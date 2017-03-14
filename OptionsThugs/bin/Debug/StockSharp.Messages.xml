@@ -81,10 +81,10 @@
       <summary>Цена открытия.</summary>
     </member>
     <member name="P:StockSharp.Messages.CandleMessage.HighPrice">
-      <summary>Максимальная цена.</summary>
+      <summary>Цена наивысшая.</summary>
     </member>
     <member name="P:StockSharp.Messages.CandleMessage.LowPrice">
-      <summary>Минимальная цена.</summary>
+      <summary>Цена наименьшая.</summary>
     </member>
     <member name="P:StockSharp.Messages.CandleMessage.ClosePrice">
       <summary>Цена закрытия.</summary>
@@ -99,7 +99,7 @@
       <summary>Максимальный объем.</summary>
     </member>
     <member name="P:StockSharp.Messages.CandleMessage.LowVolume">
-      <summary>Минимальный объем.</summary>
+      <summary>Объем закрытия.</summary>
     </member>
     <member name="P:StockSharp.Messages.CandleMessage.RelativeVolume">
       <summary>Относительный объем.</summary>
@@ -1262,6 +1262,33 @@
       <param name="error">Информация об ошибке поиска инструментов.</param>
       <returns>Сообщение об ошибке.</returns>
     </member>
+    <member name="M:StockSharp.Messages.Extensions.Convert(StockSharp.Messages.Currency,StockSharp.Messages.CurrencyTypes)">
+      <summary>Сконвертировать одну валюту в другую.</summary>
+      <param name="currencyFrom">Валюта, из которой нужно произвести конвертацию.</param>
+      <param name="currencyTypeTo">Код валюты, в которую нужно произвести конвертацию.</param>
+      <returns>Сконвертированная валюта.</returns>
+    </member>
+    <member name="M:StockSharp.Messages.Extensions.Convert(StockSharp.Messages.CurrencyTypes,StockSharp.Messages.CurrencyTypes)">
+      <summary>Получить курс конвертации одной валюту в другую.</summary>
+      <param name="from">Код валюты, из которой нужно произвести конвертацию.</param>
+      <param name="to">Код валюты, в которую нужно произвести конвертацию.</param>
+      <returns>Курс.</returns>
+    </member>
+    <member name="M:StockSharp.Messages.Extensions.Convert(StockSharp.Messages.CurrencyTypes,StockSharp.Messages.CurrencyTypes,System.DateTime)">
+      <summary>Получить курс конвертации одной валюту в другую на определенную дату.</summary>
+      <param name="from">Код валюты, из которой нужно произвести конвертацию.</param>
+      <param name="to">Код валюты, в которую нужно произвести конвертацию.</param>
+      <param name="date">Дата курса.</param>
+      <returns>Курс.</returns>
+    </member>
+    <member name="T:StockSharp.Messages.IDailyInfoSoap">
+      <summary>Интерфейс для доступа к сервису валют.</summary>
+    </member>
+    <member name="M:StockSharp.Messages.IDailyInfoSoap.GetCursOnDate(System.DateTime)">
+      <summary>Получить курсы валют на определенную дату.</summary>
+      <param name="date">Дата курсов.</param>
+      <returns>Курсы валют.</returns>
+    </member>
     <member name="T:StockSharp.Messages.MarketDataFinishedMessage">
       <summary>Сообщение окончания запроса рыночных данных.</summary>
     </member>
@@ -2204,6 +2231,12 @@
     <member name="T:StockSharp.Messages.OrderStatusMessage">
       <summary>Сообщение, запрашивающее текущие зарегистрированные заявки и сделки.</summary>
     </member>
+    <member name="P:StockSharp.Messages.OrderStatusMessage.From">
+      <summary>Дата начала, с которой необходимо получать данные.</summary>
+    </member>
+    <member name="P:StockSharp.Messages.OrderStatusMessage.To">
+      <summary>Дата окончания, до которой необходимо получать данные.</summary>
+    </member>
     <member name="M:StockSharp.Messages.OrderStatusMessage.#ctor">
       <summary>Создать <see cref="T:StockSharp.Messages.OrderStatusMessage" />.</summary>
     </member>
@@ -2524,6 +2557,12 @@
     <member name="P:StockSharp.Messages.QuoteChangeMessage.IsSorted">
       <summary>Отсортированы ли котировки по цене (<see cref="P:StockSharp.Messages.QuoteChangeMessage.Bids" /> по убыванию, <see cref="P:StockSharp.Messages.QuoteChangeMessage.Asks" /> по возрастанию).</summary>
     </member>
+    <member name="P:StockSharp.Messages.QuoteChangeMessage.IsByLevel1">
+      <summary>Изменения стакана были сделаны level1 данными.</summary>
+    </member>
+    <member name="P:StockSharp.Messages.QuoteChangeMessage.IsFiltered">
+      <summary>Изменения стакана содержат отфильтрованных котировки.</summary>
+    </member>
     <member name="P:StockSharp.Messages.QuoteChangeMessage.Currency">
       <summary>Валюта торгового инструмента.</summary>
     </member>
@@ -2575,10 +2614,10 @@
       <summary>Открытый интерес.</summary>
     </member>
     <member name="F:StockSharp.Messages.Level1Fields.MinPrice">
-      <summary>Минимальная цена.</summary>
+      <summary>Цена (мин).</summary>
     </member>
     <member name="F:StockSharp.Messages.Level1Fields.MaxPrice">
-      <summary>Максимальная цена.</summary>
+      <summary>Цена (макс).</summary>
     </member>
     <member name="F:StockSharp.Messages.Level1Fields.BidsVolume">
       <summary>Объем бидов.</summary>

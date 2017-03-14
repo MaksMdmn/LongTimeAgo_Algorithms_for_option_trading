@@ -6,7 +6,7 @@
   <members>
     <member name="T:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy">
       <summary>Стратегия автоматической защиты позиции.</summary>
-      <remarks>Новые сделки в стратегию поступают через <see cref="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.ProcessNewMyTrades(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.MyTrade})" />. Они автоматически защищаются с помощью <see cref="T:StockSharp.Algo.Strategies.Protective.TakeProfitStopLossStrategy" />. Дополнительно, <see cref="T:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy" /> переворачивает стопы в случае переворота позиции.</remarks>
+      <remarks>Новые сделки в стратегию поступают через <see cref="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.ProcessNewMyTrade(StockSharp.BusinessEntities.MyTrade)" />. Они автоматически защищаются с помощью <see cref="T:StockSharp.Algo.Strategies.Protective.TakeProfitStopLossStrategy" />. Дополнительно, <see cref="T:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy" /> переворачивает стопы в случае переворота позиции.</remarks>
     </member>
     <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.#ctor">
       <summary>Создать <see cref="T:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy" />.</summary>
@@ -35,7 +35,7 @@
       <returns>Позиция.</returns>
     </member>
     <member name="P:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.MyTradesStrategy">
-      <summary>Стратегия, новые сделки которой автоматически транслируются в <see cref="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.ProcessNewMyTrades(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.MyTrade})" />.</summary>
+      <summary>Стратегия, новые сделки которой автоматически транслируются в <see cref="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.ProcessNewMyTrade(StockSharp.BusinessEntities.MyTrade)" />.</summary>
     </member>
     <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.OnStarted">
       <summary>Метод вызывается тогда, когда вызвался метод <see cref="M:StockSharp.Algo.Strategies.Strategy.Start" />, и состояние <see cref="P:StockSharp.Algo.Strategies.Strategy.ProcessState" /> перешло в значение <see cref="F:StockSharp.Algo.ProcessStates.Started" />.</summary>
@@ -45,25 +45,20 @@
       <param name="position">Позиция.</param>
       <returns>Защитная стратегия. Если будет возвращено <see langword="null" />, значит защита позиции игнорируется.</returns>
     </member>
-    <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.Protect(System.Collections.Generic.IDictionary{StockSharp.BusinessEntities.MyTrade,System.Decimal})">
-      <summary>Защитить сделки.</summary>
-      <param name="trades">Сделки. По ключу указана защищаемая сделка, по значению указан объем, который необходимо защитить.</param>
-      <returns>Защитные стратегии.</returns>
+    <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.Protect(StockSharp.BusinessEntities.MyTrade,System.Decimal)">
+      <summary>Защищаемая позиция.</summary>
+      <param name="trade">Защищаемая сделка.</param>
+      <param name="volume">Защищаемый объем.</param>
+      <returns>Защитная стратегия.</returns>
     </member>
     <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.Sort(System.Collections.Generic.IEnumerable{System.Linq.IGrouping{System.Tuple{StockSharp.Messages.Sides,System.Decimal},StockSharp.Algo.Strategies.Protective.IProtectiveStrategy}})">
       <summary>Отсортировать защитные стратегии для указания наиболее худшей и лучшей по рыночным ценам (при частичном закрытии позиции в первую очередь снимаются наиболее худшие).</summary>
       <param name="strategies">Защитные стратегии в неотсортированном порядке.</param>
       <returns>Защитные стратегии в отсортированном порядке.</returns>
     </member>
-    <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.GetProtectiveTrades(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.MyTrade},System.Decimal)">
-      <summary>Получить из всех сделок те, которые необходимо защитить.</summary>
-      <param name="trades">Новые сделки.</param>
-      <param name="maxVolume">Максимальный объем, который необходимо защитить.</param>
-      <returns>Сделки, которые необходимо защитить.</returns>
-    </member>
-    <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.ProcessNewMyTrades(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.MyTrade})">
-      <summary>Обработать сделки для коррекции объема защитных стратегий.</summary>
-      <param name="trades">Trades.</param>
+    <member name="M:StockSharp.Algo.Strategies.Protective.AutoProtectiveStrategy.ProcessNewMyTrade(StockSharp.BusinessEntities.MyTrade)">
+      <summary>Обработать сделку для расчета защищаемого объема.</summary>
+      <param name="trade">Сделка.</param>
     </member>
     <member name="T:StockSharp.Algo.Strategies.Protective.IProtectiveStrategy">
       <summary>Интерейс защитной стратегии.</summary>

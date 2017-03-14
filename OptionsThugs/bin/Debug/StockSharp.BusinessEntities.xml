@@ -307,21 +307,6 @@
     <member name="P:StockSharp.BusinessEntities.ExchangeBoard.TimeZone">
       <summary>Информация о временной зоне, где находится биржа.</summary>
     </member>
-    <member name="M:StockSharp.BusinessEntities.ExchangeBoard.GetBoard(System.String)">
-      <summary>Получить площадку по ее коду.</summary>
-      <param name="code">Код площадки.</param>
-      <returns>Найденная площадка. Если площадки с переданным названием не существует, то будет возвращено <see langword="null" />.</returns>
-    </member>
-    <member name="M:StockSharp.BusinessEntities.ExchangeBoard.GetOrCreateBoard(System.String,System.Func{System.String,StockSharp.BusinessEntities.ExchangeBoard})">
-      <summary>Получить площадку по ее коду. Если площадки с переданным кодом не существует, то она будет создана.</summary>
-      <param name="code">Код площадки.</param>
-      <param name="createBoard">Обработчик, создающий площадку, если она не найдена. Если значение равно <see langword="null" />, то площадка создается с инициализацией по-умолчанию.</param>
-      <returns>Биржевая площадка.</returns>
-    </member>
-    <member name="M:StockSharp.BusinessEntities.ExchangeBoard.SaveBoard(StockSharp.BusinessEntities.ExchangeBoard)">
-      <summary>Сохранить площадку.</summary>
-      <param name="board">Площадка.</param>
-    </member>
     <member name="P:StockSharp.BusinessEntities.ExchangeBoard.ExtensionInfo">
       <summary>Расширенная информация по бирже.</summary>
       <remarks>Необходима в случае хранения в программе дополнительной информации, ассоциированной с биржей.</remarks>
@@ -343,12 +328,6 @@
     <member name="M:StockSharp.BusinessEntities.ExchangeBoard.Clone">
       <summary>Создать копию <see cref="T:StockSharp.BusinessEntities.ExchangeBoard" />.</summary>
       <returns>Копия объекта.</returns>
-    </member>
-    <member name="P:StockSharp.BusinessEntities.ExchangeBoard.IsMicex">
-      <summary>Является ли площадка ММВБ площадкой.</summary>
-    </member>
-    <member name="P:StockSharp.BusinessEntities.ExchangeBoard.IsUxStock">
-      <summary>Является ли площадка площадкой фондового рынка биржи UX.</summary>
     </member>
     <member name="M:StockSharp.BusinessEntities.ExchangeBoard.Load(Ecng.Serialization.SettingsStorage)">
       <summary>Загрузить настройки.</summary>
@@ -865,6 +844,9 @@
     <member name="E:StockSharp.BusinessEntities.IConnector.MassOrderCancelFailed">
       <summary>Событие об ошибке массовой отмены заявок.</summary>
     </member>
+    <member name="E:StockSharp.BusinessEntities.IConnector.OrderStatusFailed">
+      <summary>Событие ошибки запроса состояния завок.</summary>
+    </member>
     <member name="E:StockSharp.BusinessEntities.IConnector.StopOrdersRegisterFailed">
       <summary>Событие об ошибках, связанных с регистрацией стоп-заявок.</summary>
     </member>
@@ -1177,39 +1159,6 @@
     </member>
     <member name="M:StockSharp.BusinessEntities.IConnector.UnRegisterNews">
       <summary>Остановить получение новостей.</summary>
-    </member>
-    <member name="T:StockSharp.BusinessEntities.IExchangeInfoProvider">
-      <summary>Интерфейс, описывающий провайдер бирж и торговых площадок.</summary>
-    </member>
-    <member name="P:StockSharp.BusinessEntities.IExchangeInfoProvider.Boards">
-      <summary>Все биржи.</summary>
-    </member>
-    <member name="P:StockSharp.BusinessEntities.IExchangeInfoProvider.Exchanges">
-      <summary>Все площадки.</summary>
-    </member>
-    <member name="M:StockSharp.BusinessEntities.IExchangeInfoProvider.GetExchangeBoard(System.String)">
-      <summary>Получить площадку по коду.</summary>
-      <param name="code">Код площадки <see cref="P:StockSharp.BusinessEntities.ExchangeBoard.Code" />.</param>
-      <returns>Торговая площадка. Если площадка с заданным кодом не существует, то будет возвращено <see langword="null" />.</returns>
-    </member>
-    <member name="M:StockSharp.BusinessEntities.IExchangeInfoProvider.GetExchange(System.String)">
-      <summary>Получить биржу по коду.</summary>
-      <param name="code">Код биржи <see cref="P:StockSharp.BusinessEntities.Exchange.Name" />.</param>
-      <returns>Биржа. Если биржа с заданным кодом не существует, то будет возвращено <see langword="null" />.</returns>
-    </member>
-    <member name="M:StockSharp.BusinessEntities.IExchangeInfoProvider.Save(StockSharp.BusinessEntities.ExchangeBoard)">
-      <summary>Сохранить площадку.</summary>
-      <param name="board">Торговая площадка.</param>
-    </member>
-    <member name="M:StockSharp.BusinessEntities.IExchangeInfoProvider.Save(StockSharp.BusinessEntities.Exchange)">
-      <summary>Сохранить биржу.</summary>
-      <param name="exchange">Биржа.</param>
-    </member>
-    <member name="E:StockSharp.BusinessEntities.IExchangeInfoProvider.BoardAdded">
-      <summary>Оповещение о добавлении новой площадки.</summary>
-    </member>
-    <member name="E:StockSharp.BusinessEntities.IExchangeInfoProvider.ExchangeAdded">
-      <summary>Оповещение о добавлении новой биржи.</summary>
     </member>
     <member name="T:StockSharp.BusinessEntities.IMarketDataProvider">
       <summary>Интерфейс поставщика маркет-данных по инструменту.</summary>

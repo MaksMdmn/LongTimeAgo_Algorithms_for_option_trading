@@ -580,7 +580,7 @@
     <member name="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem">
       <summary>Элемент данных отрисовки графика.</summary>
     </member>
-    <member name="P:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Time">
+    <member name="P:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.TimeStamp">
       <summary>Временная отметка формирования новых данных.</summary>
     </member>
     <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartCandleElement,StockSharp.Algo.Candles.Candle)">
@@ -589,32 +589,26 @@
       <param name="candle">Данные свечи.</param>
       <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
     </member>
-    <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartCandleElement,System.Object,System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
+    <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartCandleElement,StockSharp.Algo.Candles.Candle,System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
       <summary>Добавить данные свечи.</summary>
       <param name="element">Элемент графика, представляющий свечи.</param>
-      <param name="candleArg">Параметр свечи.</param>
+      <param name="candle">Свеча.</param>
       <param name="openPrice">Цена открытия.</param>
       <param name="highPrice">Цена наивысшая.</param>
       <param name="lowPrice">Цена наименьшая.</param>
       <param name="closePrice">Цена закрытия.</param>
       <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
     </member>
-    <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartCandleElement,System.Object,System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Tuple{System.Decimal,System.Decimal}[],System.Nullable{System.Decimal})">
+    <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartCandleElement,StockSharp.Algo.Candles.Candle,System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Tuple{System.Decimal,System.Decimal}[],System.Nullable{System.Decimal})">
       <summary>Добавить данные свечи.</summary>
       <param name="element">Элемент графика, представляющий свечи.</param>
-      <param name="candleArg">Параметр свечи.</param>
+      <param name="candle">Свеча.</param>
       <param name="openPrice">Цена открытия.</param>
       <param name="highPrice">Цена наивысшая.</param>
       <param name="lowPrice">Цена наименьшая.</param>
       <param name="closePrice">Цена закрытия.</param>
       <param name="priceLevels">Ценовые уровни.</param>
       <param name="priceStep">Минимальный шаг цены.</param>
-      <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
-    </member>
-    <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartCandleElement,System.Tuple{System.Object,System.Decimal,System.Decimal,System.Decimal,System.Decimal,System.Tuple{System.Decimal,System.Decimal}[],System.Nullable{System.Decimal}})">
-      <summary>Добавить данные свечи.</summary>
-      <param name="element">Элемент графика, представляющий свечи.</param>
-      <param name="candle">Данные свечи.</param>
       <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
     </member>
     <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartIndicatorElement,StockSharp.Algo.Indicators.IIndicatorValue)">
@@ -632,16 +626,10 @@
     <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartOrderElement,System.Int64,StockSharp.Messages.Sides,System.Decimal,System.Decimal)">
       <summary>Добавить данные сделки.</summary>
       <param name="element">Элемент графика, представляющий заявки.</param>
-      <param name="tradeId">Идентификатор сделки.</param>
+      <param name="orderId">Идентификатор заявки.</param>
       <param name="side">Направление заявки (покупка или продажа).</param>
-      <param name="price">Цена сделки.</param>
-      <param name="volume">Количество контрактов в сделке.</param>
-      <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
-    </member>
-    <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartOrderElement,System.Tuple{System.Int64,StockSharp.Messages.Sides,System.Decimal,System.Decimal})">
-      <summary>Добавить данные заявки.</summary>
-      <param name="element">Элемент графика, представляющий заявки.</param>
-      <param name="order">Данные заявки.</param>
+      <param name="price">Цена заявки.</param>
+      <param name="volume">Количество контрактов в заявке.</param>
       <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
     </member>
     <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartTradeElement,StockSharp.BusinessEntities.MyTrade)">
@@ -657,12 +645,6 @@
       <param name="side">Направление заявки (покупка или продажа).</param>
       <param name="price">Цена сделки.</param>
       <param name="volume">Количество контрактов в сделке.</param>
-      <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
-    </member>
-    <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartTradeElement,System.Tuple{System.Int64,StockSharp.Messages.Sides,System.Decimal,System.Decimal})">
-      <summary>Добавить данные заявки.</summary>
-      <param name="element">Элемент графика, представляющий сделки.</param>
-      <param name="trade">Данные сделки.</param>
       <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
     </member>
     <member name="M:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem.Add(StockSharp.Xaml.Charting.ChartActiveOrdersElement,StockSharp.Xaml.Charting.ChartActiveOrderInfo)">
@@ -682,7 +664,7 @@
     </member>
     <member name="M:StockSharp.Xaml.Charting.ChartDrawData.Group(System.DateTimeOffset)">
       <summary>Создать <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</summary>
-      <param name="offset">Временная отметка формирования новых данных.</param>
+      <param name="timeStamp">Временная отметка формирования новых данных.</param>
       <returns>Объект <see cref="T:StockSharp.Xaml.Charting.ChartDrawData.ChartDrawDataItem" />.</returns>
     </member>
     <member name="T:StockSharp.Xaml.Charting.IChartElement">

@@ -4,6 +4,48 @@
     <name>StockSharp.Xaml</name>
   </assembly>
   <members>
+    <member name="T:StockSharp.Xaml.AboutWindow">
+      <summary>Окно для отображения информации о приложении.</summary>
+      <summary>
+            AboutWindow
+            </summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.UpdaterPath">
+      <summary>Получить путь приложения.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.ProductTitle">
+      <summary>Получить заголовок, которые будет отображаться в <see cref="T:StockSharp.Xaml.AboutWindow" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.Version">
+      <summary>Получить версию приложения.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.Description">
+      <summary>Получить описание приложения.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.Product">
+      <summary>Получить полное название продукта.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.Copyright">
+      <summary>Получить копирайт информацию.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.Company">
+      <summary>Получить название компании.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.LinkUri">
+      <summary>Получить адрес ссылки приложения.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.AboutWindow.ClosingForInstall">
+      <summary>Gets if this <see cref="T:wyDay.Controls.AutomaticUpdater" /> has hidden this form and preparing to install an update.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.AboutWindow.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.AboutWindow" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.AboutWindow.CheckForUpdates(System.Nullable{System.TimeSpan})">
+      <summary>Проверить обновления.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.AboutWindow.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
     <member name="T:StockSharp.Xaml.AdvertisePanel">
       <summary>Панель отображения рекламных акций.</summary>
       <summary>
@@ -64,6 +106,14 @@
     <member name="M:StockSharp.Xaml.AutoCompletePopUp.InitializeComponent">
       <summary>InitializeComponent.</summary>
     </member>
+    <member name="T:StockSharp.Xaml.AutomaticUpdaterExtensions">
+      <summary>Методы-расширения для AutomaticUpdater.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.AutomaticUpdaterExtensions.Translate(wyDay.Controls.AutomaticUpdater)">
+      <summary>Локализовать <see cref="T:wyDay.Controls.AutomaticUpdater" />.</summary>
+      <param name="automaticUpdater">
+        <see cref="T:wyDay.Controls.AutomaticUpdater" />.</param>
+    </member>
     <member name="T:StockSharp.Xaml.BaseApplication">
       <summary>Базовый класс для WPF приложений.</summary>
     </member>
@@ -102,6 +152,21 @@
       <summary>Редактировать настройки прокси-сервера.</summary>
       <param name="owner">Родительское окно.</param>
     </member>
+    <member name="T:StockSharp.Xaml.Converters.ProcessStatesToImageConverter">
+      <summary>Преобразование <see cref="T:StockSharp.Algo.ProcessStates" /> в <see cref="T:System.Windows.Media.ImageSource" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.Converters.ProcessStatesToImageConverter.StartedImage">
+      <summary>
+        <see cref="T:System.Windows.Media.ImageSource" /> для состояния <see cref="F:StockSharp.Algo.ProcessStates.Started" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.Converters.ProcessStatesToImageConverter.StoppingImage">
+      <summary>
+        <see cref="T:System.Windows.Media.ImageSource" /> для состояния <see cref="F:StockSharp.Algo.ProcessStates.Stopping" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.Converters.ProcessStatesToImageConverter.StoppedImage">
+      <summary>
+        <see cref="T:System.Windows.Media.ImageSource" /> для состояния <see cref="F:StockSharp.Algo.ProcessStates.Stopped" />.</summary>
+    </member>
     <member name="T:StockSharp.Xaml.Converters.SeriesToStringConverter">
       <summary>Преобразование <see cref="T:System.TimeSpan" /> в <see cref="T:System.String" />.</summary>
     </member>
@@ -124,6 +189,366 @@
       <summary>Создать <see cref="T:StockSharp.Xaml.DataSourcePanel" />.</summary>
     </member>
     <member name="M:StockSharp.Xaml.DataSourcePanel.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.OptionDeskModel">
+      <summary>Модель доски опционов.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskModel.EvaluateFildes">
+      <summary>Вычислять греки.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskModel.Options">
+      <summary>Страйк-опционы.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskModel.Rows">
+      <summary>Строкаи доски опционов.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskModel.MarketDataProvider">
+      <summary>Поставщик маркет-данных.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskModel.UnderlyingAsset">
+      <summary>Базовый актив.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskModel.UseBlackModel">
+      <summary>Использовать модель <see cref="T:StockSharp.Algo.Derivatives.Black" /> вместо модели <see cref="T:StockSharp.Algo.Derivatives.IBlackScholes" />. По-умолчанию выключено.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.OptionDeskModel.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.OptionDeskModel" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.OptionDeskModel.Add(StockSharp.BusinessEntities.Security)">
+      <summary>Добавить опцион.</summary>
+      <param name="security">Опцион для добавления.</param>
+    </member>
+    <member name="M:StockSharp.Xaml.OptionDeskModel.Remove(StockSharp.BusinessEntities.Security)">
+      <summary>Удалить опцион.</summary>
+      <param name="security">Опцион для удаления.</param>
+    </member>
+    <member name="M:StockSharp.Xaml.OptionDeskModel.Clear">
+      <summary>Очистить.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.OptionDeskModel.Refresh(System.Nullable{System.DateTimeOffset},System.Nullable{System.Decimal})">
+      <summary>Обновить значения доски.</summary>
+      <param name="currentTime">Текущее время.</param>
+      <param name="assetPrice">Текущая цена базового актива. Если она установлено, то <see cref="T:StockSharp.Algo.Derivatives.IBlackScholes" /> использует эту цену.</param>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.CommissionRulesEditor">
+      <summary>Редактор для <see cref="T:StockSharp.Algo.Commissions.CommissionRule" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.CommissionRulesEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.CommissionRulesEditor" />.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor">
+      <summary>Редактор для <see cref="T:StockSharp.BusinessEntities.ExchangeBoard" />.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.ExchangeInfoProviderProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.ExchangeInfoProvider" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.ExchangeInfoProvider">
+      <summary>Провайдер информации о бирже.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor" />.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.ExchangeEditor">
+      <summary>Редактор для <see cref="T:StockSharp.BusinessEntities.Exchange" />.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.ExchangeEditor.ExchangeInfoProviderProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.ExchangeEditor.ExchangeInfoProvider" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.ExchangeEditor.ExchangeInfoProvider">
+      <summary>Провайдер информации о бирже.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.ExchangeEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.ExchangeEditor" />.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor">
+      <summary>Кнопка, активирующая окно <see cref="T:StockSharp.Xaml.ExtensionInfoWindow" />.</summary>
+      <summary>
+            ExtensionInfoEditor
+            </summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.PortfolioEditor">
+      <summary>Контрол, активирующий <see cref="T:StockSharp.Xaml.PortfolioPickerWindow" />.</summary>
+      <summary>
+            PortfolioEditor
+            </summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.PortfolioEditor.PortfoliosProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PortfolioEditor.Portfolios" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.PortfolioEditor.Portfolios">
+      <summary>Доступные портфели.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.PortfolioEditor.SelectedPortfolio">
+      <summary>Выбранный портфель.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.PortfolioEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.PortfolioEditor" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.PortfolioEditor.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.SecurityEditor">
+      <summary>Контрол, активирующий <see cref="T:StockSharp.Xaml.SecurityPickerWindow" />.</summary>
+      <summary>
+            SecurityEditor
+            </summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecurityProviderProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecurityProvider" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecurityProvider">
+      <summary>Поставщик информации об инструментах.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.SecurityEditor.SelectedSecurity">
+      <summary>Выбранный инструмент.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecuritySelected">
+      <summary>Событие изменения выбранного инструмента.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.SecurityEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.SecurityEditor" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.SecurityEditor.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.TimeSpanEditor">
+      <summary>
+        <see cref="T:System.TimeSpan" /> редактор.</summary>
+      <summary>
+            TimeSpanEditor
+            </summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.ValueProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Value" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Value">
+      <summary>
+        <see cref="T:System.TimeSpan" /> значение.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.IsNullableProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValue" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.IsNullable">
+      <summary>Может быть пустым.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValueProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValue" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValue">
+      <summary>Имеет значение.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.SecondsProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Seconds" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Seconds">
+      <summary>Секунды.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.MinutesProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Minutes" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Minutes">
+      <summary>Минуты.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HoursProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Hours" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Hours">
+      <summary>Часы.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.DaysProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Days" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Days">
+      <summary>Дни.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.ValueChanged">
+      <summary>Событие изменения <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Value" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.TimeSpanEditor" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor">
+      <summary>Редактор для <see cref="T:StockSharp.Algo.Candles.CandleSeries" />.</summary>
+      <summary>
+            CandleSettingsEditor
+            </summary>
+    </member>
+    <member name="E:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.SettingsChanged">
+      <summary>Событие изменения настроек.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor" />.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.SettingsProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.Settings" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.Settings">
+      <summary>Настройки. По-умолчанию равно настройкам 1 минутных свечек.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.INotifyPropertiesChanged">
+      <summary>Интерфейс, описывающий тип с переменным количеством свойств.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.PropertyGrid.INotifyPropertiesChanged.PropertiesChanged">
+      <summary>Событие изменения доступных свойств.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.PropertyGridEx">
+      <summary>Расширенная таблица настроек.</summary>
+      <summary>
+            PropertyGridEx
+            </summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.PropertyGridEx.SecurityProviderProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.SecurityProvider" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.SecurityProvider">
+      <summary>Поставщик информации об инструментах.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.PropertyGridEx.ExchangeInfoProviderProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.ExchangeInfoProvider" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.ExchangeInfoProvider">
+      <summary>Провайдер биржевых площадок.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.PropertyGrid.PropertyGridEx.PortfoliosProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.Portfolios" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.Portfolios">
+      <summary>Доступные портфели.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.PropertyGridEx.OnSelectedObjectChanged(System.Object,System.Object)">
+      <summary>Обработчик изменения значения.</summary>
+      <param name="oldValue">Предыдущее значение.</param>
+      <param name="newValue">Новое значение.</param>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.PropertyGridEx.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.PropertyGridEx" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.PropertyGridEx.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.PropertyGrid.SecurityTypesEditor">
+      <summary>
+        <see cref="T:Ecng.Xaml.DevExp.ItemsSourceEditSettings" /> для <see cref="T:StockSharp.Xaml.SecurityTypesComboBox" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.PropertyGrid.SecurityTypesEditor.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.SecurityTypesEditor" />.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.StrategiesDashboard">
+      <summary>Панель управления стратегиями.</summary>
+      <summary>
+            StrategiesDashboard
+            </summary>
+    </member>
+    <member name="F:StockSharp.Xaml.StrategiesDashboard.StartCommand">
+      <summary>.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.StrategiesDashboard.StopCommand">
+      <summary>.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.StrategiesDashboard.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.StrategiesDashboard" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.StrategiesDashboard.Items">
+      <summary>Элементы.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.StrategiesDashboard.CanExecuteStart">
+      <summary>Можно ли выполнить <see cref="F:StockSharp.Xaml.StrategiesDashboard.StartCommand" />.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.StrategiesDashboard.CanExecuteStop">
+      <summary>Можно ли выполнить <see cref="F:StockSharp.Xaml.StrategiesDashboard.StopCommand" />.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.StrategiesDashboard.ExecuteStart">
+      <summary>Событие вызывается при исполнении <see cref="F:StockSharp.Xaml.StrategiesDashboard.StartCommand" />.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.StrategiesDashboard.ExecuteStop">
+      <summary>Событие вызывается при исполнении <see cref="F:StockSharp.Xaml.StrategiesDashboard.StopCommand" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.StrategiesDashboard.InitializeComponent">
+      <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.StrategiesDashboardItem">
+      <summary>Строка для <see cref="T:StockSharp.Xaml.StrategiesDashboard" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.StrategiesDashboardItem.Name">
+      <summary>Отображаемое имя.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.StrategiesDashboardItem.Strategy">
+      <summary>Стратегия.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.StrategiesDashboardItem.Tag">
+      <summary>Тэг.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.StrategiesDashboardItem.#ctor(System.String,StockSharp.Algo.Strategies.Strategy,System.Object)">
+      <summary>Создать <see cref="T:StockSharp.Xaml.StrategiesDashboardItem" />.</summary>
+      <param name="name">Отображаемое имя.</param>
+      <param name="strategy">Стратегия.</param>
+      <param name="tag">Тэг.</param>
+    </member>
+    <member name="P:StockSharp.Xaml.StrategiesDashboardItem.OrdersCount">
+      <summary>.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.StrategiesDashboardItem.TradesCount">
+      <summary>.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.StrategiesDashboardItem.PnLChange">
+      <summary>.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.SuggestionsWindow">
+      <summary>Окно для отправки предложений.</summary>
+      <summary>
+            SuggestionsWindow
+            </summary>
+    </member>
+    <member name="F:StockSharp.Xaml.SuggestionsWindow.OkCommand">
+      <summary>.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.SuggestionsWindow.NotificationClient">
+      <summary>Клиент для доступа к сервису уведомлений StockSharp.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.SuggestionsWindow.DoNotShowAgain">
+      <summary>Больше не показывать окно.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.SuggestionsWindow.Link">
+      <summary>Ссылка на файл.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.SuggestionsWindow.#ctor">
+      <summary>Создать <see cref="T:StockSharp.Xaml.SuggestionsWindow" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.SuggestionsWindow.Show(System.Windows.Window,System.Action{System.Boolean},System.Nullable{System.TimeSpan})">
+      <summary>Показать.</summary>
+      <param name="owner">Владелец окна.</param>
+      <param name="handled">Обработчик будет вызван после показа окна.</param>
+      <param name="delay">Отложенно.</param>
+    </member>
+    <member name="M:StockSharp.Xaml.SuggestionsWindow.InitializeComponent">
       <summary>InitializeComponent.</summary>
     </member>
     <member name="T:StockSharp.Xaml.SecurityLookupWindow">
@@ -156,6 +581,18 @@
     <member name="M:StockSharp.Xaml.SecurityLookupWindow.InitializeComponent">
       <summary>InitializeComponent.</summary>
     </member>
+    <member name="T:StockSharp.Xaml.GridControl.ItemDoubleClickEventArgs">
+      <summary>Содержит данные события для <see cref="E:StockSharp.Xaml.GridControl.BaseGridControl.ItemDoubleClick" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.GridControl.ItemDoubleClickEventArgs.Column">
+      <summary>Колонка.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.GridControl.ItemDoubleClickEventArgs.Row">
+      <summary>Значение.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.GridControl.ItemDoubleClickEventArgs.#ctor(DevExpress.Xpf.Grid.GridColumn,System.Object)">
+      <summary>Создать <see cref="T:StockSharp.Xaml.GridControl.ItemDoubleClickEventArgs" />.</summary>
+    </member>
     <member name="T:StockSharp.Xaml.GridControl.BaseGridControl">
       <summary>Табличный контрол.</summary>
     </member>
@@ -180,6 +617,9 @@
     </member>
     <member name="E:StockSharp.Xaml.GridControl.BaseGridControl.LayoutChanged">
       <summary>Событие изменения разметки.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.GridControl.BaseGridControl.ItemDoubleClick">
+      <summary>Событие двойного клика мышкой.</summary>
     </member>
     <member name="M:StockSharp.Xaml.GridControl.BaseGridControl.#ctor">
       <summary>Создать <see cref="T:StockSharp.Xaml.GridControl.BaseGridControl" />.</summary>
@@ -425,7 +865,7 @@
     </member>
     <member name="M:StockSharp.Xaml.ExchangesPanel.SetExchange(System.String)">
       <summary>Установить редактируемую биржу.</summary>
-      <param name="exchangeName">Код редактируемой биржи. Биржа для редактирования загружается из <see cref="T:StockSharp.BusinessEntities.IExchangeInfoProvider" />.</param>
+      <param name="exchangeName">Код редактируемой биржи. Биржа для редактирования загружается из <see cref="T:StockSharp.Algo.Storages.IExchangeInfoProvider" />.</param>
     </member>
     <member name="M:StockSharp.Xaml.ExchangesPanel.InitializeComponent">
       <summary>InitializeComponent.</summary>
@@ -570,237 +1010,6 @@
     </member>
     <member name="M:StockSharp.Xaml.PortfolioDataSource.Dispose">
       <summary>Освободить занятые ресурсы.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor">
-      <summary>Редактор для <see cref="T:StockSharp.BusinessEntities.ExchangeBoard" />.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.ExchangeInfoProviderProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.ExchangeInfoProvider" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.ExchangeInfoProvider">
-      <summary>Провайдер информации о бирже.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.ExchangeBoardEditor" />.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.ExchangeEditor">
-      <summary>Редактор для <see cref="T:StockSharp.BusinessEntities.Exchange" />.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.ExchangeEditor.ExchangeInfoProviderProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.ExchangeEditor.ExchangeInfoProvider" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.ExchangeEditor.ExchangeInfoProvider">
-      <summary>Провайдер информации о бирже.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.ExchangeEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.ExchangeEditor" />.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor">
-      <summary>Кнопка, активирующая окно <see cref="T:StockSharp.Xaml.ExtensionInfoWindow" />.</summary>
-      <summary>
-            ExtensionInfoEditor
-            </summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.ExtensionInfoEditor.InitializeComponent">
-      <summary>InitializeComponent.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.PortfolioEditor">
-      <summary>Контрол, активирующий <see cref="T:StockSharp.Xaml.PortfolioPickerWindow" />.</summary>
-      <summary>
-            PortfolioEditor
-            </summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.PortfolioEditor.PortfoliosProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PortfolioEditor.Portfolios" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.PortfolioEditor.Portfolios">
-      <summary>Доступные портфели.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.PortfolioEditor.SelectedPortfolio">
-      <summary>Выбранный портфель.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.PortfolioEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.PortfolioEditor" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.PortfolioEditor.InitializeComponent">
-      <summary>InitializeComponent.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.SecurityEditor">
-      <summary>Контрол, активирующий <see cref="T:StockSharp.Xaml.SecurityPickerWindow" />.</summary>
-      <summary>
-            SecurityEditor
-            </summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecurityProviderProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecurityProvider" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecurityProvider">
-      <summary>Поставщик информации об инструментах.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.SecurityEditor.SelectedSecurity">
-      <summary>Выбранный инструмент.</summary>
-    </member>
-    <member name="E:StockSharp.Xaml.PropertyGrid.SecurityEditor.SecuritySelected">
-      <summary>Событие изменения выбранного инструмента.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.SecurityEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.SecurityEditor" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.SecurityEditor.InitializeComponent">
-      <summary>InitializeComponent.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.TimeSpanEditor">
-      <summary>
-        <see cref="T:System.TimeSpan" /> редактор.</summary>
-      <summary>
-            TimeSpanEditor
-            </summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.ValueProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Value" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Value">
-      <summary>
-        <see cref="T:System.TimeSpan" /> значение.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.IsNullableProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValue" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.IsNullable">
-      <summary>Может быть пустым.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValueProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValue" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HasValue">
-      <summary>Имеет значение.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.SecondsProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Seconds" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Seconds">
-      <summary>Секунды.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.MinutesProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Minutes" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Minutes">
-      <summary>Минуты.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.HoursProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Hours" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Hours">
-      <summary>Часы.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.DaysProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Days" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Days">
-      <summary>Дни.</summary>
-    </member>
-    <member name="E:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.ValueChanged">
-      <summary>Событие изменения <see cref="P:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.Value" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.TimeSpanEditor" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.TimeSpanEditor.InitializeComponent">
-      <summary>InitializeComponent.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor">
-      <summary>Редактор для <see cref="T:StockSharp.Algo.Candles.CandleSeries" />.</summary>
-      <summary>
-            CandleSettingsEditor
-            </summary>
-    </member>
-    <member name="E:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.SettingsChanged">
-      <summary>Событие изменения настроек.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor" />.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.SettingsProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.Settings" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.Settings">
-      <summary>Настройки. По-умолчанию равно настройкам 1 минутных свечек.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.CandleSettingsEditor.InitializeComponent">
-      <summary>InitializeComponent.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.INotifyPropertiesChanged">
-      <summary>Интерфейс, описывающий тип с переменным количеством свойств.</summary>
-    </member>
-    <member name="E:StockSharp.Xaml.PropertyGrid.INotifyPropertiesChanged.PropertiesChanged">
-      <summary>Событие изменения доступных свойств.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.Level1FieldsEditor">
-      <summary>
-        <see cref="T:Ecng.Xaml.DevExp.ItemsSourceEditSettings" /> для <see cref="T:StockSharp.Xaml.Level1FieldsComboBox" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.Level1FieldsEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.Level1FieldsEditor" />.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.PropertyGridEx">
-      <summary>Расширенная таблица настроек.</summary>
-      <summary>
-            PropertyGridEx
-            </summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.PropertyGridEx.SecurityProviderProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.SecurityProvider" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.SecurityProvider">
-      <summary>Поставщик информации об инструментах.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.PropertyGridEx.ExchangeInfoProviderProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.ExchangeInfoProvider" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.ExchangeInfoProvider">
-      <summary>Провайдер биржевых площадок.</summary>
-    </member>
-    <member name="F:StockSharp.Xaml.PropertyGrid.PropertyGridEx.PortfoliosProperty">
-      <summary>
-        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.Portfolios" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.PropertyGrid.PropertyGridEx.Portfolios">
-      <summary>Доступные портфели.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.PropertyGridEx.OnSelectedObjectChanged(System.Object,System.Object)">
-      <summary>Обработчик изменения значения.</summary>
-      <param name="oldValue">Предыдущее значение.</param>
-      <param name="newValue">Новое значение.</param>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.PropertyGridEx.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.PropertyGridEx" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.PropertyGridEx.InitializeComponent">
-      <summary>InitializeComponent.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.PropertyGrid.SecurityTypesEditor">
-      <summary>
-        <see cref="T:Ecng.Xaml.DevExp.ItemsSourceEditSettings" /> для <see cref="T:StockSharp.Xaml.SecurityTypesComboBox" />.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.PropertyGrid.SecurityTypesEditor.#ctor">
-      <summary>Создать <see cref="T:StockSharp.Xaml.PropertyGrid.SecurityTypesEditor" />.</summary>
     </member>
     <member name="T:StockSharp.Xaml.ProxySettings">
       <summary>Настройки прокси-сервера.</summary>
@@ -1135,40 +1344,118 @@
             OptionDesk
             </summary>
     </member>
+    <member name="P:StockSharp.Xaml.OptionDesk.Model">
+      <summary>Модель доски опционов.</summary>
+    </member>
     <member name="M:StockSharp.Xaml.OptionDesk.#ctor">
       <summary>Создать <see cref="T:StockSharp.Xaml.OptionDesk" />.</summary>
     </member>
-    <member name="P:StockSharp.Xaml.OptionDesk.SecurityProvider">
-      <summary>Поставщик информации об инструментах.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.OptionDesk.MarketDataProvider">
-      <summary>Поставщик маркет-данных.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.OptionDesk.CurrentTime">
-      <summary>Текущее время. Если оно установлено, то <see cref="T:StockSharp.Algo.Derivatives.IBlackScholes" /> использует это время.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.OptionDesk.AssetPrice">
-      <summary>Текущая цена базового актива. Если она установлено, то <see cref="T:StockSharp.Algo.Derivatives.IBlackScholes" /> использует эту цену.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.OptionDesk.UseBlackModel">
-      <summary>Использовать модель <see cref="T:StockSharp.Algo.Derivatives.Black" /> вместо модели <see cref="T:StockSharp.Algo.Derivatives.IBlackScholes" />. По-умолчанию выключено.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.OptionDesk.Options">
-      <summary>Страйк-опционы.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.OptionDesk.RefreshOptions">
-      <summary>Обновить значения доски.</summary>
-    </member>
-    <member name="M:StockSharp.Xaml.OptionDesk.Save(Ecng.Serialization.SettingsStorage)">
-      <summary>Сохранить настройки.</summary>
-      <param name="storage">Хранилище настроек.</param>
-    </member>
-    <member name="M:StockSharp.Xaml.OptionDesk.Load(Ecng.Serialization.SettingsStorage)">
-      <summary>Загрузить настройки.</summary>
-      <param name="storage">Хранилище настроек.</param>
-    </member>
     <member name="M:StockSharp.Xaml.OptionDesk.InitializeComponent">
       <summary>InitializeComponent.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.OptionDeskRow">
+      <summary>Строка доски опционов.</summary>
+    </member>
+    <member name="T:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide">
+      <summary>
+        <see cref="F:StockSharp.Messages.OptionTypes.Call" /> или <see cref="F:StockSharp.Messages.OptionTypes.Put" /> сторона строки.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Row">
+      <summary>Строка доски опционов.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.BestBidPrice">
+      <summary>Цена лучшей покупки.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.BestAskPrice">
+      <summary>Цена лучшей покупки.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Volume">
+      <summary>Объем за сессию.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.TheorPrice">
+      <summary>Теоретическая цена.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.MaxOpenInterest">
+      <summary>Reserved.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Option">
+      <summary>Информация об опционе.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Delta">
+      <summary>Дельта опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Gamma">
+      <summary>Гамма опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Theta">
+      <summary>Тета опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Vega">
+      <summary>Вега опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.Rho">
+      <summary>Ро опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.OpenInterest">
+      <summary>Открытый интерес.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.PnL">
+      <summary>Прибыльность опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.MaxVolume">
+      <summary>Reserved.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.ImpliedVolatilityBestBid">
+      <summary>Подразумеваемая волатильность (лучший бид).</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.ImpliedVolatilityBestAsk">
+      <summary>Подразумеваемая волатильность (лучший оффер).</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.ImpliedVolatilityLastTrade">
+      <summary>Подразумеваемая волатильность (последняя цена).</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.HistoricalVolatility">
+      <summary>Волатильность (историческая) опциона.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.OptionDeskRow.OptionDeskRowSide.ToString">
+      <summary>Получить строковое представление.</summary>
+      <returns>Строковое представление.</returns>
+    </member>
+    <member name="M:StockSharp.Xaml.OptionDeskRow.#ctor(StockSharp.BusinessEntities.Security,StockSharp.BusinessEntities.Security,StockSharp.BusinessEntities.Security)">
+      <summary>Создать <see cref="T:StockSharp.Xaml.OptionDeskRow" />.</summary>
+      <param name="underlyingAsset">Базовый актив.</param>
+      <param name="call">Call опцион.</param>
+      <param name="put">Put опцион.</param>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.Strike">
+      <summary>Страйк цена опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.PnL">
+      <summary>Прибыльность опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.MaxImpliedVolatilityBestBid">
+      <summary>Reserved.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.MaxImpliedVolatilityBestAsk">
+      <summary>Reserved.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.MaxImpliedVolatilityLastTrade">
+      <summary>Reserved.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.MaxHistoricalVolatility">
+      <summary>Reserved.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.MaxPnL">
+      <summary>Reserved.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.UnderlyingAsset">
+      <summary>Информация о базовом активе.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.Call">
+      <summary>Параметры <see cref="F:StockSharp.Messages.OptionTypes.Call" /> опциона.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.OptionDeskRow.Put">
+      <summary>Параметры <see cref="F:StockSharp.Messages.OptionTypes.Put" /> опциона.</summary>
     </member>
     <member name="T:StockSharp.Xaml.OrderLogGrid">
       <summary>Таблица, отображающая лог заявок (<see cref="T:StockSharp.BusinessEntities.OrderLogItem" />).</summary>
@@ -1193,15 +1480,6 @@
     </member>
     <member name="M:StockSharp.Xaml.OrderLogGrid.InitializeComponent">
       <summary>InitializeComponent.</summary>
-    </member>
-    <member name="T:StockSharp.Xaml.ISecurityWindow">
-      <summary>Интерфейс, описывающий окно создания или редактирования торгового инструмента.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.ISecurityWindow.ValidateId">
-      <summary>Обработчик, проверяющий доступность введенного идентификатора для <see cref="P:StockSharp.Xaml.ISecurityWindow.Security" />.</summary>
-    </member>
-    <member name="P:StockSharp.Xaml.ISecurityWindow.Security">
-      <summary>Инструмент стакана.</summary>
     </member>
     <member name="T:StockSharp.Xaml.MarketDataGrid">
       <summary>Таблица доступных рыночных данных.</summary>
@@ -1249,6 +1527,9 @@
     <member name="F:StockSharp.Xaml.MarketDepthColumns.OwnSell">
       <summary>Собственный объем офера (+ стоп-объем для продажи).</summary>
     </member>
+    <member name="F:StockSharp.Xaml.MarketDepthColumns.Board">
+      <summary>Площадка.</summary>
+    </member>
     <member name="T:StockSharp.Xaml.MarketDepthControl">
       <summary>Визуальный контрол, отображающий стакан с котировками (<see cref="T:StockSharp.BusinessEntities.MarketDepth" />).</summary>
       <summary>
@@ -1273,6 +1554,13 @@
     </member>
     <member name="P:StockSharp.Xaml.MarketDepthControl.MaxDepth">
       <summary>Максимальная глубина отображения стакана. По-умолчанию равно <see cref="F:StockSharp.Xaml.MarketDepthControl.DefaultDepth" />.</summary>
+    </member>
+    <member name="F:StockSharp.Xaml.MarketDepthControl.ShowBoardColumnProperty">
+      <summary>
+        <see cref="T:System.Windows.DependencyProperty" /> для <see cref="P:StockSharp.Xaml.MarketDepthControl.ShowBoardColumn" />.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.MarketDepthControl.ShowBoardColumn">
+      <summary>Показывать столбец Площадка.</summary>
     </member>
     <member name="P:StockSharp.Xaml.MarketDepthControl.IsBidsOnTop">
       <summary>Показывать ли биды сверху. По-умолчанию выключено.</summary>
@@ -1516,11 +1804,11 @@
     <member name="M:StockSharp.Xaml.SecurityCreateWindow.#ctor">
       <summary>Создать <see cref="T:StockSharp.Xaml.SecurityCreateWindow" />.</summary>
     </member>
-    <member name="P:StockSharp.Xaml.SecurityCreateWindow.ValidateId">
-      <summary>Обработчик, проверяющий доступность введенного идентификатора для <see cref="P:StockSharp.Xaml.SecurityCreateWindow.Security" />.</summary>
-    </member>
     <member name="P:StockSharp.Xaml.SecurityCreateWindow.Security">
-      <summary>Инструмент стакана.</summary>
+      <summary>Инструмент для редактирования.</summary>
+    </member>
+    <member name="P:StockSharp.Xaml.SecurityCreateWindow.Securities">
+      <summary>Инструменты для редактирования.</summary>
     </member>
     <member name="M:StockSharp.Xaml.SecurityCreateWindow.InitializeComponent">
       <summary>InitializeComponent.</summary>
@@ -1628,6 +1916,9 @@
     </member>
     <member name="M:StockSharp.Xaml.SplashScreenControl.#ctor">
       <summary>Создать <see cref="T:StockSharp.Xaml.SplashScreenControl" />.</summary>
+    </member>
+    <member name="M:StockSharp.Xaml.SplashScreenControl.Show">
+      <summary>Показать окно-заставку.</summary>
     </member>
     <member name="M:StockSharp.Xaml.SplashScreenControl.InitializeComponent">
       <summary>InitializeComponent.</summary>
@@ -1779,6 +2070,9 @@
     </member>
     <member name="E:StockSharp.Xaml.GuiConnector`1.MassOrderCancelFailed">
       <summary>Событие массовой отмены заявок.</summary>
+    </member>
+    <member name="E:StockSharp.Xaml.GuiConnector`1.OrderStatusFailed">
+      <summary>Событие ошибки запроса состояния завок.</summary>
     </member>
     <member name="E:StockSharp.Xaml.GuiConnector`1.NewStopOrders">
       <summary>Событие появления новых стоп-заявок.</summary>

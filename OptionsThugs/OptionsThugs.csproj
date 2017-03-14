@@ -35,58 +35,94 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ecng.Collections">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\Ecng.Collections.dll</HintPath>
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\DevExpress.Data.v15.2.dll</HintPath>
     </Reference>
-    <Reference Include="Ecng.Common">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\Ecng.Common.dll</HintPath>
+    <Reference Include="Ecng.Collections, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b10e79ed0227b515, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Ecng.ComponentModel">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\Ecng.ComponentModel.dll</HintPath>
+    <Reference Include="Ecng.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b10e79ed0227b515, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ecng.ComponentModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b10e79ed0227b515, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.ComponentModel.dll</HintPath>
     </Reference>
     <Reference Include="Ecng.Localization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b10e79ed0227b515, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\Ecng.Localization.dll</HintPath>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="Ecng.Serialization">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\Ecng.Serialization.dll</HintPath>
+    <Reference Include="Ecng.Serialization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b10e79ed0227b515, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="Ecng.Xaml">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\Ecng.Xaml.dll</HintPath>
+    <Reference Include="Ecng.Xaml, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b10e79ed0227b515, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Xaml.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Algo">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Algo.dll</HintPath>
+    <Reference Include="Ecng.Xaml.Charting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b10e79ed0227b515, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Xaml.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Algo.Strategies">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Algo.Strategies.dll</HintPath>
+    <Reference Include="Ecng.Xaml.DevExp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Xaml.DevExp.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.BusinessEntities">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.BusinessEntities.dll</HintPath>
+    <Reference Include="StockSharp.Algo, Version=4.3.19.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Algo.dll</HintPath>
+    </Reference>
+    <Reference Include="StockSharp.Algo.Strategies, Version=4.3.19.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Algo.Strategies.dll</HintPath>
+    </Reference>
+    <Reference Include="StockSharp.BusinessEntities, Version=4.3.19.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.BusinessEntities.dll</HintPath>
     </Reference>
     <Reference Include="StockSharp.Localization, Version=4.3.19.5, Culture=neutral, PublicKeyToken=a245fe39d1a4aa84, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Localization.dll</HintPath>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Logging">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Logging.dll</HintPath>
+    <Reference Include="StockSharp.Logging, Version=4.3.19.5, Culture=neutral, PublicKeyToken=a245fe39d1a4aa84, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Messages">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Messages.dll</HintPath>
+    <Reference Include="StockSharp.Messages, Version=4.3.19.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Messages.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Quik">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Quik.dll</HintPath>
+    <Reference Include="StockSharp.Quik, Version=4.3.19.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Quik.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Xaml">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Xaml.dll</HintPath>
+    <Reference Include="StockSharp.QuikLua">
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.QuikLua.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Xaml.Charting">
-      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.19.5_ru\References\StockSharp.Xaml.Charting.dll</HintPath>
+    <Reference Include="StockSharp.Xaml, Version=4.3.19.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Xaml.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp_TraderConnection">
-      <HintPath>..\..\StockSharp_TraderConnection\StockSharp_TraderConnection\obj\Debug\StockSharp_TraderConnection.dll</HintPath>
+    <Reference Include="StockSharp.Xaml.Charting, Version=4.3.19.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Xaml.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp_WpfConnectionInterface">
-      <HintPath>..\..\StockSharp_TraderConnection\StockSharp_WpfConnectionInterface\obj\Debug\StockSharp_WpfConnectionInterface.dll</HintPath>
+    <Reference Include="StockSharp.Xaml.Code">
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Xaml.Code.dll</HintPath>
+    </Reference>
+    <Reference Include="StockSharp.Xaml.Diagram">
+      <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Xaml.Diagram.dll</HintPath>
+    </Reference>
+    <Reference Include="StockSharp_TraderConnection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\StockSharp_TraderConnection\StockSharp_WpfConnectionInterface\bin\Debug\StockSharp_TraderConnection.dll</HintPath>
+    </Reference>
+    <Reference Include="StockSharp_WpfConnectionInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\StockSharp_TraderConnection\StockSharp_WpfConnectionInterface\bin\Debug\StockSharp_WpfConnectionInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -116,6 +152,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\IView.cs" />
+    <Compile Include="Common\ViewModel.cs" />
+    <Compile Include="Model\CatcherStrategy.cs" />
+    <Compile Include="Model\CatcherStrategyDemo.cs" />
+    <Compile Include="Model\LimitQuotingStrategy.cs" />
+    <Compile Include="Model\MarketQuotingStrategy.cs" />
+    <Compile Include="Model\QuotingStrategy.cs" />
+    <Compile Include="Model\CloserStrategy.cs" />
+    <Compile Include="Model\DeltaHedgerStrategy.cs" />
+    <Compile Include="Model\SpreaderStrategy.cs" />
     <Compile Include="View\GeneralView.xaml.cs">
       <DependentUpon>GeneralView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -148,9 +194,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

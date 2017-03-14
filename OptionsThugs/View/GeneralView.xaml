@@ -5,12 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:loc="clr-namespace:StockSharp.Localization;assembly=StockSharp.Localization"
     xmlns:local="clr-namespace:OptionsThugs"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ss="http://schemas.stocksharp.com/xaml"
+    xmlns:ssharp="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+    xmlns:stockSharpWpfConnectionInterface="clr-namespace:StockSharp_WpfConnectionInterface;assembly=StockSharp_WpfConnectionInterface"
     Title="OptApp"
     Width="1200"
-    Height="700"
-    mc:Ignorable="d">
+    Height="700">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -44,20 +44,24 @@
         <TabControl Grid.Row="1">
             <TabItem Header="Overview">
                 <StackPanel Orientation="Vertical">
+                    <stockSharpWpfConnectionInterface:InterFace x:Name="connection" />
                     <TextBlock Text="ROBOTS INFO" />
                     <TextBlock Text="POS INFO" />
                     <TextBlock Text="GO INFO" />
                     <TextBlock Text="PNL INFO AND MB CHART" />
+
                     <Button
                         Width="100"
                         Margin="5"
                         HorizontalAlignment="Left"
-                        Content="start/stop" />
+                        Click="PrepareStrategy"
+                        Content="prepare" />
                     <Button
                         Width="100"
                         Margin="5"
                         HorizontalAlignment="Left"
-                        Content="handleBuy" />
+                        Click="StartStopClick"
+                        Content="startstop" />
                     <Button
                         Width="100"
                         Margin="5"
@@ -74,6 +78,28 @@
                         Margin="5"
                         HorizontalAlignment="Left"
                         Content="handleCancelAll ?" />
+
+                    <ss:LogControl x:Name="myMon" Height="200" />
+                    <TextBox
+                        x:Name="textBox"
+                        Height="23"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="textBox1"
+                        Height="23"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="textBox2"
+                        Height="23"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="textBox3"
+                        Height="23"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
                 </StackPanel>
 
             </TabItem>

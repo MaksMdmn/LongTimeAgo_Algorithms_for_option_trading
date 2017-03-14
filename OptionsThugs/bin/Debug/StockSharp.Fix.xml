@@ -7,36 +7,47 @@
     <member name="T:StockSharp.Fix.Dialects.BaseDialect">
       <summary>Базовый класс диалекта FIX протокола.</summary>
     </member>
-    <member name="M:StockSharp.Fix.Dialects.BaseDialect.#ctor(System.String,System.String,System.IO.Stream,System.Text.Encoding,Ecng.Common.IncrementalIdGenerator,System.String,StockSharp.Fix.FixFormats,System.TimeSpan,System.Boolean,System.String,System.Security.SecureString,System.TimeZoneInfo,System.String,System.String,System.String,System.String)">
+    <member name="M:StockSharp.Fix.Dialects.BaseDialect.#ctor(System.Text.Encoding,System.String,StockSharp.Fix.FixFormats)">
       <summary>Инициализировать <see cref="T:StockSharp.Fix.Dialects.BaseDialect" />.</summary>
-      <param name="senderCompId">Идентификатор отправителя.</param>
-      <param name="targetCompId">Идентификатор получателя.</param>
-      <param name="stream">Поток.</param>
       <param name="encoding">Кодировка.</param>
-      <param name="idGenerator">Генератор цепочки идентификаторов.</param>
       <param name="version">FIX версия.</param>
       <param name="format">Формат FIX протокола.</param>
-      <param name="heartbeatInterval">Heartbeat интервал.</param>
-      <param name="isResetCounter">Нужно ли сбрасывать счетчик номеров.</param>
-      <param name="login">Логин.</param>
-      <param name="password">Пароль.</param>
-      <param name="timeZone">Информация о временной зоне, где находится биржа.</param>
-      <param name="timeStampFormat">UTC формат штампа времени.</param>
-      <param name="timeFormat">UTC формат времени.</param>
-      <param name="dateFormat">UTC формат даты.</param>
-      <param name="exchangeBoard">Площадка, на которой торгуются инструменты.</param>
     </member>
-    <member name="P:StockSharp.Fix.Dialects.BaseDialect.TimeStampFormat">
-      <summary>UTC формат штампа времени.</summary>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.Encoding">
+      <summary>Кодировка.</summary>
     </member>
-    <member name="P:StockSharp.Fix.Dialects.BaseDialect.TimeFormat">
-      <summary>UTC формат времени.</summary>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.Login">
+      <summary>Логин.</summary>
     </member>
-    <member name="P:StockSharp.Fix.Dialects.BaseDialect.DateFormat">
-      <summary>UTC формат даты.</summary>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.Password">
+      <summary>Пароль.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.SenderCompId">
+      <summary>Идентификатор отправителя.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.TargetCompId">
+      <summary>Идентификатор получателя.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.TimeStampParser">
+      <summary>Парсер временной метки в формате UTC.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.TimeParser">
+      <summary>Парсер даты в формате UTC.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.DateParser">
+      <summary>Парсер времени в формате UTC.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.IsResetCounter">
+      <summary>Нужно ли сбрасывать счетчик номеров.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.HeartbeatInterval">
+      <summary>Heartbeat интервал.</summary>
     </member>
     <member name="P:StockSharp.Fix.Dialects.BaseDialect.TimeZone">
       <summary>Информация о временной зоне, где находится биржа.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.BaseDialect.ExchangeBoard">
+      <summary>Площадка, на которой торгуются инструменты.</summary>
     </member>
     <member name="P:StockSharp.Fix.Dialects.BaseDialect.HasPosition">
       <summary>Присутствует ли позиция в <see cref="F:StockSharp.Fix.Native.FixMessages.MarketDataSnapshotFullRefresh" />.</summary>
@@ -68,6 +79,12 @@
     </member>
     <member name="P:StockSharp.Fix.Dialects.BaseDialect.IsNativeIdentifiersPersistable">
       <summary>Системные идентификаторы могут быть сохранены.</summary>
+    </member>
+    <member name="M:StockSharp.Fix.Dialects.BaseDialect.Init(StockSharp.Fix.Native.IFixWriter,StockSharp.Fix.Native.IFixReader,Ecng.Common.IncrementalIdGenerator)">
+      <summary>Инициализировать диалект.</summary>
+      <param name="writer">Писатель FIX протокола.</param>
+      <param name="reader">Читатель данных, записанных в формате FIX протокола.</param>
+      <param name="idGenerator">Генератор цепочки идентификаторов.</param>
     </member>
     <member name="M:StockSharp.Fix.Dialects.BaseDialect.OnRead(StockSharp.Fix.Native.IFixReader,System.String,Ecng.Common.AllocationArray{StockSharp.Messages.Message})">
       <summary>Прочитать следующее сообщение FIX протокола.</summary>
@@ -127,17 +144,23 @@
       <returns>
         <see cref="T:StockSharp.Fix.Native.FixMessages" /> значение.</returns>
     </member>
-    <member name="M:StockSharp.Fix.Dialects.BaseDialect.DisposeManaged">
-      <summary>Освободить занятые ресурсы.</summary>
-    </member>
     <member name="P:StockSharp.Fix.Dialects.BaseDialect.SecuritiesSinglePacket">
       <summary>Сообщение для запроса информации обо всех инструментах.</summary>
     </member>
-    <member name="M:StockSharp.Fix.Dialects.BaseDialect.ReadExecutionReport(StockSharp.Fix.Native.IFixReader,StockSharp.Fix.Native.ExecutionReport,System.String,System.Func{StockSharp.Fix.Native.FixTags,System.Boolean})">
+    <member name="M:StockSharp.Fix.Dialects.BaseDialect.InitSecId(StockSharp.Messages.SecurityMessage,System.String,System.String,System.String,System.String)">
+      <summary>.</summary>
+      <param name="message">.</param>
+      <param name="symbol">.</param>
+      <param name="securityExchange">.</param>
+      <param name="idSource">.</param>
+      <param name="idValue">.</param>
+      <returns>.</returns>
+    </member>
+    <member name="M:StockSharp.Fix.Dialects.BaseDialect.ReadExecutionReport(StockSharp.Fix.Native.IFixReader,StockSharp.Fix.Native.ExecutionReport,Ecng.Common.FastDateTimeParser,System.Func{StockSharp.Fix.Native.FixTags,System.Boolean})">
       <summary>Прочитать сообщение <see cref="F:StockSharp.Fix.Native.FixMessages.ExecutionReport" />.</summary>
       <param name="reader">Читатель данных, записанных в формате FIX протокола.</param>
       <param name="report">Объект <see cref="T:StockSharp.Fix.Native.ExecutionReport" />.</param>
-      <param name="transactTimeFormat">Формат для поля <see cref="F:StockSharp.Fix.Native.FixTags.TransactTime" />.</param>
+      <param name="transactTimeParser">Парсер для поля <see cref="F:StockSharp.Fix.Native.FixTags.TransactTime" />.</param>
       <param name="extraTagProcess">.</param>
       <returns>
         <see langword="true" />, если сообщение было прочитано успешно, иначе, <see langword="false" />.</returns>
@@ -153,17 +176,8 @@
     <member name="T:StockSharp.Fix.Dialects.DefaultDialect">
       <summary>Реализация по-умолчанию <see cref="T:StockSharp.Fix.Dialects.IFixDialect" />.</summary>
     </member>
-    <member name="M:StockSharp.Fix.Dialects.DefaultDialect.#ctor(System.String,System.String,System.IO.Stream,Ecng.Common.IncrementalIdGenerator,System.TimeSpan,System.Boolean,System.String,System.Security.SecureString,System.TimeZoneInfo,System.Func{StockSharp.Messages.OrderCondition})">
+    <member name="M:StockSharp.Fix.Dialects.DefaultDialect.#ctor(System.Func{StockSharp.Messages.OrderCondition})">
       <summary>Создать <see cref="T:StockSharp.Fix.Dialects.DefaultDialect" />.</summary>
-      <param name="senderCompId">Идентификатор отправителя.</param>
-      <param name="targetCompId">Идентификатор получателя.</param>
-      <param name="stream">Поток.</param>
-      <param name="idGenerator">Генератор цепочки идентификаторов.</param>
-      <param name="heartbeatInterval">Heartbeat интервал.</param>
-      <param name="isResetCounter">Нужно ли сбрасывать счетчик номеров.</param>
-      <param name="login">Логин.</param>
-      <param name="password">Пароль.</param>
-      <param name="timeZone">Информация о временной зоне, где находится биржа.</param>
       <param name="createOrderCondition">Обработчик создания условия заявки.</param>
     </member>
     <member name="P:StockSharp.Fix.Dialects.DefaultDialect.ConvertToLatin">
@@ -199,11 +213,44 @@
     <member name="T:StockSharp.Fix.Dialects.IFixDialect">
       <summary>Интерфейс, описывающий диалект FIX протокола.</summary>
     </member>
-    <member name="P:StockSharp.Fix.Dialects.IFixDialect.Writer">
-      <summary>Писатель FIX протокола.</summary>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.Encoding">
+      <summary>Кодировка.</summary>
     </member>
-    <member name="P:StockSharp.Fix.Dialects.IFixDialect.Reader">
-      <summary>Читатель данных, записанных в формате FIX протокола.</summary>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.Format">
+      <summary>Формат FIX протокола.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.Login">
+      <summary>Логин.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.Password">
+      <summary>Пароль.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.SenderCompId">
+      <summary>Идентификатор отправителя.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.TargetCompId">
+      <summary>Идентификатор получателя.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.TimeStampParser">
+      <summary>Парсер временной метки в формате UTC.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.TimeParser">
+      <summary>Парсер даты в формате UTC.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.DateParser">
+      <summary>Парсер времени в формате UTC.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.IsResetCounter">
+      <summary>Нужно ли сбрасывать счетчик номеров.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.HeartbeatInterval">
+      <summary>Heartbeat интервал.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.TimeZone">
+      <summary>Информация о временной зоне, где находится биржа.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Dialects.IFixDialect.ExchangeBoard">
+      <summary>Площадка, на которой торгуются инструменты.</summary>
     </member>
     <member name="P:StockSharp.Fix.Dialects.IFixDialect.SecurityLookup">
       <summary>Поддерживается <see cref="T:StockSharp.Messages.SecurityLookupMessage" />.</summary>
@@ -229,6 +276,12 @@
     </member>
     <member name="P:StockSharp.Fix.Dialects.IFixDialect.IsNativeIdentifiersPersistable">
       <summary>Системные идентификаторы могут быть сохранены.</summary>
+    </member>
+    <member name="M:StockSharp.Fix.Dialects.IFixDialect.Init(StockSharp.Fix.Native.IFixWriter,StockSharp.Fix.Native.IFixReader,Ecng.Common.IncrementalIdGenerator)">
+      <summary>Инициализировать диалект.</summary>
+      <param name="writer">Писатель FIX протокола.</param>
+      <param name="reader">Читатель данных, записанных в формате FIX протокола.</param>
+      <param name="idGenerator">Генератор цепочки идентификаторов.</param>
     </member>
     <member name="M:StockSharp.Fix.Dialects.IFixDialect.Write(StockSharp.Messages.Message)">
       <summary>Записать сообщение в формат FIX протокола.</summary>
@@ -273,7 +326,7 @@
       <param name="reader">Читатель данных.</param>
       <returns>Успешно ли обработаны данные.</returns>
     </member>
-    <member name="M:StockSharp.Fix.FixServer.#ctor(System.Func{System.String,System.String,System.Tuple{System.TimeSpan,StockSharp.Fix.FixClientRoles}})">
+    <member name="M:StockSharp.Fix.FixServer.#ctor(System.Func{System.String,System.Security.SecureString,System.Tuple{System.TimeSpan,StockSharp.Fix.FixClientRoles}})">
       <summary>Создать <see cref="T:StockSharp.Fix.FixServer" />.</summary>
       <param name="authorize">Авторизация клиентов.</param>
     </member>
@@ -389,14 +442,14 @@
     <member name="P:StockSharp.Fix.FixSession.TimeZone">
       <summary>Информация о временной зоне, где находится биржа.</summary>
     </member>
-    <member name="P:StockSharp.Fix.FixSession.DateFormat">
-      <summary>Формат даты.</summary>
+    <member name="P:StockSharp.Fix.FixSession.DateParser">
+      <summary>Парсер даты.</summary>
     </member>
-    <member name="P:StockSharp.Fix.FixSession.DateTimeFormat">
-      <summary>Формат даты и времени.</summary>
+    <member name="P:StockSharp.Fix.FixSession.DateTimeParser">
+      <summary>Парсер даты и времени.</summary>
     </member>
-    <member name="P:StockSharp.Fix.FixSession.TimeFormat">
-      <summary>Формат представленного времени.</summary>
+    <member name="P:StockSharp.Fix.FixSession.TimeParser">
+      <summary>Парсер времени.</summary>
     </member>
     <member name="P:StockSharp.Fix.FixSession.ReadTimeout">
       <summary>Время ожидания получения данных от сервера. По-умолчанию равно <see cref="F:System.TimeSpan.Zero" />.</summary>
@@ -488,15 +541,15 @@
       <summary>Прочитать следующий тэг.</summary>
       <returns>Следующий тэг. -1 означает конец данных.</returns>
     </member>
-    <member name="M:StockSharp.Fix.Native.BinaryFixReader.ReadDateTime(System.String)">
+    <member name="M:StockSharp.Fix.Native.BinaryFixReader.ReadDateTime(Ecng.Common.FastDateTimeParser)">
       <summary>Прочитать <see cref="T:System.DateTime" /> значение.</summary>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
       <returns>
         <see cref="T:System.DateTime" /> значение.</returns>
     </member>
-    <member name="M:StockSharp.Fix.Native.BinaryFixReader.ReadTimeSpan(System.String)">
+    <member name="M:StockSharp.Fix.Native.BinaryFixReader.ReadTimeSpan(Ecng.Common.FastTimeSpanParser)">
       <summary>Прочитать <see cref="T:System.TimeSpan" /> значение.</summary>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
       <returns>
         <see cref="T:System.TimeSpan" /> значение.</returns>
     </member>
@@ -625,17 +678,17 @@
       <param name="value">
         <see cref="T:System.Decimal" /> значение.</param>
     </member>
-    <member name="M:StockSharp.Fix.Native.BinaryFixWriter.Write(System.DateTime,System.String)">
+    <member name="M:StockSharp.Fix.Native.BinaryFixWriter.Write(System.DateTime,Ecng.Common.FastDateTimeParser)">
       <summary>Записать <see cref="T:System.DateTime" /> значение.</summary>
       <param name="value">
         <see cref="T:System.DateTime" /> значение.</param>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
     </member>
-    <member name="M:StockSharp.Fix.Native.BinaryFixWriter.Write(System.TimeSpan,System.String)">
+    <member name="M:StockSharp.Fix.Native.BinaryFixWriter.Write(System.TimeSpan,Ecng.Common.FastTimeSpanParser)">
       <summary>Записать <see cref="T:System.TimeSpan" /> значение.</summary>
       <param name="value">
         <see cref="T:System.TimeSpan" /> значение.</param>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
     </member>
     <member name="M:StockSharp.Fix.Native.BinaryFixWriter.Write(System.String)">
       <summary>Записать <see cref="T:System.String" /> значение.</summary>
@@ -2752,6 +2805,9 @@
     <member name="P:StockSharp.Fix.Native.ExecutionReport.MaxFloor">
       <summary>Максимально видимый объем на бирже.</summary>
     </member>
+    <member name="P:StockSharp.Fix.Native.ExecutionReport.MassStatusReqId">
+      <summary>Указывается, если сообщение является ответом на <see cref="F:StockSharp.Fix.Native.FixMessages.OrderMassStatusRequest" />.</summary>
+    </member>
     <member name="F:StockSharp.Fix.Native.ExecutionReport.Price">
       <summary>Price per unit of quantity (e.g. per share).</summary>
     </member>
@@ -2820,6 +2876,9 @@
     </member>
     <member name="F:StockSharp.Fix.Native.ExecutionReport.ExecId">
       <summary>Уникальные идентификатор, присвоенный sell-side (брокер, биржа, ECN).</summary>
+    </member>
+    <member name="F:StockSharp.Fix.Native.ExecutionReport.OrdStatusReqId">
+      <summary>Указывается, если сообщение является ответом на <see cref="F:StockSharp.Fix.Native.FixMessages.OrderStatusRequest" />.</summary>
     </member>
     <member name="T:StockSharp.Fix.Native.FastPMap">
       <summary>Карта присутствия FAST.</summary>
@@ -3099,6 +3158,9 @@
     <member name="F:StockSharp.Fix.Native.FixTags.ClientID">
       <summary>.</summary>
     </member>
+    <member name="F:StockSharp.Fix.Native.FixTags.MinQty">
+      <summary>.</summary>
+    </member>
     <member name="F:StockSharp.Fix.Native.FixTags.MaxFloor">
       <summary>.</summary>
     </member>
@@ -3127,6 +3189,9 @@
       <summary>.</summary>
     </member>
     <member name="F:StockSharp.Fix.Native.FixTags.OfferSize">
+      <summary>.</summary>
+    </member>
+    <member name="F:StockSharp.Fix.Native.FixTags.PrevClosePx">
       <summary>.</summary>
     </member>
     <member name="F:StockSharp.Fix.Native.FixTags.ResetSeqNumFlag">
@@ -3216,6 +3281,9 @@
     <member name="F:StockSharp.Fix.Native.FixTags.QuoteEntryID">
       <summary>.</summary>
     </member>
+    <member name="F:StockSharp.Fix.Native.FixTags.UnderlyingSecurityID">
+      <summary>.</summary>
+    </member>
     <member name="F:StockSharp.Fix.Native.FixTags.SecurityReqID">
       <summary>.</summary>
     </member>
@@ -3226,6 +3294,12 @@
       <summary>.</summary>
     </member>
     <member name="F:StockSharp.Fix.Native.FixTags.SecurityResponseType">
+      <summary>.</summary>
+    </member>
+    <member name="F:StockSharp.Fix.Native.FixTags.HighPx">
+      <summary>.</summary>
+    </member>
+    <member name="F:StockSharp.Fix.Native.FixTags.LowPx">
       <summary>.</summary>
     </member>
     <member name="F:StockSharp.Fix.Native.FixTags.TradingSessionID">
@@ -3494,17 +3568,17 @@
       <param name="value">
         <see cref="T:System.Decimal" /> значение.</param>
     </member>
-    <member name="M:StockSharp.Fix.Native.IFixWriter.Write(System.DateTime,System.String)">
+    <member name="M:StockSharp.Fix.Native.IFixWriter.Write(System.DateTime,Ecng.Common.FastDateTimeParser)">
       <summary>Записать <see cref="T:System.DateTime" /> значение.</summary>
       <param name="value">
         <see cref="T:System.DateTime" /> значение.</param>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
     </member>
-    <member name="M:StockSharp.Fix.Native.IFixWriter.Write(System.TimeSpan,System.String)">
+    <member name="M:StockSharp.Fix.Native.IFixWriter.Write(System.TimeSpan,Ecng.Common.FastTimeSpanParser)">
       <summary>Записать <see cref="T:System.TimeSpan" /> значение.</summary>
       <param name="value">
         <see cref="T:System.TimeSpan" /> значение.</param>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
     </member>
     <member name="M:StockSharp.Fix.Native.IFixWriter.Write(System.String)">
       <summary>Записать <see cref="T:System.String" /> значение.</summary>
@@ -3558,6 +3632,30 @@
     <member name="P:StockSharp.Fix.Native.MDEntry.NumberOfOrders">
       <summary>Количество заявок.</summary>
     </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.OpenPrice">
+      <summary>Цена открытия.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.OpenSize">
+      <summary>Объем открытия.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.HighPrice">
+      <summary>Цена наивысшая.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.HighSize">
+      <summary>Максимальный объем.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.LowPrice">
+      <summary>Цена наименьшая.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.LowSize">
+      <summary>Объем закрытия.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.ClosePrice">
+      <summary>Цена закрытия.</summary>
+    </member>
+    <member name="P:StockSharp.Fix.Native.MDEntry.CloseSize">
+      <summary>Объем закрытия.</summary>
+    </member>
     <member name="T:StockSharp.Fix.Native.TextFixReader">
       <summary>Читатель данных, записанных в формате текстового FIX протокола.</summary>
     </member>
@@ -3570,15 +3668,15 @@
       <summary>Прочитать следующий тэг.</summary>
       <returns>Следующий тэг. -1 означает конец данных.</returns>
     </member>
-    <member name="M:StockSharp.Fix.Native.TextFixReader.ReadDateTime(System.String)">
+    <member name="M:StockSharp.Fix.Native.TextFixReader.ReadDateTime(Ecng.Common.FastDateTimeParser)">
       <summary>Прочитать <see cref="T:System.DateTime" /> значение.</summary>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
       <returns>
         <see cref="T:System.DateTime" /> значение.</returns>
     </member>
-    <member name="M:StockSharp.Fix.Native.TextFixReader.ReadTimeSpan(System.String)">
+    <member name="M:StockSharp.Fix.Native.TextFixReader.ReadTimeSpan(Ecng.Common.FastTimeSpanParser)">
       <summary>Прочитать <see cref="T:System.TimeSpan" /> значение.</summary>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
       <returns>
         <see cref="T:System.TimeSpan" /> значение.</returns>
     </member>
@@ -3647,17 +3745,17 @@
       <param name="value">
         <see cref="T:System.Decimal" /> значение.</param>
     </member>
-    <member name="M:StockSharp.Fix.Native.TextFixWriter.Write(System.DateTime,System.String)">
+    <member name="M:StockSharp.Fix.Native.TextFixWriter.Write(System.DateTime,Ecng.Common.FastDateTimeParser)">
       <summary>Записать <see cref="T:System.DateTime" /> значение.</summary>
       <param name="value">
         <see cref="T:System.DateTime" /> значение.</param>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
     </member>
-    <member name="M:StockSharp.Fix.Native.TextFixWriter.Write(System.TimeSpan,System.String)">
+    <member name="M:StockSharp.Fix.Native.TextFixWriter.Write(System.TimeSpan,Ecng.Common.FastTimeSpanParser)">
       <summary>Записать <see cref="T:System.TimeSpan" /> значение.</summary>
       <param name="value">
         <see cref="T:System.TimeSpan" /> значение.</param>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
     </member>
     <member name="M:StockSharp.Fix.Native.TextFixWriter.Write(System.String)">
       <summary>Записать <see cref="T:System.String" /> значение.</summary>
@@ -3701,15 +3799,15 @@
       <summary>Получить лог данных.</summary>
       <returns>Лог данных.</returns>
     </member>
-    <member name="M:StockSharp.Fix.Native.IFixReader.ReadDateTime(System.String)">
+    <member name="M:StockSharp.Fix.Native.IFixReader.ReadDateTime(Ecng.Common.FastDateTimeParser)">
       <summary>Прочитать <see cref="T:System.DateTime" /> значение.</summary>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
       <returns>
         <see cref="T:System.DateTime" /> значение.</returns>
     </member>
-    <member name="M:StockSharp.Fix.Native.IFixReader.ReadTimeSpan(System.String)">
+    <member name="M:StockSharp.Fix.Native.IFixReader.ReadTimeSpan(Ecng.Common.FastTimeSpanParser)">
       <summary>Прочитать <see cref="T:System.TimeSpan" /> значение.</summary>
-      <param name="format">Формат представленного времени.</param>
+      <param name="parser">Парсер времени. Требуется, если данные транслируются ввиде строки.</param>
       <returns>
         <see cref="T:System.TimeSpan" /> значение.</returns>
     </member>
@@ -3795,10 +3893,9 @@
       <summary>Отправить сообщение.</summary>
       <param name="message">Сообщение.</param>
     </member>
-    <member name="M:StockSharp.Fix.FixMessageAdapter.CreateDialect(System.IO.Stream,Ecng.Common.IncrementalIdGenerator)">
+    <member name="M:StockSharp.Fix.FixMessageAdapter.CreateDialect(StockSharp.Fix.FixDialects)">
       <summary>Создать диалект FIX протокола.</summary>
-      <param name="stream">Поток.</param>
-      <param name="idGenerator">Генератор цепочки идентификаторов.</param>
+      <param name="dialect">FIX диалект.</param>
       <returns>Диалект.</returns>
     </member>
     <member name="P:StockSharp.Fix.FixMessageAdapter.Address">

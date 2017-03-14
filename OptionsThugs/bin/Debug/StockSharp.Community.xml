@@ -32,7 +32,7 @@
     <member name="M:StockSharp.Community.AuthenticationClient.Login">
       <summary>Произвести вход в систему.</summary>
     </member>
-    <member name="M:StockSharp.Community.AuthenticationClient.Login(System.String,System.String)">
+    <member name="M:StockSharp.Community.AuthenticationClient.Login(System.String,System.Security.SecureString)">
       <summary>Произвести вход в систему.</summary>
       <param name="login">Логин.</param>
       <param name="password">Пароль.</param>
@@ -139,7 +139,7 @@
     <member name="M:StockSharp.Community.CommunityAuthorization.#ctor">
       <summary>Создать <see cref="T:StockSharp.Community.CommunityAuthorization" />.</summary>
     </member>
-    <member name="M:StockSharp.Community.CommunityAuthorization.ValidateCredentials(System.String,System.String)">
+    <member name="M:StockSharp.Community.CommunityAuthorization.ValidateCredentials(System.String,System.Security.SecureString)">
       <summary>Проверить логин и пароль на правильность.</summary>
       <param name="login">Логин.</param>
       <param name="password">Пароль.</param>
@@ -275,8 +275,16 @@
     <member name="M:StockSharp.Community.INotificationService.SendEmail(System.Guid,System.String,System.String)">
       <summary>Послать email-сообщение.</summary>
       <param name="sessionId">Идентификатор сессии.</param>
-      <param name="caption">Заголовок сообщения.</param>
-      <param name="message">Тело сообщения.</param>
+      <param name="title">Заголовок сообщения.</param>
+      <param name="body">Тело сообщения.</param>
+      <returns>Код результата выполнения.</returns>
+    </member>
+    <member name="M:StockSharp.Community.INotificationService.SendMessage(System.Guid,System.String,System.String,System.Boolean)">
+      <summary>Отправить сообщение.</summary>
+      <param name="sessionId">Идентификатор сессии.</param>
+      <param name="title">Заголовок сообщения.</param>
+      <param name="body">Тело сообщения.</param>
+      <param name="isEnglish">Сообщение на английском.</param>
       <returns>Код результата выполнения.</returns>
     </member>
     <member name="M:StockSharp.Community.INotificationService.GetNews(System.Guid,System.Int64)">
@@ -314,7 +322,7 @@
     <member name="M:StockSharp.Community.IProfileService.SendSms(System.String,System.String)">
       <summary>Отправить SMS.</summary>
       <param name="email">Адрес электронной почты.</param>
-      <param name="phone">Номер телефона.</param>
+      <param name="phone">Телефон.</param>
       <returns>Код результата выполнения.</returns>
     </member>
     <member name="M:StockSharp.Community.IProfileService.ValidatePhone(System.String,System.String)">
@@ -448,8 +456,13 @@
     </member>
     <member name="M:StockSharp.Community.NotificationClient.SendEmail(System.String,System.String)">
       <summary>Послать email-сообщение.</summary>
-      <param name="caption">Заголовок сообщения.</param>
-      <param name="message">Тело сообщения.</param>
+      <param name="title">Заголовок сообщения.</param>
+      <param name="body">Тело сообщения.</param>
+    </member>
+    <member name="M:StockSharp.Community.NotificationClient.SendMessage(System.String,System.String)">
+      <summary>Отправить сообщение.</summary>
+      <param name="title">Заголовок сообщения.</param>
+      <param name="body">Тело сообщения.</param>
     </member>
     <member name="E:StockSharp.Community.NotificationClient.NewsReceived">
       <summary>Событие появления новости.</summary>
@@ -479,7 +492,7 @@
       <summary>Адрес электронной почты.</summary>
     </member>
     <member name="P:StockSharp.Community.Profile.Phone">
-      <summary>Номер телефона.</summary>
+      <summary>Телефон.</summary>
     </member>
     <member name="P:StockSharp.Community.Profile.Homepage">
       <summary>Сайт.</summary>
@@ -534,7 +547,7 @@
     <member name="M:StockSharp.Community.ProfileClient.SendSms(System.String,System.String)">
       <summary>Отправить SMS.</summary>
       <param name="email">Адрес электронной почты.</param>
-      <param name="phone">Номер телефона.</param>
+      <param name="phone">Телефон.</param>
     </member>
     <member name="M:StockSharp.Community.ProfileClient.ValidatePhone(System.String,System.String)">
       <summary>Подтвердить телефон.</summary>
