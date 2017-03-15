@@ -79,27 +79,7 @@
                         HorizontalAlignment="Left"
                         Content="handleCancelAll ?" />
 
-                    <ss:LogControl x:Name="myMon" Height="200" />
-                    <TextBox
-                        x:Name="textBox"
-                        Height="23"
-                        Text="TextBox"
-                        TextWrapping="Wrap" />
-                    <TextBox
-                        x:Name="textBox1"
-                        Height="23"
-                        Text="TextBox"
-                        TextWrapping="Wrap" />
-                    <TextBox
-                        x:Name="textBox2"
-                        Height="23"
-                        Text="TextBox"
-                        TextWrapping="Wrap" />
-                    <TextBox
-                        x:Name="textBox3"
-                        Height="23"
-                        Text="TextBox"
-                        TextWrapping="Wrap" />
+                    <ss:LogControl x:Name="myMon" Height="400" />
                 </StackPanel>
 
             </TabItem>

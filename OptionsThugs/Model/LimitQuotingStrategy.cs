@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
+using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -8,62 +11,110 @@ namespace OptionsThugs.Model
 {
     public class LimitQuotingStrategy : QuotingStrategy
     {
-        private decimal _correctedLimitPrice;
+        public decimal QuotePriceShift { get; private set; }
+
+        private volatile Order _orderInWork;
+        private decimal _oldPosValue;
 
         public LimitQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
-            : base(quotingSide, quotingVolume, quotePriceShift)
+            : base(quotingSide, quotingVolume)
         {
+            QuotePriceShift = quotePriceShift;
+            _orderInWork = null;
         }
 
         protected sealed override void QuotingProcess()
         {
-            //Order tempOrder;
-            //if (OrderInWork == null)
-            //{
-            //    Quote quote = GetSuitableBestQuote(MarketDepth);
-            //    _correctedLimitPrice = 0;
-            //    var newPrice = quote.Price;
-            //    var oldPrice = OrderInWork == null ? newPrice : OrderInWork.Price;
+            if (_orderInWork == null)
+            {
+                Quote bestQuote = GetSuitableBestQuote(MarketDepth);
 
-            //    tempOrder = this.CreateOrder(QuotingSide, newPrice + QuotePriceShift, RestVolume);
-            //    OrderInWork = tempOrder;
+                if (MarketDepth == null) return;
+                if (bestQuote == null) return;
 
-            //    RegisterOrder(tempOrder);
+                decimal price = bestQuote.Price + QuotePriceShift;
+                decimal volume = Math.Abs(Volume - Position);
 
-            //    var rollRule = tempOrder.WhenRegistered(Connector)
-            //        .Do(() =>
-            //        {
-            //            Security.WhenMarketDepthChanged(Connector)
-            //                .Do(() =>
-            //                    {
-            //                        if (IsQuotingNeeded(MarketDepth, newPrice, oldPrice, RestVolume))
-            //                        {
-            //                            CancelOrder(OrderInWork);
+                if (volume > 0)
+                {
+                    _orderInWork = this.CreateOrder(QuotingSide, price, volume);
 
-            //                        }
-            //                    })
-            //                .Apply(this);
-            //        })
-            //        .Apply(this);
+                    _orderInWork.WhenChanged(Connector)
+                        .Do(o =>
+                        {
+                            if (o.State == OrderStates.Done || o.State == OrderStates.Failed)
+                            {
+                                _orderInWork = null;
+                            }
+                        })
+                        .Until(() => _orderInWork == null)
+                        .Apply(this);
 
-            //    tempOrder.WhenCancelFailed(Connector)
-            //        .Or(tempOrder.WhenRegisterFailed(Connector))
-            //        .Or(tempOrder.WhenMatched(Connector))
-            //        .Or(tempOrder.WhenCanceled(Connector))
-            //        .Do(() =>
-            //        {
-            //            Rules.RemoveRulesByToken(rollRule.Token, rollRule);
-            //            OrderInWork = null;
-            //        })
-            //        .Once()
-            //        .Apply(this);
-            //}
+                    //_orderInWork.WhenNewTrade(Connector)
+                    //    .Do(WaitForEqualsPositions)
+                    //    .Apply(this);
+
+                    _orderInWork.WhenRegistered(Connector)
+                        .Do(ProcessOrder)
+                        .Once()
+                        .Apply(this);
+
+                    RegisterOrder(_orderInWork);
+                }
+            }
         }
 
-        protected override bool IsQuotingNeeded(MarketDepth md, decimal marketPrice, decimal currentQuotingPrice, decimal currentQuotingVolume)
+        private void WaitForEqualsPositions()
         {
-            return marketPrice != currentQuotingPrice
-                || IsQuoteGapRepresent(out _correctedLimitPrice, marketPrice, GetSuitableQuotes(md)[1].Price, currentQuotingPrice);
+            int safeCounter = 0;
+            int maxSafeCounter = 100;
+            int delay = 50;
+
+            Rules.ForEach(rule => rule.Suspend(true));
+
+            while (Position == _oldPosValue)
+            {
+                Thread.Sleep(delay);
+                safeCounter++;
+
+                if (safeCounter > maxSafeCounter)
+                    throw new TimeoutException("have no respond from terminal, timeout: " + maxSafeCounter * delay);
+            }
+            _oldPosValue = Position;
+
+            Rules.ForEach(rule => rule.Suspend(false));
+        }
+
+        private void ProcessOrder()
+        {
+            Security.WhenMarketDepthChanged(Connector)
+                .Do((mr, md) =>
+                {
+                    if (_orderInWork != null && IsQuotingNeeded(md, _orderInWork.Price))
+                    {
+                        CancelOrder(_orderInWork);
+                        _orderInWork = null;
+                    }
+                })
+                .Until(() => _orderInWork == null)
+                .Apply(this);
+        }
+
+        private bool IsQuotingNeeded(MarketDepth md, decimal currentQuotingPrice)
+        {
+            Quote bestQuote = GetSuitableBestQuote(md);
+            Quote preBestQuote = GetSuitableQuotes(md)[1]; // 2ая лучшая котировка
+
+            if (bestQuote == null || preBestQuote == null)
+                return true; // снять заявку
+
+            if (bestQuote.Price != currentQuotingPrice)
+                return true; // цена выше бида или ниже аска
+
+            if (Math.Abs(currentQuotingPrice - preBestQuote.Price) > Security.PriceStep.Value)
+                return true; //есть гэп котировок в стакане и мы стоим выше чем на 1 шаг от лучшей котировки
+
+            return false;
         }
 
         private Quote GetSuitableBestQuote(MarketDepth depth)
@@ -78,25 +129,5 @@ namespace OptionsThugs.Model
             return QuotingSide == Sides.Buy ? depth.Bids : depth.Asks;
         }
 
-        private bool IsQuoteGapRepresent(decimal marketBestPrice, decimal marketSecondPrice, decimal currentQuotingPrice)
-        {
-            if (marketBestPrice != currentQuotingPrice)
-                return false;
-
-            if (Math.Abs(currentQuotingPrice - marketSecondPrice) > Security.PriceStep.Value)
-                return true;
-
-            return false;
-        }
-
-        private bool IsQuoteGapRepresent(out decimal correctLimitBestPrice, decimal marketBestPrice,
-            decimal marketSecondPrice, decimal currentQuotingPrice)
-        {
-            var answer = IsQuoteGapRepresent(marketBestPrice, marketSecondPrice, currentQuotingPrice);
-
-            correctLimitBestPrice = answer ? marketSecondPrice : 0;
-
-            return answer;
-        }
     }
 }

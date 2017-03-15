@@ -1,10 +1,5 @@
-﻿using System.ComponentModel;
-using System.Threading;
-using System.Windows;
-using Ecng.Xaml;
+﻿using System.Windows;
 using OptionsThugs.Model;
-using StockSharp.Algo;
-using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 using StockSharp.Xaml;
@@ -45,7 +40,7 @@ namespace OptionsThugs.View
 
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
-            _strategy = new LimitQuotingStrategy(Sides.Buy, 10, 1)
+            _strategy = new LimitQuotingStrategy(Sides.Sell, 10, -1)
             {
                 Connector = connection.SafeConnection.Connector,
                 Security = connection.SelectedSecurity,
@@ -53,19 +48,6 @@ namespace OptionsThugs.View
             };
 
             _logManager.Sources.Add(_strategy);
-
-            connection.SelectedSecurity.WhenMarketDepthChanged(connection.SafeConnection.Connector)
-                .Do(md =>
-                {
-                    this.GuiAsync(() =>
-                    {
-                        textBox.Text = md.Asks[1].ToString();
-                        textBox1.Text = md.Asks[0].ToString();
-                        textBox2.Text = md.Bids[0].ToString();
-                        textBox3.Text = md.Bids[1].ToString();
-                    });
-                })
-                .Apply(_strategy);
         }
     }
 }

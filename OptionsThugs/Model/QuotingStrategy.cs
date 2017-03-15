@@ -17,17 +17,11 @@ namespace OptionsThugs.Model
         //TODO lock на ордер нужно сделать, иначе опять буду лупить в наллы или в ордер без айди из наследников
         protected Sides QuotingSide { get; private set; }
         protected MarketDepth MarketDepth { get; private set; }
-        protected decimal ExecutedVolume { get; private set; }
-        protected decimal RestVolume => Volume - ExecutedVolume;
-        protected decimal QuotePriceShift { get; private set; }
-        protected Order OrderInWork { get;  set; }
 
-        protected QuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
+        protected QuotingStrategy(Sides quotingSide, decimal quotingVolume)
         {
             QuotingSide = quotingSide;
             Volume = quotingVolume;
-            ExecutedVolume = 0;
-            QuotePriceShift = quotePriceShift;
 
             CancelOrdersWhenStopping = true; //не пашет
             CommentOrders = true;
@@ -50,7 +44,6 @@ namespace OptionsThugs.Model
             //start here
             Security.WhenMarketDepthChanged(Connector)
                 .Do(QuotingProcess)
-                .Once()
                 .Apply(this);
 
             this.WhenPositionChanged()
@@ -70,7 +63,5 @@ namespace OptionsThugs.Model
         }
 
         protected abstract void QuotingProcess();
-
-        protected abstract bool IsQuotingNeeded(MarketDepth md, decimal marketPrice, decimal currentQuotingPrice, decimal currentQuotingVolume);
     }
 }

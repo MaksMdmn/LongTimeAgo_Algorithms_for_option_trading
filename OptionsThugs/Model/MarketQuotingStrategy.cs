@@ -12,46 +12,54 @@ namespace OptionsThugs.Model
 {
     public class MarketQuotingStrategy : QuotingStrategy
     {
-        private readonly decimal _targetPrice;
-        public MarketQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift, decimal targetPrice)
-            : base(quotingSide, quotingVolume, quotePriceShift)
+        //private readonly decimal _targetPrice;
+        //public MarketQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift, decimal targetPrice)
+        //    : base(quotingSide, quotingVolume, quotePriceShift)
+        //{
+        //    _targetPrice = targetPrice;
+        //}
+
+        //protected sealed override void QuotingProcess()
+        //{
+        //    Quote quote = GetSuitableBestQuote(MarketDepth);
+
+        //    if (quote == null) return;
+
+        //    var marketPrice = quote.Price;
+
+        //    if (IsQuotingNeeded(MarketDepth, marketPrice, 0, RestVolume))
+        //    {
+        //        RegisterOrder(this.CreateOrder(QuotingSide, marketPrice, RestVolume));
+        //        CancelOrder(OrderInWork);
+        //    }
+        //}
+
+        //protected override bool IsQuotingNeeded(MarketDepth md, decimal marketPrice, decimal currentQuotingPrice, decimal currentQuotingVolume)
+        //{
+        //    if (marketPrice <= 0 || _targetPrice <= 0) return false;
+
+        //    if (QuotingSide == Sides.Buy)
+        //    {
+        //        return marketPrice >= _targetPrice;
+        //    }
+        //    else
+        //    {
+        //        return marketPrice <= _targetPrice;
+        //    }
+        //}
+
+        //private Quote GetSuitableBestQuote(MarketDepth depth)
+        //{
+        //    if (depth == null) return null;
+        //    return QuotingSide == Sides.Buy ? depth.BestAsk : depth.BestBid;
+        //}
+        public MarketQuotingStrategy(Sides quotingSide, decimal quotingVolume) : base(quotingSide, quotingVolume)
         {
-            _targetPrice = targetPrice;
         }
 
-        protected sealed override void QuotingProcess()
+        protected override void QuotingProcess()
         {
-            Quote quote = GetSuitableBestQuote(MarketDepth);
-
-            if (quote == null) return;
-
-            var marketPrice = quote.Price;
-
-            if (IsQuotingNeeded(MarketDepth, marketPrice, 0, RestVolume))
-            {
-                RegisterOrder(this.CreateOrder(QuotingSide, marketPrice, RestVolume));
-                CancelOrder(OrderInWork);
-            }
-        }
-
-        protected override bool IsQuotingNeeded(MarketDepth md, decimal marketPrice, decimal currentQuotingPrice, decimal currentQuotingVolume)
-        {
-            if (marketPrice <= 0 || _targetPrice <= 0) return false;
-
-            if (QuotingSide == Sides.Buy)
-            {
-                return marketPrice >= _targetPrice;
-            }
-            else
-            {
-                return marketPrice <= _targetPrice;
-            }
-        }
-
-        private Quote GetSuitableBestQuote(MarketDepth depth)
-        {
-            if (depth == null) return null;
-            return QuotingSide == Sides.Buy ? depth.BestAsk : depth.BestBid;
+            throw new NotImplementedException();
         }
     }
 }
