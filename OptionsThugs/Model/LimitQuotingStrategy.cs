@@ -13,8 +13,8 @@ namespace OptionsThugs.Model
     {
         public decimal QuotePriceShift { get; private set; }
 
-        private volatile Order _orderInWork;
-        private decimal _oldPosValue;
+        private Order _orderInWork;
+        private decimal _positionValueOnStart;
 
         public LimitQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
             : base(quotingSide, quotingVolume)
@@ -28,6 +28,7 @@ namespace OptionsThugs.Model
             if (_orderInWork == null)
             {
                 Quote bestQuote = GetSuitableBestQuote(MarketDepth);
+                _positionValueOnStart = Position;
 
                 if (MarketDepth == null) return;
                 if (bestQuote == null) return;
@@ -39,20 +40,22 @@ namespace OptionsThugs.Model
                 {
                     _orderInWork = this.CreateOrder(QuotingSide, price, volume);
 
-                    _orderInWork.WhenChanged(Connector)
+                    _orderInWork.WhenMatched(Connector)
+                        .Or(_orderInWork.WhenCanceled(Connector))
                         .Do(o =>
                         {
-                            if (o.State == OrderStates.Done || o.State == OrderStates.Failed)
-                            {
-                                _orderInWork = null;
-                            }
+                            SyncPositionByOrderExecution(o);
                         })
                         .Until(() => _orderInWork == null)
                         .Apply(this);
 
-                    //_orderInWork.WhenNewTrade(Connector)
-                    //    .Do(WaitForEqualsPositions)
-                    //    .Apply(this);
+                    _orderInWork.WhenCancelFailed(Connector)
+                        .Do(of =>
+                        {
+                            SyncPositionByOrderExecution(of.Order);
+                        })
+                        .Until(() => _orderInWork == null)
+                        .Apply(this);
 
                     _orderInWork.WhenRegistered(Connector)
                         .Do(ProcessOrder)
@@ -64,31 +67,23 @@ namespace OptionsThugs.Model
             }
         }
 
-        private void WaitForEqualsPositions()
+
+        private void SyncPositionByOrderExecution(Order order)
         {
-            int safeCounter = 0;
-            int maxSafeCounter = 100;
-            int delay = 50;
+            var executedVolume = order.GetTrades(Connector).Sum(t => t.Trade.Volume);
 
-            Rules.ForEach(rule => rule.Suspend(true));
-
-            while (Position == _oldPosValue)
+            while (Math.Abs(_positionValueOnStart) + Math.Abs(executedVolume) != Math.Abs(Position))
             {
-                Thread.Sleep(delay);
-                safeCounter++;
-
-                if (safeCounter > maxSafeCounter)
-                    throw new TimeoutException("have no respond from terminal, timeout: " + maxSafeCounter * delay);
+                //NOP
             }
-            _oldPosValue = Position;
 
-            Rules.ForEach(rule => rule.Suspend(false));
+            _orderInWork = null;
         }
 
         private void ProcessOrder()
         {
             Security.WhenMarketDepthChanged(Connector)
-                .Do((mr, md) =>
+                .Do(md =>
                 {
                     if (_orderInWork != null && IsQuotingNeeded(md, _orderInWork.Price))
                     {

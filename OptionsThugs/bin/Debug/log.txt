@@ -1,65 +1,15 @@
-﻿2017/03/15 17:12:31.181|       |LQS_SIM7@FORTS_SPBFUT00e11|Стратегия Запущена. [0,-1]. Позиция 0.
-2017/03/15 17:12:31.254|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x28BC862) заявки на Sell с ценой 60309 и объемом 10. 
-2017/03/15 17:12:31.548|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:34.172|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940182 (0x28BC862).
-2017/03/15 17:12:34.378|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x141AB20) заявки на Sell с ценой 60305 и объемом 10. 
-2017/03/15 17:12:34.379|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:34.379|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:34.379|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940182 (0x28BC862) больше не активна.
-2017/03/15 17:12:34.536|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x20375B4) заявки на Sell с ценой 60305 и объемом 10. 
-2017/03/15 17:12:34.587|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:34.752|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:35.465|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940185 (0x20375B4).
-2017/03/15 17:12:35.627|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:35.628|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:35.628|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940185 (0x20375B4) больше не активна.
-2017/03/15 17:12:35.628|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x142F07D) заявки на Sell с ценой 60304 и объемом 10. 
-2017/03/15 17:12:35.866|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:36.222|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940187 (0x142F07D).
-2017/03/15 17:12:36.383|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:36.384|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x14F5A1E) заявки на Sell с ценой 60302 и объемом 10. 
-2017/03/15 17:12:36.384|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:36.384|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940187 (0x142F07D) больше не активна.
-2017/03/15 17:12:36.637|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:37.632|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940189 (0x14F5A1E).
-2017/03/15 17:12:37.791|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:37.792|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:37.792|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940189 (0x14F5A1E) больше не активна.
-2017/03/15 17:12:37.793|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x384B22A) заявки на Sell с ценой 60302 и объемом 10. 
-2017/03/15 17:12:38.029|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:40.917|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940191 (0x384B22A).
-2017/03/15 17:12:41.053|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0xB4B389) заявки на Sell с ценой 60301 и объемом 10. 
-2017/03/15 17:12:41.306|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:41.306|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:41.306|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940191 (0x384B22A) больше не активна.
-2017/03/15 17:12:41.307|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x17A6CF7) заявки на Sell с ценой 60304 и объемом 10. 
-2017/03/15 17:12:41.336|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:41.478|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:41.480|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940194 (0x17A6CF7).
-2017/03/15 17:12:41.623|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:41.733|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:41.733|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940194 (0x17A6CF7) больше не активна.
-2017/03/15 17:12:41.734|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x26705BE) заявки на Sell с ценой 60300 и объемом 10. 
-2017/03/15 17:12:42.014|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:44.759|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:44.759|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая Sell сделка 5442062 по цене 60300 на 10 заявки 61940196.
-2017/03/15 17:12:44.760|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:44.760|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая Sell сделка 5442063 по цене 60301 на 10 заявки 61940193.
-2017/03/15 17:12:44.760|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:44.760|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:44.761|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:44.761|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/15 17:12:44.761|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=-10.
-2017/03/15 17:12:44.761|       |LQS_SIM7@FORTS_SPBFUT00e11|Стратегия останавливается. [0,-1]. Позиция -10.
-2017/03/15 17:12:44.761|       |LQS_SIM7@FORTS_SPBFUT00e11|Ожидание снятия всех активных заявок.
-2017/03/15 17:12:44.761|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940184 (0x141AB20).
-2017/03/15 17:12:44.761|       |LQS_SIM7@FORTS_SPBFUT00e11|Отмена заявки 61940193 (0xB4B389).
-2017/03/15 17:12:44.761|Warning|LQS_SIM7@FORTS_SPBFUT00e11|Order 61940193 (0xB4B389) has state Active. Rule cannot be stopped.
-2017/03/15 17:12:44.761|Warning|LQS_SIM7@FORTS_SPBFUT00e11|Order 61940184 (0x141AB20) has state Active. Rule cannot be stopped.
-2017/03/15 17:12:44.762|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=-20.
-2017/03/15 17:12:44.762|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940193 (0xB4B389) больше не активна.
-2017/03/15 17:12:44.932|Error  |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940193 (0xB4B389) не была отменена по причине System.InvalidOperationException: Ошибка снятия заявки 172003229. Текст 'Вы не можете снять данную заявку'..
-2017/03/15 17:12:45.000|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=-20.
-2017/03/15 17:12:45.000|       |LQS_SIM7@FORTS_SPBFUT00e11|Новая позиция: (S#:SiM7@FORTS, Native:,Type:Future, SPBFUT00e11)=-20.
-2017/03/15 17:12:45.000|       |LQS_SIM7@FORTS_SPBFUT00e11|Заявка 61940184 (0x141AB20) больше не активна.
-2017/03/15 17:12:45.000|       |LQS_SIM7@FORTS_SPBFUT00e11|Стратегия остановлена. [0,-1]. Позиция -20.
+﻿2017/03/16 13:18:19.070|       |LQS_VBM7@FORTS_SPBFUT00e11|Стратегия Запущена. [0,-1]. Позиция 0.
+2017/03/16 13:18:19.282|       |LQS_VBM7@FORTS_SPBFUT00e11|Регистрация новой  (0x3C11AD6) заявки на Buy с ценой 6672 и объемом 10. 
+2017/03/16 13:18:19.760|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
+2017/03/16 13:18:24.631|       |LQS_VBM7@FORTS_SPBFUT00e11|Отмена заявки 47876317 (0x3C11AD6).
+2017/03/16 13:18:24.641|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
+2017/03/16 13:18:24.641|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая Buy сделка 5538603 по цене 6672 на 1 заявки 47876317.
+2017/03/16 13:18:24.642|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
+2017/03/16 13:18:24.643|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
+2017/03/16 13:18:24.646|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=1.
+2017/03/16 13:18:24.876|       |LQS_VBM7@FORTS_SPBFUT00e11|Регистрация новой  (0x289EB90) заявки на Buy с ценой 6671 и объемом 9. 
+2017/03/16 13:18:24.879|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=1.
+2017/03/16 13:18:24.880|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=1.
+2017/03/16 13:18:24.880|       |LQS_VBM7@FORTS_SPBFUT00e11|Стратегия останавливается. [0,-1]. Позиция 1.
+2017/03/16 13:18:24.880|       |LQS_VBM7@FORTS_SPBFUT00e11|Ожидание снятия всех активных заявок.
+2017/03/16 13:18:24.880|Warning|LQS_VBM7@FORTS_SPBFUT00e11|Order 47876319 (0x289EB90) has state Pending. Rule cannot be stopped.

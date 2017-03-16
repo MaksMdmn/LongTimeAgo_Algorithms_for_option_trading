@@ -14,7 +14,6 @@ namespace OptionsThugs.Model
 {
     public abstract class QuotingStrategy : Strategy
     {
-        //TODO lock на ордер нужно сделать, иначе опять буду лупить в наллы или в ордер без айди из наследников
         protected Sides QuotingSide { get; private set; }
         protected MarketDepth MarketDepth { get; private set; }
 
@@ -29,6 +28,7 @@ namespace OptionsThugs.Model
             MaxErrorCount = 1;
             OrdersKeepTime = TimeSpan.Zero;
             //WaitAllTrades = true;
+            
         }
 
         protected override void OnStarted()

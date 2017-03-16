@@ -12,7 +12,6 @@ namespace OptionsThugs.View
     public partial class GeneralView : Window
     {
         private bool _testFlag = false;
-        private bool _test1Time = false;
         private readonly LogManager _logManager = new LogManager();
         private QuotingStrategy _strategy;
 
@@ -40,14 +39,22 @@ namespace OptionsThugs.View
 
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
-            _strategy = new LimitQuotingStrategy(Sides.Sell, 10, -1)
+            decimal sign = 1;
+            _strategy = CreateNewLQStrategy(Sides.Buy, 10, connection.SelectedSecurity.PriceStep.Value * sign);
+        }
+
+        private LimitQuotingStrategy CreateNewLQStrategy(Sides side, decimal volume, decimal priceShift)
+        {
+            LimitQuotingStrategy strg = new LimitQuotingStrategy(side, volume, priceShift)
             {
                 Connector = connection.SafeConnection.Connector,
                 Security = connection.SelectedSecurity,
                 Portfolio = connection.SelectedPortfolio,
             };
 
-            _logManager.Sources.Add(_strategy);
+            _logManager.Sources.Add(strg);
+
+            return strg;
         }
     }
 }
