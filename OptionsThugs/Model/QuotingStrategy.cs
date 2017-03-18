@@ -17,18 +17,21 @@ namespace OptionsThugs.Model
         protected Sides QuotingSide { get; private set; }
         protected MarketDepth MarketDepth { get; private set; }
 
+        protected OrderSynchronizer OrderSynchronizer { get; private set; }
+
         protected QuotingStrategy(Sides quotingSide, decimal quotingVolume)
         {
             QuotingSide = quotingSide;
             Volume = quotingVolume;
+            OrderSynchronizer = new OrderSynchronizer(this);
 
             CancelOrdersWhenStopping = true; //не пашет
             CommentOrders = true;
             DisposeOnStop = false;
-            MaxErrorCount = 1;
+            MaxErrorCount = 100;
             OrdersKeepTime = TimeSpan.Zero;
             //WaitAllTrades = true;
-            
+
         }
 
         protected override void OnStarted()
@@ -63,5 +66,6 @@ namespace OptionsThugs.Model
         }
 
         protected abstract void QuotingProcess();
+
     }
 }

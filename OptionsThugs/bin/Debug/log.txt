@@ -1,15 +1,2 @@
-﻿2017/03/16 13:18:19.070|       |LQS_VBM7@FORTS_SPBFUT00e11|Стратегия Запущена. [0,-1]. Позиция 0.
-2017/03/16 13:18:19.282|       |LQS_VBM7@FORTS_SPBFUT00e11|Регистрация новой  (0x3C11AD6) заявки на Buy с ценой 6672 и объемом 10. 
-2017/03/16 13:18:19.760|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/16 13:18:24.631|       |LQS_VBM7@FORTS_SPBFUT00e11|Отмена заявки 47876317 (0x3C11AD6).
-2017/03/16 13:18:24.641|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/16 13:18:24.641|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая Buy сделка 5538603 по цене 6672 на 1 заявки 47876317.
-2017/03/16 13:18:24.642|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/16 13:18:24.643|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=0.
-2017/03/16 13:18:24.646|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=1.
-2017/03/16 13:18:24.876|       |LQS_VBM7@FORTS_SPBFUT00e11|Регистрация новой  (0x289EB90) заявки на Buy с ценой 6671 и объемом 9. 
-2017/03/16 13:18:24.879|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=1.
-2017/03/16 13:18:24.880|       |LQS_VBM7@FORTS_SPBFUT00e11|Новая позиция: (S#:VBM7@FORTS, Native:,Type:Future, SPBFUT00e11)=1.
-2017/03/16 13:18:24.880|       |LQS_VBM7@FORTS_SPBFUT00e11|Стратегия останавливается. [0,-1]. Позиция 1.
-2017/03/16 13:18:24.880|       |LQS_VBM7@FORTS_SPBFUT00e11|Ожидание снятия всех активных заявок.
-2017/03/16 13:18:24.880|Warning|LQS_VBM7@FORTS_SPBFUT00e11|Order 47876319 (0x289EB90) has state Pending. Rule cannot be stopped.
+﻿2017/03/17 18:14:01.544|       |LQS_SIM7@FORTS_SPBFUT00e11|Стратегия Запущена. [0,-1]. Позиция 0.
+2017/03/17 18:14:01.589|       |LQS_SIM7@FORTS_SPBFUT00e11|Регистрация новой  (0x172E9C) заявки на Buy с ценой 58843 и объемом 17. 

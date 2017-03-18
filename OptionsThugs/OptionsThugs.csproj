@@ -127,15 +127,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\IView.cs" />
+    <Compile Include="Common\TradeEmulator4Test.cs" />
     <Compile Include="Common\ViewModel.cs" />
-    <Compile Include="Model\CatcherStrategy.cs" />
-    <Compile Include="Model\CatcherStrategyDemo.cs" />
     <Compile Include="Model\LimitQuotingStrategy.cs" />
     <Compile Include="Model\MarketQuotingStrategy.cs" />
     <Compile Include="Model\QuotingStrategy.cs" />
     <Compile Include="Model\CloserStrategy.cs" />
     <Compile Include="Model\DeltaHedgerStrategy.cs" />
     <Compile Include="Model\SpreaderStrategy.cs" />
+    <Compile Include="Model\OrderSynchronizer.cs" />
+    <Compile Include="Model\PositionSynchronizer.cs" />
     <Compile Include="View\GeneralView.xaml.cs">
       <DependentUpon>GeneralView.xaml</DependentUpon>
       <SubType>Code</SubType>

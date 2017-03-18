@@ -1,97 +1,82 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
+using StockSharp.Logging;
 using StockSharp.Messages;
 
 namespace OptionsThugs.Model
 {
     public class LimitQuotingStrategy : QuotingStrategy
     {
-        public decimal QuotePriceShift { get; private set; }
-
-        private Order _orderInWork;
-        private decimal _positionValueOnStart;
+        public decimal QuotePriceShift { get; }
+        public decimal StopQuotingPrice { get; }
 
         public LimitQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
             : base(quotingSide, quotingVolume)
         {
             QuotePriceShift = quotePriceShift;
-            _orderInWork = null;
+            StopQuotingPrice = 0;
+        }
+
+        public LimitQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift, decimal stopQuotingPrice)
+            : base(quotingSide, quotingVolume)
+        {
+            QuotePriceShift = quotePriceShift;
+            StopQuotingPrice = stopQuotingPrice;
         }
 
         protected sealed override void QuotingProcess()
         {
-            if (_orderInWork == null)
+            try
             {
-                Quote bestQuote = GetSuitableBestQuote(MarketDepth);
-                _positionValueOnStart = Position;
-
-                if (MarketDepth == null) return;
-                if (bestQuote == null) return;
-
-                decimal price = bestQuote.Price + QuotePriceShift;
-                decimal volume = Math.Abs(Volume - Position);
-
-                if (volume > 0)
+                if (!OrderSynchronizer.IsAnyOrdersInWork)
                 {
-                    _orderInWork = this.CreateOrder(QuotingSide, price, volume);
+                    Quote bestQuote = GetSuitableBestQuote(MarketDepth);
 
-                    _orderInWork.WhenMatched(Connector)
-                        .Or(_orderInWork.WhenCanceled(Connector))
-                        .Do(o =>
-                        {
-                            SyncPositionByOrderExecution(o);
-                        })
-                        .Until(() => _orderInWork == null)
-                        .Apply(this);
+                    if (MarketDepth == null) return;
+                    if (bestQuote == null) return;
 
-                    _orderInWork.WhenCancelFailed(Connector)
-                        .Do(of =>
-                        {
-                            SyncPositionByOrderExecution(of.Order);
-                        })
-                        .Until(() => _orderInWork == null)
-                        .Apply(this);
+                    decimal price = bestQuote.Price + QuotePriceShift;
+                    decimal volume = Math.Abs(Volume - Position);
 
-                    _orderInWork.WhenRegistered(Connector)
-                        .Do(ProcessOrder)
-                        .Once()
-                        .Apply(this);
+                    if (volume > 0 && IsMarketPriceAcceptableForQuoting(price))
+                    {
+                        var order = this.CreateOrder(QuotingSide, price, volume);
 
-                    RegisterOrder(_orderInWork);
+                        order.WhenRegistered(Connector)
+                            .Do(() => ProcessOrder(order))
+                            .Once()
+                            .Apply(this);
+
+                        OrderSynchronizer.PlaceOrder(order);
+
+                    }
                 }
             }
-        }
-
-
-        private void SyncPositionByOrderExecution(Order order)
-        {
-            var executedVolume = order.GetTrades(Connector).Sum(t => t.Trade.Volume);
-
-            while (Math.Abs(_positionValueOnStart) + Math.Abs(executedVolume) != Math.Abs(Position))
+            catch (Exception ex)
             {
-                //NOP
+                this.AddErrorLog(ex);
             }
-
-            _orderInWork = null;
         }
 
-        private void ProcessOrder()
+        private void ProcessOrder(Order order)
         {
             Security.WhenMarketDepthChanged(Connector)
                 .Do(md =>
                 {
-                    if (_orderInWork != null && IsQuotingNeeded(md, _orderInWork.Price))
+                    if (OrderSynchronizer.IsAnyOrdersInWork
+                    && IsQuotingNeeded(md, order.Price))
                     {
-                        CancelOrder(_orderInWork);
-                        _orderInWork = null;
+                        OrderSynchronizer.CancelCurrentOrder();
                     }
                 })
-                .Until(() => _orderInWork == null)
+                //.Until(() => !IsActiveOrderRepresent)
                 .Apply(this);
         }
 
@@ -103,6 +88,9 @@ namespace OptionsThugs.Model
             if (bestQuote == null || preBestQuote == null)
                 return true; // снять заявку
 
+            if (!IsMarketPriceAcceptableForQuoting(bestQuote.Price))
+                return true; // снять заявку
+
             if (bestQuote.Price != currentQuotingPrice)
                 return true; // цена выше бида или ниже аска
 
@@ -111,6 +99,26 @@ namespace OptionsThugs.Model
 
             return false;
         }
+
+        private bool IsMarketPriceAcceptableForQuoting(decimal price)
+        {
+            if (StopQuotingPrice == 0)
+                return true;
+
+            if (QuotingSide == Sides.Buy)
+            {
+                if (price <= StopQuotingPrice)
+                    return true;
+            }
+            else
+            {
+                if (price >= StopQuotingPrice)
+                    return true;
+            }
+
+            return false;
+        }
+
 
         private Quote GetSuitableBestQuote(MarketDepth depth)
         {

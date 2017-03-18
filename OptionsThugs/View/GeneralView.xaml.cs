@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
+using OptionsThugs.Common;
 using OptionsThugs.Model;
 using StockSharp.Logging;
 using StockSharp.Messages;
@@ -40,18 +42,22 @@ namespace OptionsThugs.View
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
             decimal sign = 1;
-            _strategy = CreateNewLQStrategy(Sides.Buy, 10, connection.SelectedSecurity.PriceStep.Value * sign);
+            _strategy = CreateNewLQStrategy(Sides.Buy, 17, connection.SelectedSecurity.PriceStep.Value * sign, 0);
         }
 
-        private LimitQuotingStrategy CreateNewLQStrategy(Sides side, decimal volume, decimal priceShift)
+        private LimitQuotingStrategy CreateNewLQStrategy(Sides side, decimal volume, decimal priceShift, decimal stopQuote)
         {
-            LimitQuotingStrategy strg = new LimitQuotingStrategy(side, volume, priceShift)
+            LimitQuotingStrategy strg = new LimitQuotingStrategy(side, volume, priceShift, stopQuote)
             {
                 Connector = connection.SafeConnection.Connector,
                 Security = connection.SelectedSecurity,
                 Portfolio = connection.SelectedPortfolio,
             };
 
+            strg.ProcessStateChanged += s =>
+            {
+                Debug.WriteLine(s.ProcessState);
+            };
             _logManager.Sources.Add(strg);
 
             return strg;
