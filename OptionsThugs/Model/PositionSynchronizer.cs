@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace OptionsThugs.Model
 {
@@ -7,25 +8,25 @@ namespace OptionsThugs.Model
         private event Action TimeToCheckIfPositionEqual;
         private decimal _absPosVol;
         private decimal _absTradeVol;
-        private volatile bool _isPositionEqual;
+        private volatile bool _isPosAndTradesEven;
 
         public event Action PositionChanged;
-        public bool IsPositionEqual => _isPositionEqual;
+        public bool IsPosAndTradesEven => _isPosAndTradesEven;
 
         public PositionSynchronizer()
         {
-            _isPositionEqual = false;
+            _isPosAndTradesEven = true;
 
             TimeToCheckIfPositionEqual += () =>
             {
-                _isPositionEqual = _absPosVol == _absTradeVol;
+                _isPosAndTradesEven = _absPosVol == _absTradeVol;
                 PositionChanged?.Invoke();
             };
         }
 
         public void NewTradeChange(decimal volume)
         {
-            _isPositionEqual = false;
+            _isPosAndTradesEven = false;
 
             _absTradeVol += Math.Abs(volume);
 
@@ -34,9 +35,9 @@ namespace OptionsThugs.Model
 
         public void NewPositionChange(decimal volume)
         {
-            _isPositionEqual = false;
+            _isPosAndTradesEven = false;
 
-            _absPosVol += Math.Abs(volume);
+            _absPosVol = Math.Abs(volume);
 
             TimeToCheckIfPositionEqual?.Invoke();
         }

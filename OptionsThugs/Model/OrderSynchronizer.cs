@@ -15,90 +15,101 @@ namespace OptionsThugs.Model
         private readonly EventWaitHandle _eventWaiter = new EventWaitHandle(false, EventResetMode.AutoReset);
         private readonly int _timeout = 1000;
         private readonly Strategy _strategy;
-        private readonly PositionSynchronizer _keeper;
-        private volatile bool _isAnyOrdersInWork;
+        private volatile bool _isOrderRegistering;
         private volatile bool _isOrderCanceling;
         private Order _currentOrder;
 
-        public bool IsAnyOrdersInWork => _isAnyOrdersInWork;
-        public bool IsOrderCanceling => _isOrderCanceling;
+        public bool IsAnyOrdersInWork { get; private set; }
 
         public OrderSynchronizer(Strategy strategy)
         {
             _currentOrder = null;
-            _isAnyOrdersInWork = false;
+            IsAnyOrdersInWork = false;
+            _isOrderRegistering = false;
+            _isOrderCanceling = false;
             _strategy = strategy;
-            _keeper = new PositionSynchronizer();
 
-            _strategy.WhenPositionChanged()
-                .Do(p => _keeper.NewPositionChange(p))
-                .Apply(_strategy);
-
-            _strategy.WhenNewMyTrade()
-                .Do(mt => _keeper.NewTradeChange(mt.Trade.Volume))
-                .Apply(_strategy);
-
-            _keeper.PositionChanged += () =>
-            {
-                if (_keeper.IsPositionEqual)
+            _strategy.WhenStopping()
+                .Or(_strategy.WhenStopped())
+                .Do(s =>
+                {
+                    Debug.WriteLine(s.ProcessState + " event");
                     _eventWaiter.Set();
-            };
+                })
+                .Apply(_strategy);
         }
 
         public void PlaceOrder(Order order)
         {
-            _isAnyOrdersInWork = true;
+            if (_isOrderRegistering)
+                return;
+
+            _isOrderRegistering = true;
 
             _currentOrder = order;
 
             if (_currentOrder == null)
             {
-                _isAnyOrdersInWork = false;
+                IsAnyOrdersInWork = false;
+                _isOrderRegistering = false;
                 throw new ArgumentNullException(nameof(_currentOrder));
             }
 
             _currentOrder.WhenRegistered(_strategy.Connector)
                 .Do(() =>
                 {
+                    Debug.WriteLine("register event");
                     _eventWaiter.Set();
                 })
                 .Once()
                 .Apply(_strategy);
 
+            _strategy.RegisterOrder(_currentOrder);
 
             Task.Run(() =>
             {
-                _strategy.RegisterOrder(_currentOrder);
-
+                Debug.WriteLine("registration...");
                 ContinueOrTimeout();
+
+                IsAnyOrdersInWork = true;
+                _isOrderRegistering = false;
             });
 
         }
 
         public void CancelCurrentOrder()
         {
+            if (_isOrderCanceling)
+                return;
+
             _isOrderCanceling = true;
 
             if (_currentOrder == null)
             {
+                _isOrderCanceling = false;
                 throw new ArgumentNullException("Such an order does not exist: " + _currentOrder);
             }
 
-            _currentOrder.WhenCanceled(_strategy.Connector)
-                .Do(() =>
+            _currentOrder.WhenChanged(_strategy.Connector)
+                .Do(o =>
                 {
-                    _eventWaiter.Set();
+                    if (o.State == OrderStates.Done || o.State == OrderStates.Failed)
+                    {
+                        Debug.WriteLine("cancel event");
+                        _eventWaiter.Set();
+                    }
                 })
-                .Once()
+                .Until(() => _currentOrder.State == OrderStates.Done || _currentOrder.State == OrderStates.Failed)
                 .Apply(_strategy);
+
+            _strategy.CancelOrder(_currentOrder);
 
             Task.Run(() =>
             {
-                _strategy.CancelOrder(_currentOrder);
-
+                Debug.WriteLine("canceling...");
                 ContinueOrTimeout();
 
-                _isAnyOrdersInWork = false;
+                IsAnyOrdersInWork = false;
                 _isOrderCanceling = false;
             });
 
