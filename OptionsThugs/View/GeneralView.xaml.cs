@@ -52,7 +52,8 @@ namespace OptionsThugs.View
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
             decimal sign = -1;
-            _strategy = CreateNewLQStrategy(Sides.Sell, 4, conn.SelectedSecurity.PriceStep.Value * sign, 0);
+            //_strategy = CreateNewLQStrategy(Sides.Sell, 4, conn.SelectedSecurity.PriceStep.Value * sign, 0);
+            _strategy = CreateNewMQStrategy(Sides.Sell, 20, 58455);
 
 
             #region Test OptionDesk and OptionDeskModel
@@ -85,6 +86,24 @@ namespace OptionsThugs.View
         private MyLimitQuotingStrategy CreateNewLQStrategy(Sides side, decimal volume, decimal priceShift, decimal stopQuote)
         {
             MyLimitQuotingStrategy strg = new MyLimitQuotingStrategy(side, volume, priceShift, stopQuote)
+            {
+                Connector = conn.SafeConnection.Connector,
+                Security = conn.SelectedSecurity,
+                Portfolio = conn.SelectedPortfolio,
+            };
+
+            strg.ProcessStateChanged += s =>
+            {
+                Debug.WriteLine(s.ProcessState);
+            };
+            _logManager.Sources.Add(strg);
+
+            return strg;
+        }
+
+        private MyMarketQuotingStrategy CreateNewMQStrategy(Sides side, decimal volume, decimal targetPrice)
+        {
+            MyMarketQuotingStrategy strg = new MyMarketQuotingStrategy(side, volume, targetPrice)
             {
                 Connector = conn.SafeConnection.Connector,
                 Security = conn.SelectedSecurity,

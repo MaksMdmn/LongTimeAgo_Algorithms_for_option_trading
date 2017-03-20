@@ -16,7 +16,6 @@ namespace OptionsThugs.Model
     {
         protected Sides QuotingSide { get; private set; }
         protected MarketDepth MarketDepth { get; private set; }
-
         protected OrderSynchronizer OrderSynchronizer { get; private set; }
         protected PositionSynchronizer PositionSynchronizer { get; private set; }
 
@@ -72,6 +71,46 @@ namespace OptionsThugs.Model
             //TODO this.WhenError();  this.Connector.OrderRegisterFailed;
 
             base.OnStarted();
+        }
+
+        protected Quote GetSuitableBestLimitQuote()
+        {
+            if (MarketDepth == null) return null;
+            return QuotingSide == Sides.Buy ? MarketDepth.BestBid : MarketDepth.BestAsk;
+        }
+
+        protected Quote[] GetSuitableLimitQuotes()
+        {
+            if (MarketDepth == null) return null;
+            return QuotingSide == Sides.Buy ? MarketDepth.Bids : MarketDepth.Asks;
+        }
+
+        protected Quote GetSuitableBestMarketQuote()
+        {
+            if (MarketDepth == null) return null;
+            return QuotingSide == Sides.Buy ? MarketDepth.BestAsk : MarketDepth.BestBid;
+        }
+
+        protected Quote[] GetSuitableMarketQuotes()
+        {
+            if (MarketDepth == null) return null;
+            return QuotingSide == Sides.Buy ? MarketDepth.Asks : MarketDepth.Bids;
+        }
+
+        protected bool IsPriceAcceptableForQuoting(decimal currentPrice, decimal worstPossibleQuotingPrice)
+        {
+            if (QuotingSide == Sides.Buy)
+            {
+                if (currentPrice <= worstPossibleQuotingPrice)
+                    return true;
+            }
+            else
+            {
+                if (currentPrice >= worstPossibleQuotingPrice)
+                    return true;
+            }
+
+            return false;
         }
 
         protected abstract void QuotingProcess();

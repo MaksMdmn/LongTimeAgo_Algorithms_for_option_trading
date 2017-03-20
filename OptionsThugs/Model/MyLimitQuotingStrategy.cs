@@ -38,15 +38,14 @@ namespace OptionsThugs.Model
                 if (!OrderSynchronizer.IsAnyOrdersInWork
                     && PositionSynchronizer.IsPosAndTradesEven)
                 {
-                    Quote bestQuote = GetSuitableBestQuote(MarketDepth);
+                    Quote bestQuote = GetSuitableBestLimitQuote();
 
-                    if (MarketDepth == null) return;
                     if (bestQuote == null) return;
 
                     decimal price = bestQuote.Price + QuotePriceShift;
                     decimal volume = Math.Abs(Volume) - Math.Abs(Position);
 
-                    if (volume > 0 && IsMarketPriceAcceptableForQuoting(price))
+                    if (volume > 0 && IsLimitPriceAcceptableForQuoting(price))
                     {
                         var order = this.CreateOrder(QuotingSide, price, volume);
 
@@ -72,7 +71,7 @@ namespace OptionsThugs.Model
                 .Do(md =>
                 {
                     if (OrderSynchronizer.IsAnyOrdersInWork
-                    && IsQuotingNeeded(md, order.Price))
+                    && IsQuotingNeeded(order.Price))
                     {
                         OrderSynchronizer.CancelCurrentOrder();
                     }
@@ -81,15 +80,15 @@ namespace OptionsThugs.Model
                 .Apply(this);
         }
 
-        private bool IsQuotingNeeded(MarketDepth md, decimal currentQuotingPrice)
+        private bool IsQuotingNeeded(decimal currentQuotingPrice)
         {
-            Quote bestQuote = GetSuitableBestQuote(md);
-            Quote preBestQuote = GetSuitableQuotes(md)[1]; // 2ая лучшая котировка
+            Quote bestQuote = GetSuitableBestLimitQuote();
+            Quote preBestQuote = GetSuitableLimitQuotes()[1]; // 2ая лучшая котировка
 
             if (bestQuote == null || preBestQuote == null)
                 return true; // снять заявку
 
-            if (!IsMarketPriceAcceptableForQuoting(bestQuote.Price))
+            if (!IsLimitPriceAcceptableForQuoting(bestQuote.Price))
                 return true; // снять заявку
 
             if (bestQuote.Price != currentQuotingPrice)
@@ -101,37 +100,12 @@ namespace OptionsThugs.Model
             return false;
         }
 
-        private bool IsMarketPriceAcceptableForQuoting(decimal price)
+        private bool IsLimitPriceAcceptableForQuoting(decimal currentPrice)
         {
             if (StopQuotingPrice == 0)
                 return true;
 
-            if (QuotingSide == Sides.Buy)
-            {
-                if (price <= StopQuotingPrice)
-                    return true;
-            }
-            else
-            {
-                if (price >= StopQuotingPrice)
-                    return true;
-            }
-
-            return false;
+            return IsPriceAcceptableForQuoting(currentPrice,StopQuotingPrice);
         }
-
-
-        private Quote GetSuitableBestQuote(MarketDepth depth)
-        {
-            if (depth == null) return null;
-            return QuotingSide == Sides.Buy ? depth.BestBid : depth.BestAsk;
-        }
-
-        private Quote[] GetSuitableQuotes(MarketDepth depth)
-        {
-            if (depth == null) return null;
-            return QuotingSide == Sides.Buy ? depth.Bids : depth.Asks;
-        }
-
     }
 }
