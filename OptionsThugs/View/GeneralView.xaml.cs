@@ -54,10 +54,10 @@ namespace OptionsThugs.View
 
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
-            decimal sign = -1;
-            //_strategy = CreateNewLQStrategy(Sides.Sell, 4, conn.SelectedSecurity.PriceStep.Value * sign, 0);
+            decimal sign = 1;
+            _strategy = CreateNewLQStrategy(Sides.Buy, 15, conn.SelectedSecurity.PriceStep.Value * sign, 0);
             //_strategy = CreateNewMQStrategy(Sides.Sell, 20, 58455);
-            _strategy = CreateNewCondtrategy(16450, 13, MyConditionalClosePosStrategy.PriceDirection.Down, _sec2);
+            //_strategy = CreateNewCondtrategy(16450, 13, MyConditionalClosePosStrategy.PriceDirection.Down, _sec2);
 
 
             #region Test OptionDesk and OptionDeskModel

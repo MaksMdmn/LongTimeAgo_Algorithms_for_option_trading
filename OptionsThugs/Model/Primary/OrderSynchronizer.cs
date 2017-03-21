@@ -12,7 +12,6 @@ namespace OptionsThugs.Model.Primary
     public class OrderSynchronizer
     {
         private readonly EventWaitHandle _eventWaiter = new EventWaitHandle(false, EventResetMode.AutoReset);
-        private readonly int _timeout = 1000;
         private readonly Strategy _strategy;
         private volatile bool _isOrderRegistering;
         private volatile bool _isOrderCanceling;
@@ -20,8 +19,12 @@ namespace OptionsThugs.Model.Primary
 
         public bool IsAnyOrdersInWork { get; private set; }
 
+        public int Timeout { get; set; }
+
         public OrderSynchronizer(Strategy strategy)
         {
+            Timeout = 1000;
+
             _currentOrder = null;
             IsAnyOrdersInWork = false;
             _isOrderRegistering = false;
@@ -32,7 +35,6 @@ namespace OptionsThugs.Model.Primary
                 .Or(_strategy.WhenStopped())
                 .Do(s =>
                 {
-                    Debug.WriteLine(s.ProcessState + " event");
                     _eventWaiter.Set();
                 })
                 .Apply(_strategy);
@@ -57,7 +59,6 @@ namespace OptionsThugs.Model.Primary
             _currentOrder.WhenRegistered(_strategy.Connector)
                 .Do(() =>
                 {
-                    Debug.WriteLine("register event");
                     _eventWaiter.Set();
                 })
                 .Once()
@@ -65,11 +66,8 @@ namespace OptionsThugs.Model.Primary
 
             _strategy.RegisterOrder(_currentOrder);
 
-            Task.Run(() =>
+            ContinueOrTimeout(() =>
             {
-                Debug.WriteLine("registration...");
-                ContinueOrTimeout();
-
                 IsAnyOrdersInWork = true;
                 _isOrderRegistering = false;
             });
@@ -94,32 +92,33 @@ namespace OptionsThugs.Model.Primary
                 {
                     if (o.State == OrderStates.Done || o.State == OrderStates.Failed)
                     {
-                        Debug.WriteLine("cancel event");
                         _eventWaiter.Set();
                     }
+
                 })
                 .Until(() => _currentOrder.State == OrderStates.Done || _currentOrder.State == OrderStates.Failed)
                 .Apply(_strategy);
 
             _strategy.CancelOrder(_currentOrder);
 
-            Task.Run(() =>
-            {
-                Debug.WriteLine("canceling...");
-                ContinueOrTimeout();
 
+            ContinueOrTimeout(() =>
+            {
                 IsAnyOrdersInWork = false;
                 _isOrderCanceling = false;
             });
-
-
         }
 
-        private void ContinueOrTimeout()
+        private void ContinueOrTimeout(Action methodAfterSuccess)
         {
-            if (!_eventWaiter.WaitOne(_timeout))
-                throw new TimeoutException("Still have no respond, timeout: " + _timeout);
-        }
+            Task.Run(() =>
+            {
+                if (!_eventWaiter.WaitOne(Timeout))
+                    throw new TimeoutException(
+                        "Still have no respond from terminal about order transaction, timeout: " + Timeout);
 
+                methodAfterSuccess();
+            });
+        }
     }
 }

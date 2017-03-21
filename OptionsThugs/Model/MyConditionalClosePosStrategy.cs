@@ -10,10 +10,10 @@ namespace OptionsThugs.Model
 {
     public class MyConditionalClosePosStrategy : Strategy
     {
-        private decimal _priceToClose;
-        private Security _securityToClose;
-        private PriceDirection _securityDesirableDirection;
-        private Sides _strategyOrderSide;
+        private readonly decimal _priceToClose;
+        private readonly Security _securityToClose;
+        private readonly PriceDirection _securityDesirableDirection;
+        private readonly Sides _strategyOrderSide;
 
         public MyConditionalClosePosStrategy(decimal priceToClose, Security securityToClose, PriceDirection securityDesirableDirection, decimal posSizeToClose)
         {

@@ -8,6 +8,8 @@ namespace OptionsThugs.Model.Primary
 {
     public abstract class MyQuotingStrategy : Strategy
     {
+        private readonly int _timeout = 2000;
+
         protected Sides QuotingSide { get; private set; }
         protected MarketDepth MarketDepth { get; private set; }
         protected OrderSynchronizer OrderSynchronizer { get; private set; }
@@ -20,6 +22,8 @@ namespace OptionsThugs.Model.Primary
             OrderSynchronizer = new OrderSynchronizer(this);
             PositionSynchronizer = new PositionSynchronizer();
 
+            OrderSynchronizer.Timeout = 1000;
+
             this.WhenPositionChanged()
                 .Do(p => PositionSynchronizer.NewPositionChange(p))
                 .Apply(this);
@@ -27,9 +31,9 @@ namespace OptionsThugs.Model.Primary
             this.WhenNewMyTrade()
                 .Do(mt => PositionSynchronizer.NewTradeChange(mt.Trade.Volume))
                 .Apply(this);
-           
 
-            CancelOrdersWhenStopping = true; 
+
+            CancelOrdersWhenStopping = true;
             CommentOrders = true;
             DisposeOnStop = false;
             MaxErrorCount = 10;
@@ -66,6 +70,8 @@ namespace OptionsThugs.Model.Primary
 
             base.OnStarted();
         }
+
+        protected void IncrMaxErrorCountIfNotScared() => MaxErrorCount += 1;
 
         protected Quote GetSuitableBestLimitQuote()
         {

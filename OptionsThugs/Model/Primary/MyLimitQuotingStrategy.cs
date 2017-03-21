@@ -68,7 +68,16 @@ namespace OptionsThugs.Model.Primary
                     if (OrderSynchronizer.IsAnyOrdersInWork
                     && IsQuotingNeeded(order.Price))
                     {
-                        OrderSynchronizer.CancelCurrentOrder();
+                        try
+                        {
+                            OrderSynchronizer.CancelCurrentOrder();
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            IncrMaxErrorCountIfNotScared();
+                            this.AddWarningLog("MaxErrorCount was incremented");
+                            this.AddErrorLog(ex);
+                        }
                     }
                 })
                 .Until(() => !OrderSynchronizer.IsAnyOrdersInWork)

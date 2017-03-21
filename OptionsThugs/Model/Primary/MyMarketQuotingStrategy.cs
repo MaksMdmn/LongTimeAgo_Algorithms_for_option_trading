@@ -37,7 +37,16 @@ namespace OptionsThugs.Model.Primary
                         order.WhenRegistered(Connector)
                             .Do(o =>
                             {
-                                OrderSynchronizer.CancelCurrentOrder();
+                                try
+                                {
+                                    OrderSynchronizer.CancelCurrentOrder();
+                                }
+                                catch (InvalidOperationException ex)
+                                {
+                                    IncrMaxErrorCountIfNotScared();
+                                    this.AddWarningLog("MaxErrorCount was incremented");
+                                    this.AddErrorLog(ex);
+                                }
                             })
                             .Once()
                             .Apply(this);
