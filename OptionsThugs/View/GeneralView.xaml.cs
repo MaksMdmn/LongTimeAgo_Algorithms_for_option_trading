@@ -7,7 +7,9 @@ using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugs.Common;
 using OptionsThugs.Model;
+using OptionsThugs.Model.Primary;
 using StockSharp.Algo.Derivatives;
+using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
@@ -22,8 +24,9 @@ namespace OptionsThugs.View
     {
         private bool _testFlag = false;
         private readonly LogManager _logManager = new LogManager();
-        private MyQuotingStrategy _strategy;
+        private Strategy _strategy;
         private OptionDeskModel _optionDeskModel;
+        private Security _sec2;
 
 
         public GeneralView()
@@ -53,7 +56,8 @@ namespace OptionsThugs.View
         {
             decimal sign = -1;
             //_strategy = CreateNewLQStrategy(Sides.Sell, 4, conn.SelectedSecurity.PriceStep.Value * sign, 0);
-            _strategy = CreateNewMQStrategy(Sides.Sell, 20, 58455);
+            //_strategy = CreateNewMQStrategy(Sides.Sell, 20, 58455);
+            _strategy = CreateNewCondtrategy(16450, 13, MyConditionalClosePosStrategy.PriceDirection.Down, _sec2);
 
 
             #region Test OptionDesk and OptionDeskModel
@@ -83,6 +87,11 @@ namespace OptionsThugs.View
             #endregion
         }
 
+        private void Prepare2Click(object sender, RoutedEventArgs e)
+        {
+            _sec2 = conn.SelectedSecurity;
+        }
+
         private MyLimitQuotingStrategy CreateNewLQStrategy(Sides side, decimal volume, decimal priceShift, decimal stopQuote)
         {
             MyLimitQuotingStrategy strg = new MyLimitQuotingStrategy(side, volume, priceShift, stopQuote)
@@ -109,6 +118,41 @@ namespace OptionsThugs.View
                 Security = conn.SelectedSecurity,
                 Portfolio = conn.SelectedPortfolio,
             };
+
+            strg.ProcessStateChanged += s =>
+            {
+                Debug.WriteLine(s.ProcessState);
+            };
+            _logManager.Sources.Add(strg);
+
+            return strg;
+        }
+
+        private MyConditionalClosePosStrategy CreateNewCondtrategy(decimal priceToClose,
+            decimal sizeToClose,
+            MyConditionalClosePosStrategy.PriceDirection securityDesirableDirection = MyConditionalClosePosStrategy.PriceDirection.None,
+            Security securityToClose = null)
+        {
+            MyConditionalClosePosStrategy strg;
+
+            if (securityDesirableDirection == MyConditionalClosePosStrategy.PriceDirection.None)
+            {
+                strg = new MyConditionalClosePosStrategy(priceToClose, sizeToClose)
+                {
+                    Connector = conn.SafeConnection.Connector,
+                    Security = conn.SelectedSecurity,
+                    Portfolio = conn.SelectedPortfolio,
+                };
+            }
+            else
+            {
+                strg = new MyConditionalClosePosStrategy(priceToClose, securityToClose, securityDesirableDirection, sizeToClose)
+                {
+                    Connector = conn.SafeConnection.Connector,
+                    Security = conn.SelectedSecurity,
+                    Portfolio = conn.SelectedPortfolio,
+                };
+            }
 
             strg.ProcessStateChanged += s =>
             {

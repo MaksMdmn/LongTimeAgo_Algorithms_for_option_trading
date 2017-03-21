@@ -161,14 +161,15 @@
     </Compile>
     <Compile Include="Common\SimpleCommand.cs" />
     <Compile Include="Common\TradeEmulator4Test.cs" />
-    <Compile Include="Model\MyLimitQuotingStrategy.cs" />
-    <Compile Include="Model\MyMarketQuotingStrategy.cs" />
-    <Compile Include="Model\MyQuotingStrategy.cs" />
+    <Compile Include="Model\Primary\MyLimitQuotingStrategy.cs" />
+    <Compile Include="Model\Primary\MyMarketQuotingStrategy.cs" />
+    <Compile Include="Model\Primary\MyQuotingStrategy.cs" />
+    <Compile Include="Model\Primary\MyStrategyHelper.cs" />
     <Compile Include="Model\MyConditionalClosePosStrategy.cs" />
     <Compile Include="Model\MyDeltaHedgeStrategy.cs" />
     <Compile Include="Model\MySpreadStrategy.cs" />
-    <Compile Include="Model\OrderSynchronizer.cs" />
-    <Compile Include="Model\PositionSynchronizer.cs" />
+    <Compile Include="Model\Primary\OrderSynchronizer.cs" />
+    <Compile Include="Model\Primary\PositionSynchronizer.cs" />
     <Compile Include="ViewModel\OptionDeskViewModel.cs" />
     <Compile Include="View\GeneralView.xaml.cs">
       <DependentUpon>GeneralView.xaml</DependentUpon>

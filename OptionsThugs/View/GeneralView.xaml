@@ -69,7 +69,8 @@
                         Width="100"
                         Margin="5"
                         HorizontalAlignment="Left"
-                        Content="handleSell" />
+                        Click="Prepare2Click"
+                        Content="handleSell(prepare2)" />
                     <Button
                         Width="100"
                         Margin="5"

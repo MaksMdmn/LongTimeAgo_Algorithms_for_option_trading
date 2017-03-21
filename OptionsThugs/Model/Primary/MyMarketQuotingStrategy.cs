@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OptionsThugs.Model;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
-using StockSharp.Algo.Strategies.Quoting;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model
+namespace OptionsThugs.Model.Primary
 {
     public class MyMarketQuotingStrategy : MyQuotingStrategy
     {

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 
-namespace OptionsThugs.Model
+namespace OptionsThugs.Model.Primary
 {
     public class PositionSynchronizer
     {
