@@ -45,7 +45,7 @@ namespace OptionsThugs.Model.Primary
             //TODO обработчики ретёрнов
             if (Connector == null || Security == null || Portfolio == null) return;
             if (Volume <= 0) return;
-
+            
             Connector.RegisterMarketDepth(Security);
 
             MarketDepth = GetMarketDepth(Security);

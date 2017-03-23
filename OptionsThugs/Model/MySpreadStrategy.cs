@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Practices.ObjectBuilder2;
+using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.Algo.Strategies.Quoting;
@@ -11,24 +12,24 @@ namespace OptionsThugs.Model
     public class MySpreadStrategy : Strategy
     {
         private readonly decimal _minSpread;
-        private readonly decimal _minPos;
-        private readonly decimal _maxPos;
         private readonly decimal _lot;
-        private readonly bool _isCloseInLossModeEnabled;
+        private readonly decimal _longPosSize;
+        private readonly decimal _shortPosSize;
+        private readonly bool _isLimitOrdersAlwaysRepresent;
 
         private volatile bool _isBuyPartActive;
         private volatile bool _isSellPartActive;
 
-        public MySpreadStrategy(decimal minSpread, decimal minPos, decimal maxPos) : this(minSpread, minPos, maxPos, 1, false) { }
+        public MySpreadStrategy(decimal minSpread, decimal minPos, decimal maxPos) : this(minSpread, minPos, maxPos, 1, true) { }
 
-        public MySpreadStrategy(decimal minSpread, decimal minPos, decimal maxPos, decimal lot,
-            bool isCloseInLossModeEnabled)
+        public MySpreadStrategy(decimal minSpread, decimal shortPosSize, decimal longPosSize, decimal lot,
+            bool isLimitOrdersAlwaysRepresent)
         {
             _minSpread = minSpread;
-            _minPos = minPos;
-            _maxPos = maxPos;
+            _longPosSize = shortPosSize;
+            _shortPosSize = longPosSize;
             _lot = lot;
-            _isCloseInLossModeEnabled = isCloseInLossModeEnabled;
+            _isLimitOrdersAlwaysRepresent = isLimitOrdersAlwaysRepresent;
 
             _isBuyPartActive = false;
             _isSellPartActive = false;
@@ -53,17 +54,30 @@ namespace OptionsThugs.Model
 
                     if (currentSpread >= _minSpread)
                     {
-
-                        //TODO:
+                        if (_isLimitOrdersAlwaysRepresent)
+                        {
+                            //Cancel Active Orders THIS strategy (parent)
+                        }
+                        
+                        //TODO: notify about pos change at someone child strategy and calc it here. 
+                        //TODO: after that remove both - recalc max short long positions and create new strategies.
+                        //TODO: before stopping/removing child strategies we must be sure that we get actual pos value!!! (override onstopping/onstopped may be)
                         ProcessBuyPart();
                         ProcessSellPart();
                     }
                     else
                     {
                         //TODO check if strategies'll stopped through .Clear()
-                        ChildStrategies.Clear();
-                        _isBuyPartActive = false;
-                        _isSellPartActive = false;
+                        if (_isLimitOrdersAlwaysRepresent)
+                        {
+                            //Place two orders on buy sell and calc price for them
+                        }
+                        else
+                        {
+                            ChildStrategies.Clear();
+                            _isBuyPartActive = false;
+                            _isSellPartActive = false;
+                        }
                     }
 
 
@@ -79,11 +93,8 @@ namespace OptionsThugs.Model
         {
             if (_isSellPartActive)
             {
-                //TODO WhenNewTrades WhenStopped - signal to MySpread and check pos, direction, lot etc..
-            }
-            else
-            {
-
+                var sellPartStrategy = new MyLimitQuotingStrategy(Sides.Sell, CalculateSuitableAbsLot(Sides.Sell), -Security.PriceStep.Value);
+                ChildStrategies.Add(sellPartStrategy);
 
                 _isSellPartActive = true;
             }
@@ -92,16 +103,28 @@ namespace OptionsThugs.Model
 
         private void ProcessBuyPart()
         {
-            if (_isBuyPartActive)
+            if (!_isBuyPartActive)
             {
-
-            }
-            else
-            {
-
+                var buyPartStrategy = new MyLimitQuotingStrategy(Sides.Buy, CalculateSuitableAbsLot(Sides.Buy), Security.PriceStep.Value);
+                ChildStrategies.Add(buyPartStrategy);
 
                 _isBuyPartActive = true;
             }
+        }
+
+        private decimal CalculateSuitableAbsLot(Sides side)
+        {
+            decimal diff;
+            if (side == Sides.Buy)
+            {
+                diff = Math.Abs(_longPosSize - Position);
+            }
+            else
+            {
+                diff = Math.Abs(_shortPosSize - Position);
+            }
+
+            return diff >= _lot ? _lot : diff;
         }
     }
 }
