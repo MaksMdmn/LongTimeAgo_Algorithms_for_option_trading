@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
@@ -8,14 +8,14 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model
 {
-    public class MyConditionalClosePosStrategy : Strategy
+    public class PositionCloserStrategy : Strategy
     {
         private readonly decimal _priceToClose;
         private readonly Security _securityToClose;
         private readonly PriceDirection _securityDesirableDirection;
         private readonly Sides _strategyOrderSide;
 
-        public MyConditionalClosePosStrategy(decimal priceToClose, Security securityToClose, PriceDirection securityDesirableDirection, decimal posSizeToClose)
+        public PositionCloserStrategy(decimal priceToClose, Security securityToClose, PriceDirection securityDesirableDirection, decimal posSizeToClose)
         {
             _priceToClose = priceToClose;
             _securityToClose = securityToClose;
@@ -24,7 +24,7 @@ namespace OptionsThugs.Model
             Volume = Math.Abs(posSizeToClose);
         }
 
-        public MyConditionalClosePosStrategy(decimal priceToClose, decimal positionToClose) : this(priceToClose, null, PriceDirection.None, positionToClose) { }
+        public PositionCloserStrategy(decimal priceToClose, decimal positionToClose) : this(priceToClose, null, PriceDirection.None, positionToClose) { }
 
         protected override void OnStarted()
         {
@@ -48,7 +48,7 @@ namespace OptionsThugs.Model
                 Security.WhenMarketDepthChanged(Connector)
                     .Do(md =>
                     {
-                        var mqs = new MyMarketQuotingStrategy(_strategyOrderSide, Volume, _priceToClose);
+                        var mqs = new MarketQuoterStrategy(_strategyOrderSide, Volume, _priceToClose);
 
                         mqs.WhenStopped()
                             .Do(this.Stop)
@@ -72,7 +72,7 @@ namespace OptionsThugs.Model
                         if (_securityDesirableDirection == PriceDirection.Up && md.BestBid.Price >= _priceToClose
                         || _securityDesirableDirection == PriceDirection.Down && md.BestAsk.Price <= _priceToClose)
                         {
-                            mqsChild = new MyMarketQuotingStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide, Connector));
+                            mqsChild = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide, Connector));
                             //TODO пока делаем по любой цене, как только сработает условие
 
                             mqsChild.WhenStopped()
@@ -93,12 +93,6 @@ namespace OptionsThugs.Model
             }
 
             base.OnStarted();
-        }
-
-
-        public enum PriceDirection
-        {
-            Up, Down, None
         }
     }
 }

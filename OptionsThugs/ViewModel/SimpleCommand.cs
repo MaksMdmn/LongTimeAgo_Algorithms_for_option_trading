@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace OptionsThugs.Common
+namespace OptionsThugs.ViewModel
 {
     public class SimpleCommand : ICommand
     {

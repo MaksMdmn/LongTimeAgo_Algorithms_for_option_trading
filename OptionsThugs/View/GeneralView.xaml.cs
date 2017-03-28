@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using DevExpress.Xpf.Editors.Internal;
 using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
-using OptionsThugs.Common;
 using OptionsThugs.Model;
+using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
 using StockSharp.Algo.Derivatives;
 using StockSharp.Algo.Strategies;
@@ -55,9 +56,21 @@ namespace OptionsThugs.View
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
             decimal sign = 1;
-            _strategy = CreateNewLQStrategy(Sides.Buy, 15, conn.SelectedSecurity.PriceStep.Value * sign, 0);
+            //_strategy = CreateNewLQStrategy(Sides.Buy, 15, conn.SelectedSecurity.PriceStep.Value * sign, 0);
             //_strategy = CreateNewMQStrategy(Sides.Sell, 20, 58455);
             //_strategy = CreateNewCondtrategy(16450, 13, MyConditionalClosePosStrategy.PriceDirection.Down, _sec2);
+
+            List<Security> tempOptions = new List<Security>();
+
+            conn.SafeConnection.Connector.Positions.ForEach(p =>
+            {
+                if (p.Security.Type == SecurityTypes.Option)
+                {
+                    tempOptions.Add(p.Security);
+                }
+            });
+
+            _strategy = CreateNewDHStrategy(1, tempOptions);
 
 
             #region Test OptionDesk and OptionDeskModel
@@ -90,11 +103,19 @@ namespace OptionsThugs.View
         private void Prepare2Click(object sender, RoutedEventArgs e)
         {
             _sec2 = conn.SelectedSecurity;
+            //Position pos = conn.SafeConnection.Connector.GetPosition(conn.SelectedPortfolio, conn.SelectedSecurity);
+
+            //conn.SafeConnection.Connector.PositionChanged += p =>
+            //{
+            //    if (p.Security.UnderlyingSecurityId.ContainsIgnoreCase("si"))
+            //        MessageBox.Show(p.Security.ToString() + " new pos: " + p.CurrentValue);
+            //};
+
         }
 
-        private MyLimitQuotingStrategy CreateNewLQStrategy(Sides side, decimal volume, decimal priceShift, decimal stopQuote)
+        private LimitQuoterStrategy CreateNewLQStrategy(Sides side, decimal volume, decimal priceShift, decimal stopQuote)
         {
-            MyLimitQuotingStrategy strg = new MyLimitQuotingStrategy(side, volume, priceShift, stopQuote)
+            LimitQuoterStrategy strg = new LimitQuoterStrategy(side, volume, priceShift, stopQuote)
             {
                 Connector = conn.SafeConnection.Connector,
                 Security = conn.SelectedSecurity,
@@ -110,9 +131,9 @@ namespace OptionsThugs.View
             return strg;
         }
 
-        private MyMarketQuotingStrategy CreateNewMQStrategy(Sides side, decimal volume, decimal targetPrice)
+        private MarketQuoterStrategy CreateNewMQStrategy(Sides side, decimal volume, decimal targetPrice)
         {
-            MyMarketQuotingStrategy strg = new MyMarketQuotingStrategy(side, volume, targetPrice)
+            MarketQuoterStrategy strg = new MarketQuoterStrategy(side, volume, targetPrice)
             {
                 Connector = conn.SafeConnection.Connector,
                 Security = conn.SelectedSecurity,
@@ -128,16 +149,16 @@ namespace OptionsThugs.View
             return strg;
         }
 
-        private MyConditionalClosePosStrategy CreateNewCondtrategy(decimal priceToClose,
+        private PositionCloserStrategy CreateNewCondtrategy(decimal priceToClose,
             decimal sizeToClose,
-            MyConditionalClosePosStrategy.PriceDirection securityDesirableDirection = MyConditionalClosePosStrategy.PriceDirection.None,
+            PriceDirection securityDesirableDirection = PriceDirection.None,
             Security securityToClose = null)
         {
-            MyConditionalClosePosStrategy strg;
+            PositionCloserStrategy strg;
 
-            if (securityDesirableDirection == MyConditionalClosePosStrategy.PriceDirection.None)
+            if (securityDesirableDirection == PriceDirection.None)
             {
-                strg = new MyConditionalClosePosStrategy(priceToClose, sizeToClose)
+                strg = new PositionCloserStrategy(priceToClose, sizeToClose)
                 {
                     Connector = conn.SafeConnection.Connector,
                     Security = conn.SelectedSecurity,
@@ -146,7 +167,7 @@ namespace OptionsThugs.View
             }
             else
             {
-                strg = new MyConditionalClosePosStrategy(priceToClose, securityToClose, securityDesirableDirection, sizeToClose)
+                strg = new PositionCloserStrategy(priceToClose, securityToClose, securityDesirableDirection, sizeToClose)
                 {
                     Connector = conn.SafeConnection.Connector,
                     Security = conn.SelectedSecurity,
@@ -158,6 +179,41 @@ namespace OptionsThugs.View
             {
                 Debug.WriteLine(s.ProcessState);
             };
+            _logManager.Sources.Add(strg);
+
+            return strg;
+        }
+
+        private DeltaHedgerStrategy CreateNewDHStrategy(decimal deltaStep, List<Security> options)
+        {
+            DeltaHedgerStrategy strg;
+
+            //strg = new DeltaHedgerStrategy(deltaStep, options); 
+
+            var tempLevelsArr = new PriceHedgeLevel[]
+            {
+                new PriceHedgeLevel(PriceDirection.Up, 58090),
+                new PriceHedgeLevel(PriceDirection.Down, 57945)
+            };
+
+            strg = new DeltaHedgerStrategy(-1, 1, 1, 0, tempLevelsArr, options);
+
+
+
+
+
+            strg.Connector = conn.SafeConnection.Connector;
+            strg.Security = conn.SelectedSecurity;
+            strg.Portfolio = conn.SelectedPortfolio;
+
+
+
+
+            strg.ProcessStateChanged += s =>
+            {
+                Debug.WriteLine(s.ProcessState);
+            };
+
             _logManager.Sources.Add(strg);
 
             return strg;

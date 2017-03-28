@@ -9,7 +9,7 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model
 {
-    public class MySpreadStrategy : Strategy
+    public class SpreaderStrategy : Strategy
     {
         private readonly decimal _minSpread;
         private readonly decimal _lot;
@@ -20,9 +20,9 @@ namespace OptionsThugs.Model
         private volatile bool _isBuyPartActive;
         private volatile bool _isSellPartActive;
 
-        public MySpreadStrategy(decimal minSpread, decimal minPos, decimal maxPos) : this(minSpread, minPos, maxPos, 1, true) { }
+        public SpreaderStrategy(decimal minSpread, decimal minPos, decimal maxPos) : this(minSpread, minPos, maxPos, 1, true) { }
 
-        public MySpreadStrategy(decimal minSpread, decimal shortPosSize, decimal longPosSize, decimal lot,
+        public SpreaderStrategy(decimal minSpread, decimal shortPosSize, decimal longPosSize, decimal lot,
             bool isLimitOrdersAlwaysRepresent)
         {
             _minSpread = minSpread;
@@ -93,7 +93,7 @@ namespace OptionsThugs.Model
         {
             if (_isSellPartActive)
             {
-                var sellPartStrategy = new MyLimitQuotingStrategy(Sides.Sell, CalculateSuitableAbsLot(Sides.Sell), -Security.PriceStep.Value);
+                var sellPartStrategy = new LimitQuoterStrategy(Sides.Sell, CalculateSuitableAbsLot(Sides.Sell), -Security.PriceStep.Value);
                 ChildStrategies.Add(sellPartStrategy);
 
                 _isSellPartActive = true;
@@ -105,7 +105,7 @@ namespace OptionsThugs.Model
         {
             if (!_isBuyPartActive)
             {
-                var buyPartStrategy = new MyLimitQuotingStrategy(Sides.Buy, CalculateSuitableAbsLot(Sides.Buy), Security.PriceStep.Value);
+                var buyPartStrategy = new LimitQuoterStrategy(Sides.Buy, CalculateSuitableAbsLot(Sides.Buy), Security.PriceStep.Value);
                 ChildStrategies.Add(buyPartStrategy);
 
                 _isBuyPartActive = true;

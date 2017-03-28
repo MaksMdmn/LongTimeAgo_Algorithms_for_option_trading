@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OptionsThugs.Common
+namespace OptionsThugs.Model.Common
 {
     public class TradeEmulator4Test
     {

@@ -128,6 +128,6 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\Microsoft.Cod
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\Microsoft.CodeAnalysis.VisualBasic.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\DevExpress.Xpf.Layout.v15.2.Core.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\System.Reflection.Metadata.xml
-D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\OptionsThugs.csprojResolveAssemblyReference.cache
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\OptionsThugs_MarkupCompile.lref
+D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\OptionsThugs.csprojResolveAssemblyReference.cache

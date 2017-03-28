@@ -1,4 +1,5 @@
 ﻿using System;
+using OptionsThugs.Model.Common;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -6,7 +7,7 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model.Primary
 {
-    public abstract class MyQuotingStrategy : Strategy
+    public abstract class QuoterStrategy : Strategy
     {
         private readonly int _timeout = 2000;
 
@@ -15,14 +16,15 @@ namespace OptionsThugs.Model.Primary
         protected OrderSynchronizer OrderSynchronizer { get; private set; }
         protected PositionSynchronizer PositionSynchronizer { get; private set; }
 
-        protected MyQuotingStrategy(Sides quotingSide, decimal quotingVolume)
+        protected QuoterStrategy(Sides quotingSide, decimal quotingVolume)
         {
             QuotingSide = quotingSide;
             Volume = quotingVolume;
             OrderSynchronizer = new OrderSynchronizer(this);
             PositionSynchronizer = new PositionSynchronizer();
 
-            OrderSynchronizer.Timeout = 1000;
+            OrderSynchronizer.Timeout = _timeout;
+            PositionSynchronizer.Timeout = _timeout;
 
             this.WhenPositionChanged()
                 .Do(p => PositionSynchronizer.NewPositionChange(p))

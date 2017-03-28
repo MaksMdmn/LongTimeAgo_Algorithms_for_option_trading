@@ -7,19 +7,19 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model.Primary
 {
-    public class MyLimitQuotingStrategy : MyQuotingStrategy
+    public class LimitQuoterStrategy : QuoterStrategy
     {
         public decimal QuotePriceShift { get; }
         public decimal StopQuotingPrice { get; }
 
-        public MyLimitQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
+        public LimitQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
             : base(quotingSide, quotingVolume)
         {
             QuotePriceShift = quotePriceShift;
             StopQuotingPrice = 0;
         }
 
-        public MyLimitQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift, decimal stopQuotingPrice)
+        public LimitQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift, decimal stopQuotingPrice)
             : base(quotingSide, quotingVolume)
         {
             QuotePriceShift = quotePriceShift;

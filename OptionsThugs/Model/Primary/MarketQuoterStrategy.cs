@@ -8,11 +8,11 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model.Primary
 {
-    public class MyMarketQuotingStrategy : MyQuotingStrategy
+    public class MarketQuoterStrategy : QuoterStrategy
     {
         public decimal TargetPrice { get; }
 
-        public MyMarketQuotingStrategy(Sides quotingSide, decimal quotingVolume, decimal targetPrice) : base(quotingSide, quotingVolume)
+        public MarketQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal targetPrice) : base(quotingSide, quotingVolume)
         {
             TargetPrice = targetPrice;
         }

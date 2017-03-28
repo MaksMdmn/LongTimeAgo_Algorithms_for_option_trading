@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using StockSharp.Algo;
@@ -7,7 +6,7 @@ using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model.Primary
+namespace OptionsThugs.Model.Common
 {
     public class OrderSynchronizer
     {

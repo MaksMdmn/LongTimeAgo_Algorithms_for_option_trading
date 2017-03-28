@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OptionsThugs.Model.Primary
+namespace OptionsThugs.Model.Common
 {
     public class PositionSynchronizer
     {
