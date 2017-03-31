@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using DevExpress.Xpf.Editors.Internal;
 using Ecng.Common;
@@ -217,6 +219,42 @@ namespace OptionsThugs.View
             _logManager.Sources.Add(strg);
 
             return strg;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Security opt = _sec2;
+
+            conn.SafeConnection.Connector.RegisterSecurity(conn.SelectedSecurity);
+            conn.SafeConnection.Connector.RegisterSecurity(opt);
+            //TODO подумать, где регистрировать Секьюрити ИЛИ маркетдепзы?
+            //TODO подумать, может надо регать ещё портфель?
+            //TODO поменять это в своей архитектуре
+
+            Thread.Sleep(2000);
+
+            BlackScholes bs = new BlackScholes(opt, conn.SelectedSecurity, conn.SafeConnection.Connector);
+
+            //var vol = GreeksCalculator.CalculateImpliedVolatility(OptionTypes.Call,
+            //        conn.SelectedSecurity.BestAsk.Price, opt.Strike.Value, 20, 365, opt.BestAsk.Price, 0.5m);
+            //var d1 = GreeksCalculator.Calculate_d1(conn.SelectedSecurity.BestAsk.Price, opt.Strike.Value, 20, 365, vol);
+            //var dev = GreeksCalculator.GreeksDistribution(d1);
+
+            //tb1.Text = bs.Delta(DateTimeOffset.Now, dev, conn.SelectedSecurity.BestAsk.Price).ToString();
+            //tb2.Text = bs.Gamma(DateTimeOffset.Now, dev, conn.SelectedSecurity.BestAsk.Price).ToString();
+            //tb3.Text = bs.Vega(DateTimeOffset.Now, dev, conn.SelectedSecurity.BestAsk.Price).ToString();
+            //tb4.Text = bs.Theta(DateTimeOffset.Now, dev, conn.SelectedSecurity.BestAsk.Price).ToString();
+            //tb5.Text = bs.Premium(DateTimeOffset.Now, dev, conn.SelectedSecurity.BestAsk.Price).ToString();
+            //tb6.Text = bs.UnderlyingAsset.Id;
+            //tb7.Text = bs.DefaultDeviation.ToString(CultureInfo.InvariantCulture);
+
+            tb1.Text = bs.Delta(DateTimeOffset.Now).ToString();
+            tb2.Text = bs.Gamma(DateTimeOffset.Now).ToString();
+            tb3.Text = bs.Vega(DateTimeOffset.Now).ToString();
+            tb4.Text = bs.Theta(DateTimeOffset.Now).ToString();
+            tb5.Text = bs.Premium(DateTimeOffset.Now).ToString();
+            tb6.Text = bs.UnderlyingAsset.Id;
+            tb7.Text = bs.DefaultDeviation.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
