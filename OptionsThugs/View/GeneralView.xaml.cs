@@ -9,12 +9,14 @@ using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugs.Model;
 using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
+using OptionsThugs.xTests;
 using StockSharp.Algo.Derivatives;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 using StockSharp.Xaml;
+using StockSharp_TraderConnection;
 
 namespace OptionsThugs.View
 {
@@ -28,6 +30,7 @@ namespace OptionsThugs.View
         private Strategy _strategy;
         private OptionDeskModel _optionDeskModel;
         private Security _sec2;
+        private BaseTest _strategyTest;
 
 
         public GeneralView()
@@ -44,33 +47,38 @@ namespace OptionsThugs.View
         {
             if (_testFlag)
             {
-                _strategy.Stop();
+                _strategyTest.Strategy.Stop();
             }
             else
             {
-                _strategy.Start();
+                _strategyTest.Strategy.Start();
             }
             _testFlag = !_testFlag;
         }
 
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
-            decimal sign = 1;
+            _strategyTest = new LqsTest(_logManager, conn.SafeConnection.Connector, conn.SelectedPortfolio, conn.SelectedSecurity);
+
+            ((LqsTest)_strategyTest).CreateNewLqsStrategy(Sides.Buy, 10, 1, 57390);
+
+
+            //decimal sign = 1;
             //_strategy = CreateNewLQStrategy(Sides.Buy, 15, conn.SelectedSecurity.PriceStep.Value * sign, 0);
             //_strategy = CreateNewMQStrategy(Sides.Sell, 20, 58455);
             //_strategy = CreateNewCondtrategy(16450, 13, MyConditionalClosePosStrategy.PriceDirection.Down, _sec2);
 
-            List<Security> tempOptions = new List<Security>();
+            //List<Security> tempOptions = new List<Security>();
 
-            conn.SafeConnection.Connector.Positions.ForEach(p =>
-            {
-                if (p.Security.Type == SecurityTypes.Option)
-                {
-                    tempOptions.Add(p.Security);
-                }
-            });
+            //conn.SafeConnection.Connector.Positions.ForEach(p =>
+            //{
+            //    if (p.Security.Type == SecurityTypes.Option)
+            //    {
+            //        tempOptions.Add(p.Security);
+            //    }
+            //});
 
-            _strategy = CreateNewDHStrategy(1, tempOptions);
+            //_strategy = CreateNewDHStrategy(1, tempOptions);
 
 
             #region Test OptionDesk and OptionDeskModel

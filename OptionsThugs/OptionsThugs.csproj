@@ -151,6 +151,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="xTests\BaseTest.cs" />
+    <Compile Include="xTests\LqsTest.cs" />
     <Page Include="View\GeneralView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
