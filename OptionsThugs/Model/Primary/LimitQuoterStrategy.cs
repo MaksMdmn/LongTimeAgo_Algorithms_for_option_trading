@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -12,11 +13,13 @@ namespace OptionsThugs.Model.Primary
         public decimal QuotePriceShift { get; }
         public decimal StopQuotingPrice { get; }
 
+        public bool IsLimitOrdersAlwaysRepresent { get; set; }
         public LimitQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
             : base(quotingSide, quotingVolume)
         {
             QuotePriceShift = quotePriceShift;
             StopQuotingPrice = 0;
+            IsLimitOrdersAlwaysRepresent = true;
         }
 
         public LimitQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift, decimal stopQuotingPrice)
@@ -24,6 +27,7 @@ namespace OptionsThugs.Model.Primary
         {
             QuotePriceShift = quotePriceShift;
             StopQuotingPrice = stopQuotingPrice;
+            IsLimitOrdersAlwaysRepresent = true;
         }
 
         protected sealed override void QuotingProcess()
@@ -40,17 +44,29 @@ namespace OptionsThugs.Model.Primary
                     decimal price = bestQuote.Price + QuotePriceShift;
                     decimal volume = Math.Abs(Volume) - Math.Abs(Position);
 
-                    if (volume > 0 && IsLimitPriceAcceptableForQuoting(price))
+                    if (volume <= 0) return;
+
+                    if (IsLimitPriceAcceptableForQuoting(price))
                     {
                         var order = this.CreateOrder(QuotingSide, price, volume);
 
                         order.WhenRegistered(Connector)
-                            .Do(() => ProcessOrder(order))
+                            .Do(() => ProcessFastOrder(order))
                             .Once()
                             .Apply(this);
 
                         OrderSynchronizer.PlaceOrder(order);
+                    }
+                    else if (IsLimitOrdersAlwaysRepresent && StopQuotingPrice > 0)
+                    {
+                        var order = this.CreateOrder(QuotingSide, StopQuotingPrice, volume);
 
+                        order.WhenRegistered(Connector)
+                            .Do(() => ProcessSlowOrder(order))
+                            .Once()
+                            .Apply(this);
+
+                        OrderSynchronizer.PlaceOrder(order);
                     }
                 }
             }
@@ -60,7 +76,7 @@ namespace OptionsThugs.Model.Primary
             }
         }
 
-        private void ProcessOrder(Order order)
+        private void ProcessFastOrder(Order order)
         {
             Security.WhenMarketDepthChanged(Connector)
                 .Do(md =>
@@ -80,7 +96,31 @@ namespace OptionsThugs.Model.Primary
                         }
                     }
                 })
-                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork)
+                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork || ProcessState == ProcessStates.Stopping)
+                .Apply(this);
+        }
+
+        private void ProcessSlowOrder(Order order)
+        {
+            Security.WhenMarketDepthChanged(Connector)
+                .Do(md =>
+                {
+                    if (OrderSynchronizer.IsAnyOrdersInWork
+                    && IsBestQuoteMyQuote(order, GetSuitableBestLimitQuote()))
+                    {
+                        try
+                        {
+                            OrderSynchronizer.CancelCurrentOrder();
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            IncrMaxErrorCountIfNotScared();
+                            this.AddWarningLog("MaxErrorCount was incremented");
+                            this.AddErrorLog(ex);
+                        }
+                    }
+                })
+                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork || ProcessState == ProcessStates.Stopping)
                 .Apply(this);
         }
 
@@ -104,12 +144,25 @@ namespace OptionsThugs.Model.Primary
             return false;
         }
 
+        private bool IsBestQuoteMyQuote(Order order, Quote bestQuote)
+        {
+            var bestSize = bestQuote.Volume;
+            var bestPrice = bestQuote.Price;
+            var ordSize = order.Volume - order.GetTrades(Connector).Sum(mt => mt.Order.Volume);
+            var ordPrice = order.Price;
+
+            if (bestSize == ordSize && bestPrice == ordPrice)
+                return true;
+
+            return false;
+        }
+
         private bool IsLimitPriceAcceptableForQuoting(decimal currentPrice)
         {
             if (StopQuotingPrice == 0)
                 return true;
 
-            return IsPriceAcceptableForQuoting(currentPrice,StopQuotingPrice);
+            return IsPriceAcceptableForQuoting(currentPrice, StopQuotingPrice);
         }
     }
 }
