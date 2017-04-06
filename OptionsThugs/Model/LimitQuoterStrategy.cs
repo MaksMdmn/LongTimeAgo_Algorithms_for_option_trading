@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Linq;
+using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model.Primary
+namespace OptionsThugs.Model
 {
     public class LimitQuoterStrategy : QuoterStrategy
     {
         public decimal QuotePriceShift { get; }
         public decimal StopQuotingPrice { get; }
-
         public bool IsLimitOrdersAlwaysRepresent { get; set; }
+
         public LimitQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift)
-            : base(quotingSide, quotingVolume)
-        {
-            QuotePriceShift = quotePriceShift;
-            StopQuotingPrice = 0;
-            IsLimitOrdersAlwaysRepresent = true;
-        }
+            : this(quotingSide, quotingVolume, quotePriceShift, 0)
+        { }
 
         public LimitQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal quotePriceShift, decimal stopQuotingPrice)
             : base(quotingSide, quotingVolume)

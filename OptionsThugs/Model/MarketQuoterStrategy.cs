@@ -1,18 +1,19 @@
 ﻿using System;
-using OptionsThugs.Model;
+using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model.Primary
+namespace OptionsThugs.Model
 {
     public class MarketQuoterStrategy : QuoterStrategy
     {
         public decimal TargetPrice { get; }
 
-        public MarketQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal targetPrice) : base(quotingSide, quotingVolume)
+        public MarketQuoterStrategy(Sides quotingSide, decimal quotingVolume, decimal targetPrice) 
+            : base(quotingSide, quotingVolume)
         {
             TargetPrice = targetPrice;
         }

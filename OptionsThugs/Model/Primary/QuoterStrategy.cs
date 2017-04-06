@@ -7,24 +7,22 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model.Primary
 {
-    public abstract class QuoterStrategy : Strategy
+    public abstract class QuoterStrategy : PrimaryStrategy
     {
-        private readonly int _timeout = 2000;
-
         protected Sides QuotingSide { get; private set; }
         protected MarketDepth MarketDepth { get; private set; }
         protected OrderSynchronizer OrderSynchronizer { get; private set; }
         protected PositionSynchronizer PositionSynchronizer { get; private set; }
 
-        protected QuoterStrategy(Sides quotingSide, decimal quotingVolume)
+        protected QuoterStrategy(Sides quotingSide, decimal quotingVolume) 
         {
             QuotingSide = quotingSide;
             Volume = quotingVolume;
             OrderSynchronizer = new OrderSynchronizer(this);
             PositionSynchronizer = new PositionSynchronizer();
 
-            OrderSynchronizer.Timeout = _timeout;
-            PositionSynchronizer.Timeout = _timeout;
+            OrderSynchronizer.Timeout = Timeout;
+            PositionSynchronizer.Timeout = Timeout;
 
             this.WhenPositionChanged()
                 .Do(p => PositionSynchronizer.NewPositionChange(p))
@@ -34,25 +32,18 @@ namespace OptionsThugs.Model.Primary
                 .Do(mt => PositionSynchronizer.NewTradeChange(mt.Trade.Volume))
                 .Apply(this);
 
-
-            CancelOrdersWhenStopping = true;
-            CommentOrders = true;
-            DisposeOnStop = false;
-            MaxErrorCount = 10;
-            OrdersKeepTime = TimeSpan.Zero;
         }
 
         protected override void OnStarted()
         {
-            //TODO обработчики ретёрнов
-            if (Connector == null || Security == null || Portfolio == null) return;
-            if (Volume <= 0) return;
-            
-            Connector.RegisterMarketDepth(Security);
+            CheckIfStrategyReadyToWork();
+
+            if (Volume <= 0) throw new ArgumentException("Volume cannot be below zero: " + Volume);
+
+            //Connector.RegisterMarketDepth(Security);
 
             MarketDepth = GetMarketDepth(Security);
 
-            //start here
             Security.WhenMarketDepthChanged(Connector)
                 .Do(QuotingProcess)
                 .Apply(this);
@@ -67,8 +58,6 @@ namespace OptionsThugs.Model.Primary
                     }
                 })
                 .Apply(this);
-
-            //TODO this.WhenError();  this.Connector.OrderRegisterFailed;
 
             base.OnStarted();
         }

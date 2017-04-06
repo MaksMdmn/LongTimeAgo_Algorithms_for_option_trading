@@ -9,7 +9,7 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model
 {
-    public class SpreaderStrategy : Strategy
+    public class SpreaderStrategy : PrimaryStrategy
     {
         private readonly decimal _minSpread;
         private readonly decimal _lot;
@@ -20,7 +20,8 @@ namespace OptionsThugs.Model
         private volatile bool _isBuyPartActive;
         private volatile bool _isSellPartActive;
 
-        public SpreaderStrategy(decimal minSpread, decimal minPos, decimal maxPos) : this(minSpread, minPos, maxPos, 1, true) { }
+        public SpreaderStrategy(decimal minSpread, decimal minPos, decimal maxPos)
+            : this(minSpread, minPos, maxPos, 1, true) { }
 
         public SpreaderStrategy(decimal minSpread, decimal shortPosSize, decimal longPosSize, decimal lot,
             bool isLimitOrdersAlwaysRepresent)
@@ -58,7 +59,7 @@ namespace OptionsThugs.Model
                         {
                             //Cancel Active Orders THIS strategy (parent)
                         }
-                        
+
                         //TODO: notify about pos change at someone child strategy and calc it here. 
                         //TODO: after that remove both - recalc max short long positions and create new strategies.
                         //TODO: before stopping/removing child strategies we must be sure that we get actual pos value!!! (override onstopping/onstopped may be)

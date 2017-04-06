@@ -7,86 +7,72 @@ using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
+using StockSharp.Algo.Derivatives;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
 namespace OptionsThugs.Model
 {
-    public class DeltaHedgerStrategy : Strategy
+    public class DeltaHedgerStrategy : PrimaryStrategy
     {
-        private readonly decimal _maxFuturesPositionVal;
-        private readonly decimal _minFuturesPositionVal;
-        private readonly decimal _deltaStep;
-        private readonly decimal _deltaBuffer;
-        private readonly PriceHedgeLevel[] _priceLevelsForHedge;
-        private readonly List<Security> _options;
-        private readonly SynchronizedDictionary<Security, decimal> _optionPositions;
-        private bool _isPriceLevelsForHedgeInitialized;
+        private readonly SynchronizedDictionary<Security, decimal> _optionsPositions;
         private decimal _futuresPosition;
+        private PriceHedgeLevel[] _priceLevelsForHedge;
+
+        private decimal _totalDelta;
+        private bool _isPriceLevelsForHedgeInitialized;
         private volatile bool _isDeltaHedging;
+        //Security = Underlying assets (future for hedge)
 
-        //Security field = Underlying assets here (futures for hedge)
+        public decimal MaxFuturesPositionVal { get; set; }
 
+        public decimal MinFuturesPositionVal { get; set; }
 
-        public DeltaHedgerStrategy(decimal deltaStep, List<Security> options)
-            : this(deltaStep, 0, options) { }
+        public decimal DeltaStep { get; set; }
 
-        public DeltaHedgerStrategy(decimal deltaStep, decimal deltaBuffer, List<Security> options) : this(0, 0, deltaStep, deltaBuffer, options) { }
+        public decimal DeltaBuffer { get; set; }
 
-        public DeltaHedgerStrategy(PriceHedgeLevel[] priceLevelsForHedge, List<Security> options)
-            : this(0, priceLevelsForHedge, options) {}
-
-        public DeltaHedgerStrategy(decimal deltaStep, PriceHedgeLevel[] priceLevelsForHedge, List<Security> options)
-            : this(deltaStep, 0, priceLevelsForHedge, options){}
-        
-        public DeltaHedgerStrategy(decimal deltaStep, decimal deltaBuffer, PriceHedgeLevel[] priceLevelsForHedge,
-            List<Security> options): this(0, 0, deltaStep, deltaBuffer, priceLevelsForHedge, options)
+        public PriceHedgeLevel[] PriceLevelsForHedge
         {
-            CheckIfPriceArrOkay(priceLevelsForHedge);
-            _priceLevelsForHedge = priceLevelsForHedge;
-            _isPriceLevelsForHedgeInitialized = true;
+            get { return _priceLevelsForHedge; }
+            set
+            {
+                _priceLevelsForHedge = value;
+                CheckIfPriceArrOkay(_priceLevelsForHedge);
+            }
         }
 
-        public DeltaHedgerStrategy(decimal minFuturesPositionVal, decimal maxFuturesPositionVal, decimal deltaStep,
-            decimal deltaBuffer, PriceHedgeLevel[] priceLevelsForHedge, List<Security> options)
-            : this(minFuturesPositionVal, maxFuturesPositionVal, deltaStep, deltaBuffer, options)
-        {
-            CheckIfPriceArrOkay(priceLevelsForHedge);
-            _priceLevelsForHedge = priceLevelsForHedge;
-            _isPriceLevelsForHedgeInitialized = true;
-        }
+        public DeltaHedgerStrategy(decimal futuresPosition, SynchronizedDictionary<Security, decimal> optionsPositions)
+            : this(futuresPosition, optionsPositions, 1, 0, null, decimal.MinValue, decimal.MaxValue) //TODO min max is it ok?
+        { }
 
-        public DeltaHedgerStrategy(decimal minFuturesPositionVal, decimal maxFuturesPositionVal, decimal deltaStep, decimal deltaBuffer, List<Security> options)
+
+        private DeltaHedgerStrategy(decimal futuresPosition, SynchronizedDictionary<Security, decimal> optionsPositions,
+            decimal deltaStep, decimal deltaBuffer, PriceHedgeLevel[] priceLevelsForHedge,
+            decimal minFuturesPositionVal, decimal maxFuturesPositionVal)
         {
-            _minFuturesPositionVal = minFuturesPositionVal;
-            _maxFuturesPositionVal = maxFuturesPositionVal;
-            _deltaStep = deltaStep;
-            _deltaBuffer = deltaBuffer;
-            _optionPositions = new SynchronizedDictionary<Security, decimal>();
-            _futuresPosition = 0;
-            _options = options;
-            _isPriceLevelsForHedgeInitialized = false;
+            _futuresPosition = futuresPosition;
+            _optionsPositions = optionsPositions;
+            DeltaStep = deltaStep;
+            DeltaBuffer = deltaBuffer;
+            _priceLevelsForHedge = priceLevelsForHedge;
+            MinFuturesPositionVal = minFuturesPositionVal;
+            MaxFuturesPositionVal = maxFuturesPositionVal;
+
+            if (_priceLevelsForHedge == null)
+                _isPriceLevelsForHedgeInitialized = false;
+            else
+                CheckIfPriceArrOkay(_priceLevelsForHedge);
+
             _isDeltaHedging = false;
+            _totalDelta = 0;
         }
+
 
         protected override void OnStarted()
         {
-            if (Connector == null || Security == null || Portfolio == null) return;
-            if (_deltaStep < 0) return;
-
-            Connector.RegisterMarketDepth(Security);
-
-            _futuresPosition = CheckIfValueNull(Connector.GetPosition(Portfolio, Security).CurrentValue);
-
-            _options.ForEach(o =>
-            {
-                Connector.RegisterMarketDepth(o);
-
-                decimal tempPosition = CheckIfValueNull(Connector.GetPosition(Portfolio, o).CurrentValue);
-
-                _optionPositions[o] = tempPosition;
-            });
+            if (DeltaStep < 0) throw new ArgumentException("DeltaStep cannot be below zero: " + DeltaStep); ;
 
             Security.WhenMarketDepthChanged(Connector)
                 .Do(md =>
@@ -95,38 +81,39 @@ namespace OptionsThugs.Model
                     {
                         _isDeltaHedging = true;
 
-                        if (Security.BestAsk == null)
+                        var futuresQuote = _totalDelta >= 0 ? md.BestBid : md.BestAsk;
+
+                        if (futuresQuote == null)
                         {
                             _isDeltaHedging = false;
-                            return; //TODO pzdc
+                            return;
                         }
 
                         if (_isPriceLevelsForHedgeInitialized)
                         {
                             _priceLevelsForHedge.ForEach(level =>
                             {
-                                //TODO last price??
-                                if (level.CheckIfWasCrossedByPrice(Security.BestAsk.Price))
+                                if (level.CheckIfWasCrossedByPrice(futuresQuote.Price))
                                 {
                                     DoHedge(CalcPosDelta(), 1);
                                 }
                             });
                         }
 
-                        var currentDelta = CalcPosDelta();
+                        _totalDelta = CalcPosDelta();
 
-                        if (_deltaStep != 0
-                            && Math.Abs(currentDelta / _deltaStep) >= 1
-                            && currentDelta != 0)
+                        if (DeltaStep != 0
+                            && Math.Abs(_totalDelta / DeltaStep) >= 1
+                            && _totalDelta != 0)
                         {
-                            DoHedge(currentDelta, _deltaStep);
+                            DoHedge(_totalDelta, DeltaStep);
                         }
 
                         _isDeltaHedging = false;
                     }
 
                 })
-                .Until(() => this.ProcessState == ProcessStates.Stopping) // может лишнее
+                .Until(() => ProcessState == ProcessStates.Stopping) // может лишнее
                 .Apply(this);
 
 
@@ -135,31 +122,29 @@ namespace OptionsThugs.Model
 
         private decimal CalcPosDelta()
         {
-            decimal result = 0;
+            decimal delta = 0M;
 
-            result += _futuresPosition;
+            delta += _futuresPosition;
 
-            result += _deltaBuffer;
+            delta += DeltaBuffer;
 
-            _optionPositions.ForEach(pair =>
+            _optionsPositions.ForEach(pair =>
             {
-                //TODO pzdc polniy
-                if (Security == null || Security.BestAsk == null) return;
-                if (pair.Key == null || pair.Key.BestAsk == null || pair.Key.Strike == null) return;
+                decimal? futPrice = null;
 
-                var vol = GreeksCalculator.CalculateImpliedVolatility(OptionTypes.Call,
-                    Security.BestAsk.Price, pair.Key.Strike.Value, 23, 365, pair.Key.BestAsk.Price, 0.5m);
-                var d1 = GreeksCalculator.Calculate_d1(Security.BestAsk.Price, pair.Key.Strike.Value, 23,
-                    365, vol);
-                var delta = GreeksCalculator.CalculateDelta(pair.Key.OptionType.Value, d1);
+                if (pair.Value > 0)
+                    futPrice = Security.BestBid?.Price;
+                if (pair.Value < 0)
+                    futPrice = Security.BestAsk?.Price;
 
-                result += CheckIfValueNull(delta) * pair.Value;
+                var bs = new BlackScholes(pair.Key, Security, Connector);
 
+                delta += bs.Delta(DateTimeOffset.Now, null, futPrice).CheckIfValueNullThenZero() * pair.Value;
             });
 
-            Debug.WriteLine("curdelta: " + result);
+            Debug.WriteLine(delta);
 
-            return result;
+            return delta;
         }
 
         private void DoHedge(decimal currentDelta, decimal deltaStep)
@@ -170,39 +155,41 @@ namespace OptionsThugs.Model
 
             if (currentDelta > 0)
             {
-                if(_futuresPosition <= _minFuturesPositionVal)
+                if (_futuresPosition <= MinFuturesPositionVal)
                     return;
 
-                if (_futuresPosition - hedgeSize < _minFuturesPositionVal)
-                    hedgeSize = (_minFuturesPositionVal - _futuresPosition).PrepareSizeToTrade();
+                if (_futuresPosition - hedgeSize < MinFuturesPositionVal)
+                    hedgeSize = (MinFuturesPositionVal - _futuresPosition).PrepareSizeToTrade();
 
-                mqs = new MarketQuoterStrategy(Sides.Sell, hedgeSize,
-                    Security.GetMarketPrice(Sides.Sell, Connector));
+                mqs = new MarketQuoterStrategy(Sides.Sell, hedgeSize, Security.GetMarketPrice(Sides.Sell));
                 _futuresPosition -= hedgeSize;
             }
 
             if (currentDelta < 0)
             {
-                if (_futuresPosition >= _maxFuturesPositionVal)
+                if (_futuresPosition >= MaxFuturesPositionVal)
                     return;
 
-                if (_futuresPosition + hedgeSize > _maxFuturesPositionVal)
-                    hedgeSize = (_maxFuturesPositionVal - _futuresPosition).PrepareSizeToTrade();
+                if (_futuresPosition + hedgeSize > MaxFuturesPositionVal)
+                    hedgeSize = (MaxFuturesPositionVal - _futuresPosition).PrepareSizeToTrade();
 
                 if (hedgeSize <= 0)
                     return;
 
-                mqs = new MarketQuoterStrategy(Sides.Buy, hedgeSize,
-                    Security.GetMarketPrice(Sides.Buy, Connector));
+                mqs = new MarketQuoterStrategy(Sides.Buy, hedgeSize, Security.GetMarketPrice(Sides.Buy));
                 _futuresPosition += hedgeSize;
             }
 
+            MarkStrategyLikeChild(mqs);
             ChildStrategies.Add(mqs);
         }
 
 
         private void CheckIfPriceArrOkay(PriceHedgeLevel[] priceLevels)
         {
+            if (priceLevels == null)
+                throw new NullReferenceException("priceLevels");
+
             if (priceLevels.Length == 0)
                 throw new ArgumentException("prices array is empty.");
 
@@ -216,11 +203,6 @@ namespace OptionsThugs.Model
             }
 
             _isPriceLevelsForHedgeInitialized = true;
-        }
-
-        private decimal CheckIfValueNull(decimal? val)
-        {
-            return val == null ? 0 : val.Value;
         }
     }
 }

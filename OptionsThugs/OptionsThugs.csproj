@@ -133,6 +133,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -151,8 +152,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="xTests\BaseTest.cs" />
+    <Compile Include="Model\Primary\PrimaryStrategy.cs" />
+    <Compile Include="xTests\BaseStrategyTest.cs" />
+    <Compile Include="xTests\DhsTest.cs" />
     <Compile Include="xTests\LqsTest.cs" />
+    <Compile Include="xTests\MqsTest.cs" />
+    <Compile Include="xTests\PcsTest.cs" />
     <Page Include="View\GeneralView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,10 +171,10 @@
     <Compile Include="ViewModel\SimpleCommand.cs" />
     <Compile Include="Model\Common\TradeEmulator4Test.cs" />
     <Compile Include="Model\Common\GreeksCalculator.cs" />
-    <Compile Include="Model\Primary\LimitQuoterStrategy.cs" />
-    <Compile Include="Model\Primary\MarketQuoterStrategy.cs" />
+    <Compile Include="Model\LimitQuoterStrategy.cs" />
+    <Compile Include="Model\MarketQuoterStrategy.cs" />
     <Compile Include="Model\Primary\QuoterStrategy.cs" />
-    <Compile Include="Model\Common\MyStrategyHelper.cs" />
+    <Compile Include="Model\Common\MyTradeHelper.cs" />
     <Compile Include="Model\PositionCloserStrategy.cs" />
     <Compile Include="Model\DeltaHedgerStrategy.cs" />
     <Compile Include="Model\SpreaderStrategy.cs" />

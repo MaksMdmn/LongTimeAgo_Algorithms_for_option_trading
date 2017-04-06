@@ -8,30 +8,32 @@ using StockSharp.Messages;
 
 namespace OptionsThugs.Model
 {
-    public class PositionCloserStrategy : Strategy
+    public class PositionCloserStrategy : PrimaryStrategy
     {
         private readonly decimal _priceToClose;
-        private readonly Security _securityToClose;
+        private readonly Security _securityWithSignalToClose;
         private readonly PriceDirection _securityDesirableDirection;
         private readonly Sides _strategyOrderSide;
 
-        public PositionCloserStrategy(decimal priceToClose, Security securityToClose, PriceDirection securityDesirableDirection, decimal posSizeToClose)
+        public PositionCloserStrategy(decimal priceToClose, decimal positionToClose)
+            : this(priceToClose, null, PriceDirection.None, positionToClose) { }
+
+        public PositionCloserStrategy(decimal priceToClose,
+            Security securityWithSignalToClose, PriceDirection securityDesirableDirection, decimal posSizeToClose)
         {
             _priceToClose = priceToClose;
-            _securityToClose = securityToClose;
+            _securityWithSignalToClose = securityWithSignalToClose;
             _securityDesirableDirection = securityDesirableDirection;
             _strategyOrderSide = posSizeToClose > 0 ? Sides.Sell : Sides.Buy;
             Volume = Math.Abs(posSizeToClose);
         }
 
-        public PositionCloserStrategy(decimal priceToClose, decimal positionToClose) : this(priceToClose, null, PriceDirection.None, positionToClose) { }
-
         protected override void OnStarted()
         {
-            if (Connector == null || Security == null || Portfolio == null) return;
-            if (Volume <= 0 || _priceToClose <= 0) return;
+            if (Volume <= 0 || _priceToClose <= 0) throw new ArgumentException(
+                $"Volume: {Volume} or price to close: {_priceToClose} cannot be below zero"); ;
 
-            Connector.RegisterMarketDepth(Security);
+            //Connector.RegisterMarketDepth(Security);
 
             this.WhenPositionChanged()
                 .Do(() =>
@@ -43,7 +45,7 @@ namespace OptionsThugs.Model
                 })
                 .Apply(this);
 
-            if (_securityToClose == null)
+            if (_securityWithSignalToClose == null)
             {
                 Security.WhenMarketDepthChanged(Connector)
                     .Do(md =>
@@ -64,16 +66,16 @@ namespace OptionsThugs.Model
             {
                 Strategy mqsChild = null;
 
-                Connector.RegisterMarketDepth(_securityToClose);
+                //Connector.RegisterMarketDepth(_securityWithSignalToClose);
 
-                var mqsStartRule = _securityToClose.WhenMarketDepthChanged(Connector)
+                var mqsStartRule = _securityWithSignalToClose.WhenMarketDepthChanged(Connector)
                     .Do(md =>
                     {
                         if (_securityDesirableDirection == PriceDirection.Up && md.BestBid.Price >= _priceToClose
                         || _securityDesirableDirection == PriceDirection.Down && md.BestAsk.Price <= _priceToClose)
                         {
+                            // пока делаем по любой цене, как только сработает условие
                             mqsChild = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide, Connector));
-                            //TODO пока делаем по любой цене, как только сработает условие
 
                             mqsChild.WhenStopped()
                                 .Do(this.Stop)

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -41,7 +36,8 @@ namespace OptionsThugs
 
             if (!isTerminating)
             {
-                Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Неизвестная ошибка: {0}", e.ToString()));
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, "Unknown error: {0}", e.ToString()),
+                    "Serious shit", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
