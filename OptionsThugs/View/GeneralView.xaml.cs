@@ -57,12 +57,25 @@ namespace OptionsThugs.View
 
             var dhsTest = _strategyTest as DhsTest;
 
-            dhsTest.CreateNewDhstrategy(
-                conn.SafeConnection.Connector
-                    .GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity),
-                conn.SafeConnection.Connector
-                    .GetSecuritiesPositions(conn.SelectedPortfolio, conn.SafeConnection.Connector
-                        .GetSecuritiesWithPositions(SecurityTypes.Option)));
+            var futPos = conn.SafeConnection.Connector.GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity);
+            var optPos = conn.SafeConnection.Connector.GetSecuritiesPositions(
+                conn.SelectedPortfolio,
+                conn.SafeConnection.Connector.GetSecuritiesWithPositions(SecurityTypes.Option));
+            var hedgeLevels = new PriceHedgeLevel[]
+            {
+                new PriceHedgeLevel(PriceDirection.Down, 57800)
+            };
+            var deltaStep = 10;
+            var deltaBuffer = -1;
+
+            var minFutPos = -2;
+            var maxFutPos = 3;
+
+
+            //dhsTest.CreateNewDhstrategy(futPos, optPos);
+            dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, hedgeLevels);
+            //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, deltaBuffer);
+            //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, minFutPos, maxFutPos);
 
             #region Test OptionDesk and OptionDeskModel
 

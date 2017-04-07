@@ -75,7 +75,7 @@ namespace OptionsThugs.Model
                         || _securityDesirableDirection == PriceDirection.Down && md.BestAsk.Price <= _priceToClose)
                         {
                             // пока делаем по любой цене, как только сработает условие
-                            mqsChild = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide, Connector));
+                            mqsChild = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide));
 
                             mqsChild.WhenStopped()
                                 .Do(this.Stop)

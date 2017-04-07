@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Derivatives;
-using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
@@ -160,6 +157,9 @@ namespace OptionsThugs.Model
 
                 if (_futuresPosition - hedgeSize < MinFuturesPositionVal)
                     hedgeSize = (MinFuturesPositionVal - _futuresPosition).PrepareSizeToTrade();
+
+                if (hedgeSize <= 0)
+                    return;
 
                 mqs = new MarketQuoterStrategy(Sides.Sell, hedgeSize, Security.GetMarketPrice(Sides.Sell));
                 _futuresPosition -= hedgeSize;
