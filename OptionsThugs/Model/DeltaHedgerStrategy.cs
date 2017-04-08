@@ -152,11 +152,8 @@ namespace OptionsThugs.Model
 
             if (currentDelta > 0)
             {
-                if (_futuresPosition <= MinFuturesPositionVal)
-                    return;
-
-                if (_futuresPosition - hedgeSize < MinFuturesPositionVal)
-                    hedgeSize = (MinFuturesPositionVal - _futuresPosition).PrepareSizeToTrade();
+                hedgeSize = hedgeSize.ShrinkSizeToTrade(Sides.Sell, _futuresPosition,
+                    MinFuturesPositionVal);
 
                 if (hedgeSize <= 0)
                     return;
@@ -167,11 +164,8 @@ namespace OptionsThugs.Model
 
             if (currentDelta < 0)
             {
-                if (_futuresPosition >= MaxFuturesPositionVal)
-                    return;
-
-                if (_futuresPosition + hedgeSize > MaxFuturesPositionVal)
-                    hedgeSize = (MaxFuturesPositionVal - _futuresPosition).PrepareSizeToTrade();
+                hedgeSize = hedgeSize.ShrinkSizeToTrade(Sides.Buy, _futuresPosition,
+                    MaxFuturesPositionVal);
 
                 if (hedgeSize <= 0)
                     return;

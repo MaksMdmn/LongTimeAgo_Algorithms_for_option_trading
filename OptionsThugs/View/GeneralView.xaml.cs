@@ -65,17 +65,17 @@ namespace OptionsThugs.View
             {
                 new PriceHedgeLevel(PriceDirection.Down, 57800)
             };
-            var deltaStep = 10;
-            var deltaBuffer = -1;
+            var deltaStep = 1;
+            var deltaBuffer = 0;
 
             var minFutPos = -2;
             var maxFutPos = 3;
 
 
             //dhsTest.CreateNewDhstrategy(futPos, optPos);
-            dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, hedgeLevels);
+            //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, hedgeLevels);
             //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, deltaBuffer);
-            //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, minFutPos, maxFutPos);
+            dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, minFutPos, maxFutPos);
 
             #region Test OptionDesk and OptionDeskModel
 

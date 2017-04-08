@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Practices.ObjectBuilder2;
+using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
@@ -11,121 +12,204 @@ namespace OptionsThugs.Model
 {
     public class SpreaderStrategy : PrimaryStrategy
     {
-        private readonly decimal _minSpread;
+        private readonly decimal _spread;
         private readonly decimal _lot;
-        private readonly decimal _longPosSize;
-        private readonly decimal _shortPosSize;
-        private readonly bool _isLimitOrdersAlwaysRepresent;
+        private readonly decimal _minFuturesPositionVal;
+        private readonly decimal _maxFuturesPositionVal;
+        private readonly DealDirection _enterPositionSide;
 
-        private volatile bool _isBuyPartActive;
-        private volatile bool _isSellPartActive;
+        private MarketDepth _marketDepth;
+        private decimal _currentPosition;
+        private decimal _enteredPrice;
+        private LimitQuoterStrategy _buyer;
+        private LimitQuoterStrategy _seller;
 
-        public SpreaderStrategy(decimal minSpread, decimal minPos, decimal maxPos)
-            : this(minSpread, minPos, maxPos, 1, true) { }
+        private volatile bool _isTryingToBuy;
+        private volatile bool _isTryingToSell;
+        private volatile bool _isTryingToExit;
 
-        public SpreaderStrategy(decimal minSpread, decimal shortPosSize, decimal longPosSize, decimal lot,
-            bool isLimitOrdersAlwaysRepresent)
+        public SpreaderStrategy(decimal currentPosition, decimal spread, decimal lot, DealDirection enterPositionSide)
+            : this(currentPosition, spread, lot, enterPositionSide, decimal.MinValue, decimal.MaxValue) { }
+
+
+        public SpreaderStrategy(decimal currentPosition, decimal spread, decimal lot,
+            DealDirection enterPositionSide, decimal minFuturesPositionVal, decimal maxFuturesPositionVal)
         {
-            _minSpread = minSpread;
-            _longPosSize = shortPosSize;
-            _shortPosSize = longPosSize;
+            _spread = spread;
             _lot = lot;
-            _isLimitOrdersAlwaysRepresent = isLimitOrdersAlwaysRepresent;
-
-            _isBuyPartActive = false;
-            _isSellPartActive = false;
-
-            CancelOrdersWhenStopping = true;
-            CommentOrders = true;
-            DisposeOnStop = false;
-            MaxErrorCount = 10;
-            OrdersKeepTime = TimeSpan.Zero;
+            _minFuturesPositionVal = minFuturesPositionVal;
+            _maxFuturesPositionVal = maxFuturesPositionVal;
+            _enterPositionSide = enterPositionSide;
+            _currentPosition = currentPosition;
         }
+
 
         protected override void OnStarted()
         {
-            if (Connector == null || Security == null || Portfolio == null) return;
+            //TODO DO NOT FORGET reg security and MD!!!!!
 
-            Connector.RegisterMarketDepth(Security);
+            if (_spread <= 0) throw new ArgumentException("Spread cannot be below zero: " + _spread);
+            if (_lot <= 0) throw new ArgumentException("Lot cannot be below zero: " + _lot);
+            if (Security.PriceStep == null) throw new ArgumentException("Cannot read security price set, probably data still loading... :" + Security.PriceStep.Value);
 
-            Security.WhenMarketDepthChanged(Connector)
-                .Do(md =>
+            _marketDepth = Connector.GetMarketDepth(Security);
+            var minSpreadChange = Security.PriceStep.Value;
+
+            _marketDepth.WhenSpreadMore(minSpreadChange)
+                .Or(_marketDepth.WhenSpreadLess(minSpreadChange))
+                .Do(() =>
                 {
-                    var currentSpread = md.BestAsk.Price - md.BestBid.Price;
-
-                    if (currentSpread >= _minSpread)
+                    if (_currentPosition == 0)
                     {
-                        if (_isLimitOrdersAlwaysRepresent)
-                        {
-                            //Cancel Active Orders THIS strategy (parent)
-                        }
-
-                        //TODO: notify about pos change at someone child strategy and calc it here. 
-                        //TODO: after that remove both - recalc max short long positions and create new strategies.
-                        //TODO: before stopping/removing child strategies we must be sure that we get actual pos value!!! (override onstopping/onstopped may be)
-                        ProcessBuyPart();
-                        ProcessSellPart();
+                        DoEnterPart(_marketDepth.BestPair);
                     }
                     else
                     {
-                        //TODO check if strategies'll stopped through .Clear()
-                        if (_isLimitOrdersAlwaysRepresent)
-                        {
-                            //Place two orders on buy sell and calc price for them
-                        }
-                        else
-                        {
-                            ChildStrategies.Clear();
-                            _isBuyPartActive = false;
-                            _isSellPartActive = false;
-                        }
+                        DoExitPart(_marketDepth.BestPair);
+                        DoEnterPart(_marketDepth.BestPair);
                     }
-
-
-
                 })
+                .Until(() => ProcessState == ProcessStates.Stopping)
                 .Apply(this);
-
 
             base.OnStarted();
         }
 
-        private void ProcessSellPart()
+        private void DoEnterPart(MarketDepthPair bestPair)
         {
-            if (_isSellPartActive)
-            {
-                var sellPartStrategy = new LimitQuoterStrategy(Sides.Sell, CalculateSuitableAbsLot(Sides.Sell), -Security.PriceStep.Value);
-                ChildStrategies.Add(sellPartStrategy);
+            if (bestPair.Bid == null || bestPair.Ask == null) return;
 
-                _isSellPartActive = true;
-            }
+            var currentSpread = bestPair.Ask.Price - bestPair.Bid.Price;
 
+            if (currentSpread <= 0) return;
+
+            if (_minFuturesPositionVal >= _currentPosition || _currentPosition >= _maxFuturesPositionVal) return;
+
+            if (currentSpread > _spread)
+                PickUpQuoters(bestPair, Security.PriceStep.CheckIfValueNullThenZero(), false);
+
+            if (currentSpread < _spread)
+                PickUpQuoters(bestPair, Security.PriceStep.CheckIfValueNullThenZero(), true);
+
+            if (currentSpread == _spread)
+                PickUpQuoters(bestPair, 0, false);
         }
 
-        private void ProcessBuyPart()
+        private void DoExitPart(MarketDepthPair bestPair)
         {
-            if (!_isBuyPartActive)
-            {
-                var buyPartStrategy = new LimitQuoterStrategy(Sides.Buy, CalculateSuitableAbsLot(Sides.Buy), Security.PriceStep.Value);
-                ChildStrategies.Add(buyPartStrategy);
+            //TODO pos must be volatile or smth
+            //TODO calc pos price 100% (desirable do it in some event or smth)
+            //TODO it's must be fast exit - recreate strategy if MD changed and always represent limit order 
+            //TODO                 (or mb just create my limit order?, but this is a lot of shit)
 
-                _isBuyPartActive = true;
+            if (!_isTryingToExit)
+            {
+
             }
         }
 
-        private decimal CalculateSuitableAbsLot(Sides side)
+        private void PickUpQuoters(MarketDepthPair bestPair, decimal absQuotingStepValue, bool limitOrdersAlwaysPlaced)
         {
-            decimal diff;
+            switch (_enterPositionSide)
+            {
+                case DealDirection.Buy:
+                    if (!_isTryingToBuy)
+                        RunNewQuoter(Sides.Buy, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
+                    break;
+                case DealDirection.Sell:
+                    if (!_isTryingToSell)
+                        RunNewQuoter(Sides.Sell, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
+                    break;
+                case DealDirection.Both:
+                    if (!_isTryingToBuy)
+                        RunNewQuoter(Sides.Buy, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
+                    if (!_isTryingToSell)
+                        RunNewQuoter(Sides.Sell, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
+                    break;
+            }
+        }
+
+        private void RunNewQuoter(Sides side, MarketDepthPair bestPair, decimal quotingStep, bool limitOrdersAlwaysPlaced)
+        {
+            var sign = side == Sides.Buy ? 1 : -1;
+
+            LimitQuoterStrategy tempQuoter;
+            decimal quotingVolume;
+            decimal worstQuotingPrice;
+
             if (side == Sides.Buy)
             {
-                diff = Math.Abs(_longPosSize - Position);
+                quotingVolume = _lot.ShrinkSizeToTrade(side, _currentPosition, _maxFuturesPositionVal);
+                worstQuotingPrice = bestPair.Ask.Price - _spread;
             }
             else
             {
-                diff = Math.Abs(_shortPosSize - Position);
+                quotingVolume = _lot.ShrinkSizeToTrade(side, _currentPosition, _minFuturesPositionVal);
+                worstQuotingPrice = bestPair.Bid.Price + _spread;
             }
 
-            return diff >= _lot ? _lot : diff;
+            tempQuoter = new LimitQuoterStrategy(side, quotingVolume, quotingStep * sign, worstQuotingPrice)
+            {
+                IsLimitOrdersAlwaysRepresent = limitOrdersAlwaysPlaced
+            };
+
+            tempQuoter.WhenNewMyTrade()
+                .Do(mt =>
+                {
+                    _currentPosition += mt.Trade.Volume * sign;
+                })
+                .Apply(this);
+
+            tempQuoter.WhenStopped()
+                .Do(() =>
+                {
+                    if (tempQuoter.QuotingSide == Sides.Buy)
+                        _isTryingToBuy = false;
+                    else
+                        _isTryingToSell = false;
+
+                    ChildStrategies.Remove(tempQuoter);
+
+                    tempQuoter = null;
+                });
+
+            _marketDepth.WhenChanged()
+                .Do(() =>
+                {
+                    if (_marketDepth.BestBid == null || _marketDepth.BestAsk == null || _marketDepth.BestPair.SpreadPrice < _spread)
+                        tempQuoter.Stop();
+                })
+                .Until(() => tempQuoter == null)
+                .Apply(this);
+
+            if (side == Sides.Buy)
+            {
+                _buyer = tempQuoter;
+                _isTryingToBuy = true;
+            }
+            else
+            {
+                _seller = tempQuoter;
+                _isTryingToSell = true;
+            }
+
+            MarkStrategyLikeChild(tempQuoter);
+            ChildStrategies.Add(tempQuoter);
+        }
+
+
+        private bool CheckIfExitPriceFine(MarketDepthPair bestPair)
+        {
+            if (_enteredPrice == 0 || _currentPosition == 0)
+                return false;
+
+            if (_currentPosition > 0)
+                return _enteredPrice + _spread <= bestPair.Bid.Price;
+
+            if (_currentPosition < 0)
+                return _enteredPrice - _spread >= bestPair.Ask.Price;
+
+            return false;
         }
     }
 }

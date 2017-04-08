@@ -1,12 +1,11 @@
 ﻿using System;
-using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model
+namespace OptionsThugs.Model.Primary
 {
     public class MarketQuoterStrategy : QuoterStrategy
     {

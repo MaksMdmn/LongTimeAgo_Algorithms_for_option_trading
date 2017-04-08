@@ -8,10 +8,10 @@ namespace OptionsThugs.Model.Common
     {
         private readonly EventWaitHandle _eventWaiter = new EventWaitHandle(false, EventResetMode.AutoReset);
 
-        private event Action TimeToCheckIfPositionEqual;
         private decimal _absPosVol;
         private decimal _absTradeVol;
         private volatile bool _isPosAndTradesEven;
+        private event Action TimeToCheckIfPositionEqual;
 
         public event Action PositionChanged;
         public bool IsPosAndTradesEven => _isPosAndTradesEven;

@@ -152,6 +152,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Common\DealDirection.cs" />
     <Compile Include="Model\Primary\PrimaryStrategy.cs" />
     <Compile Include="xTests\BaseStrategyTest.cs" />
     <Compile Include="xTests\DhsTest.cs" />
@@ -171,8 +172,8 @@
     <Compile Include="ViewModel\SimpleCommand.cs" />
     <Compile Include="Model\Common\TradeEmulator4Test.cs" />
     <Compile Include="Model\Common\GreeksCalculator.cs" />
-    <Compile Include="Model\LimitQuoterStrategy.cs" />
-    <Compile Include="Model\MarketQuoterStrategy.cs" />
+    <Compile Include="Model\Primary\LimitQuoterStrategy.cs" />
+    <Compile Include="Model\Primary\MarketQuoterStrategy.cs" />
     <Compile Include="Model\Primary\QuoterStrategy.cs" />
     <Compile Include="Model\Common\MyTradeHelper.cs" />
     <Compile Include="Model\PositionCloserStrategy.cs" />

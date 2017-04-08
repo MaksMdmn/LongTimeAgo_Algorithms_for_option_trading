@@ -9,12 +9,12 @@ namespace OptionsThugs.Model.Primary
 {
     public abstract class QuoterStrategy : PrimaryStrategy
     {
-        protected Sides QuotingSide { get; private set; }
+        public Sides QuotingSide { get; }
         protected MarketDepth MarketDepth { get; private set; }
-        protected OrderSynchronizer OrderSynchronizer { get; private set; }
-        protected PositionSynchronizer PositionSynchronizer { get; private set; }
+        protected OrderSynchronizer OrderSynchronizer { get; }
+        protected PositionSynchronizer PositionSynchronizer { get; }
 
-        protected QuoterStrategy(Sides quotingSide, decimal quotingVolume) 
+        protected QuoterStrategy(Sides quotingSide, decimal quotingVolume)
         {
             QuotingSide = quotingSide;
             Volume = quotingVolume;
@@ -40,8 +40,6 @@ namespace OptionsThugs.Model.Primary
 
             if (Volume <= 0) throw new ArgumentException("Volume cannot be below zero: " + Volume);
 
-            //Connector.RegisterMarketDepth(Security);
-
             MarketDepth = GetMarketDepth(Security);
 
             Security.WhenMarketDepthChanged(Connector)
@@ -53,7 +51,6 @@ namespace OptionsThugs.Model.Primary
                 {
                     if (Math.Abs(Position) >= Volume)
                     {
-                        //TODO логи
                         Stop();
                     }
                 })
