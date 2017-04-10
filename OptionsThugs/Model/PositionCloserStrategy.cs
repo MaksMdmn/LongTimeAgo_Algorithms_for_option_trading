@@ -33,8 +33,6 @@ namespace OptionsThugs.Model
             if (Volume <= 0 || _priceToClose <= 0) throw new ArgumentException(
                 $"Volume: {Volume} or price to close: {_priceToClose} cannot be below zero"); ;
 
-            //Connector.RegisterMarketDepth(Security);
-
             this.WhenPositionChanged()
                 .Do(() =>
                 {
@@ -64,9 +62,7 @@ namespace OptionsThugs.Model
             }
             else
             {
-                Strategy mqsChild = null;
-
-                //Connector.RegisterMarketDepth(_securityWithSignalToClose);
+                Strategy mqs = null;
 
                 var mqsStartRule = _securityWithSignalToClose.WhenMarketDepthChanged(Connector)
                     .Do(md =>
@@ -75,17 +71,17 @@ namespace OptionsThugs.Model
                         || _securityDesirableDirection == PriceDirection.Down && md.BestAsk.Price <= _priceToClose)
                         {
                             // пока делаем по любой цене, как только сработает условие
-                            mqsChild = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide));
+                            mqs = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide));
 
-                            mqsChild.WhenStopped()
+                            mqs.WhenStopped()
                                 .Do(this.Stop)
                                 .Once()
                                 .Apply(this);
 
-                            ChildStrategies.Add(mqsChild);
+                            ChildStrategies.Add(mqs);
                         }
                     })
-                    .Until(() => mqsChild != null)
+                    .Until(() => mqs != null)
                     .Apply(this);
 
                 this.WhenStopping()

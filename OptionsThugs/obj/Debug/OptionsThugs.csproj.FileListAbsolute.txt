@@ -131,3 +131,5 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\StockSharp_Tr
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\StockSharp_WpfConnectionInterface.dll
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\OptionsThugs.csproj.OptionsThugs.exe.config
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\OptionsThugs.csprojResolveAssemblyReference.cache
+D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\View\RobotControlView.g.cs
+D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\View\RobotControlView.baml

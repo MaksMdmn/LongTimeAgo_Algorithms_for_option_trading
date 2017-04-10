@@ -42,8 +42,7 @@ namespace OptionsThugs.View
             _logManager.Listeners.Add(new GuiLogListener(myMon));
             _logManager.Listeners.Add(new FileLogListener("log.txt"));
 
-            conn.SafeConnection.Connector.NewPositions += ps => ps.ForEach(p => Debug.WriteLine(p));
-
+            conn.SafeConnection.Connector.NewPosition += p => Debug.WriteLine(p + " #: " + p.CurrentValue);
         }
 
         private void StartStopClick(object sender, RoutedEventArgs e)
@@ -53,29 +52,43 @@ namespace OptionsThugs.View
 
         private void PrepareStrategy(object sender, RoutedEventArgs e)
         {
-            _strategyTest = new DhsTest(_logManager, conn.SafeConnection.Connector, conn.SelectedPortfolio, conn.SelectedSecurity);
+            _strategyTest = new SprTest(_logManager, conn.SafeConnection.Connector, conn.SelectedPortfolio, conn.SelectedSecurity);
 
-            var dhsTest = _strategyTest as DhsTest;
-
+            var sprTest = _strategyTest as SprTest;
             var futPos = conn.SafeConnection.Connector.GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity);
-            var optPos = conn.SafeConnection.Connector.GetSecuritiesPositions(
-                conn.SelectedPortfolio,
-                conn.SafeConnection.Connector.GetSecuritiesWithPositions(SecurityTypes.Option));
-            var hedgeLevels = new PriceHedgeLevel[]
-            {
-                new PriceHedgeLevel(PriceDirection.Down, 57800)
-            };
-            var deltaStep = 1;
-            var deltaBuffer = 0;
+            var spread = conn.SelectedSecurity.PriceStep.CheckIfValueNullThenZero() * 4;
+            var lot = 5;
+            var side = DealDirection.Buy;
+            var minPos = -6;
+            var maxPos = 8;
 
-            var minFutPos = -2;
-            var maxFutPos = 3;
+            sprTest.CreateNewSprStrategy(futPos, spread, lot, side, minPos, maxPos);
+
+            #region test DHS
+            //_strategyTest = new DhsTest(_logManager, conn.SafeConnection.Connector, conn.SelectedPortfolio, conn.SelectedSecurity);
+
+            //var dhsTest = _strategyTest as DhsTest;
+
+            //var futPos = conn.SafeConnection.Connector.GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity);
+            //var optPos = conn.SafeConnection.Connector.GetSecuritiesPositions(
+            //    conn.SelectedPortfolio,
+            //    conn.SafeConnection.Connector.GetSecuritiesWithPositions(SecurityTypes.Option));
+            //var hedgeLevels = new PriceHedgeLevel[]
+            //{
+            //    new PriceHedgeLevel(PriceDirection.Down, 57800)
+            //};
+            //var deltaStep = 1;
+            //var deltaBuffer = 0;
+
+            //var minFutPos = -2;
+            //var maxFutPos = 3;
 
 
             //dhsTest.CreateNewDhstrategy(futPos, optPos);
             //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, hedgeLevels);
             //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, deltaBuffer);
-            dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, minFutPos, maxFutPos);
+            //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, minFutPos, maxFutPos);
+            #endregion
 
             #region Test OptionDesk and OptionDeskModel
 

@@ -154,11 +154,15 @@
     </ApplicationDefinition>
     <Compile Include="Model\Common\DealDirection.cs" />
     <Compile Include="Model\Primary\PrimaryStrategy.cs" />
+    <Compile Include="View\RobotControlView.xaml.cs">
+      <DependentUpon>RobotControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xTests\BaseStrategyTest.cs" />
     <Compile Include="xTests\DhsTest.cs" />
     <Compile Include="xTests\LqsTest.cs" />
     <Compile Include="xTests\MqsTest.cs" />
     <Compile Include="xTests\PcsTest.cs" />
+    <Compile Include="xTests\SprTest.cs" />
     <Page Include="View\GeneralView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -186,6 +190,10 @@
       <DependentUpon>GeneralView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\RobotControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
