@@ -23,6 +23,9 @@ namespace OptionsThugs.Model
         private LimitQuoterStrategy _sellerStrategy;
         private LimitQuoterStrategy _leaveStrategy;
 
+        private decimal _lastBuyQuoterPrice;
+        private decimal _lastSellQuoterPrice;
+
         private volatile bool _isBuyerActivated;
         private volatile bool _isSellerActivated;
         private volatile bool _isLeaverActivated;
@@ -78,7 +81,10 @@ namespace OptionsThugs.Model
 
             if (_position != 0)
             {
-                _leaveStrategy = CreateQuoter(Sides.Buy, 55555M, 25M, false, false);
+                _leaveStrategy = CreateQuoter(_position > 0 ? Sides.Sell : Sides.Buy,
+                    _position,
+                    _positionPrice,
+                    Security.PriceStep.CheckIfValueNullThenZero());
                 _isLeaverActivated = true;
             }
 
@@ -113,21 +119,24 @@ namespace OptionsThugs.Model
             base.OnStarted();
         }
 
-        private LimitQuoterStrategy CreateQuoter(Sides quoteSide, decimal quoteSize, decimal worstPrice, decimal quoteStep,
-            bool isOrdersAlwaysPlaced)
+        private LimitQuoterStrategy CreateQuoter(Sides quoteSide, decimal quoteSize, decimal worstPrice, decimal quoteStep)
         {
-            var resultStrategy = new LimitQuoterStrategy(quoteSide, quoteSize, quoteStep, worstPrice)
+            //TODO calculate price step depend on spread and set it here;
+
+            var strategy =  new LimitQuoterStrategy(quoteSide, quoteSize, quoteStep, worstPrice)
             {
-                IsLimitOrdersAlwaysRepresent = isOrdersAlwaysPlaced
+                IsLimitOrdersAlwaysRepresent = true
             };
 
-            return resultStrategy;
+
+
+            return strategy;
         }
 
-        private void AssignBuyerRules()
+        private void AssignEnterPosRules(LimitQuoterStrategy enterStrategy)
         {
-            if (_buyerStrategy == null)
-                throw new NullReferenceException("buyerStrategy");
+            if (enterStrategy == null)
+                throw new NullReferenceException("strategy, when was trying to assign enter rules");
 
             Security.WhenMarketDepthChanged(Connector)
                 .Do(md =>
@@ -142,29 +151,70 @@ namespace OptionsThugs.Model
                     if (currentSpread <= 0)
                         return;
 
-                    if (currentSpread < _spread)
-                    {
-                        _buyerStrategy.Stop();
-                        ChildStrategies.Remove(_buyerStrategy);
-                        _isBuyerActivated = false;
-                    }
+                    if (_lastBuyQuoterPrice != bestPair.Bid.Price 
+                    || _lastSellQuoterPrice != bestPair.Ask.Price)
+                        enterStrategy.Stop();
 
                 })
-                .Until(() => _buyerStrategy.ProcessState == ProcessStates.Stopping)
+                .Until(() => enterStrategy.ProcessState == ProcessStates.Stopping)
                 .Apply(this);
 
-            MarkStrategyLikeChild(_buyerStrategy);
-            ChildStrategies.Add(_buyerStrategy);
+            enterStrategy.WhenPositionChanged()
+                .Do(() =>
+                {
+                    //TODO cur pos changed
+                })
+                .Until(() => enterStrategy.ProcessState == ProcessStates.Stopping)
+                .Apply(this);
+
+            enterStrategy.WhenStopping()
+                .Do(() =>
+                {
+                    //TODO last check pos?
+                    if (enterStrategy.QuotingSide == Sides.Buy)
+                        _isBuyerActivated = false;
+                    else
+                        _isSellerActivated = false;
+
+                    ChildStrategies.Remove(enterStrategy);
+                })
+                .Until(() => enterStrategy.ProcessState == ProcessStates.Stopping)
+                .Apply(this);
+
+
+            MarkStrategyLikeChild(enterStrategy);
+            ChildStrategies.Add(enterStrategy);
         }
 
-        private void AssignSellerRules()
+        private void AssignLeaveRules()
         {
+            if (_leaveStrategy == null)
+                throw new NullReferenceException("leaveStrategy");
 
-        }
+            //TODO When cur volatile pos changed...  _leaverStrategy.Stop();
 
-        private void AssignLeaverRules()
-        {
+            _leaveStrategy.WhenPositionChanged()
+                .Do(() =>
+                {
+                    //TODO
+                })
+                .Until(() => _leaveStrategy.ProcessState == ProcessStates.Stopping)
+                .Apply(this);
 
+            _leaveStrategy.WhenStopping()
+                .Do(() =>
+                {
+                    //TODO last check pos?
+                    _isLeaverActivated = false;
+
+                    ChildStrategies.Remove(_leaveStrategy);
+                })
+                .Until(() => _leaveStrategy.ProcessState == ProcessStates.Stopping)
+                .Apply(this);
+
+
+            MarkStrategyLikeChild(_leaveStrategy);
+            ChildStrategies.Add(_leaveStrategy);
         }
 
         //private void DoEnterPart(MarketDepthPair bestPair)
