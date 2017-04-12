@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
-using StockSharp.Algo.Strategies.Quoting;
-using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
 namespace OptionsThugs.Model
@@ -30,11 +27,43 @@ namespace OptionsThugs.Model
         private volatile bool _isSellerActivated;
         private volatile bool _isLeaverActivated;
 
-        private decimal _position;
-        private decimal _positionMoney;
-        private decimal _positionPrice;
+        private volatile int _syncPosition;
+        private volatile int _syncMoneyIntegerPart;
+        private volatile int _syncMoneyDecimalPart;
+        private volatile int _syncPriceIntegerPart;
+        private volatile int _syncPriceDecimalPart;
 
+        private decimal _syncMultipleTenValueOfDecimalNumbers = 100; //TODO in property?
 
+        private decimal CurrentPoisition
+        {
+            get { return _syncPosition; }
+            set { _syncPosition = Convert.ToInt32(value); }
+        }
+
+        private decimal CurrentPositionMoney
+        {
+            get { return _syncMoneyIntegerPart + _syncMoneyDecimalPart / _syncMultipleTenValueOfDecimalNumbers; }
+            set
+            {
+                var integerPart = decimal.Truncate(value);
+
+                _syncMoneyIntegerPart = (int)integerPart;
+                _syncMoneyDecimalPart = (int)((value - integerPart) * _syncMultipleTenValueOfDecimalNumbers);
+            }
+        }
+
+        private decimal CurrentPositionPrice
+        {
+            get { return _syncPriceIntegerPart + _syncPriceDecimalPart / _syncMultipleTenValueOfDecimalNumbers; }
+            set
+            {
+                var integerPart = decimal.Truncate(value);
+
+                _syncPriceIntegerPart = (int)integerPart;
+                _syncPriceDecimalPart = (int)((value - integerPart) * _syncMultipleTenValueOfDecimalNumbers);
+            }
+        }
         public SpreaderStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot, DealDirection sideForEnterToPosition)
             : this(currentPosition, currentPositionPrice, spread, lot, sideForEnterToPosition, decimal.MinValue, decimal.MaxValue) { }
 
@@ -47,9 +76,9 @@ namespace OptionsThugs.Model
             _minFuturesPositionVal = minFuturesPositionVal;
             _maxFuturesPositionVal = maxFuturesPositionVal;
             _sideForEnterToPosition = sideForEnterToPosition;
-            _position = currentPosition;
-            _positionPrice = currentPositionPrice;
-            _positionMoney = currentPosition * currentPositionPrice;
+            CurrentPoisition = currentPosition;
+            CurrentPositionPrice = currentPositionPrice;
+            CurrentPositionMoney = currentPosition * currentPositionPrice * -1;
         }
 
 
@@ -123,7 +152,7 @@ namespace OptionsThugs.Model
         {
             //TODO calculate price step depend on spread and set it here;
 
-            var strategy =  new LimitQuoterStrategy(quoteSide, quoteSize, quoteStep, worstPrice)
+            var strategy = new LimitQuoterStrategy(quoteSide, quoteSize, quoteStep, worstPrice)
             {
                 IsLimitOrdersAlwaysRepresent = true
             };
@@ -151,7 +180,7 @@ namespace OptionsThugs.Model
                     if (currentSpread <= 0)
                         return;
 
-                    if (_lastBuyQuoterPrice != bestPair.Bid.Price 
+                    if (_lastBuyQuoterPrice != bestPair.Bid.Price
                     || _lastSellQuoterPrice != bestPair.Ask.Price)
                         enterStrategy.Stop();
 
@@ -159,10 +188,19 @@ namespace OptionsThugs.Model
                 .Until(() => enterStrategy.ProcessState == ProcessStates.Stopping)
                 .Apply(this);
 
-            enterStrategy.WhenPositionChanged()
-                .Do(() =>
+            enterStrategy.WhenNewMyTrade()
+                .Do(mt =>
                 {
-                    //TODO cur pos changed
+                    var sign = 1;
+
+                    if (mt.Trade.OrderDirection == Sides.Sell)
+                        sign = -1;
+
+                    _syncPosition += Convert.ToInt32(mt.Trade.Volume);
+
+                    CurrentPoisition += mt.Trade.Volume * sign;
+                    CurrentPositionMoney += mt.Trade.Volume * mt.Trade.Price * sign * -1;
+                    CurrentPositionPrice = Math.Round(CurrentPositionMoney / CurrentPoisition) * -1;
                 })
                 .Until(() => enterStrategy.ProcessState == ProcessStates.Stopping)
                 .Apply(this);
