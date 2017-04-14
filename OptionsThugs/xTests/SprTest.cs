@@ -17,10 +17,11 @@ namespace OptionsThugs.xTests
         {
         }
 
-        public void CreateNewSprStrategy(decimal currentPosition, decimal spread, decimal lot,
-            DealDirection sideForEnterToPosition, decimal minFuturesPositionVal,decimal maxFuturesPositionVal)
+        public void CreateNewSprStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot,
+            DealDirection sideForEnterToPosition, decimal minFuturesPositionVal, decimal maxFuturesPositionVal)
         {
-            StrategyForTest = new SpreaderStrategy(currentPosition, spread, lot, sideForEnterToPosition, minFuturesPositionVal, maxFuturesPositionVal);
+            StrategyForTest = new SpreaderStrategy(currentPosition, currentPositionPrice, spread, lot, 
+                sideForEnterToPosition, minFuturesPositionVal, maxFuturesPositionVal);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
             StrategyForTest.RegisterStrategyEntitiesForWork(
@@ -29,10 +30,11 @@ namespace OptionsThugs.xTests
                 new Portfolio[] { StPortfolio });
         }
 
-        public void CreateNewSprStrategy(decimal currentPosition, decimal spread, decimal lot,
+        public void CreateNewSprStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot,
             DealDirection sideForEnterToPosition)
         {
-            CreateNewSprStrategy(currentPosition, spread,lot,sideForEnterToPosition, decimal.MinValue, decimal.MaxValue);
+            CreateNewSprStrategy(currentPosition, currentPositionPrice, spread, lot, 
+                sideForEnterToPosition, decimal.MinValue, decimal.MaxValue);
         }
     }
 }

@@ -54,17 +54,19 @@ namespace OptionsThugs.View
         {
             _strategyTest = new SprTest(_logManager, conn.SafeConnection.Connector, conn.SelectedPortfolio, conn.SelectedSecurity);
 
-            var sprTest = _strategyTest as SprTest;
-            var futPos = conn.SafeConnection.Connector.GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity);
+            var sprTest = (SprTest) _strategyTest;
+            var futPos = 0; /*conn.SafeConnection.Connector.GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity);*/
+            var futPosPrice = 0;
             var spread = conn.SelectedSecurity.PriceStep.CheckIfValueNullThenZero() * 4;
             var lot = 5;
             var side = DealDirection.Buy;
-            var minPos = -6;
-            var maxPos = 8;
+            var minPos = -10;
+            var maxPos = 13;
 
-            sprTest.CreateNewSprStrategy(futPos, spread, lot, side, minPos, maxPos);
+            sprTest.CreateNewSprStrategy(futPos, futPosPrice, spread, lot, side, minPos, maxPos);
 
             #region test DHS
+
             //_strategyTest = new DhsTest(_logManager, conn.SafeConnection.Connector, conn.SelectedPortfolio, conn.SelectedSecurity);
 
             //var dhsTest = _strategyTest as DhsTest;
@@ -88,6 +90,7 @@ namespace OptionsThugs.View
             //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, hedgeLevels);
             //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, deltaBuffer);
             //dhsTest.CreateNewDhstrategy(futPos, optPos, deltaStep, minFutPos, maxFutPos);
+
             #endregion
 
             #region Test OptionDesk and OptionDeskModel

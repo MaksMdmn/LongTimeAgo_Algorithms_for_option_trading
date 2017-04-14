@@ -127,5 +127,15 @@ namespace OptionsThugs.Model.Common
         {
             return md?.BestBid != null && md.BestAsk != null;
         }
+
+        public static bool CheckIfQuotesEqual(this Quote marketQuote, Quote myQuote, bool includingVolumes = true)
+        {
+            if (marketQuote == null || myQuote == null)
+                throw new NullReferenceException($"one of quotes is null, comparing impossible: market- {marketQuote} my- {myQuote}");
+
+            return includingVolumes
+                ? marketQuote.Price == myQuote.Price && marketQuote.Volume == myQuote.Volume
+                : marketQuote.Price == myQuote.Price;
+        }
     }
 }
