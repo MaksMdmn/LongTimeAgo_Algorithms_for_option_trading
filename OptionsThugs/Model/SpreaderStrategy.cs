@@ -4,12 +4,15 @@ using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
+using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
 namespace OptionsThugs.Model
 {
     public class SpreaderStrategy : PrimaryStrategy
     {
+        private readonly object _locker = new object();
+
         private readonly decimal _spread;
         private readonly decimal _lot;
         private readonly decimal _minFuturesPositionVal;
@@ -30,21 +33,28 @@ namespace OptionsThugs.Model
         private volatile int _syncPosition;
         private volatile int _syncMoneyIntegerPart;
         private volatile int _syncMoneyDecimalPart;
-        private volatile int _syncPriceIntegerPart;
-        private volatile int _syncPriceDecimalPart;
 
         private decimal _syncMultipleTenValueOfDecimalNumbers = 100; //TODO in property?
 
-        private decimal CurrentPoisition
+        public decimal CurrentPoisition
         {
-            get { return _syncPosition; }
-            set { _syncPosition = Convert.ToInt32(value); }
+            get
+            {
+                return _syncPosition;
+            }
+            private set
+            {
+                _syncPosition = Convert.ToInt32(value);
+            }
         }
 
-        private decimal CurrentPositionMoney
+        public decimal CurrentPositionMoney
         {
-            get { return _syncMoneyIntegerPart + _syncMoneyDecimalPart / _syncMultipleTenValueOfDecimalNumbers; }
-            set
+            get
+            {
+                return _syncMoneyIntegerPart + _syncMoneyDecimalPart / _syncMultipleTenValueOfDecimalNumbers; ;
+            }
+            private set
             {
                 var integerPart = decimal.Truncate(value);
 
@@ -53,17 +63,6 @@ namespace OptionsThugs.Model
             }
         }
 
-        private decimal CurrentPositionPrice
-        {
-            get { return _syncPriceIntegerPart + _syncPriceDecimalPart / _syncMultipleTenValueOfDecimalNumbers; }
-            set
-            {
-                var integerPart = decimal.Truncate(value);
-
-                _syncPriceIntegerPart = (int)integerPart;
-                _syncPriceDecimalPart = (int)((value - integerPart) * _syncMultipleTenValueOfDecimalNumbers);
-            }
-        }
         public SpreaderStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot, DealDirection sideForEnterToPosition)
             : this(currentPosition, currentPositionPrice, spread, lot, sideForEnterToPosition, decimal.MinValue, decimal.MaxValue) { }
 
@@ -77,7 +76,6 @@ namespace OptionsThugs.Model
             _maxFuturesPositionVal = maxFuturesPositionVal;
             _sideForEnterToPosition = sideForEnterToPosition;
             CurrentPoisition = currentPosition;
-            CurrentPositionPrice = currentPositionPrice;
             CurrentPositionMoney = currentPosition * currentPositionPrice * -1;
         }
 
@@ -90,46 +88,48 @@ namespace OptionsThugs.Model
             if (_lot <= 0) throw new ArgumentException("Lot cannot be below zero: " + _lot);
             if (Security.PriceStep == null) throw new ArgumentException("Cannot read security price set, probably data still loading... :" + Security.PriceStep);
 
-            switch (_sideForEnterToPosition)
-            {
-                case DealDirection.Buy:
-                    _buyerStrategy = new LimitQuoterStrategy();
-                    _isBuyerActivated = true;
-                    break;
-                case DealDirection.Sell:
-                    _sellerStrategy = new LimitQuoterStrategy();
-                    _isSellerActivated = true;
-                    break;
-                case DealDirection.Both:
-                    _buyerStrategy = new LimitQuoterStrategy();
-                    _sellerStrategy = new LimitQuoterStrategy();
-                    _isBuyerActivated = true;
-                    _isSellerActivated = true;
-                    break;
-            }
-
-            if (_position != 0)
-            {
-                _leaveStrategy = CreateQuoter(_position > 0 ? Sides.Sell : Sides.Buy,
-                    _position,
-                    _positionPrice,
-                    Security.PriceStep.CheckIfValueNullThenZero());
-                _isLeaverActivated = true;
-            }
-
             Security.WhenMarketDepthChanged(Connector)
                 .Do(md =>
                 {
-                    if (!_isBuyerActivated)
+                    if (!_isBuyerActivated && md.CheckIfSpreadExist())
                     {
+                        _buyerStrategy = new LimitQuoterStrategy(
+                            Sides.Buy,
+                            _lot.ShrinkSizeToTrade(Sides.Buy, CurrentPoisition, _maxFuturesPositionVal),
+                            md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread ? Security.PriceStep.CheckIfValueNullThenZero() : 0,
+                            md.CalculateWorstLimitSpreadPrice(Sides.Buy, _spread));
+
+                        _buyerStrategy.IsLimitOrdersAlwaysRepresent = true;
+
+                        AssignEnterRulesAndStart(_buyerStrategy);
                     }
 
-                    if (!_isSellerActivated)
+                    if (!_isSellerActivated && md.CheckIfSpreadExist())
                     {
+                        _sellerStrategy = new LimitQuoterStrategy(
+                            Sides.Sell,
+                            _lot.ShrinkSizeToTrade(Sides.Sell, CurrentPoisition, _minFuturesPositionVal),
+                            md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread ? Security.PriceStep.CheckIfValueNullThenZero() : 0,
+                            md.CalculateWorstLimitSpreadPrice(Sides.Sell, _spread));
+
+                        _sellerStrategy.IsLimitOrdersAlwaysRepresent = true;
+
+                        AssignEnterRulesAndStart(_sellerStrategy);
                     }
 
-                    if (!_isLeaverActivated)
+                    if (!_isLeaverActivated && CurrentPoisition != 0)
                     {
+                        var side = CurrentPoisition > 0 ? Sides.Sell : Sides.Buy;
+
+                        _leaveStrategy = new LimitQuoterStrategy(
+                            side,
+                            CurrentPoisition.PrepareSizeToTrade(),
+                            md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread ? Security.PriceStep.CheckIfValueNullThenZero() : 0,
+                            CalculateExitPositionPrice());
+
+                        _leaveStrategy.IsLimitOrdersAlwaysRepresent = true;
+
+                        AssignLeaveRulesAndStart();
                     }
                 })
                 .Until(() => ProcessState == ProcessStates.Stopping)
@@ -148,21 +148,7 @@ namespace OptionsThugs.Model
             base.OnStarted();
         }
 
-        private LimitQuoterStrategy CreateQuoter(Sides quoteSide, decimal quoteSize, decimal worstPrice, decimal quoteStep)
-        {
-            //TODO calculate price step depend on spread and set it here;
-
-            var strategy = new LimitQuoterStrategy(quoteSide, quoteSize, quoteStep, worstPrice)
-            {
-                IsLimitOrdersAlwaysRepresent = true
-            };
-
-
-
-            return strategy;
-        }
-
-        private void AssignEnterPosRules(LimitQuoterStrategy enterStrategy)
+        private void AssignEnterRulesAndStart(LimitQuoterStrategy enterStrategy)
         {
             if (enterStrategy == null)
                 throw new NullReferenceException("strategy, when was trying to assign enter rules");
@@ -182,7 +168,12 @@ namespace OptionsThugs.Model
 
                     if (_lastBuyQuoterPrice != bestPair.Bid.Price
                     || _lastSellQuoterPrice != bestPair.Ask.Price)
+                    {
+                        _lastBuyQuoterPrice = bestPair.Bid.Price;
+                        _lastSellQuoterPrice = bestPair.Ask.Price;
+
                         enterStrategy.Stop();
+                    }
 
                 })
                 .Until(() => enterStrategy.ProcessState == ProcessStates.Stopping)
@@ -196,11 +187,10 @@ namespace OptionsThugs.Model
                     if (mt.Trade.OrderDirection == Sides.Sell)
                         sign = -1;
 
-                    _syncPosition += Convert.ToInt32(mt.Trade.Volume);
+                    PositionSyncIncrement(mt.Trade.Volume * sign);
+                    PositionMoneySyncIncrement(mt.Trade.Volume * mt.Trade.Price * sign * -1);
 
-                    CurrentPoisition += mt.Trade.Volume * sign;
-                    CurrentPositionMoney += mt.Trade.Volume * mt.Trade.Price * sign * -1;
-                    CurrentPositionPrice = Math.Round(CurrentPositionMoney / CurrentPoisition) * -1;
+                    _leaveStrategy?.Stop();
                 })
                 .Until(() => enterStrategy.ProcessState == ProcessStates.Stopping)
                 .Apply(this);
@@ -208,7 +198,6 @@ namespace OptionsThugs.Model
             enterStrategy.WhenStopping()
                 .Do(() =>
                 {
-                    //TODO last check pos?
                     if (enterStrategy.QuotingSide == Sides.Buy)
                         _isBuyerActivated = false;
                     else
@@ -224,25 +213,14 @@ namespace OptionsThugs.Model
             ChildStrategies.Add(enterStrategy);
         }
 
-        private void AssignLeaveRules()
+        private void AssignLeaveRulesAndStart()
         {
             if (_leaveStrategy == null)
                 throw new NullReferenceException("leaveStrategy");
 
-            //TODO When cur volatile pos changed...  _leaverStrategy.Stop();
-
-            _leaveStrategy.WhenPositionChanged()
-                .Do(() =>
-                {
-                    //TODO
-                })
-                .Until(() => _leaveStrategy.ProcessState == ProcessStates.Stopping)
-                .Apply(this);
-
             _leaveStrategy.WhenStopping()
                 .Do(() =>
                 {
-                    //TODO last check pos?
                     _isLeaverActivated = false;
 
                     ChildStrategies.Remove(_leaveStrategy);
@@ -255,165 +233,27 @@ namespace OptionsThugs.Model
             ChildStrategies.Add(_leaveStrategy);
         }
 
-        //private void DoEnterPart(MarketDepthPair bestPair)
-        //{
-        //    if (bestPair.Bid == null || bestPair.Ask == null) return;
+        private void PositionSyncIncrement(decimal addedValue)
+        {
+            lock (_locker)
+            {
+                CurrentPoisition += addedValue;
+            }
+        }
 
-        //    var currentSpread = bestPair.Ask.Price - bestPair.Bid.Price;
+        private void PositionMoneySyncIncrement(decimal addedValue)
+        {
+            lock (_locker)
+            {
+                CurrentPositionMoney += addedValue;
+            }
+        }
 
-        //    if (currentSpread <= 0) return;
-
-        //    if (_minFuturesPositionVal >= _currentPosition || _currentPosition >= _maxFuturesPositionVal) return;
-
-        //    if (currentSpread > _spread)
-        //        PickUpQuoters(bestPair, Security.PriceStep.CheckIfValueNullThenZero(), false);
-
-        //    if (currentSpread < _spread)
-        //        PickUpQuoters(bestPair, Security.PriceStep.CheckIfValueNullThenZero(), true);
-
-        //    if (currentSpread == _spread)
-        //        PickUpQuoters(bestPair, 0, false);
-        //}
-
-        //private void DoExitPart(MarketDepthPair bestPair)
-        //{
-        //    //TODO pos must be volatile or smth
-        //    //TODO calc pos price 100% (desirable do it in some event or smth)
-        //    //TODO it's must be fast exit - recreate strategy if MD changed and always represent limit order 
-        //    //TODO                 (or mb just create my limit order?, but this is a lot of shit)
-
-        //    if (!_isTryingToExit
-        //        && CheckIfExitPriceFine(bestPair)
-        //        && _currentPosition != 0)
-        //    {
-        //        RunNewQuoter(_currentPosition > 0 ? Sides.Sell : Sides.Buy,
-        //            bestPair, Security.PriceStep.CheckIfValueNullThenZero(), true, true);
-        //    }
-        //}
-
-        //private void PickUpQuoters(MarketDepthPair bestPair, decimal absQuotingStepValue, bool limitOrdersAlwaysPlaced)
-        //{
-        //    switch (_sideForEnterToPosition)
-        //    {
-        //        case DealDirection.Buy:
-        //            if (!_isTryingToBuy)
-        //                RunNewQuoter(Sides.Buy, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
-        //            break;
-        //        case DealDirection.Sell:
-        //            if (!_isTryingToSell)
-        //                RunNewQuoter(Sides.Sell, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
-        //            break;
-        //        case DealDirection.Both:
-        //            if (!_isTryingToBuy)
-        //                RunNewQuoter(Sides.Buy, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
-        //            if (!_isTryingToSell)
-        //                RunNewQuoter(Sides.Sell, bestPair, absQuotingStepValue, limitOrdersAlwaysPlaced);
-        //            break;
-        //    }
-        //}
-
-        //private void RunNewQuoter(Sides side, MarketDepthPair bestPair, decimal quotingStep, bool limitOrdersAlwaysPlaced, bool positionIsTradeSize = false)
-        //{
-        //    var sign = side == Sides.Buy ? 1 : -1;
-
-        //    LimitQuoterStrategy tempQuoter;
-        //    decimal quotingVolume;
-        //    decimal worstQuotingPrice;
-        //    decimal orientiedSize = positionIsTradeSize ? Math.Abs(_currentPosition) : _lot;
-
-
-        //    if (side == Sides.Buy)
-        //    {
-        //        quotingVolume = orientiedSize.ShrinkSizeToTrade(side, _currentPosition, _maxFuturesPositionVal);
-        //        worstQuotingPrice = bestPair.Ask.Price - _spread;
-        //    }
-        //    else
-        //    {
-        //        quotingVolume = orientiedSize.ShrinkSizeToTrade(side, _currentPosition, _minFuturesPositionVal);
-        //        worstQuotingPrice = bestPair.Bid.Price + _spread;
-        //    }
-
-        //    tempQuoter = new LimitQuoterStrategy(side, quotingVolume, quotingStep * sign, worstQuotingPrice)
-        //    {
-        //        IsLimitOrdersAlwaysRepresent = limitOrdersAlwaysPlaced
-        //    };
-
-        //    Debug.WriteLine("Creating new LQS: vol: {0}, worstPrice: {1}, side: {2}, step: {3}, isAlwaysPlaced: {4}, IsPos=Trade: {5}",
-        //        quotingVolume, worstQuotingPrice, side, quotingStep,
-        //        limitOrdersAlwaysPlaced, positionIsTradeSize);
-
-        //    tempQuoter.WhenNewMyTrade()
-        //        .Do(mt =>
-        //        {
-        //            _currentPosition += mt.Trade.Volume * sign;
-        //            _currentMoney += mt.Trade.Volume * mt.Trade.Price * sign * -1;
-        //            _enteredPrice = Math.Round(_currentMoney / _currentPosition, 4) * -1;
-
-        //            Debug.Print("entered price: " + _enteredPrice);
-        //        })
-        //        .Apply(this);
-
-        //    tempQuoter.WhenStopped()
-        //        .Do(() =>
-        //        {
-        //            Debug.WriteLine("tq removing");
-        //            if (tempQuoter.QuotingSide == Sides.Buy)
-        //                _isTryingToBuy = false;
-        //            else
-        //                _isTryingToSell = false;
-
-        //            ChildStrategies.Remove(tempQuoter);
-
-        //            tempQuoter = null;
-
-        //            Debug.WriteLine("tq removed");
-        //        })
-        //        .Once()
-        //        .Apply(this);
-
-        //    Security.WhenMarketDepthChanged(Connector)
-        //        .Do(md =>
-        //        {
-        //            if (md.BestBid == null || md.BestAsk == null || md.BestPair.SpreadPrice < _spread)
-        //            {
-        //                Debug.WriteLine("tq stopping");
-        //                tempQuoter.Stop();
-        //                Debug.WriteLine("tq stopped");
-        //            }
-        //        })
-        //        .Until(() => tempQuoter == null)
-        //        .Apply(this);
-
-        //    if (side == Sides.Buy)
-        //    {
-        //        _buyer = tempQuoter;
-        //        _isTryingToBuy = true;
-        //    }
-        //    else
-        //    {
-        //        _seller = tempQuoter;
-        //        _isTryingToSell = true;
-        //    }
-
-        //    MarkStrategyLikeChild(tempQuoter);
-        //    ChildStrategies.Add(tempQuoter);
-
-        //    Debug.WriteLine("LQS created like above");
-        //}
-
-
-        //private bool CheckIfExitPriceFine(MarketDepthPair bestPair)
-        //{
-        //    if (_enteredPrice == 0 || _currentPosition == 0)
-        //        return false;
-
-        //    if (_currentPosition > 0)
-        //        return _enteredPrice + _spread <= bestPair.Bid.Price;
-
-        //    if (_currentPosition < 0)
-        //        return _enteredPrice - _spread >= bestPair.Ask.Price;
-
-        //    return false;
-        //}
+        private decimal CalculateExitPositionPrice()
+        {
+            return CurrentPoisition > 0
+                ? Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 + _spread
+                : Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 - _spread;
+        }
     }
 }

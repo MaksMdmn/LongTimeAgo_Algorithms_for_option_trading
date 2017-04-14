@@ -105,5 +105,27 @@ namespace OptionsThugs.Model.Common
                     throw new ArgumentOutOfRangeException(nameof(dealSide), dealSide, @"impossible value of deal type");
             }
         }
+
+        public static decimal CalculateWorstLimitSpreadPrice(this MarketDepth md, Sides dealSide,
+            decimal desirableSpread)
+        {
+            if (!md.CheckIfSpreadExist())
+                throw new ArgumentException("spread does not exist, calculation impossible: " + md.BestPair);
+
+            var diff = md.BestPair.SpreadPrice.Value - desirableSpread;
+            var halfDiff = diff / 2;
+
+            if (diff % 2 == 0)
+                return dealSide == Sides.Buy ? md.BestBid.Price + halfDiff : md.BestAsk.Price - halfDiff;
+
+            return dealSide == Sides.Buy
+                ? md.BestBid.Price + Math.Floor(halfDiff)
+                : md.BestAsk.Price - Math.Ceiling(halfDiff);
+        }
+
+        public static bool CheckIfSpreadExist(this MarketDepth md)
+        {
+            return md?.BestBid != null && md.BestAsk != null;
+        }
     }
 }
