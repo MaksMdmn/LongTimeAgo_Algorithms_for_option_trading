@@ -10,7 +10,7 @@ namespace OptionsThugs.Model.Trading
 {
     public class SpreaderStrategy : PrimaryStrategy
     {
-        private readonly object _locker = new object();
+        private readonly object _syncRoot = new object();
 
         private readonly decimal _spread;
         private readonly decimal _lot;
@@ -300,7 +300,7 @@ namespace OptionsThugs.Model.Trading
 
         private void PositionAndMoneyAsyncIncrementation(decimal addedPosValue, decimal addedMoneyValue)
         {
-            lock (_locker)
+            lock (_syncRoot)
             {
                 CurrentPoisition += addedPosValue;
                 CurrentPositionMoney += addedMoneyValue;
