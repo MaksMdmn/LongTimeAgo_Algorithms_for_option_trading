@@ -1,5 +1,5 @@
 ﻿using OptionsThugs.Model;
-using OptionsThugs.Model.Primary;
+using OptionsThugs.Model.Trading;
 using StockSharp.Algo;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;

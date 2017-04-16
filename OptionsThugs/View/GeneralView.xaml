@@ -29,8 +29,6 @@
             <MenuItem Header="Open">
                 <MenuItem Header="Chart" />
                 <MenuItem Header="OptionDesk" />
-                <MenuItem Header="Trades" />
-                <MenuItem Header="Orders" />
             </MenuItem>
             <MenuItem Header="Thugs">
                 <MenuItem Header="DeltaHedger" />
@@ -46,6 +44,130 @@
 
         <TabControl Grid.Row="1">
             <TabItem Header="Overview">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="155*" />
+                        <ColumnDefinition Width="35*" />
+                        <ColumnDefinition Width="996*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="2"
+                        Width="100"
+                        Height="20"
+                        Margin="30.448,10,866,771"
+                        IsReadOnly="True" />
+                    <Button
+                        Grid.ColumnSpan="3"
+                        Width="100"
+                        Height="20"
+                        Margin="115,10,971,771"
+                        Content="connect" />
+                    <Button
+                        Width="100"
+                        Height="20"
+                        Margin="10,10,45,771"
+                        Content="start" />
+
+                    <Button
+                        Grid.Column="2"
+                        Width="100"
+                        Height="20"
+                        Margin="651.448,13,245,768"
+                        Content="buy" />
+                    <Button
+                        Grid.Column="2"
+                        Width="100"
+                        Height="20"
+                        Margin="770.448,13,126,768"
+                        Content="sell" />
+                    <Button
+                        Grid.Column="2"
+                        Width="100"
+                        Height="20"
+                        Margin="886.448,13,10,768"
+                        Content="cancel all" />
+
+                    <Button
+                        Grid.Column="2"
+                        Width="100"
+                        Height="20"
+                        Margin="651.448,48,245,733"
+                        Content="hedge" />
+                    <Button
+                        Grid.Column="2"
+                        Width="100"
+                        Height="20"
+                        Margin="770.448,48,126,733"
+                        Content="stop strategies" />
+                    <Button
+                        Grid.Column="2"
+                        Width="100"
+                        Height="20"
+                        Margin="886.448,48,10,733"
+                        Content="refresh" />
+                    <ComboBox
+                        x:Name="trackedSecurity"
+                        Grid.Column="2"
+                        Width="120"
+                        Margin="135.448,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
+
+                    <ss:Chart
+                        x:Name="trackedSecurityChart"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Margin="10,73,654,453" />
+
+                    <ss:MarketDepthControl
+                        x:Name="trackedSecurityMD"
+                        Grid.Column="2"
+                        Margin="347.448,73,450,453" />
+
+                    <sschart:EquityCurveChart
+                        x:Name="equityChart"
+                        Grid.ColumnSpan="3"
+                        Margin="10,353,654,155" />
+
+                    <ss:OrderGrid
+                        x:Name="allOrderGrid"
+                        Grid.Column="2"
+                        Margin="551.448,73,10,453" />
+                    <ss:MyTradeGrid
+                        x:Name="allTradesGrid"
+                        Grid.Column="2"
+                        Margin="347.448,353,10,155" />
+                    <DataGrid
+                        x:Name="quikAndMyPositionsGrid"
+                        Grid.ColumnSpan="3"
+                        Width="522"
+                        Height="124"
+                        Margin="10,667,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
+                    <DataGrid
+                        x:Name="AllRobotsGrid"
+                        Grid.Column="2"
+                        Width="271"
+                        Height="124"
+                        Margin="710.448,667,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
+                    <TextBox
+                        x:Name="messagesTextBox"
+                        Grid.Column="2"
+                        Width="358"
+                        Height="124"
+                        Margin="347.448,667,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="TEST">
                 <StackPanel Orientation="Vertical">
                     <stockSharpWpfConnectionInterface:InterFace x:Name="conn" />
                     <TextBlock Text="ROBOTS INFO" />
@@ -86,46 +208,6 @@
 
                     <ss:LogControl x:Name="myMon" Height="400" />
                 </StackPanel>
-            </TabItem>
-
-            <TabItem Header="TEST">
-                <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
-                    <TextBox
-                        x:Name="tb1"
-                        Width="150"
-                        Height="30"
-                        Margin="5" />
-                    <TextBox
-                        x:Name="tb2"
-                        Width="150"
-                        Height="30"
-                        Margin="5" />
-                    <TextBox
-                        x:Name="tb3"
-                        Width="150"
-                        Height="30"
-                        Margin="5" />
-                    <TextBox
-                        x:Name="tb4"
-                        Width="150"
-                        Height="30"
-                        Margin="5" />
-                    <TextBox
-                        x:Name="tb5"
-                        Width="150"
-                        Height="30"
-                        Margin="5" />
-                    <TextBox
-                        x:Name="tb6"
-                        Width="150"
-                        Height="30"
-                        Margin="5" />
-                    <TextBox
-                        x:Name="tb7"
-                        Width="150"
-                        Height="30"
-                        Margin="5" />
-                </StackPanel>
 
                 <!--<ss:OptionDesk x:Name="Desk" />-->
             </TabItem>
@@ -134,7 +216,8 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="69*" />
+                        <ColumnDefinition Width="917*" />
                     </Grid.ColumnDefinitions>
 
                     <ListView Width="200">
@@ -148,7 +231,7 @@
                         </ListView.View>
                     </ListView>
 
-                    <sschart:OptionPositionChart Grid.Column="1" />
+                    <sschart:OptionPositionChart Grid.Column="1" Grid.ColumnSpan="2" />
                 </Grid>
             </TabItem>
 
@@ -163,9 +246,9 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <sschart:OptionPositionChart Grid.RowSpan="2" Grid.Column="1" />
+                    <sschart:OptionPositionChart Grid.ColumnSpan="2" Margin="11,121,10,10" />
 
-                    <ListView>
+                    <ListView Grid.ColumnSpan="2" Margin="10,10,447,685">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Type" />
@@ -185,28 +268,28 @@
                     </ListView>
 
                     <Button
-                        Grid.Row="1"
+                        Grid.Column="1"
                         Width="100"
                         Height="20"
-                        Margin="10,5,348,5"
+                        Margin="767,10,319,771"
                         Content="add option" />
                     <Button
-                        Grid.Row="1"
+                        Grid.Column="1"
                         Width="100"
                         Height="20"
-                        Margin="115,5,243,5"
+                        Margin="767,35,319,746"
                         Content="add futures" />
                     <Button
-                        Grid.Row="1"
+                        Grid.Column="1"
                         Width="100"
                         Height="20"
-                        Margin="220,5,138,5"
+                        Margin="767,60,319,721"
                         Content="delete instr" />
                     <Button
-                        Grid.Row="1"
+                        Grid.Column="1"
                         Width="70"
                         Height="20"
-                        Margin="225,5,18,5"
+                        Margin="0,96,319,685"
                         HorizontalAlignment="Right"
                         Content="reset" />
                 </Grid>
@@ -222,7 +305,22 @@
                     <ComboBox Width="150" />
                     <CheckBox Width="50" Margin="403,0,733,0">calls</CheckBox>
                     <CheckBox Width="50" Margin="453,0,683,0">puts</CheckBox>
-                    <sschart:OptionVolatilitySmileChart Grid.Row="1" HorizontalAlignment="Right" />
+                    <CheckBox
+                        Grid.Row="1"
+                        Width="50"
+                        Margin="403,0,733,757">
+                        bids
+                    </CheckBox>
+                    <CheckBox
+                        Grid.Row="1"
+                        Width="50"
+                        Margin="453,0,683,757">
+                        asks
+                    </CheckBox>
+                    <sschart:OptionVolatilitySmileChart
+                        Grid.Row="1"
+                        Margin="0,36,0,0"
+                        HorizontalAlignment="Right" />
                 </Grid>
             </TabItem>
 

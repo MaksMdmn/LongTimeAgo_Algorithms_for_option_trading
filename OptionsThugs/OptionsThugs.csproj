@@ -153,7 +153,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Common\DealDirection.cs" />
-    <Compile Include="Model\Primary\PrimaryStrategy.cs" />
+    <Compile Include="Model\Service\DotaSoundType.cs" />
+    <Compile Include="Model\Service\SoundManager.cs" />
+    <Compile Include="Model\Trading\PrimaryStrategy.cs" />
     <Compile Include="View\RobotControlView.xaml.cs">
       <DependentUpon>RobotControlView.xaml</DependentUpon>
     </Compile>
@@ -176,13 +178,13 @@
     <Compile Include="ViewModel\SimpleCommand.cs" />
     <Compile Include="Model\Common\TradeEmulator4Test.cs" />
     <Compile Include="Model\Common\GreeksCalculator.cs" />
-    <Compile Include="Model\Primary\LimitQuoterStrategy.cs" />
-    <Compile Include="Model\Primary\MarketQuoterStrategy.cs" />
-    <Compile Include="Model\Primary\QuoterStrategy.cs" />
+    <Compile Include="Model\Trading\LimitQuoterStrategy.cs" />
+    <Compile Include="Model\Trading\MarketQuoterStrategy.cs" />
+    <Compile Include="Model\Trading\QuoterStrategy.cs" />
     <Compile Include="Model\Common\MyTradeHelper.cs" />
-    <Compile Include="Model\PositionCloserStrategy.cs" />
-    <Compile Include="Model\DeltaHedgerStrategy.cs" />
-    <Compile Include="Model\SpreaderStrategy.cs" />
+    <Compile Include="Model\Trading\PositionCloserStrategy.cs" />
+    <Compile Include="Model\Trading\DeltaHedgerStrategy.cs" />
+    <Compile Include="Model\Trading\SpreaderStrategy.cs" />
     <Compile Include="Model\Common\OrderSynchronizer.cs" />
     <Compile Include="Model\Common\PositionSynchronizer.cs" />
     <Compile Include="ViewModel\OptionDeskViewModel.cs" />

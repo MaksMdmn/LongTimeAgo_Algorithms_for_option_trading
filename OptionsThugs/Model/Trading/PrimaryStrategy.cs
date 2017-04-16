@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 
-namespace OptionsThugs.Model.Primary
+namespace OptionsThugs.Model.Trading
 {
     public abstract class PrimaryStrategy : Strategy
     {

@@ -2,13 +2,11 @@
 using System.Diagnostics;
 using System.Globalization;
 using OptionsThugs.Model.Common;
-using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
-using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model
+namespace OptionsThugs.Model.Trading
 {
     public class SpreaderStrategy : PrimaryStrategy
     {
@@ -80,6 +78,25 @@ namespace OptionsThugs.Model
             CurrentPositionMoney = currentPosition * currentPositionPrice * -1;
 
             TenRepresentationOfDecimalNumbers = 10000;
+
+            switch (sideForEnterToPosition)
+            {
+                case DealDirection.Buy:
+                    _isBuyerActivated = false;
+                    _isSellerActivated = true; //never will be executed;
+                    _isLeaverActivated = false;
+                    break;
+                case DealDirection.Sell:
+                    _isBuyerActivated = true; //never will be executed;
+                    _isSellerActivated = false;
+                    _isLeaverActivated = false;
+                    break;
+                case DealDirection.Both:
+                    _isBuyerActivated = false;
+                    _isSellerActivated = false;
+                    _isLeaverActivated = false;
+                    break;
+            }
         }
 
 
@@ -111,7 +128,6 @@ namespace OptionsThugs.Model
                         }
                         else
                         {
-
                             _buyerStrategy = new LimitQuoterStrategy(
                                 Sides.Buy,
                                 size,
@@ -301,13 +317,14 @@ namespace OptionsThugs.Model
 
         private decimal CalculateExitPositionPrice()
         {
-            Debug.Print("new exit-price: " + (CurrentPoisition > 0
-                ? Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 + _spread
-                : Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 - _spread).ToString(CultureInfo.InvariantCulture));
+            Debug.Print("new exit-price: " + Security.ShrinkPrice(CurrentPoisition > 0
+                                ? Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 + _spread
+                                : Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 - _spread)
+                            .ToString(CultureInfo.InvariantCulture));
 
-            return CurrentPoisition > 0
+            return Security.ShrinkPrice(CurrentPoisition > 0
                 ? Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 + _spread
-                : Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 - _spread;
+                : Math.Round(CurrentPositionMoney / CurrentPoisition, 4) * -1 - _spread);
         }
 
         private decimal CalculateTradeSizeIfInPosition(Sides dealSide)

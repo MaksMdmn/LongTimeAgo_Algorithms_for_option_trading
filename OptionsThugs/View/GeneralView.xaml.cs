@@ -10,7 +10,6 @@ using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugs.Model;
 using OptionsThugs.Model.Common;
-using OptionsThugs.Model.Primary;
 using OptionsThugs.xTests;
 using StockSharp.Algo.Derivatives;
 using StockSharp.Algo.Strategies;

@@ -5,7 +5,7 @@ using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model.Primary
+namespace OptionsThugs.Model.Trading
 {
     public class MarketQuoterStrategy : QuoterStrategy
     {

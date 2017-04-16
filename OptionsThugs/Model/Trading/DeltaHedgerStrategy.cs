@@ -3,13 +3,12 @@ using System.Diagnostics;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugs.Model.Common;
-using OptionsThugs.Model.Primary;
 using StockSharp.Algo;
 using StockSharp.Algo.Derivatives;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model
+namespace OptionsThugs.Model.Trading
 {
     public class DeltaHedgerStrategy : PrimaryStrategy
     {
@@ -90,7 +89,7 @@ namespace OptionsThugs.Model
                         {
                             _priceLevelsForHedge.ForEach(level =>
                             {
-                                if (level.CheckIfWasCrossedByPrice(futuresQuote.Price))
+                                if (MyTradeHelper.CheckIfWasCrossedByPrice(level, futuresQuote.Price))
                                 {
                                     DoHedge(CalcPosDelta(), 1);
                                 }

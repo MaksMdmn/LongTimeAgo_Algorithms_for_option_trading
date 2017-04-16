@@ -5,7 +5,7 @@ using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
-namespace OptionsThugs.Model.Primary
+namespace OptionsThugs.Model.Trading
 {
     public abstract class QuoterStrategy : PrimaryStrategy
     {
