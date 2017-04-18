@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using OptionsThugs.Model.Common;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -33,11 +34,11 @@ namespace OptionsThugs.Model.Trading
                 if (!OrderSynchronizer.IsAnyOrdersInWork
                     && PositionSynchronizer.IsPosAndTradesEven)
                 {
-                    Quote bestQuote = GetSuitableBestLimitQuote();
+                    Quote bestQuote = MarketDepth.GetSuitableBestLimitQuote(QuotingSide);
 
                     if (bestQuote == null) return;
 
-                    decimal price = bestQuote.Price + QuotePriceShift;
+                    decimal price = Security.ShrinkPrice(bestQuote.Price + QuotePriceShift);
                     decimal volume = Math.Abs(Volume) - Math.Abs(Position);
 
                     if (volume <= 0) return;
@@ -102,7 +103,7 @@ namespace OptionsThugs.Model.Trading
                 .Do(md =>
                 {
                     if (OrderSynchronizer.IsAnyOrdersInWork
-                    && IsBestQuoteMyQuote(order, GetSuitableBestLimitQuote()))
+                    && IsBestQuoteMyQuote(order, MarketDepth.GetSuitableBestLimitQuote(QuotingSide)))
                     {
                         try
                         {
@@ -122,8 +123,8 @@ namespace OptionsThugs.Model.Trading
 
         private bool IsQuotingNeeded(decimal currentQuotingPrice)
         {
-            Quote bestQuote = GetSuitableBestLimitQuote();
-            Quote preBestQuote = GetSuitableLimitQuotes()[1]; // 2ая лучшая котировка
+            Quote bestQuote = MarketDepth.GetSuitableBestLimitQuote(QuotingSide);
+            Quote preBestQuote = MarketDepth.GetSuitableLimitQuotes(QuotingSide)[1]; // 2ая лучшая котировка
 
             if (bestQuote == null || preBestQuote == null)
                 return true; // снять заявку

@@ -1,4 +1,5 @@
 ﻿using System;
+using OptionsThugs.Model.Common;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -24,7 +25,7 @@ namespace OptionsThugs.Model.Trading
                 if (!OrderSynchronizer.IsAnyOrdersInWork
                     && PositionSynchronizer.IsPosAndTradesEven)
                 {
-                    Quote bestQuote = GetSuitableBestMarketQuote();
+                    Quote bestQuote = MarketDepth.GetSuitableBestMarketQuote(QuotingSide);
 
                     if (bestQuote == null) return;
 
@@ -32,7 +33,7 @@ namespace OptionsThugs.Model.Trading
 
                     if (volume > 0 && IsMarketPriceAcceptableForQuoting(bestQuote.Price))
                     {
-                        var order = this.CreateOrder(QuotingSide, TargetPrice, volume);
+                        var order = this.CreateOrder(QuotingSide, Security.ShrinkPrice(TargetPrice), volume);
 
                         order.WhenRegistered(Connector)
                             .Do(o =>

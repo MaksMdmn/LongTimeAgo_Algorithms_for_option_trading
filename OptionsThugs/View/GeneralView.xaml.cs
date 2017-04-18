@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
+﻿using System.Diagnostics;
 using System.Windows;
-using DevExpress.Xpf.Editors.Internal;
-using Ecng.Common;
-using Microsoft.Practices.ObjectBuilder2;
-using OptionsThugs.Model;
 using OptionsThugs.Model.Common;
 using OptionsThugs.xTests;
-using StockSharp.Algo.Derivatives;
-using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 using StockSharp.Xaml;
-using StockSharp_TraderConnection;
 
 namespace OptionsThugs.View
 {
@@ -53,16 +41,15 @@ namespace OptionsThugs.View
         {
             _strategyTest = new SprTest(_logManager, conn.SafeConnection.Connector, conn.SelectedPortfolio, conn.SelectedSecurity);
 
-            var sprTest = (SprTest) _strategyTest;
-            var futPos = 0; /*conn.SafeConnection.Connector.GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity);*/
-            var futPosPrice = 0;
-            var spread = conn.SelectedSecurity.PriceStep.CheckIfValueNullThenZero() * 4;
-            var lot = 5;
-            var side = DealDirection.Buy;
-            var minPos = -10;
-            var maxPos = 13;
+            var sprTest = (SprTest)_strategyTest;
+            var futPos = -10; /*conn.SafeConnection.Connector.GetSecurityPosition(conn.SelectedPortfolio, conn.SelectedSecurity)*/
+            var futPosPrice = 55.41M;
+            var spread = conn.SelectedSecurity.PriceStep.CheckIfValueNullThenZero() * 2;
+            var lot = 2;
+            var side = Sides.Sell;
+            var absLimitFutPosNumber = 5M;
 
-            sprTest.CreateNewSprStrategy(futPos, futPosPrice, spread, lot, side, minPos, maxPos);
+            sprTest.CreateNewSprStrategy(futPos, futPosPrice, spread, lot, side, absLimitFutPosNumber);
 
             #region test DHS
 

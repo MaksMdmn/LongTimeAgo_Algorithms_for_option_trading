@@ -61,30 +61,6 @@ namespace OptionsThugs.Model.Trading
 
         protected void IncrMaxErrorCountIfNotScared() => MaxErrorCount += 1;
 
-        protected Quote GetSuitableBestLimitQuote()
-        {
-            if (MarketDepth == null) return null;
-            return QuotingSide == Sides.Buy ? MarketDepth.BestBid : MarketDepth.BestAsk;
-        }
-
-        protected Quote[] GetSuitableLimitQuotes()
-        {
-            if (MarketDepth == null) return null;
-            return QuotingSide == Sides.Buy ? MarketDepth.Bids : MarketDepth.Asks;
-        }
-
-        protected Quote GetSuitableBestMarketQuote()
-        {
-            if (MarketDepth == null) return null;
-            return QuotingSide == Sides.Buy ? MarketDepth.BestAsk : MarketDepth.BestBid;
-        }
-
-        protected Quote[] GetSuitableMarketQuotes()
-        {
-            if (MarketDepth == null) return null;
-            return QuotingSide == Sides.Buy ? MarketDepth.Asks : MarketDepth.Bids;
-        }
-
         protected bool IsPriceAcceptableForQuoting(decimal currentPrice, decimal worstPossibleQuotingPrice)
         {
             if (QuotingSide == Sides.Buy)

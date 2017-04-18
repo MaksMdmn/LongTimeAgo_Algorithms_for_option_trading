@@ -152,7 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Common\DealDirection.cs" />
     <Compile Include="Model\Service\DotaSoundType.cs" />
     <Compile Include="Model\Service\SoundManager.cs" />
     <Compile Include="Model\Trading\PrimaryStrategy.cs" />

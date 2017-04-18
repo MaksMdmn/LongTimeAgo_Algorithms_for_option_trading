@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
+using StockSharp.Algo;
+using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 
@@ -22,6 +24,30 @@ namespace OptionsThugs.Model.Common
                 throw new ArgumentException($"Check market prices, something going wrong with: {security}");
 
             return result;
+        }
+
+        public static Quote GetSuitableBestLimitQuote(this MarketDepth md, Sides quotingSide)
+        {
+            if (md == null) return null;
+            return quotingSide == Sides.Buy ? md.BestBid : md.BestAsk;
+        }
+
+        public static Quote[] GetSuitableLimitQuotes(this MarketDepth md, Sides quotingSide)
+        {
+            if (md == null) return null;
+            return quotingSide == Sides.Buy ? md.Bids : md.Asks;
+        }
+
+        public static Quote GetSuitableBestMarketQuote(this MarketDepth md, Sides quotingSide)
+        {
+            if (md == null) return null;
+            return quotingSide == Sides.Buy ? md.BestAsk : md.BestBid;
+        }
+
+        public static Quote[] GetSuitableMarketQuotes(this MarketDepth md, Sides quotingSide)
+        {
+            if (md == null) return null;
+            return quotingSide == Sides.Buy ? md.Asks : md.Bids;
         }
 
         public static decimal CheckIfValueNullThenZero(this decimal? val)
@@ -106,6 +132,12 @@ namespace OptionsThugs.Model.Common
             }
         }
 
+        public static void SafeStop(this Strategy strategy)
+        {
+            if (strategy?.ProcessState == ProcessStates.Started)
+                strategy.Stop();
+        }
+
         public static decimal CalculateWorstLimitSpreadPrice(this MarketDepth md, Sides dealSide,
             decimal desirableSpread)
         {
@@ -116,11 +148,13 @@ namespace OptionsThugs.Model.Common
             var halfDiff = diff / 2;
 
             if (diff % 2 == 0)
-                return dealSide == Sides.Buy ? md.BestBid.Price + halfDiff : md.BestAsk.Price - halfDiff;
+                return md.Security.ShrinkPrice(dealSide == Sides.Buy ? md.BestBid.Price + halfDiff : md.BestAsk.Price - halfDiff);
 
-            return dealSide == Sides.Buy
+
+
+            return md.Security.ShrinkPrice(dealSide == Sides.Buy
                 ? md.BestBid.Price + Math.Floor(halfDiff)
-                : md.BestAsk.Price - Math.Ceiling(halfDiff);
+                : md.BestAsk.Price - Math.Ceiling(halfDiff));
         }
 
         public static bool CheckIfSpreadExist(this MarketDepth md)

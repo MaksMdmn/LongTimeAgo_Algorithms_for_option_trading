@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OptionsThugs.Model;
-using OptionsThugs.Model.Common;
-using OptionsThugs.Model.Trading;
+﻿using OptionsThugs.Model.Trading;
 using StockSharp.Algo;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
+using StockSharp.Messages;
 
 namespace OptionsThugs.xTests
 {
@@ -19,10 +13,10 @@ namespace OptionsThugs.xTests
         }
 
         public void CreateNewSprStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot,
-            DealDirection sideForEnterToPosition, decimal minFuturesPositionVal, decimal maxFuturesPositionVal)
+            Sides sideForEnterToPosition, decimal absMaxFuturesNumber)
         {
-            StrategyForTest = new SpreaderStrategy(currentPosition, currentPositionPrice, spread, lot, 
-                sideForEnterToPosition, minFuturesPositionVal, maxFuturesPositionVal);
+            StrategyForTest = new SpreaderStrategy(currentPosition, currentPositionPrice, spread, lot,
+                sideForEnterToPosition, absMaxFuturesNumber);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
             StrategyForTest.RegisterStrategyEntitiesForWork(
@@ -32,10 +26,10 @@ namespace OptionsThugs.xTests
         }
 
         public void CreateNewSprStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot,
-            DealDirection sideForEnterToPosition)
+            Sides sideForEnterToPosition)
         {
             CreateNewSprStrategy(currentPosition, currentPositionPrice, spread, lot, 
-                sideForEnterToPosition, decimal.MinValue, decimal.MaxValue);
+                sideForEnterToPosition, 0);
         }
     }
 }

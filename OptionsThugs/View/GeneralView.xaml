@@ -43,6 +43,50 @@
         </Menu>
 
         <TabControl Grid.Row="1">
+            <TabItem Header="TEST">
+                <StackPanel Orientation="Vertical">
+                    <stockSharpWpfConnectionInterface:InterFace x:Name="conn" />
+                    <TextBlock Text="ROBOTS INFO" />
+                    <TextBlock Text="POS INFO" />
+                    <TextBlock Text="GO INFO" />
+                    <TextBlock Text="PNL INFO AND MB CHART" />
+
+                    <Button
+                        Width="100"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Click="PrepareStrategy"
+                        Content="prepare" />
+                    <Button
+                        Width="100"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Click="StartStopClick"
+                        Content="startstop" />
+                    <Button
+                        Width="100"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Click="Prepare2Click"
+                        Content="handleSell(prepare2)" />
+                    <Button
+                        Width="100"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Click="ButtonBase_OnClick"
+                        Content="handleHedge (test BS)" />
+
+                    <Button
+                        Width="100"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Content="handleCancelAll ?" />
+
+                    <ss:LogControl x:Name="myMon" Height="400" />
+                </StackPanel>
+
+                <!--<ss:OptionDesk x:Name="Desk" />-->
+            </TabItem>
             <TabItem Header="Overview">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -166,52 +210,6 @@
 
                 </Grid>
             </TabItem>
-
-            <TabItem Header="TEST">
-                <StackPanel Orientation="Vertical">
-                    <stockSharpWpfConnectionInterface:InterFace x:Name="conn" />
-                    <TextBlock Text="ROBOTS INFO" />
-                    <TextBlock Text="POS INFO" />
-                    <TextBlock Text="GO INFO" />
-                    <TextBlock Text="PNL INFO AND MB CHART" />
-
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        Click="PrepareStrategy"
-                        Content="prepare" />
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        Click="StartStopClick"
-                        Content="startstop" />
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        Click="Prepare2Click"
-                        Content="handleSell(prepare2)" />
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        Click="ButtonBase_OnClick"
-                        Content="handleHedge (test BS)" />
-
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        Content="handleCancelAll ?" />
-
-                    <ss:LogControl x:Name="myMon" Height="400" />
-                </StackPanel>
-
-                <!--<ss:OptionDesk x:Name="Desk" />-->
-            </TabItem>
-
             <TabItem Header="Current Position Analyse">
                 <Grid>
                     <Grid.ColumnDefinitions>
