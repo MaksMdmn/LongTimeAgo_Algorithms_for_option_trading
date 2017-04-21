@@ -172,20 +172,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Common\PriceHedgeLevel.cs" />
-    <Compile Include="Model\Common\PriceDirection.cs" />
+    <Compile Include="Model\Trading\Common\PriceHedgeLevel.cs" />
+    <Compile Include="Model\Trading\Common\PriceDirection.cs" />
     <Compile Include="ViewModel\SimpleCommand.cs" />
-    <Compile Include="Model\Common\TradeEmulator4Test.cs" />
-    <Compile Include="Model\Common\GreeksCalculator.cs" />
+    <Compile Include="Model\Trading\Common\TradeEmulator4Test.cs" />
+    <Compile Include="Model\Trading\Common\GreeksCalculator.cs" />
     <Compile Include="Model\Trading\LimitQuoterStrategy.cs" />
     <Compile Include="Model\Trading\MarketQuoterStrategy.cs" />
     <Compile Include="Model\Trading\QuoterStrategy.cs" />
-    <Compile Include="Model\Common\MyTradeHelper.cs" />
+    <Compile Include="Model\Trading\Common\MyTradeHelper.cs" />
     <Compile Include="Model\Trading\PositionCloserStrategy.cs" />
     <Compile Include="Model\Trading\DeltaHedgerStrategy.cs" />
     <Compile Include="Model\Trading\SpreaderStrategy.cs" />
-    <Compile Include="Model\Common\OrderSynchronizer.cs" />
-    <Compile Include="Model\Common\PositionSynchronizer.cs" />
+    <Compile Include="Model\Trading\Common\OrderSynchronizer.cs" />
+    <Compile Include="Model\Trading\Common\PositionSynchronizer.cs" />
     <Compile Include="ViewModel\OptionDeskViewModel.cs" />
     <Compile Include="View\GeneralView.xaml.cs">
       <DependentUpon>GeneralView.xaml</DependentUpon>
@@ -223,7 +223,30 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\DotaDoubleKill.wav" />
+    <None Include="Resources\DotaFirstBlood.wav" />
+    <None Include="Resources\DotaHolyShit.wav" />
+    <None Include="Resources\DotaOwnage.wav" />
+    <None Include="Resources\DotaRampage.wav" />
+    <None Include="Resources\DotaTrippleKill.wav" />
+    <None Include="Resources\DotaUltraKill.wav" />
+    <None Include="Resources\PudgeAyyup.wav" />
+    <None Include="Resources\PudgeBloodyCreeps.wav" />
+    <None Include="Resources\PudgeChopChop.wav" />
+    <None Include="Resources\PudgeChopperTime.wav" />
+    <None Include="Resources\PudgeComeToPudge.wav" />
+    <None Include="Resources\PudgeFreshChops.wav" />
+    <None Include="Resources\PudgeGetOverHere%28tough%29.wav" />
+    <None Include="Resources\PudgeGetOverHere.wav" />
+    <None Include="Resources\PudgeHahaFreshMeat.wav" />
+    <None Include="Resources\PudgeHahahaFreshMeat.wav" />
+    <None Include="Resources\RubickLaughNice.wav" />
+    <None Include="Resources\RubickMuchBetter.wav" />
+    <None Include="Resources\SlarkFishyFishy.wav" />
+    <None Include="Resources\SlarkGotcha.wav" />
+    <None Include="Resources\SlarkIGotThisOne.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

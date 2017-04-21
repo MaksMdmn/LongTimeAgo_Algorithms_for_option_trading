@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
-using OptionsThugs.Model.Common;
+using OptionsThugs.Model.Trading.Common;
 using StockSharp.Algo;
 using StockSharp.Algo.Derivatives;
 using StockSharp.BusinessEntities;

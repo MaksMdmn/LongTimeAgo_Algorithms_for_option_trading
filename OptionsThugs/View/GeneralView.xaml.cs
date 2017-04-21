@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using OptionsThugs.Model.Common;
+using OptionsThugs.Model.Service;
+using OptionsThugs.Model.Trading.Common;
 using OptionsThugs.xTests;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
@@ -113,7 +114,7 @@ namespace OptionsThugs.View
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-
+            SoundManager.GetInstance().PlayRandomSlarkSound();
         }
     }
 }

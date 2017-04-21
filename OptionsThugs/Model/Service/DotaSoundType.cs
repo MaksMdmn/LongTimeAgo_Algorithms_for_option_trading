@@ -2,8 +2,9 @@
 {
     public enum DotaSoundType
     {
-        PudgeGetOverHere, PudgeFreshMeat, PudgeBloodyCreep,
-        DotaFirstBlood, DotaDoubleKill, DotaTrippleKill, DotaUltraKill, DotaGodlike, DotaRampage,
-        RubickLaugh, RubickLaughMore
+        PudgeAuuup, PudgeBloodyCreeps, PudgeChopChop, PudgeChopperTime, PudgeComeToPudge, PudgeFreshChops, PudgeGetOverHere, PudgeGetOverHereTough, PudgeHahaFreshMeat, PudgeHahahaFreshMeat,
+        DotaFirstBlood, DotaDoubleKill, DotaTrippleKill, DotaUltraKill, DotaGodlike, DotaRampage, DotaOwnage, DotaHolyShit,
+        RubickLaughNice, RubickMuchBetter,
+        SlarkFishyFishy, SlarkGotcha, SlarkIGotThisOne
     }
 }

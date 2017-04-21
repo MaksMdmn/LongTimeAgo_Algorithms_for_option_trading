@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Ecng.Collections;
 using OptionsThugs.Model;
-using OptionsThugs.Model.Common;
 using OptionsThugs.Model.Trading;
+using OptionsThugs.Model.Trading.Common;
 using StockSharp.Algo;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
