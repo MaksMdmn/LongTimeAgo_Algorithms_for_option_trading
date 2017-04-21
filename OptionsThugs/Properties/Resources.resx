@@ -169,11 +169,17 @@
   <data name="PudgeHahahaFreshMeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PudgeHahahaFreshMeat.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="RubickAhahahahmhmha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RubickAhahahahmhmha.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="RubickLaughNice" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RubickLaughNice.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="RubickMuchBetter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RubickMuchBetter.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="RubickNyahaheheha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RubickNyahaheheha.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RubickWhoops" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RubickWhoops.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SlarkFishyFishy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SlarkFishyFishy.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

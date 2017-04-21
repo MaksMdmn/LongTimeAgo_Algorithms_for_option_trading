@@ -4,7 +4,7 @@
     {
         PudgeAuuup, PudgeBloodyCreeps, PudgeChopChop, PudgeChopperTime, PudgeComeToPudge, PudgeFreshChops, PudgeGetOverHere, PudgeGetOverHereTough, PudgeHahaFreshMeat, PudgeHahahaFreshMeat,
         DotaFirstBlood, DotaDoubleKill, DotaTrippleKill, DotaUltraKill, DotaGodlike, DotaRampage, DotaOwnage, DotaHolyShit,
-        RubickLaughNice, RubickMuchBetter,
+        RubickLaughNice, RubickWhoops, RubickAhahahahmhmha, RubickNyahaheheha,
         SlarkFishyFishy, SlarkGotcha, SlarkIGotThisOne
     }
 }

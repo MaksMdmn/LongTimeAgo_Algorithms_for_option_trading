@@ -93,8 +93,14 @@ namespace OptionsThugs.Model.Service
                 case DotaSoundType.RubickLaughNice:
                     PlayDotaSound(Properties.Resources.RubickLaughNice);
                     break;
-                case DotaSoundType.RubickMuchBetter:
-                    PlayDotaSound(Properties.Resources.RubickMuchBetter);
+                case DotaSoundType.RubickWhoops:
+                    PlayDotaSound(Properties.Resources.RubickWhoops);
+                    break;
+                case DotaSoundType.RubickAhahahahmhmha:
+                    PlayDotaSound(Properties.Resources.RubickAhahahahmhmha);
+                    break;
+                case DotaSoundType.RubickNyahaheheha:
+                    PlayDotaSound(Properties.Resources.RubickNyahaheheha);
                     break;
                 case DotaSoundType.SlarkFishyFishy:
                     PlayDotaSound(Properties.Resources.SlarkFishyFishy);

@@ -242,10 +242,18 @@
     <None Include="Resources\PudgeHahaFreshMeat.wav" />
     <None Include="Resources\PudgeHahahaFreshMeat.wav" />
     <None Include="Resources\RubickLaughNice.wav" />
-    <None Include="Resources\RubickMuchBetter.wav" />
     <None Include="Resources\SlarkFishyFishy.wav" />
     <None Include="Resources\SlarkGotcha.wav" />
     <None Include="Resources\SlarkIGotThisOne.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RubickWhoops.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RubickAhahahahmhmha.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RubickNyahaheheha.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

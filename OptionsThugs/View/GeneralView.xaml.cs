@@ -114,7 +114,7 @@ namespace OptionsThugs.View
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            SoundManager.GetInstance().PlayRandomSlarkSound();
+            SoundManager.GetInstance().PlayRandomRubickSound();
         }
     }
 }

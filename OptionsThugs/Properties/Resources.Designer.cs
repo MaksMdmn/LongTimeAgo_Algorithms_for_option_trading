@@ -216,6 +216,15 @@ namespace OptionsThugs.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream RubickAhahahahmhmha {
+            get {
+                return ResourceManager.GetStream("RubickAhahahahmhmha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream RubickLaughNice {
             get {
                 return ResourceManager.GetStream("RubickLaughNice", resourceCulture);
@@ -225,9 +234,18 @@ namespace OptionsThugs.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream RubickMuchBetter {
+        internal static System.IO.UnmanagedMemoryStream RubickNyahaheheha {
             get {
-                return ResourceManager.GetStream("RubickMuchBetter", resourceCulture);
+                return ResourceManager.GetStream("RubickNyahaheheha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream RubickWhoops {
+            get {
+                return ResourceManager.GetStream("RubickWhoops", resourceCulture);
             }
         }
         
