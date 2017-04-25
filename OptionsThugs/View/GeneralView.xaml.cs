@@ -2,6 +2,7 @@
 using System.Windows;
 using OptionsThugs.Model.Service;
 using OptionsThugs.Model.Trading.Common;
+using OptionsThugs.ViewModel;
 using OptionsThugs.xTests;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
@@ -114,7 +115,12 @@ namespace OptionsThugs.View
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            SoundManager.GetInstance().PlayRandomRubickSound();
+            SoundManager.GetInstance().PlayRandomPudgeSound();
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var strategyControlViewModel = new StrategyControlViewModel(StrategyTypes.Dhs);
         }
     }
 }

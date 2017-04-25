@@ -89,6 +89,8 @@ namespace OptionsThugs.Model.Trading
 
         protected override void OnStarted()
         {
+            DoStrategyPreparation(new Security[] { Security}, new Security[] { Security }, new Portfolio[] { Portfolio });
+
             if (_spread <= 0) throw new ArgumentException("Spread cannot be below zero: " + _spread);
             if (_lot <= 0) throw new ArgumentException("Lot cannot be below zero: " + _lot);
             if (Security.PriceStep == null) throw new ArgumentException("Cannot read security price set, probably data still loading... :" + Security.PriceStep);

@@ -31,7 +31,7 @@
                 <MenuItem Header="OptionDesk" />
             </MenuItem>
             <MenuItem Header="Thugs">
-                <MenuItem Header="DeltaHedger" />
+                <MenuItem Click="MenuItem_OnClick" Header="DeltaHedger" />
                 <MenuItem Header="PosCatcher" />
                 <MenuItem Header="PosCloser" />
                 <MenuItem Header="Spreader" />

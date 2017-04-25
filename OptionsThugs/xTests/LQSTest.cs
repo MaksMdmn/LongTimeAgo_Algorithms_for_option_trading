@@ -25,10 +25,6 @@ namespace OptionsThugs.xTests
             StrategyForTest = new LimitQuoterStrategy(side, volume, priceShift, stopQuote);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
-            StrategyForTest.RegisterStrategyEntitiesForWork(
-                new Security[] { },
-                new Security[] { StSecurity },
-                new Portfolio[] { StPortfolio });
         }
 
         public void CreateNewLqsStrategy(Sides side, decimal volume, decimal priceShift)

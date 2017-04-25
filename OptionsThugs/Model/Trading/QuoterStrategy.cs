@@ -36,7 +36,7 @@ namespace OptionsThugs.Model.Trading
 
         protected override void OnStarted()
         {
-            CheckIfStrategyReadyToWork();
+            DoStrategyPreparation(new Security[] { }, new Security[] { Security }, new Portfolio[] { Portfolio });
 
             if (Volume <= 0) throw new ArgumentException("Volume cannot be below zero: " + Volume);
 

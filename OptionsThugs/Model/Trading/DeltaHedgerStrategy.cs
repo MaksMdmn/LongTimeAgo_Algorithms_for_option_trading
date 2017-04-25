@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
@@ -68,6 +69,12 @@ namespace OptionsThugs.Model.Trading
 
         protected override void OnStarted()
         {
+            List<Security> securitiesToReg = new List<Security>();
+            securitiesToReg.AddRange(_optionsPositions.Keys);
+            securitiesToReg.Add(Security);
+
+            DoStrategyPreparation(securitiesToReg.ToArray(), new Security[] { Security }, new Portfolio[] { Portfolio });
+
             if (DeltaStep < 0) throw new ArgumentException("DeltaStep cannot be below zero: " + DeltaStep); ;
 
             Security.WhenMarketDepthChanged(Connector)

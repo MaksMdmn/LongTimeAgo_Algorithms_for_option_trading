@@ -2,9 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Media;
 
 namespace OptionsThugs.Model.Service
 {

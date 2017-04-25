@@ -27,10 +27,6 @@ namespace OptionsThugs.xTests
             securitiesToReg.Add(StSecurity);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
-            StrategyForTest.RegisterStrategyEntitiesForWork(
-                securitiesToReg.ToArray(),
-                new Security[] { StSecurity },
-                new Portfolio[] { StPortfolio });
         }
 
         public void  CreateNewDhstrategy(decimal futuresPosition, SynchronizedDictionary<Security, decimal> optionsPositions,

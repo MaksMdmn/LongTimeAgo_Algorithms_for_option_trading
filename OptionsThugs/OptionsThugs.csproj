@@ -155,8 +155,11 @@
     <Compile Include="Model\Service\DotaSoundType.cs" />
     <Compile Include="Model\Service\SoundManager.cs" />
     <Compile Include="Model\Trading\PrimaryStrategy.cs" />
-    <Compile Include="View\RobotControlView.xaml.cs">
-      <DependentUpon>RobotControlView.xaml</DependentUpon>
+    <Compile Include="Model\Service\StrategyStringCreator.cs" />
+    <Compile Include="Model\Service\StrategyTypes.cs" />
+    <Compile Include="ViewModel\StrategyControlViewModel.cs" />
+    <Compile Include="View\StrategyControlView.xaml.cs">
+      <DependentUpon>StrategyControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="xTests\BaseStrategyTest.cs" />
     <Compile Include="xTests\DhsTest.cs" />
@@ -174,7 +177,6 @@
     </Compile>
     <Compile Include="Model\Trading\Common\PriceHedgeLevel.cs" />
     <Compile Include="Model\Trading\Common\PriceDirection.cs" />
-    <Compile Include="ViewModel\SimpleCommand.cs" />
     <Compile Include="Model\Trading\Common\TradeEmulator4Test.cs" />
     <Compile Include="Model\Trading\Common\GreeksCalculator.cs" />
     <Compile Include="Model\Trading\LimitQuoterStrategy.cs" />
@@ -191,7 +193,7 @@
       <DependentUpon>GeneralView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\RobotControlView.xaml">
+    <Page Include="View\StrategyControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

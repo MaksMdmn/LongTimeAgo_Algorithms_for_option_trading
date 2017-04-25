@@ -18,17 +18,23 @@ namespace OptionsThugs.Model.Trading
             : this(priceToClose, null, PriceDirection.None, positionToClose) { }
 
         public PositionCloserStrategy(decimal priceToClose,
-            Security securityWithSignalToClose, PriceDirection securityDesirableDirection, decimal posSizeToClose)
+            Security securityWithSignalToClose, PriceDirection securityDesirableDirection, decimal positionToClose)
         {
             _priceToClose = priceToClose;
             _securityWithSignalToClose = securityWithSignalToClose;
             _securityDesirableDirection = securityDesirableDirection;
-            _strategyOrderSide = posSizeToClose > 0 ? Sides.Sell : Sides.Buy;
-            Volume = Math.Abs(posSizeToClose);
+            _strategyOrderSide = positionToClose > 0 ? Sides.Sell : Sides.Buy;
+            Volume = Math.Abs(positionToClose);
         }
 
         protected override void OnStarted()
         {
+            if (_securityWithSignalToClose == null)
+                DoStrategyPreparation(new Security[] { }, new Security[] { Security }, new Portfolio[] { Portfolio });
+            else
+                DoStrategyPreparation(new Security[] { }, new Security[] { Security, _securityWithSignalToClose }, new Portfolio[] { Portfolio });
+
+
             if (Volume <= 0 || _priceToClose <= 0) throw new ArgumentException(
                 $"Volume: {Volume} or price to close: {_priceToClose} cannot be below zero"); ;
 

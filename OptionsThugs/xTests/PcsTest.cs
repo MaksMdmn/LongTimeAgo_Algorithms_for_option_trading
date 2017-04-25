@@ -23,10 +23,6 @@ namespace OptionsThugs.xTests
             StrategyForTest = new PositionCloserStrategy(priceToClose, securityToClose, securityDesirableDirection, positionToClose);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
-            StrategyForTest.RegisterStrategyEntitiesForWork(
-                new Security[] { },
-                new Security[] { StSecurity, securityToClose },
-                new Portfolio[] { StPortfolio });
         }
 
         public void CreateNewCondtrategy(decimal priceToClose, decimal positionToClose)

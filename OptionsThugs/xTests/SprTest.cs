@@ -19,10 +19,6 @@ namespace OptionsThugs.xTests
                 sideForEnterToPosition, absMaxFuturesNumber);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
-            StrategyForTest.RegisterStrategyEntitiesForWork(
-                new Security[] { StSecurity },
-                new Security[] { StSecurity },
-                new Portfolio[] { StPortfolio });
         }
 
         public void CreateNewSprStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot,

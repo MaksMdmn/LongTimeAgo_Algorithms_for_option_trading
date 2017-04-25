@@ -18,10 +18,6 @@ namespace OptionsThugs.xTests
             StrategyForTest = new MarketQuoterStrategy(side, volume, targetPrice);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
-            StrategyForTest.RegisterStrategyEntitiesForWork(
-                new Security[] { },
-                new Security[] { StSecurity },
-                new Portfolio[] { StPortfolio });
         }
     }
 }
