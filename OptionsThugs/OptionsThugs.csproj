@@ -143,6 +143,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Trading">
+      <HintPath>..\Trading\bin\Debug\Trading.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -154,9 +157,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Service\DotaSoundType.cs" />
     <Compile Include="Model\Service\SoundManager.cs" />
-    <Compile Include="Model\Trading\PrimaryStrategy.cs" />
     <Compile Include="Model\Service\StrategyStringCreator.cs" />
-    <Compile Include="Model\Service\StrategyTypes.cs" />
     <Compile Include="ViewModel\StrategyControlViewModel.cs" />
     <Compile Include="View\StrategyControlView.xaml.cs">
       <DependentUpon>StrategyControlView.xaml</DependentUpon>
@@ -175,19 +176,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Trading\Common\PriceHedgeLevel.cs" />
-    <Compile Include="Model\Trading\Common\PriceDirection.cs" />
-    <Compile Include="Model\Trading\Common\TradeEmulator4Test.cs" />
-    <Compile Include="Model\Trading\Common\GreeksCalculator.cs" />
-    <Compile Include="Model\Trading\LimitQuoterStrategy.cs" />
-    <Compile Include="Model\Trading\MarketQuoterStrategy.cs" />
-    <Compile Include="Model\Trading\QuoterStrategy.cs" />
-    <Compile Include="Model\Trading\Common\MyTradeHelper.cs" />
-    <Compile Include="Model\Trading\PositionCloserStrategy.cs" />
-    <Compile Include="Model\Trading\DeltaHedgerStrategy.cs" />
-    <Compile Include="Model\Trading\SpreaderStrategy.cs" />
-    <Compile Include="Model\Trading\Common\OrderSynchronizer.cs" />
-    <Compile Include="Model\Trading\Common\PositionSynchronizer.cs" />
     <Compile Include="ViewModel\OptionDeskViewModel.cs" />
     <Compile Include="View\GeneralView.xaml.cs">
       <DependentUpon>GeneralView.xaml</DependentUpon>

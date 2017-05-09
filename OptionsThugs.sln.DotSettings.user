@@ -2,4 +2,6 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="D:\programming\c# here\Project\StockSharp_TraderConnection\StockSharp_WpfConnectionInterface\bin\Debug\StockSharp.Messages.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\programming\c# here\xLibs\S#\StockSharp_4.3.21_ru\References\StockSharp.Messages.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\programming\c# here\Project\StockSharp_TraderConnection\StockSharp_WpfConnectionInterface\bin\Debug\StockSharp_TraderConnection.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\programming\c# here\Project\StockSharp_TraderConnection\StockSharp_WpfConnectionInterface\bin\Debug\StockSharp_WpfConnectionInterface.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

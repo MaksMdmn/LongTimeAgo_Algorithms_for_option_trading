@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using OptionsThugs.Model.Service;
-using OptionsThugs.Model.Trading.Common;
+using Trading.Common;
 using OptionsThugs.ViewModel;
 using OptionsThugs.xTests;
 using StockSharp.BusinessEntities;
@@ -120,7 +120,7 @@ namespace OptionsThugs.View
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            var strategyControlViewModel = new StrategyControlViewModel(StrategyTypes.Dhs);
+            //var strategyControlViewModel = new StrategyControlViewModel(StrategyTypes.Dhs);
         }
     }
 }

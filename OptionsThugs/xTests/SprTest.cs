@@ -1,8 +1,8 @@
-﻿using OptionsThugs.Model.Trading;
-using StockSharp.Algo;
+﻿using StockSharp.Algo;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
+using Trading.Strategies;
 
 namespace OptionsThugs.xTests
 {

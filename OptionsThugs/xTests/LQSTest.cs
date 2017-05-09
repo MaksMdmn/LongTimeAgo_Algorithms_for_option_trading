@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OptionsThugs.Model;
-using OptionsThugs.Model.Trading;
-using StockSharp.Algo;
-using StockSharp.Algo.Strategies;
+﻿using StockSharp.Algo;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
+using Trading.Strategies;
 
 namespace OptionsThugs.xTests
 {

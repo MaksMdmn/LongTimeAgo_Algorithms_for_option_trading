@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Ecng.Xaml;
 using OptionsThugs.Model.Service;
-using OptionsThugs.Model.Trading;
+using Trading.Strategies;
 using OptionsThugs.View;
 using StockSharp.Algo;
 using StockSharp.Messages;
+using Trading.Common;
 
 
 namespace OptionsThugs.ViewModel

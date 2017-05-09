@@ -133,3 +133,5 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\OptionsThugs.
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\View\StrategyControlView.g.cs
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\View\StrategyControlView.baml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugs\obj\Debug\OptionsThugs.csprojResolveAssemblyReference.cache
+D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\Trading.dll
+D:\programming\c# here\Project\OptionsThugs\OptionsThugs\bin\Debug\Trading.pdb

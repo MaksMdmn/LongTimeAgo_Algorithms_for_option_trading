@@ -1,5 +1,6 @@
 ﻿using System;
-using OptionsThugs.Model.Trading;
+using Trading.Common;
+using Trading.Strategies;
 
 namespace OptionsThugs.Model.Service
 {
