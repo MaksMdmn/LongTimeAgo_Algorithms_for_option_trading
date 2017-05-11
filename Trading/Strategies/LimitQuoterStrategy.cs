@@ -93,7 +93,7 @@ namespace Trading.Strategies
                         }
                     }
                 })
-                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork || ProcessState == ProcessStates.Stopping)
+                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
                 .Apply(this);
         }
 
@@ -117,7 +117,7 @@ namespace Trading.Strategies
                         }
                     }
                 })
-                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork || ProcessState == ProcessStates.Stopping)
+                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
                 .Apply(this);
         }
 
@@ -160,6 +160,14 @@ namespace Trading.Strategies
                 return true;
 
             return IsPriceAcceptableForQuoting(currentPrice, StopQuotingPrice);
+        }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, " +
+                   $"{nameof(QuotePriceShift)}: {QuotePriceShift}, " +
+                   $"{nameof(StopQuotingPrice)}: {StopQuotingPrice}, " +
+                   $"{nameof(IsLimitOrdersAlwaysRepresent)}: {IsLimitOrdersAlwaysRepresent}";
         }
     }
 }

@@ -28,7 +28,7 @@ namespace OptionsThugsConsole
             configManager.NewAnswer += Console.WriteLine;
             parser.NewAnswer += Console.WriteLine;
 
-            Console.WriteLine(configManager.GetAllSettings());
+            configManager.PrintAllSettings();
 
             while (true)
             {
@@ -49,7 +49,6 @@ namespace OptionsThugsConsole
                 counter--;
             }
 
-            Console.WriteLine(counter > 0 ? "connection closed safety." : "connection closed forcibly");
             Console.WriteLine("Press any key to exit");
             Console.ReadLine();
 

@@ -144,7 +144,7 @@ namespace Trading.Strategies
                         AssignLeaveRulesAndStart();
                     }
                 })
-                .Until(() => ProcessState == ProcessStates.Stopping)
+                //.Until(() => ProcessState == ProcessStates.Stopping)
                 .Apply(this);
 
             this.WhenStopping()
@@ -297,6 +297,16 @@ namespace Trading.Strategies
             }
 
             return result;
+        }
+
+
+        public override string ToString()
+        {
+            return $"{nameof(_spread)}: {_spread}, " +
+                   $"{nameof(_lot)}: {_lot}, " +
+                   $"{nameof(_sideForEnterToPosition)}: {_sideForEnterToPosition}, " +
+                   $"{nameof(LimitedFuturesValueAbs)}: {LimitedFuturesValueAbs}, " +
+                   $"{nameof(TenRepresentationOfDecimalNumbers)}: {TenRepresentationOfDecimalNumbers}";
         }
     }
 }

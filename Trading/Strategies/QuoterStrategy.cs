@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -24,12 +26,17 @@ namespace Trading.Strategies
             OrderSynchronizer.Timeout = Timeout;
             PositionSynchronizer.Timeout = Timeout;
 
+            WaitAllTrades = true;
+
             this.WhenPositionChanged()
                 .Do(p => PositionSynchronizer.NewPositionChange(p))
                 .Apply(this);
 
             this.WhenNewMyTrade()
-                .Do(mt => PositionSynchronizer.NewTradeChange(mt.Trade.Volume))
+                .Do(mt =>
+                {
+                    PositionSynchronizer.NewTradeChange(mt.Trade.Volume);
+                })
                 .Apply(this);
 
         }
@@ -51,6 +58,7 @@ namespace Trading.Strategies
                 {
                     if (Math.Abs(Position) >= Volume)
                     {
+                        Debug.WriteLine(this.MyTrades.Count());
                         Stop();
                     }
                 })
@@ -79,5 +87,9 @@ namespace Trading.Strategies
 
         protected abstract void QuotingProcess();
 
+        public override string ToString()
+        {
+            return $"{nameof(QuotingSide)}: {QuotingSide}";
+        }
     }
 }

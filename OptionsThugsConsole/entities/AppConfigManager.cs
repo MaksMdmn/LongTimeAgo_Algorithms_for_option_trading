@@ -8,6 +8,7 @@ namespace OptionsThugsConsole.entities
     {
         public static string ArrConfigSeparator = ",";
         public event Action<string> NewAnswer;
+        public event Action<string> SettingChanged;
 
         private static AppConfigManager Instance;
 
@@ -36,12 +37,14 @@ namespace OptionsThugsConsole.entities
                     settings[name].Value = value;
                     OnNewAnswer("value updated");
                 }
-                configFile.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+                configFile.Save(ConfigurationSaveMode.Modified);
+
+                SettingChanged?.Invoke(name);
             }
-            catch (ConfigurationErrorsException)
+            catch (ConfigurationErrorsException e1)
             {
-                OnNewAnswer("Error writing app settings");
+                OnNewAnswer("cannot update/write setting " + e1.Message, ConsoleColor.Red);
             }
         }
 
@@ -58,9 +61,9 @@ namespace OptionsThugsConsole.entities
                 configFile.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
             }
-            catch (ConfigurationErrorsException)
+            catch (ConfigurationErrorsException e1)
             {
-                OnNewAnswer("Error removing app settings");
+                OnNewAnswer("cannot remove setting " + e1.Message, ConsoleColor.Red);
             }
         }
 
@@ -70,9 +73,9 @@ namespace OptionsThugsConsole.entities
             {
                 return ConfigurationManager.AppSettings[name];
             }
-            catch (ConfigurationErrorsException)
+            catch (ConfigurationErrorsException e1)
             {
-                OnNewAnswer("Error getting app setting");
+                OnNewAnswer("cannot get setting " + e1.Message, ConsoleColor.Red);
             }
 
             throw new NullReferenceException("such setting does not exist. Check config file.");
@@ -80,7 +83,6 @@ namespace OptionsThugsConsole.entities
 
         public string GetAllSettings()
         {
-            OnNewAnswer("current program setup:");
             StringBuilder sb = new StringBuilder();
             foreach (string appSetting in ConfigurationManager.AppSettings)
             {
@@ -90,10 +92,26 @@ namespace OptionsThugsConsole.entities
             return sb.ToString();
         }
 
-
-        private void OnNewAnswer(string msg)
+        public void PrintAllSettings()
         {
-            NewAnswer?.Invoke($"{DateTime.Now}: {msg}");
+            OnNewAnswer("", ConsoleColor.Yellow);
+            OnNewAnswer("---  current settings  ---", ConsoleColor.Yellow, false);
+            OnNewAnswer("", ConsoleColor.Yellow,false);
+            OnNewAnswer(GetAllSettings(), ConsoleColor.Yellow, false);
+            OnNewAnswer("---  current settings  ---", ConsoleColor.Yellow, false);
+        }
+
+
+        private void OnNewAnswer(string msg, ConsoleColor color = ConsoleColor.White, bool showDateTime = true)
+        {
+            if (showDateTime)
+                msg = DateTime.Now + ": " + msg;
+
+            if (color != ConsoleColor.White)
+                Console.ForegroundColor = color;
+
+            NewAnswer?.Invoke(msg);
+            Console.ResetColor();
         }
 
     }

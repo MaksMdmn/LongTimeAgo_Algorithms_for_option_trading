@@ -22,8 +22,6 @@ namespace OptionsThugsConsole.entities
         private readonly IConnector _connector;
         private readonly DataManager _dataManager;
 
-        private Security _defaultFuture;
-        private List<Security> _defaultOptions;
         private Portfolio _defaultPortfolio;
 
         public StrategyManager(IConnector connector, DataManager dataManager)
@@ -31,28 +29,9 @@ namespace OptionsThugsConsole.entities
             _connector = connector;
             _dataManager = dataManager;
 
-            _defaultFuture = dataManager.LookupThroughExistingSecurities(
-                AppConfigManager.GetInstance().GetSettingValue(
-                    UserConfigs.FutureToLoad.ToString()));
-
             _defaultPortfolio = dataManager.LookupThroughConnectorsPortfolios(
                 AppConfigManager.GetInstance().GetSettingValue(
                     UserConfigs.Portfolio.ToString()));
-
-            _defaultOptions = new List<Security>();
-
-            var tempArr = AppConfigManager.GetInstance()
-                    .GetSettingValue(UserConfigs.OptionsToLoad.ToString())
-                    .Split(AppConfigManager.ArrConfigSeparator.ToCharArray());
-
-            if (tempArr.Length > 0)
-            {
-                tempArr.ForEach(s =>
-                {
-                    _defaultOptions.Add(dataManager.LookupThroughExistingSecurities(s));
-                });
-            }
-
         }
 
         public string GetStrategyStringLayout(StrategyTypes strategyType)
@@ -162,16 +141,19 @@ namespace OptionsThugsConsole.entities
                     var lqs6AlwaysPlaces = strategyParams[5];
 
                     Sides lSide;
+                    var worstPrice = 0M;
 
                     if (!Enum.TryParse(lqs2Side, true, out lSide))
                         throw new ArgumentException("cannot parse side value (enum exception)");
 
+                    if (!CheckIfDefault(lqs5WorstPrice))
+                        worstPrice = ParseDecimalValue(lqs5WorstPrice);
 
                     var lqsStrategy = new LimitQuoterStrategy(
                         lSide,
                         ParseDecimalValue(lqs3Volume),
                         ParseDecimalValue(lqs4PriceShift),
-                        ParseDecimalValue(lqs5WorstPrice));
+                        worstPrice);
 
                     if (!CheckIfDefault(lqs6AlwaysPlaces))
                         lqsStrategy.IsLimitOrdersAlwaysRepresent = ParseBoolValue(lqs6AlwaysPlaces);

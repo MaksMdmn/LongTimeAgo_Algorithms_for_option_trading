@@ -16,17 +16,29 @@ namespace OptionsThugsConsole.entities
     {
         private readonly IConnector _connector;
 
-        public Dictionary<string, PrimaryStrategy> MappedStrategies { get; }
+        public SynchronizedDictionary<string, PrimaryStrategy> MappedStrategies { get; }
         public SynchronizedDictionary<string, Security> MappedSecurities { get; }
+        public Security UnderlyingAsset { get; set; }
 
         public DataManager(IConnector connector)
         {
-            MappedStrategies = new Dictionary<string, PrimaryStrategy>();
+            MappedStrategies = new SynchronizedDictionary<string, PrimaryStrategy>();
             MappedSecurities = new SynchronizedDictionary<string, Security>();
 
-            _connector = connector;
+            AppConfigManager.GetInstance().SettingChanged += settingName =>
+            {
+                if (settingName.CompareIgnoreCase(UserConfigs.UnderlyingAsset.ToString()))
+                {
+                    UnRegisterMappedUndAssetsSecuruties();
 
-            _connector.NewSecurity += s => MappedSecurities.Add(GetSecurityStringRepresentation(s), s);
+                    UnderlyingAsset =
+                        LookupThroughExistingSecurities(AppConfigManager.GetInstance().GetSettingValue(settingName));
+
+                    RegisterMappedUndAssetsSecuruties();
+                }
+            };
+
+            _connector = connector;
         }
 
         public Security LookupThroughExistingSecurities(string secCodePart)
@@ -57,6 +69,21 @@ namespace OptionsThugsConsole.entities
             return tempSec;
         }
 
+        public List<Security> LookupCollectionThroughExistingSecurities(string secCodePart)
+        {
+            List<Security> tempSecurities = new List<Security>();
+
+            MappedSecurities.Keys.ForEach(key =>
+            {
+                if (key.ToLower().Contains(secCodePart.ToLower()))
+                {
+                    tempSecurities.Add(MappedSecurities[key]);
+                }
+            });
+
+            return tempSecurities;
+        }
+
         public Portfolio LookupThroughConnectorsPortfolios(string portfolioNamePart)
         {
             Portfolio tempPortfolio = null;
@@ -84,7 +111,12 @@ namespace OptionsThugsConsole.entities
             return tempPortfolio;
         }
 
-        private string GetSecurityStringRepresentation(Security s)
+        public List<Position> LookupAllConnectorsPositions()
+        {
+            return _connector.Positions.ToList();
+        }
+
+        public string GetSecurityStringRepresentation(Security s)
         {
             var sb = new StringBuilder();
             var code = s.Code.Substring(0, 2);
@@ -116,6 +148,31 @@ namespace OptionsThugsConsole.entities
                     .ToString();
 
             throw new ArgumentException("could be only parsed futures and options");
+        }
+
+        public void RegisterMappedUndAssetsSecuruties()
+        {
+            RegisterOrUnRegisterSecurity(_connector.RegisterSecurity);
+        }
+
+        public void UnRegisterMappedUndAssetsSecuruties()
+        {
+            RegisterOrUnRegisterSecurity(_connector.UnRegisterSecurity);
+        }
+
+        private void RegisterOrUnRegisterSecurity(Action<Security> connectorMethod)
+        {
+            var unAssetCodePart = UnderlyingAsset.Code.Substring(0, 2);
+
+            MappedSecurities.Values.ForEach(s =>
+            {
+                var curAssetCodePart = s.Code.Substring(0, 2);
+
+                if (!curAssetCodePart.CompareIgnoreCase(unAssetCodePart))
+                    return;
+
+                connectorMethod(s);
+            });
         }
     }
 }

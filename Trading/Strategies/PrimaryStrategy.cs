@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
@@ -9,11 +11,6 @@ namespace Trading.Strategies
     public abstract class PrimaryStrategy : Strategy
     {
         public int Timeout { get; set; }
-
-        protected static string DelimiterAfterName = "=";
-        protected static string DelimiterAfterValue = ";";
-        protected static string DelimiterArrStart = "[";
-        protected static string DelimiterArrEnd = "]";
 
         private bool _isSetDone;
         private volatile bool _isCorrectChild;
@@ -90,7 +87,7 @@ namespace Trading.Strategies
 
         protected void DoStrategyPreparation(Security[] securities, Security[] marketDepths, Portfolio[] portfolios)
         {
-            if(_isCorrectChild) return;
+            if (_isCorrectChild) return;
 
             if (!_isSetDone)
                 throw new ArgumentException($"You should set following entities: Connector: {Connector}, Portfolio: {Portfolio} and strategy Security: {Security}");
@@ -108,7 +105,6 @@ namespace Trading.Strategies
             if (portfolios.Length > 0)
                 portfolios.ForEach(p => Connector.RegisterPortfolio(p));
         }
-
 
         //TODO это общий обработчик, подумать может нужно останавливать стратегию и писать разные обработчики.
         private void ShowAppropriateMsgBox(string text, string error, string caption)

@@ -68,6 +68,6 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Newton
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\DevExpress.Data.v15.2.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\DevExpress.Printing.v15.2.Core.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\DevExpress.Xpf.Grid.v15.2.Core.xml
-D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Debug\OptionsThugsConsole.csprojResolveAssemblyReference.cache
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Trading.dll
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Trading.pdb
+D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Debug\OptionsThugsConsole.csprojResolveAssemblyReference.cache

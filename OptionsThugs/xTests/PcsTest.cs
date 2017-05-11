@@ -14,7 +14,7 @@ namespace OptionsThugs.xTests
 
         public void CreateNewCondtrategy(decimal priceToClose, Security securityToClose, PriceDirection securityDesirableDirection, decimal positionToClose)
         {
-            StrategyForTest = new PositionCloserStrategy(priceToClose, securityToClose, securityDesirableDirection, positionToClose);
+            //StrategyForTest = new PositionCloserStrategy(priceToClose, securityToClose, securityDesirableDirection, positionToClose);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
         }

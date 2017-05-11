@@ -2,6 +2,6 @@
 {
     public enum UserKeyWords
     {
-        F, C, P, All
+        F, C, P, All, Grk, Vol, Spr, Pos
     }
 }

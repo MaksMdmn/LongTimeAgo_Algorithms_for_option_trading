@@ -15,8 +15,8 @@ namespace OptionsThugs.xTests
         public void CreateNewSprStrategy(decimal currentPosition, decimal currentPositionPrice, decimal spread, decimal lot,
             Sides sideForEnterToPosition, decimal absMaxFuturesNumber)
         {
-            StrategyForTest = new SpreaderStrategy(currentPosition, currentPositionPrice, spread, lot,
-                sideForEnterToPosition, absMaxFuturesNumber);
+            //StrategyForTest = new SpreaderStrategy(currentPosition, currentPositionPrice, spread, lot,
+            //    sideForEnterToPosition, absMaxFuturesNumber);
 
             StrategyForTest.SetStrategyEntitiesForWork(StConnector, StSecurity, StPortfolio);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
@@ -130,7 +131,7 @@ namespace Trading.Strategies
                         {
                             _priceLevelsForHedge.ForEach(level =>
                             {
-                                if (MyTradeHelper.CheckIfWasCrossedByPrice(level, futuresQuote.Price))
+                                if (MyTradingHelper.CheckIfWasCrossedByPrice(level, futuresQuote.Price))
                                 {
                                     DoHedge(CalcPosDelta(), 1);
                                 }
@@ -150,7 +151,7 @@ namespace Trading.Strategies
                     }
 
                 })
-                .Until(() => ProcessState == ProcessStates.Stopping) // может лишнее
+                //.Until(() => ProcessState == ProcessStates.Stopping) // может лишнее
                 .Apply(this);
 
 
@@ -235,6 +236,15 @@ namespace Trading.Strategies
                 if (level.Price <= 0)
                     throw new ArgumentException("all prices must be above zero: " + level);
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(MaxFuturesPositionVal)}: {MaxFuturesPositionVal}, " +
+                   $"{nameof(MinFuturesPositionVal)}: {MinFuturesPositionVal}, " +
+                   $"{nameof(DeltaStep)}: {DeltaStep}, " +
+                   $"{nameof(DeltaBuffer)}: {DeltaBuffer}, " +
+                   $"{nameof(PriceLevelsForHedge)}: {PriceLevelsForHedge.Select(phl => phl.Direction + " " + phl.Price + " ")}";
         }
     }
 }

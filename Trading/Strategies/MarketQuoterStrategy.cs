@@ -69,5 +69,11 @@ namespace Trading.Strategies
 
             return IsPriceAcceptableForQuoting(currentPrice, TargetPrice);
         }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, " +
+                   $"{nameof(TargetPrice)}: {TargetPrice}";
+        }
     }
 }

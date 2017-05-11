@@ -2,6 +2,6 @@
 {
     public enum UserConfigs
     {
-        Portfolio, FutureToLoad, OptionsToLoad
+        Portfolio, UnderlyingAsset
     }
 }

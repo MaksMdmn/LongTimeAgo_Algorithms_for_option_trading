@@ -68,13 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\GreeksCalculator.cs" />
-    <Compile Include="Common\MyTradeHelper.cs" />
+    <Compile Include="Common\MyTradingHelper.cs" />
     <Compile Include="Common\OrderSynchronizer.cs" />
     <Compile Include="Common\PositionSynchronizer.cs" />
     <Compile Include="Common\PriceDirection.cs" />
     <Compile Include="Common\PriceHedgeLevel.cs" />
     <Compile Include="Common\StrategyTypes.cs" />
-    <Compile Include="Common\TradeEmulator4Test.cs" />
     <Compile Include="Strategies\DeltaHedgerStrategy.cs" />
     <Compile Include="Strategies\LimitQuoterStrategy.cs" />
     <Compile Include="Strategies\MarketQuoterStrategy.cs" />

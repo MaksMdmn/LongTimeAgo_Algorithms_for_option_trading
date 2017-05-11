@@ -51,7 +51,7 @@ namespace OptionsThugs.xTests
             if (dhs == null)
                 throw new InvalidCastException("problem with strategy casting, check test method");
 
-            dhs.PriceLevelsForHedge = priceLevelsForHedge;
+            //dhs.PriceLevelsForHedge = priceLevelsForHedge;
         }
 
 
@@ -66,7 +66,7 @@ namespace OptionsThugs.xTests
                 throw new InvalidCastException("problem with strategy casting, check test method");
 
             dhs.DeltaStep = deltaStep;
-            dhs.PriceLevelsForHedge = priceLevelsForHedge;
+            //dhs.PriceLevelsForHedge = priceLevelsForHedge;
 
         }
 

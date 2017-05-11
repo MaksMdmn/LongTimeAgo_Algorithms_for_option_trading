@@ -92,6 +92,16 @@ namespace Trading.Strategies
             }
 
             base.OnStarted();
+
+
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(_priceToClose)}: {_priceToClose}, " +
+                   $"{nameof(_securityDesirableDirection)}: {_securityDesirableDirection}, " +
+                   $"{nameof(_strategyOrderSide)}: {_strategyOrderSide}, " +
+                   $"{nameof(SecurityWithSignalToClose)}: {SecurityWithSignalToClose.Code}";
         }
     }
 }
