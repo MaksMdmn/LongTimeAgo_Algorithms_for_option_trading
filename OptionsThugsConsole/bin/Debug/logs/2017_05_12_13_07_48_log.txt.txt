@@ -1,0 +1,13 @@
+﻿00:00:00.000|       |QuikTrader|Connect
+13:07:52.000|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001...
+13:07:52.001|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001 is OK.
+13:07:52.003|       |Quik LUA. Transactions|Sending logon to 127.0.0.1:5001...
+13:07:52.015|       |Quik LUA. Transactions|Logon sent to 127.0.0.1:5001 OK.
+13:07:52.015|       |Quik LUA. Market data|Connect to 127.0.0.1:5001...
+13:07:52.017|       |Quik LUA. Market data|Connect to 127.0.0.1:5001 is OK.
+13:07:52.017|       |Quik LUA. Market data|Sending logon to 127.0.0.1:5001...
+13:07:52.018|       |Quik LUA. Market data|Logon sent to 127.0.0.1:5001 OK.
+13:07:52.021|       |Quik LUA. Transactions|Start message processing.
+13:07:52.021|       |Quik LUA. Market data|Start message processing.
+13:07:52.071|       |QuikTrader|Создан новый портфель SPBFUT26WLL.
+13:07:52.074|       |QuikTrader|Создан новый портфель FAE8653.

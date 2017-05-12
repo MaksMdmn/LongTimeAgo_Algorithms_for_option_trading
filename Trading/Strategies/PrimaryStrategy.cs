@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Timers;
 using Ecng.Collections;
+using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
@@ -18,6 +20,8 @@ namespace Trading.Strategies
         private Security[] _marketDepths;
         private Portfolio[] _portfolios;
 
+        //private readonly Timer _workingTimeControl;
+
         protected PrimaryStrategy()
         {
             Timeout = 2000;
@@ -30,6 +34,20 @@ namespace Trading.Strategies
             DisposeOnStop = false;
             MaxErrorCount = 10;
             OrdersKeepTime = TimeSpan.Zero;
+
+            TimeHelper.SyncMarketTime();
+
+            //_workingTimeControl = new Timer();
+            //_workingTimeControl.Elapsed += (sender, args) =>
+            //{
+            //    //TODO делать саспенд на клиринг и восстанавливать после (беда в том что на фортс клиринг иногда больше, чем зашито в либе)
+
+            //    ExchangeBoard.Forts.WorkingTime.Periods[0].Times
+
+            //    TimeHelper.Now
+            //};
+            //_workingTimeControl.Interval = 1000;
+            //_workingTimeControl.Enabled = true;
         }
 
         public void SetStrategyEntitiesForWork(IConnector connector, Security security, Portfolio portfolio)
@@ -61,6 +79,11 @@ namespace Trading.Strategies
             Connector.Error += e => { ShowAppropriateMsgBox("Connector.Error event: ", e.ToString(), "Connection error"); };
             Connector.ConnectionError += e => { ShowAppropriateMsgBox("Connector.ConnectionError event: ", e.ToString(), "Connection error2"); };
             Connector.OrderRegisterFailed += of => { ShowAppropriateMsgBox("Connector.OrderRegisterFaild event: ", of.Error.ToString(), "Order registration failed"); };
+
+            //this.WhenStopping()
+            //    .Do(() => _workingTimeControl.Enabled = false)
+            //    .Once()
+            //    .Apply(this);
 
             base.OnStarted();
         }

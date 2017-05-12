@@ -17,7 +17,7 @@ namespace OptionsThugsConsole.entities
         private readonly IConnector _connector;
 
         public SynchronizedDictionary<string, PrimaryStrategy> MappedStrategies { get; }
-        public SynchronizedDictionary<string, Security> MappedSecurities { get; }
+        public SynchronizedDictionary<string, Security> MappedSecurities { get; set; }
         public Security UnderlyingAsset { get; set; }
 
         public DataManager(IConnector connector)

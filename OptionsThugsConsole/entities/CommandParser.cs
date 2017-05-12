@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Ecng.Collections;
 using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugsConsole.enums;
@@ -11,6 +12,7 @@ using StockSharp.Algo;
 using StockSharp.Algo.Derivatives;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
+using StockSharp.Logging;
 using StockSharp.Messages;
 using Trading.Common;
 
@@ -23,10 +25,25 @@ namespace OptionsThugsConsole.entities
         private static CommandParser Instance;
         private DataManager _dataManager;
         private readonly IConnector _connector;
+        private readonly FileLogListener _logger;
+        private readonly LogManager _logManager;
 
         private CommandParser(IConnector connector)
         {
             _connector = connector;
+            _logger = new FileLogListener
+            {
+                Append = true,
+                MaxLength = 2048000,
+                FileName = "{0:00}_{1:00}_{2:00}_log.txt".Put(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                SeparateByDates = SeparateByDateModes.FileName,
+                LogDirectory = "logs"
+            };
+
+            _logManager = new LogManager();
+
+            _logManager.Listeners.Add(_logger);
+            _logManager.Sources.Add(_connector);
         }
 
         public static CommandParser GetInstance(IConnector connector)
@@ -118,7 +135,7 @@ namespace OptionsThugsConsole.entities
                 return;
             }
 
-            var tempSecurityPositionMap = new Dictionary<Security, decimal>();
+            var tempSecurityMap = new Dictionary<Security, decimal>();
 
             var sb = new StringBuilder();
             sb.AppendLine();
@@ -127,7 +144,7 @@ namespace OptionsThugsConsole.entities
             {
                 _dataManager
                     .LookupAllConnectorsPositions()
-                    .ForEach(p => { tempSecurityPositionMap.Add(p.Security, p.CurrentValue ?? 0); });
+                    .ForEach(p => { tempSecurityMap.Add(p.Security, p.CurrentValue ?? 0); });
             }
             else
             {
@@ -135,10 +152,14 @@ namespace OptionsThugsConsole.entities
 
                 _dataManager
                     .LookupCollectionThroughExistingSecurities(secCodePart)
-                    .ForEach(s => { tempSecurityPositionMap.Add(s, 1); });
+                    .ForEach(s => { tempSecurityMap.Add(s, 1); });
             }
 
-
+            if (tempSecurityMap.Count == 0)
+            {
+                OnNewAnswer($"any securities with such code part, please try more specific letters", ConsoleColor.Yellow);
+                return;
+            }
 
             switch (kw1)
             {
@@ -148,7 +169,7 @@ namespace OptionsThugsConsole.entities
                     decimal vega = 0M;
                     decimal theta = 0M;
 
-                    tempSecurityPositionMap.ForEach(kvp =>
+                    tempSecurityMap.ForEach(kvp =>
                     {
                         if (kvp.Value == 0)
                         {
@@ -176,15 +197,15 @@ namespace OptionsThugsConsole.entities
 
                     sb.Append($"POSITIONS GREEKS " +
                               $"delta: {GreeksRounding(delta)} " +
-                              $"gamma: {GreeksRounding(gamma)} " +
+                              $"gamma: {GreeksRounding(gamma, 1)} " +
                               $"vega: {GreeksRounding(vega)} " +
-                              $"theta: {GreeksRounding(theta)}");
+                              $"theta: {GreeksRounding(theta, -2)}");
                     break;
                 case UserKeyWords.Grk:
 
                     var unAssetCodePart = _dataManager.UnderlyingAsset.Code.Substring(0, 2);
 
-                    tempSecurityPositionMap.ForEach(kvp =>
+                    tempSecurityMap.ForEach(kvp =>
                     {
                         var curAssetCodePart = kvp.Key.Code.Substring(0, 2);
 
@@ -209,23 +230,24 @@ namespace OptionsThugsConsole.entities
 
                             sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
                             .Append($" delta: {GreeksRounding(bs.Delta(DateTimeOffset.Now, null, lastPrice) ?? 0)}")
-                            .Append($" gamma: {GreeksRounding(bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0)}")
+                            .Append($" gamma: {GreeksRounding(bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0, 1)}")
                             .Append($" vega: {GreeksRounding(bs.Vega(DateTimeOffset.Now, null, lastPrice) ?? 0)}")
-                            .Append($" theta: {GreeksRounding(bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0)}")
+                            .Append($" theta: {GreeksRounding(bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0, -2)}")
                             .AppendLine();
                         }
                     });
                     break;
                 case UserKeyWords.Spr:
-                    tempSecurityPositionMap.ForEach(kvp =>
+                    tempSecurityMap.ForEach(kvp =>
                     {
                         sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
-                        .Append($" spread: {PriceRounding(kvp.Key.BestPair?.SpreadPrice ?? 0)}")
+                        .Append($" spread: {PriceRounding(kvp.Key.BestPair?.SpreadPrice ?? 0)}" +
+                                $"   [{PriceRounding(kvp.Key.BestBid?.Price ?? 0)} / {PriceRounding(kvp.Key.BestAsk?.Price ?? 0)}]")
                         .AppendLine();
                     });
                     break;
                 case UserKeyWords.Vol:
-                    tempSecurityPositionMap.ForEach(kvp =>
+                    tempSecurityMap.ForEach(kvp =>
                     {
                         if (kvp.Key.Type == SecurityTypes.Option)
                         {
@@ -237,8 +259,8 @@ namespace OptionsThugsConsole.entities
                                 VolaRounding(bs.ImpliedVolatility(DateTimeOffset.Now, kvp.Key.BestAsk.Price) ?? 0);
 
                             sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
-                            .Append($" bid vol: {bidVol}")
-                            .Append($" ask vol: {askVol}")
+                            .Append($" bid vol: {bidVol}%")
+                            .Append($" ask vol: {askVol}%")
                             .AppendLine();
                         }
                     });
@@ -314,10 +336,10 @@ namespace OptionsThugsConsole.entities
 
                 _dataManager.MappedStrategies.ForEach(kvp =>
                 {
-                    sb.Append("name: ")
+                    sb.Append("*name: ")
                         .Append(kvp.Key)
                         .AppendLine()
-                        .Append("state: ")
+                        .Append("*state: ")
                         .Append(kvp.Value.ProcessState)
                         .Append(" errors: ")
                         .Append(kvp.Value.ErrorCount)
@@ -330,7 +352,7 @@ namespace OptionsThugsConsole.entities
                         .AppendLine()
                         .AppendLine();
 
-                    OnNewAnswer(sb.ToString());
+                    OnNewAnswer(sb.ToString(), ConsoleColor.Green, false);
                 });
             }
             OnNewAnswer($"program underlying asset: {_dataManager.UnderlyingAsset.Code}", ConsoleColor.Green, false);
@@ -369,7 +391,7 @@ namespace OptionsThugsConsole.entities
 
                 else
                     OnNewAnswer("please choose correct strategy name from following: "
-                        + _dataManager.MappedStrategies.Select(kvp => kvp.Key + Environment.NewLine), ConsoleColor.Yellow);
+                        + _dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray().Join(Environment.NewLine), ConsoleColor.Yellow);
             }
 
             keysToRemove.ForEach(s => { _dataManager.MappedStrategies.Remove(s); });
@@ -397,7 +419,11 @@ namespace OptionsThugsConsole.entities
 
                             .Apply(kvp.Value);
                         kvp.Value.WhenStopping()
-                            .Do(() => NewAnswer($"{kvp.Key} strategy stopping, pos: {kvp.Value.Position}"))
+                            .Do(() =>
+                            {
+                                NewAnswer($"{kvp.Key} strategy stopping, pos: {kvp.Value.Position}");
+                                _dataManager.MappedStrategies.Remove(kvp.Key);
+                            })
                             .Apply(kvp.Value);
 
                         kvp.Value.Start();
@@ -414,7 +440,11 @@ namespace OptionsThugsConsole.entities
                         .Apply(soughtStrategy);
 
                     soughtStrategy.WhenStopping()
-                        .Do(() => NewAnswer($"{soughtStrategy} strategy stopping, pos: {soughtStrategy.Position}"))
+                        .Do(() =>
+                        {
+                            NewAnswer($"{soughtStrategy} strategy stopping, pos: {soughtStrategy.Position}");
+                            _dataManager.MappedStrategies.Remove(strategyName);
+                        })
                         .Apply(soughtStrategy);
 
                     soughtStrategy.Start();
@@ -422,7 +452,7 @@ namespace OptionsThugsConsole.entities
                 else
                 {
                     OnNewAnswer("please choose correct strategy name from following: "
-                        + _dataManager.MappedStrategies.Select(kvp => kvp.Key + Environment.NewLine), ConsoleColor.Yellow);
+                        + _dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray().Join(Environment.NewLine), ConsoleColor.Yellow);
                 }
             }
         }
@@ -472,6 +502,8 @@ namespace OptionsThugsConsole.entities
                 var strategy = strategyMaker.CreateStrategyFromString(param1, Console.ReadLine());
                 _dataManager.MappedStrategies.Add(param2, strategy);
 
+                _logManager.Sources.Add(strategy);
+
                 OnNewAnswer("strategy created.");
             }
             catch (ArgumentException e1)
@@ -494,11 +526,36 @@ namespace OptionsThugsConsole.entities
             {
                 try
                 {
-                    Thread.Sleep(3000); //dunno what to do
+                    Thread.Sleep(5000); //dunno what to do
+
+                    var tempSecurityMap = new SynchronizedDictionary<string, Security>();
+                    var cannotReadCounter = 0;
+                    var alreadyLoadedCounter = 0;
+
                     _connector.Securities.ForEach(s =>
                     {
-                        _dataManager.MappedSecurities.Add(_dataManager.GetSecurityStringRepresentation(s), s);
+                        if (s.ExpiryDate == null || s.Type != SecurityTypes.Future && s.Type != SecurityTypes.Option)
+                        {
+                            cannotReadCounter++;
+                            return;
+                        }
+
+                        var key = _dataManager.GetSecurityStringRepresentation(s);
+
+                        if (tempSecurityMap.ContainsKey(key))
+                        {
+                            alreadyLoadedCounter++;
+                        }
+                        else
+                        {
+                            tempSecurityMap.Add(key, s);
+                        }
                     });
+
+                    _dataManager.MappedSecurities = tempSecurityMap;
+
+                    OnNewAnswer($"couldn't read instruments: {cannotReadCounter}", ConsoleColor.Red, false);
+                    OnNewAnswer($"attempts to load more than twice: {alreadyLoadedCounter}", ConsoleColor.Red, false);
 
                     _dataManager.UnderlyingAsset = _dataManager.LookupThroughExistingSecurities(
                         AppConfigManager.GetInstance().GetSettingValue(UserConfigs.UnderlyingAsset.ToString()));
@@ -525,9 +582,9 @@ namespace OptionsThugsConsole.entities
             _connector?.Disconnect();
         }
 
-        private decimal GreeksRounding(decimal value)
+        private decimal GreeksRounding(decimal value, int extraRoundNumbers = 0)
         {
-            return Math.Round(value, 4);
+            return Math.Round(value, 4 + extraRoundNumbers);
         }
 
         private decimal VolaRounding(decimal value)
