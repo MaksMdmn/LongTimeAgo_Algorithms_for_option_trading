@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="entities\AppConfigManager.cs" />
+    <Compile Include="entities\UserPosition.cs" />
     <Compile Include="enums\UserConfigs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

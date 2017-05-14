@@ -75,56 +75,72 @@ namespace Trading.Strategies
 
         private void ProcessFastOrder(Order order)
         {
+            //TODO попробовал 2 раза выполнить действие, поможет ли от лага?
+            DoSafeFastOrderCanceling(order);
+
             Security.WhenMarketDepthChanged(Connector)
-                .Do(md =>
-                {
-                    if (OrderSynchronizer.IsAnyOrdersInWork
-                    && IsQuotingNeeded(order.Price))
-                    {
-                        try
-                        {
-                            OrderSynchronizer.CancelCurrentOrder();
-                        }
-                        catch (InvalidOperationException ex)
-                        {
-                            IncrMaxErrorCountIfNotScared();
-                            this.AddWarningLog("MaxErrorCount was incremented");
-                            this.AddErrorLog(ex);
-                        }
-                    }
-                })
+                .Do(md => { DoSafeFastOrderCanceling(order); })
                 .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
                 .Apply(this);
         }
 
         private void ProcessSlowOrder(Order order)
         {
+            //TODO попробовал 2 раза выполнить действие, поможет ли от лага?
+            DoSafeSlowOrderCanceling(order);
+
             Security.WhenMarketDepthChanged(Connector)
-                .Do(md =>
-                {
-                    if (OrderSynchronizer.IsAnyOrdersInWork
-                    && IsBestQuoteMyQuote(order, MarketDepth.GetSuitableBestLimitQuote(QuotingSide)))
-                    {
-                        try
-                        {
-                            OrderSynchronizer.CancelCurrentOrder();
-                        }
-                        catch (InvalidOperationException ex)
-                        {
-                            IncrMaxErrorCountIfNotScared();
-                            this.AddWarningLog("MaxErrorCount was incremented");
-                            this.AddErrorLog(ex);
-                        }
-                    }
-                })
+                .Do(md => { DoSafeSlowOrderCanceling(order); })
                 .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
                 .Apply(this);
         }
 
+        private void DoSafeFastOrderCanceling(Order order)
+        {
+            if (OrderSynchronizer.IsAnyOrdersInWork
+                    && IsQuotingNeeded(order.Price))
+            {
+                try
+                {
+                    OrderSynchronizer.CancelCurrentOrder();
+                }
+                catch (InvalidOperationException ex)
+                {
+                    IncrMaxErrorCountIfNotScared();
+                    this.AddWarningLog("MaxErrorCount was incremented");
+                    this.AddErrorLog(ex);
+                }
+            }
+        }
+
+        private void DoSafeSlowOrderCanceling(Order order)
+        {
+            if (OrderSynchronizer.IsAnyOrdersInWork
+                    && !IsBestQuoteMyQuote(order, MarketDepth.GetSuitableBestLimitQuote(QuotingSide)))
+            //TODO добавил "!" тк логика была не верна, проверить
+            {
+                try
+                {
+                    OrderSynchronizer.CancelCurrentOrder();
+                }
+                catch (InvalidOperationException ex)
+                {
+                    IncrMaxErrorCountIfNotScared();
+                    this.AddWarningLog("MaxErrorCount was incremented");
+                    this.AddErrorLog(ex);
+                }
+            }
+        }
+
         private bool IsQuotingNeeded(decimal currentQuotingPrice)
         {
-            Quote bestQuote = MarketDepth.GetSuitableBestLimitQuote(QuotingSide);
-            Quote preBestQuote = MarketDepth.GetSuitableLimitQuotes(QuotingSide)[1]; // 2ая лучшая котировка
+            var bestQuotesCollection = MarketDepth.GetSuitableLimitQuotes(QuotingSide);
+
+            if (bestQuotesCollection.Length < 2)
+                return true; // снять заявку
+
+            Quote bestQuote = bestQuotesCollection[0];
+            Quote preBestQuote = bestQuotesCollection[1]; // 2ая лучшая котировка
 
             if (bestQuote == null || preBestQuote == null)
                 return true; // снять заявку

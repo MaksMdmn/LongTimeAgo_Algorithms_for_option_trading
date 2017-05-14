@@ -15,23 +15,25 @@ using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
 using Trading.Common;
+using Trading.Strategies;
 
 namespace OptionsThugsConsole.entities
 {
-    public class CommandParser
+    public class CommandHandler
     {
         public event Action<string> NewAnswer;
 
-        private static CommandParser Instance;
+        private static CommandHandler Instance;
+
+        private Dictionary<string, UserPosition> _userPositions;
         private DataManager _dataManager;
         private readonly IConnector _connector;
-        private readonly FileLogListener _logger;
         private readonly LogManager _logManager;
 
-        private CommandParser(IConnector connector)
+        private CommandHandler(IConnector connector)
         {
             _connector = connector;
-            _logger = new FileLogListener
+            var logger = new FileLogListener
             {
                 Append = true,
                 MaxLength = 2048000,
@@ -42,13 +44,15 @@ namespace OptionsThugsConsole.entities
 
             _logManager = new LogManager();
 
-            _logManager.Listeners.Add(_logger);
+            UserPosition.LoadFromXml()?.ForEach(up => { _userPositions.Add(up.SecCode, up); });
+
+            _logManager.Listeners.Add(logger);
             _logManager.Sources.Add(_connector);
         }
 
-        public static CommandParser GetInstance(IConnector connector)
+        public static CommandHandler GetInstance(IConnector connector)
         {
-            return Instance ?? (Instance = new CommandParser(connector));
+            return Instance ?? (Instance = new CommandHandler(connector));
         }
 
         public void ParseUserMessage(string msg)
@@ -195,11 +199,28 @@ namespace OptionsThugsConsole.entities
                         }
                     });
 
-                    sb.Append($"POSITIONS GREEKS " +
+                    sb.Append($"POSITION GREEKS " +
                               $"delta: {GreeksRounding(delta)} " +
                               $"gamma: {GreeksRounding(gamma, 1)} " +
                               $"vega: {GreeksRounding(vega)} " +
                               $"theta: {GreeksRounding(theta, -2)}");
+                    sb.AppendLine();
+                    sb.Append($"POSITIONS FROM XML-FILE:");
+                    sb.AppendLine();
+                    _userPositions.ForEach(kvp =>
+                    {
+                        sb
+                        .Append(kvp.Key)
+                        .Append(" ")
+                        .Append(kvp.Value.Quantity)
+                        .Append(" ")
+                        .Append(kvp.Value.Price)
+                        .Append(" ")
+                        .Append($" was created:{kvp.Value.CreatedTime}")
+                        .AppendLine();
+                    });
+                    sb.AppendLine();
+
                     break;
                 case UserKeyWords.Grk:
 
@@ -370,7 +391,7 @@ namespace OptionsThugsConsole.entities
 
             UserKeyWords kw;
 
-            var keysToRemove = new List<string>();
+            var pairsToRemove = new List<KeyValuePair<string, PrimaryStrategy>>();
 
             if (Enum.TryParse(strategyName, true, out kw))
             {
@@ -378,7 +399,7 @@ namespace OptionsThugsConsole.entities
                     _dataManager.MappedStrategies.ForEach(kvp =>
                     {
                         kvp.Value.Stop();
-                        keysToRemove.Add(kvp.Key);
+                        pairsToRemove.Add(kvp);
                     });
             }
             else
@@ -386,7 +407,8 @@ namespace OptionsThugsConsole.entities
                 if (_dataManager.MappedStrategies.ContainsKey(strategyName))
                 {
                     _dataManager.MappedStrategies[strategyName].Stop();
-                    keysToRemove.Add(strategyName);
+                    pairsToRemove
+                        .Add(new KeyValuePair<string, PrimaryStrategy>(strategyName, _dataManager.MappedStrategies[strategyName]));
                 }
 
                 else
@@ -394,7 +416,9 @@ namespace OptionsThugsConsole.entities
                         + _dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray().Join(Environment.NewLine), ConsoleColor.Yellow);
             }
 
-            keysToRemove.ForEach(s => { _dataManager.MappedStrategies.Remove(s); });
+
+            if (pairsToRemove.Count > 0)
+                _dataManager.MappedStrategies.RemoveRange(pairsToRemove);
         }
 
         private void DoStartCmd(string[] userParams)
@@ -422,7 +446,6 @@ namespace OptionsThugsConsole.entities
                             .Do(() =>
                             {
                                 NewAnswer($"{kvp.Key} strategy stopping, pos: {kvp.Value.Position}");
-                                _dataManager.MappedStrategies.Remove(kvp.Key);
                             })
                             .Apply(kvp.Value);
 
@@ -443,7 +466,6 @@ namespace OptionsThugsConsole.entities
                         .Do(() =>
                         {
                             NewAnswer($"{soughtStrategy} strategy stopping, pos: {soughtStrategy.Position}");
-                            _dataManager.MappedStrategies.Remove(strategyName);
                         })
                         .Apply(soughtStrategy);
 
@@ -558,11 +580,36 @@ namespace OptionsThugsConsole.entities
                     OnNewAnswer($"attempts to load more than twice: {alreadyLoadedCounter}", ConsoleColor.Red, false);
 
                     _dataManager.UnderlyingAsset = _dataManager.LookupThroughExistingSecurities(
-                        AppConfigManager.GetInstance().GetSettingValue(UserConfigs.UnderlyingAsset.ToString()));
+                        AppConfigManager.GetInstance().GetSettingValue(UserConfigs.UndAsset.ToString()));
 
                     _dataManager.RegisterMappedUndAssetsSecuruties();
 
                     OnNewAnswer($"{_dataManager.MappedSecurities.Count} securities loaded.");
+
+                    _connector.NewMyTrade += mt =>
+                    {
+                        var secCode = mt.Trade.Security.Code;
+                        var price = mt.Trade.Price;
+                        var size = mt.Trade.Volume;
+                        var side = mt.Order.Direction;
+
+                        if (!_userPositions.ContainsKey(secCode))
+                        {
+                            var userPosNew = new UserPosition(secCode);
+                            _userPositions.Add(secCode, userPosNew);
+
+                        }
+
+                        _userPositions[secCode].AddNewDeal(side, price, size);
+
+                        UserPosition.SaveToXml(_userPositions.Values.ToList());
+
+                        OnNewAnswer($"NEW TRADE [ " +
+                                    $"side: {mt.Order.Direction} " +
+                                    $"size: {mt.Trade.Volume}  " +
+                                    $"price: {mt.Trade.Price} " +
+                                    $"sec: {mt.Trade.Security.Code} ], deal saved", ConsoleColor.Green);
+                    };
                 }
                 catch (Exception e1)
                 {
@@ -578,6 +625,8 @@ namespace OptionsThugsConsole.entities
                 OnNewAnswer("disconnected (success)");
                 _dataManager = null;
             };
+
+            DoStopCmd(new[] { UserKeyWords.All.ToString() });
 
             _connector?.Disconnect();
         }

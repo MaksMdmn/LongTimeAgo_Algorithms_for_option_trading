@@ -27,7 +27,7 @@ namespace OptionsThugsConsole.entities
 
             AppConfigManager.GetInstance().SettingChanged += settingName =>
             {
-                if (settingName.CompareIgnoreCase(UserConfigs.UnderlyingAsset.ToString()))
+                if (settingName.CompareIgnoreCase(UserConfigs.UndAsset.ToString()))
                 {
                     UnRegisterMappedUndAssetsSecuruties();
 

@@ -1,0 +1,408 @@
+﻿00:00:00.000|       |QuikTrader|Connect
+19:06:12.684|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001...
+19:06:12.685|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001 is OK.
+19:06:12.687|       |Quik LUA. Transactions|Sending logon to 127.0.0.1:5001...
+19:06:12.698|       |Quik LUA. Transactions|Logon sent to 127.0.0.1:5001 OK.
+19:06:12.698|       |Quik LUA. Market data|Connect to 127.0.0.1:5001...
+19:06:12.700|       |Quik LUA. Market data|Connect to 127.0.0.1:5001 is OK.
+19:06:12.700|       |Quik LUA. Market data|Sending logon to 127.0.0.1:5001...
+19:06:12.701|       |Quik LUA. Market data|Logon sent to 127.0.0.1:5001 OK.
+19:06:12.704|       |Quik LUA. Market data|Start message processing.
+19:06:12.704|       |Quik LUA. Transactions|Start message processing.
+19:06:12.829|       |QuikTrader|Создан новый портфель SPBFUT00d75.
+19:06:12.870|Warning|QuikTrader|Заявка 289182600 не найдена.
+19:06:12.872|Warning|QuikTrader|Заявка 289182818 не найдена.
+19:06:12.873|Warning|QuikTrader|Заявка 289182427 не найдена.
+19:06:12.873|Warning|QuikTrader|Заявка 289182726 не найдена.
+19:06:12.873|Warning|QuikTrader|Заявка 289298011 не найдена.
+19:06:12.873|Warning|QuikTrader|Заявка 289299924 не найдена.
+19:06:12.874|Warning|QuikTrader|Заявка 289321234 не найдена.
+19:06:12.874|Warning|QuikTrader|Заявка 289321984 не найдена.
+19:06:12.874|Warning|QuikTrader|Заявка 289329257 не найдена.
+19:06:12.874|Warning|QuikTrader|Заявка 289331910 не найдена.
+19:06:12.875|Warning|QuikTrader|Заявка 289332088 не найдена.
+19:06:12.875|Warning|QuikTrader|Заявка 289332598 не найдена.
+19:06:12.875|Warning|QuikTrader|Заявка 289332739 не найдена.
+19:06:12.875|Warning|QuikTrader|Заявка 289333101 не найдена.
+19:06:12.876|Warning|QuikTrader|Заявка 289358252 не найдена.
+19:06:12.876|Warning|QuikTrader|Заявка 289361102 не найдена.
+19:06:12.876|Warning|QuikTrader|Заявка 289367885 не найдена.
+19:06:12.876|Warning|QuikTrader|Заявка 289388290 не найдена.
+19:06:12.877|Warning|QuikTrader|Заявка 289388389 не найдена.
+19:06:12.877|Warning|QuikTrader|Заявка 289389305 не найдена.
+19:06:12.878|Warning|QuikTrader|Заявка 289390675 не найдена.
+19:06:12.878|Warning|QuikTrader|Заявка 289390735 не найдена.
+19:06:12.878|Warning|QuikTrader|Заявка 289393563 не найдена.
+19:06:12.879|Warning|QuikTrader|Заявка 289393673 не найдена.
+19:06:12.879|Warning|QuikTrader|Заявка 289393792 не найдена.
+19:06:12.880|Warning|QuikTrader|Заявка 289455070 не найдена.
+19:06:12.880|Warning|QuikTrader|Заявка 289540793 не найдена.
+19:06:12.880|       |QuikTrader|New order: 53588260/291649269 Покупка Цена=1.3 Объем=10 Сост=Done Бал=0 
+19:06:12.881|       |QuikTrader|New order: 53588279/291672556 Продажа Цена=0.56 Объем=5 Сост=Done Бал=5 
+19:06:12.881|       |QuikTrader|New order: 55099236/291764878 Продажа Цена=47.63 Объем=2 Сост=Done Бал=0 
+19:06:12.881|       |QuikTrader|New order: 55099243/291771461 Продажа Цена=0.84 Объем=2 Сост=Done Бал=2 
+19:06:12.881|       |QuikTrader|New order: 55099247/291773595 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+19:06:12.882|       |QuikTrader|New order: 55099249/291774743 Продажа Цена=1.54 Объем=2 Сост=Done Бал=2 
+19:06:12.882|       |QuikTrader|New order: 55099251/291775019 Продажа Цена=1.54 Объем=2 Сост=Done Бал=2 
+19:06:12.882|       |QuikTrader|New order: 55099253/291776314 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.882|       |QuikTrader|New order: 55099255/291776386 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.883|       |QuikTrader|New order: 55099257/291776895 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.883|       |QuikTrader|New order: 55099261/291778612 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.883|       |QuikTrader|New order: 55099263/291782093 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.884|       |QuikTrader|New order: 55099265/291782396 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+19:06:12.884|       |QuikTrader|New order: 55099267/291783417 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+19:06:12.884|       |QuikTrader|New order: 55099271/291783767 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+19:06:12.884|       |QuikTrader|New order: 55099273/291784829 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+19:06:12.885|       |QuikTrader|New order: 55099275/291786357 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+19:06:12.885|       |QuikTrader|New order: 55099277/291786727 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.885|       |QuikTrader|New order: 55099279/291787686 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.885|       |QuikTrader|New order: 55099281/291789237 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.886|       |QuikTrader|New order: 55099285/291789748 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.886|Warning|QuikTrader|Заявка 291792275 не найдена.
+19:06:12.886|       |QuikTrader|New order: 55099287/291792287 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.887|       |QuikTrader|New order: 55099289/291792631 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.887|       |QuikTrader|New order: 55099291/291794212 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.887|       |QuikTrader|New order: 55099295/291796687 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.887|       |QuikTrader|New order: 55099297/291797074 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.888|       |QuikTrader|New order: 55099299/291799121 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.888|Warning|QuikTrader|Заявка 291799507 не найдена.
+19:06:12.888|       |QuikTrader|New order: 55099301/291799758 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.888|Warning|QuikTrader|Заявка 291800079 не найдена.
+19:06:12.889|       |QuikTrader|New order: 55099303/291800190 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.889|Warning|QuikTrader|Заявка 291800891 не найдена.
+19:06:12.889|       |QuikTrader|New order: 55099305/291800936 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.889|       |QuikTrader|New order: 56223127/291906386 Продажа Цена=47.63 Объем=1 Сост=Done Бал=0 
+19:06:12.890|       |QuikTrader|New order: 56223134/291908413 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+19:06:12.890|       |QuikTrader|New order: 56223136/291910400 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+19:06:12.890|       |QuikTrader|New order: 56223138/291911037 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+19:06:12.891|       |QuikTrader|New order: 56223140/291911217 Продажа Цена=1.54 Объем=2 Сост=Done Бал=2 
+19:06:12.891|       |QuikTrader|New order: 56223142/291911415 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+19:06:12.891|       |QuikTrader|New order: 56223144/291911805 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+19:06:12.891|       |QuikTrader|New order: 56223146/291911907 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+19:06:12.892|       |QuikTrader|New order: 56518261/291925979 Продажа Цена=0.87 Объем=2 Сост=Done Бал=2 
+19:06:12.892|       |QuikTrader|New order: 56518263/291926641 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+19:06:12.892|       |QuikTrader|New order: 56518265/291926852 Продажа Цена=0.89 Объем=2 Сост=Done Бал=2 
+19:06:12.892|       |QuikTrader|New order: 65182259/292702315 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.893|       |QuikTrader|New order: 65182261/292702365 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.893|       |QuikTrader|New order: 65182263/292702408 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.893|       |QuikTrader|New order: 65182265/292702524 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.894|       |QuikTrader|New order: 65182267/292702618 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.894|       |QuikTrader|New order: 65182269/292702692 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.895|       |QuikTrader|New order: 65182271/292702821 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.895|       |QuikTrader|New order: 65182273/292703054 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.895|       |QuikTrader|New order: 65182275/292703082 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.896|       |QuikTrader|New order: 65182277/292703130 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.896|       |QuikTrader|New order: 65182279/292703245 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.897|       |QuikTrader|New order: 65182281/292703305 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.897|       |QuikTrader|New order: 65182283/292703382 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.897|       |QuikTrader|New order: 65182285/292703412 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.898|       |QuikTrader|New order: 65182287/292703473 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.898|       |QuikTrader|New order: 65182289/292703571 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.898|       |QuikTrader|New order: 65182291/292703658 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.899|       |QuikTrader|New order: 65182293/292703769 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.899|       |QuikTrader|New order: 65182295/292703815 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.899|       |QuikTrader|New order: 65182297/292703900 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.899|       |QuikTrader|New order: 65182299/292703944 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.900|       |QuikTrader|New order: 65182301/292703970 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.900|       |QuikTrader|New order: 65182305/292706069 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.900|       |QuikTrader|New order: 65182307/292706094 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.901|       |QuikTrader|New order: 65182309/292706160 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.901|       |QuikTrader|New order: 65182313/292706199 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.901|       |QuikTrader|New order: 65182315/292706269 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.901|       |QuikTrader|New order: 65182317/292706361 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.902|       |QuikTrader|New order: 65182319/292706383 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.902|       |QuikTrader|New order: 65182321/292706457 Продажа Цена=50.7 Объем=1 Сост=Done Бал=1 
+19:06:12.902|       |QuikTrader|New order: 65182323/292706554 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+19:06:12.902|       |QuikTrader|New order: 65182327/292708303 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.903|       |QuikTrader|New order: 65182329/292708449 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.903|       |QuikTrader|New order: 65182331/292708522 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.903|       |QuikTrader|New order: 65182337/292710906 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.904|       |QuikTrader|New order: 65182339/292710983 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.904|       |QuikTrader|New order: 65182341/292711018 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.904|       |QuikTrader|New order: 65182343/292711070 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.904|       |QuikTrader|New order: 65182345/292711128 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.905|       |QuikTrader|New order: 65182347/292711219 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.905|       |QuikTrader|New order: 65182349/292711376 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.905|       |QuikTrader|New order: 65182351/292711424 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.906|       |QuikTrader|New order: 65182353/292711439 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.906|       |QuikTrader|New order: 65182355/292711477 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.906|       |QuikTrader|New order: 65182357/292711520 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.906|       |QuikTrader|New order: 65182359/292711609 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.907|       |QuikTrader|New order: 65182361/292711637 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.907|       |QuikTrader|New order: 65182363/292711686 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+19:06:12.907|       |QuikTrader|New order: 65182365/292711743 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+19:06:12.908|       |QuikTrader|New order: 65670931/292736141 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.908|       |QuikTrader|New order: 65670933/292736256 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.908|       |QuikTrader|New order: 65670935/292736324 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.908|       |QuikTrader|New order: 65670937/292736376 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.909|       |QuikTrader|New order: 65670939/292736480 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+19:06:12.909|       |QuikTrader|New order: 65670945/292739783 Продажа Цена=50.67 Объем=1 Сост=Done Бал=1 
+19:06:12.909|       |QuikTrader|New order: 65670947/292739829 Продажа Цена=50.67 Объем=1 Сост=Done Бал=1 
+19:06:12.910|       |QuikTrader|New order: 65670949/292739926 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.910|       |QuikTrader|New order: 65670951/292739999 Продажа Цена=50.67 Объем=1 Сост=Done Бал=1 
+19:06:12.910|       |QuikTrader|New order: 65670953/292740064 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.911|       |QuikTrader|New order: 65670955/292740145 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.911|       |QuikTrader|New order: 65670957/292740225 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.912|       |QuikTrader|New order: 65670959/292740278 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.912|       |QuikTrader|New order: 65670961/292740339 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.912|       |QuikTrader|New order: 65670963/292740401 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.912|       |QuikTrader|New order: 65670965/292740493 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+19:06:12.913|       |QuikTrader|New order: 65670967/292740548 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.913|       |QuikTrader|New order: 65670969/292740628 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.913|       |QuikTrader|New order: 65670971/292740665 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.914|       |QuikTrader|New order: 65670973/292740715 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.914|       |QuikTrader|New order: 65670975/292740793 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.914|       |QuikTrader|New order: 65670977/292740916 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.914|       |QuikTrader|New order: 65670979/292740987 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.915|       |QuikTrader|New order: 65670981/292741021 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.915|       |QuikTrader|New order: 65670983/292741071 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.915|       |QuikTrader|New order: 65670985/292741138 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.915|       |QuikTrader|New order: 65670987/292741194 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.916|       |QuikTrader|New order: 65670989/292741246 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.916|       |QuikTrader|New order: 65670991/292741289 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.916|       |QuikTrader|New order: 65670993/292741418 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.917|       |QuikTrader|New order: 65670995/292741510 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.917|       |QuikTrader|New order: 65670997/292741642 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+19:06:12.917|       |QuikTrader|New order: 65670999/292741727 Продажа Цена=50.66 Объем=1 Сост=Done Бал=1 
+19:06:12.918|       |QuikTrader|New order: 65671001/292741885 Продажа Цена=50.66 Объем=1 Сост=Done Бал=1 
+19:06:12.918|       |QuikTrader|New order: 65671003/292741948 Продажа Цена=50.66 Объем=1 Сост=Done Бал=1 
+19:06:12.918|       |QuikTrader|New order: 65671005/292742060 Продажа Цена=50.66 Объем=1 Сост=Done Бал=1 
+19:06:12.918|       |QuikTrader|New order: 65892893/292756411 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.919|       |QuikTrader|New order: 65892895/292756544 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.919|       |QuikTrader|New order: 65892899/292758499 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.919|       |QuikTrader|New order: 65892901/292758549 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.919|       |QuikTrader|New order: 65892905/292763691 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.920|       |QuikTrader|New order: 65892907/292763801 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.920|       |QuikTrader|New order: 65892911/292764762 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.920|       |QuikTrader|New order: 65892913/292764919 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.921|       |QuikTrader|New order: 65892915/292765304 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.921|       |QuikTrader|New order: 65892917/292766200 Продажа Цена=0.71 Объем=2 Сост=Done Бал=2 
+19:06:12.921|       |QuikTrader|New order: 66845120/292842831 Продажа Цена=0.74 Объем=2 Сост=Done Бал=2 
+19:06:12.921|       |QuikTrader|New order: 66845122/292843553 Продажа Цена=0.74 Объем=2 Сост=Done Бал=2 
+19:06:12.922|       |QuikTrader|New order: 66845124/292843783 Продажа Цена=0.74 Объем=2 Сост=Done Бал=2 
+19:06:12.922|Warning|QuikTrader|Заявка 292845259 не найдена.
+19:06:12.922|       |QuikTrader|New order: 66845128/292845277 Продажа Цена=0.74 Объем=2 Сост=Done Бал=2 
+19:06:12.923|       |QuikTrader|New order: 66845130/292845430 Продажа Цена=0.74 Объем=2 Сост=Done Бал=2 
+19:06:12.923|Warning|QuikTrader|Заявка 292845876 не найдена.
+19:06:12.923|       |QuikTrader|New order: 66845132/292845894 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.923|       |QuikTrader|New order: 66845134/292846534 Продажа Цена=0.75 Объем=2 Сост=Done Бал=2 
+19:06:12.924|       |QuikTrader|New order: 66845136/292846891 Продажа Цена=0.75 Объем=2 Сост=Done Бал=2 
+19:06:12.924|Warning|QuikTrader|Заявка 292847632 не найдена.
+19:06:12.924|       |QuikTrader|New order: 66845138/292848349 Продажа Цена=0.75 Объем=2 Сост=Done Бал=2 
+19:06:12.924|       |QuikTrader|New order: 66845140/292848912 Продажа Цена=0.75 Объем=2 Сост=Done Бал=0 
+19:06:12.925|       |QuikTrader|New order: 66845144/292851421 Продажа Цена=0.78 Объем=2 Сост=Done Бал=2 
+19:06:12.925|       |QuikTrader|New order: 66845145/292851422 Покупка Цена=0.7 Объем=2 Сост=Done Бал=2 
+19:06:12.926|       |QuikTrader|New order: 66845147/292851516 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.926|       |QuikTrader|New order: 66845149/292851630 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.926|       |QuikTrader|New order: 66845151/292851800 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.927|       |QuikTrader|New order: 66845153/292852831 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.927|       |QuikTrader|New order: 66845155/292853166 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.927|       |QuikTrader|New order: 66845157/292853430 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.928|       |QuikTrader|New order: 66845159/292853583 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.928|       |QuikTrader|New order: 66845161/292853881 Продажа Цена=0.78 Объем=2 Сост=Done Бал=2 
+19:06:12.928|       |QuikTrader|New order: 66845167/292855144 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.928|       |QuikTrader|New order: 66845171/292856533 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.929|       |QuikTrader|New order: 66845173/292857452 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.929|       |QuikTrader|New order: 66845175/292857995 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.929|       |QuikTrader|New order: 66845177/292858847 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.930|       |QuikTrader|New order: 66845179/292860599 Продажа Цена=0.76 Объем=2 Сост=Done Бал=2 
+19:06:12.930|       |QuikTrader|New order: 66845183/292861208 Продажа Цена=0.78 Объем=2 Сост=Done Бал=2 
+19:06:12.930|       |QuikTrader|New order: 66845194/292873030 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.930|       |QuikTrader|New order: 66845195/292873037 Покупка Цена=0.6 Объем=2 Сост=Done Бал=2 
+19:06:12.931|       |QuikTrader|New order: 66845197/292873217 Продажа Цена=0.84 Объем=2 Сост=Done Бал=2 
+19:06:12.931|       |QuikTrader|New order: 66845201/292876010 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.931|       |QuikTrader|New order: 66845203/292876655 Продажа Цена=0.84 Объем=2 Сост=Done Бал=2 
+19:06:12.931|Warning|QuikTrader|Заявка 292879686 не найдена.
+19:06:12.932|       |QuikTrader|New order: 66845207/292880068 Продажа Цена=0.84 Объем=2 Сост=Done Бал=2 
+19:06:12.932|       |QuikTrader|New order: 67347590/292890518 Продажа Цена=0.81 Объем=2 Сост=Done Бал=2 
+19:06:12.932|       |QuikTrader|New order: 67347591/292890521 Покупка Цена=0.7 Объем=2 Сост=Done Бал=2 
+19:06:12.933|       |QuikTrader|New order: 67347593/292892280 Продажа Цена=0.8 Объем=2 Сост=Done Бал=2 
+19:06:12.933|       |QuikTrader|New order: 67347595/292894697 Продажа Цена=0.79 Объем=2 Сост=Done Бал=2 
+19:06:12.933|       |QuikTrader|New order: 67347597/292895631 Продажа Цена=0.78 Объем=2 Сост=Done Бал=2 
+19:06:12.933|Warning|QuikTrader|Заявка 292898428 не найдена.
+19:06:12.934|Warning|QuikTrader|Заявка 292898429 не найдена.
+19:06:12.934|Warning|QuikTrader|Заявка 292898430 не найдена.
+19:06:12.934|Warning|QuikTrader|Заявка 292898431 не найдена.
+19:06:12.934|Warning|QuikTrader|Заявка 292901421 не найдена.
+19:06:12.935|Warning|QuikTrader|Заявка 292901441 не найдена.
+19:06:12.935|       |QuikTrader|New order: 68233325/292901442 Продажа Цена=0.84 Объем=2 Сост=Done Бал=2 
+19:06:12.935|Warning|QuikTrader|Заявка 292901443 не найдена.
+19:06:12.935|       |QuikTrader|New order: 68233335/292901482 Продажа Цена=50.77 Объем=2 Сост=Done Бал=2 
+19:06:12.936|       |QuikTrader|New order: 68233337/292901785 Продажа Цена=50.75 Объем=2 Сост=Done Бал=2 
+19:06:12.936|       |QuikTrader|New order: 68233339/292901863 Продажа Цена=50.81 Объем=2 Сост=Done Бал=2 
+19:06:12.936|       |QuikTrader|New order: 68233341/292901914 Продажа Цена=50.75 Объем=2 Сост=Done Бал=2 
+19:06:12.936|       |QuikTrader|New order: 68233343/292901978 Продажа Цена=50.75 Объем=2 Сост=Done Бал=2 
+19:06:12.937|       |QuikTrader|New order: 68233345/292902038 Продажа Цена=50.81 Объем=2 Сост=Done Бал=2 
+19:06:12.937|       |QuikTrader|New order: 68233347/292902391 Продажа Цена=50.81 Объем=2 Сост=Done Бал=2 
+19:06:12.937|       |QuikTrader|New order: 68233349/292902490 Продажа Цена=50.82 Объем=2 Сост=Done Бал=2 
+19:06:12.938|       |QuikTrader|New order: 68233353/292903072 Продажа Цена=50.81 Объем=2 Сост=Done Бал=2 
+19:06:12.938|       |QuikTrader|New order: 68233355/292903704 Продажа Цена=50.81 Объем=2 Сост=Done Бал=2 
+19:06:12.938|       |QuikTrader|New order: 68233357/292903783 Продажа Цена=50.8 Объем=2 Сост=Done Бал=2 
+19:06:12.938|       |QuikTrader|New order: 68233359/292904133 Продажа Цена=50.8 Объем=2 Сост=Done Бал=2 
+19:06:12.939|       |QuikTrader|New order: 68233361/292904351 Продажа Цена=50.79 Объем=2 Сост=Done Бал=2 
+19:06:12.939|       |QuikTrader|New order: 68233363/292904533 Продажа Цена=50.79 Объем=2 Сост=Done Бал=2 
+19:06:12.939|       |QuikTrader|New order: 68233365/292904572 Продажа Цена=50.78 Объем=2 Сост=Done Бал=2 
+19:06:12.939|       |QuikTrader|New order: 68233367/292904673 Продажа Цена=50.8 Объем=2 Сост=Done Бал=2 
+19:06:12.940|       |QuikTrader|New order: 68233369/292904895 Продажа Цена=50.81 Объем=2 Сост=Done Бал=2 
+19:06:12.940|Warning|QuikTrader|Заявка 292906480 не найдена.
+19:06:12.940|       |QuikTrader|New order: 68233379/292906498 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.940|Warning|QuikTrader|Заявка 292906664 не найдена.
+19:06:12.941|       |QuikTrader|New order: 68233381/292906681 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.941|Warning|QuikTrader|Заявка 292907315 не найдена.
+19:06:12.941|       |QuikTrader|New order: 68233383/292907334 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.942|Warning|QuikTrader|Заявка 292907375 не найдена.
+19:06:12.942|Warning|QuikTrader|Заявка 292907427 не найдена.
+19:06:12.942|       |QuikTrader|New order: 68233385/292907432 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.943|Warning|QuikTrader|Заявка 292907478 не найдена.
+19:06:12.943|Warning|QuikTrader|Заявка 292907514 не найдена.
+19:06:12.943|       |QuikTrader|New order: 68233387/292907523 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.943|Warning|QuikTrader|Заявка 292907586 не найдена.
+19:06:12.944|       |QuikTrader|New order: 68233389/292907655 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.944|Warning|QuikTrader|Заявка 292909021 не найдена.
+19:06:12.944|       |QuikTrader|New order: 68233393/292909033 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.945|Warning|QuikTrader|Заявка 292909197 не найдена.
+19:06:12.945|Warning|QuikTrader|Заявка 292909257 не найдена.
+19:06:12.945|       |QuikTrader|New order: 68233395/292909260 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.946|Warning|QuikTrader|Заявка 292909497 не найдена.
+19:06:12.946|       |QuikTrader|New order: 68233397/292909499 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.946|       |QuikTrader|New order: 68233401/292910378 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+19:06:12.946|Warning|QuikTrader|Заявка 292910656 не найдена.
+19:06:12.947|Warning|QuikTrader|Заявка 292910706 не найдена.
+19:06:12.947|       |QuikTrader|New order: 68233403/292910711 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.947|Warning|QuikTrader|Заявка 292910730 не найдена.
+19:06:12.947|       |QuikTrader|New order: 68233405/292910808 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.948|Warning|QuikTrader|Заявка 292910952 не найдена.
+19:06:12.948|       |QuikTrader|New order: 68233407/292910958 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.948|Warning|QuikTrader|Заявка 292911006 не найдена.
+19:06:12.948|Warning|QuikTrader|Заявка 292911034 не найдена.
+19:06:12.949|       |QuikTrader|New order: 68233409/292911036 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.949|Warning|QuikTrader|Заявка 292911058 не найдена.
+19:06:12.949|Warning|QuikTrader|Заявка 292911062 не найдена.
+19:06:12.949|Warning|QuikTrader|Заявка 292911093 не найдена.
+19:06:12.950|       |QuikTrader|New order: 68233411/292911096 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+19:06:12.950|Warning|QuikTrader|Заявка 289182600 не найдена.
+19:06:12.950|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.950,T(S)=2017.05.11 17:20:03.268,(Transaction),Sec=S#:BR45BQ7@FORTS, Native:,Type:,Ord=289182600/0/0,Fail=,Price=0,OrdVol=,TrVol=21,Bal=,TId=9136357,Pf=SPBFUT00d75,TPrice=0,11,UId=,State=
+19:06:12.950|Warning|QuikTrader|Заявка 289182818 не найдена.
+19:06:12.950|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.950,T(S)=2017.05.11 17:20:05.253,(Transaction),Sec=S#:Si57500BF7@FORTS, Native:,Type:,Ord=289182818/0/0,Fail=,Price=0,OrdVol=,TrVol=6,Bal=,TId=9136368,Pf=SPBFUT00d75,TPrice=933,UId=,State=
+19:06:12.951|Warning|QuikTrader|Заявка 289182427 не найдена.
+19:06:12.951|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.951,T(S)=2017.05.11 17:20:02.238,(Transaction),Sec=S#:BRM7@FORTS, Native:,Type:,Ord=289182427/0/0,Fail=,Price=0,OrdVol=,TrVol=5,Bal=,TId=9136345,Pf=SPBFUT00d75,TPrice=50,76,UId=,State=
+19:06:12.951|Warning|QuikTrader|Заявка 289182726 не найдена.
+19:06:12.951|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.951,T(S)=2017.05.11 17:20:04.174,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289182726/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9136361,Pf=SPBFUT00d75,TPrice=57558,UId=,State=
+19:06:12.951|Warning|QuikTrader|Заявка 289298011 не найдена.
+19:06:12.951|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.951,T(S)=2017.05.11 17:34:20.553,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289298011/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139251,Pf=SPBFUT00d75,TPrice=57522,UId=,State=
+19:06:12.951|Warning|QuikTrader|Заявка 289299924 не найдена.
+19:06:12.951|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.951,T(S)=2017.05.11 17:34:36.382,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289299924/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139309,Pf=SPBFUT00d75,TPrice=57518,UId=,State=
+19:06:12.951|Warning|QuikTrader|Заявка 289321234 не найдена.
+19:06:12.951|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.951,T(S)=2017.05.11 17:37:19.744,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321234/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139832,Pf=SPBFUT00d75,TPrice=57525,UId=,State=
+19:06:12.951|Warning|QuikTrader|Заявка 289321984 не найдена.
+19:06:12.951|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.951,T(S)=2017.05.11 17:37:28.041,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321984/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139849,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+19:06:12.952|Warning|QuikTrader|Заявка 289329257 не найдена.
+19:06:12.952|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.952,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9140003,Pf=SPBFUT00d75,TPrice=57519,UId=,State=
+19:06:12.952|Warning|QuikTrader|Заявка 289329257 не найдена.
+19:06:12.952|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.952,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140004,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+19:06:12.952|Warning|QuikTrader|Заявка 289333101 не найдена.
+19:06:12.952|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.952,T(S)=2017.05.11 17:39:11.793,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9140052,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+19:06:12.952|Warning|QuikTrader|Заявка 289333101 не найдена.
+19:06:12.952|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.952,T(S)=2017.05.11 17:39:14.955,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=2,Bal=,TId=9140058,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+19:06:12.952|Warning|QuikTrader|Заявка 289358252 не найдена.
+19:06:12.952|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.952,T(S)=2017.05.11 17:42:52.001,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289358252/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140591,Pf=SPBFUT00d75,TPrice=57532,UId=,State=
+19:06:12.952|Warning|QuikTrader|Заявка 289361102 не найдена.
+19:06:12.952|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.952,T(S)=2017.05.11 17:43:15.503,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289361102/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140624,Pf=SPBFUT00d75,TPrice=57538,UId=,State=
+19:06:12.953|Warning|QuikTrader|Заявка 289367885 не найдена.
+19:06:12.953|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.953,T(S)=2017.05.11 17:44:16.597,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289367885/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140726,Pf=SPBFUT00d75,TPrice=57547,UId=,State=
+19:06:12.953|Warning|QuikTrader|Заявка 289390735 не найдена.
+19:06:12.953|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.953,T(S)=2017.05.11 17:48:05.209,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289390735/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141130,Pf=SPBFUT00d75,TPrice=57537,UId=,State=
+19:06:12.953|Warning|QuikTrader|Заявка 289393792 не найдена.
+19:06:12.953|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.953,T(S)=2017.05.11 17:48:31.168,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289393792/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141184,Pf=SPBFUT00d75,TPrice=57528,UId=,State=
+19:06:12.953|Warning|QuikTrader|Заявка 289455070 не найдена.
+19:06:12.953|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.953,T(S)=2017.05.11 17:58:18.459,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289455070/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9142349,Pf=SPBFUT00d75,TPrice=57554,UId=,State=
+19:06:12.953|Warning|QuikTrader|Заявка 289540793 не найдена.
+19:06:12.953|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.953,T(S)=2017.05.11 18:09:51.006,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289540793/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9144137,Pf=SPBFUT00d75,TPrice=57561,UId=,State=
+19:06:12.954|Warning|QuikTrader|Заявка 292898428 не найдена.
+19:06:12.954|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.954,T(S)=2017.05.12 18:46:41.573,(Transaction),Sec=S#:BR52BE7@FORTS, Native:,Type:,Ord=292898428/0/0,Fail=,Price=0,OrdVol=,TrVol=2,Bal=,TId=9236388,Pf=SPBFUT00d75,TPrice=0,85,UId=,State=
+19:06:12.954|Warning|QuikTrader|Заявка 292898429 не найдена.
+19:06:12.954|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.954,T(S)=2017.05.12 18:46:44.448,(Transaction),Sec=S#:BR51BE7@FORTS, Native:,Type:,Ord=292898429/0/0,Fail=,Price=0,OrdVol=,TrVol=2,Bal=,TId=9236389,Pf=SPBFUT00d75,TPrice=1,01,UId=,State=
+19:06:12.955|Warning|QuikTrader|Заявка 292898430 не найдена.
+19:06:12.955|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.955,T(S)=2017.05.12 18:46:45.682,(Transaction),Sec=S#:BRM7@FORTS, Native:,Type:,Ord=292898430/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9236390,Pf=SPBFUT00d75,TPrice=50,77,UId=,State=
+19:06:12.955|Warning|QuikTrader|Заявка 292901421 не найдена.
+19:06:12.955|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.955,T(S)=2017.05.12 18:53:07.410,(Transaction),Sec=S#:BR51BE7@FORTS, Native:,Type:,Ord=292901421/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9236405,Pf=SPBFUT00d75,TPrice=0,63,UId=,State=
+19:06:12.955|Warning|QuikTrader|Заявка 292901421 не найдена.
+19:06:12.955|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.955,T(S)=2017.05.12 18:53:07.410,(Transaction),Sec=S#:BR51BE7@FORTS, Native:,Type:,Ord=292901421/0/0,Fail=,Price=0,OrdVol=,TrVol=5,Bal=,TId=9236406,Pf=SPBFUT00d75,TPrice=0,56,UId=,State=
+19:06:12.955|Warning|QuikTrader|Заявка 292911058 не найдена.
+19:06:12.955|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.955,T(S)=2017.05.12 19:03:54.127,(Transaction),Sec=S#:BR52BE7@FORTS, Native:,Type:,Ord=292911058/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9236829,Pf=SPBFUT00d75,TPrice=0,75,UId=,State=
+19:06:12.955|Warning|QuikTrader|Заявка 292911062 не найдена.
+19:06:12.955|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.955,T(S)=2017.05.12 19:03:54.377,(Transaction),Sec=S#:BR52BE7@FORTS, Native:,Type:,Ord=292911062/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9236830,Pf=SPBFUT00d75,TPrice=0,75,UId=,State=
+19:06:12.955|Warning|QuikTrader|Заявка 292911093 не найдена.
+19:06:12.955|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 19:06:12.955,T(S)=2017.05.12 19:03:56.677,(Transaction),Sec=S#:BR52BE7@FORTS, Native:,Type:,Ord=292911093/0/0,Fail=,Price=0,OrdVol=,TrVol=2,Bal=,TId=9236833,Pf=SPBFUT00d75,TPrice=0,85,UId=,State=
+19:06:17.666|       |QuikTrader|Инструмент BR45BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.667|       |QuikTrader|Инструмент BR51BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.667|       |QuikTrader|Инструмент BR52BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.669|       |QuikTrader|Инструмент BR53BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.669|       |QuikTrader|Инструмент BRM7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.669|       |QuikTrader|Инструмент BRN7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.670|       |QuikTrader|Инструмент BR43BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.670|       |QuikTrader|Инструмент BR43BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.670|       |QuikTrader|Инструмент BR44BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.671|       |QuikTrader|Инструмент BR44BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.672|       |QuikTrader|Инструмент BR45BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.672|       |QuikTrader|Инструмент BR46BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.672|       |QuikTrader|Инструмент BR46BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.673|       |QuikTrader|Инструмент BR47BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.673|       |QuikTrader|Инструмент BR47BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.673|       |QuikTrader|Инструмент BR48BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.674|       |QuikTrader|Инструмент BR48BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.674|       |QuikTrader|Инструмент BR49BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.674|       |QuikTrader|Инструмент BR49BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.674|       |QuikTrader|Инструмент BR50BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.675|       |QuikTrader|Инструмент BR50BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.675|       |QuikTrader|Инструмент BR51BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.675|       |QuikTrader|Инструмент BR52BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.675|       |QuikTrader|Инструмент BR53BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.676|       |QuikTrader|Инструмент BR54BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.676|       |QuikTrader|Инструмент BR54BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.676|       |QuikTrader|Инструмент BR55BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.677|       |QuikTrader|Инструмент BR55BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.677|       |QuikTrader|Инструмент BR56BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.677|       |QuikTrader|Инструмент BR56BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.678|       |QuikTrader|Инструмент BR57BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.678|       |QuikTrader|Инструмент BR57BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.679|       |QuikTrader|Инструмент BR58BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.679|       |QuikTrader|Инструмент BR58BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.679|       |QuikTrader|Инструмент BR59BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.680|       |QuikTrader|Инструмент BR59BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.680|       |QuikTrader|Инструмент BR60BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.680|       |QuikTrader|Инструмент BR60BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.681|       |QuikTrader|Инструмент BR43BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.681|       |QuikTrader|Инструмент BR43BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.681|       |QuikTrader|Инструмент BR44BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.681|       |QuikTrader|Инструмент BR44BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.682|       |QuikTrader|Инструмент BR45BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.682|       |QuikTrader|Инструмент BR45BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.682|       |QuikTrader|Инструмент BR46BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.683|       |QuikTrader|Инструмент BR46BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.683|       |QuikTrader|Инструмент BR47BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.683|       |QuikTrader|Инструмент BR47BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.683|       |QuikTrader|Инструмент BR48BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.684|       |QuikTrader|Инструмент BR48BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.684|       |QuikTrader|Инструмент BR49BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.684|       |QuikTrader|Инструмент BR49BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.685|       |QuikTrader|Инструмент BR50BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.685|       |QuikTrader|Инструмент BR50BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.685|       |QuikTrader|Инструмент BR51BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.685|       |QuikTrader|Инструмент BR51BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.686|       |QuikTrader|Инструмент BR52BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.686|       |QuikTrader|Инструмент BR52BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.686|       |QuikTrader|Инструмент BR53BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.687|       |QuikTrader|Инструмент BR53BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.687|       |QuikTrader|Инструмент BR54BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.687|       |QuikTrader|Инструмент BR54BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.688|       |QuikTrader|Инструмент BR55BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.688|       |QuikTrader|Инструмент BR55BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.688|       |QuikTrader|Инструмент BR56BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.689|       |QuikTrader|Инструмент BR56BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.689|       |QuikTrader|Инструмент BR57BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.689|       |QuikTrader|Инструмент BR57BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.690|       |QuikTrader|Инструмент BR58BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.690|       |QuikTrader|Инструмент BR58BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.690|       |QuikTrader|Инструмент BR59BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+19:06:17.691|       |QuikTrader|Инструмент BR59BR7@FORTS зарегистрирован на получение рыночных данных для Level1.

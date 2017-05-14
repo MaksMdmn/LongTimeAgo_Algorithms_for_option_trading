@@ -58,7 +58,6 @@ namespace Trading.Strategies
                 {
                     if (Math.Abs(Position) >= Volume)
                     {
-                        Debug.WriteLine(this.MyTrades.Count());
                         Stop();
                     }
                 })

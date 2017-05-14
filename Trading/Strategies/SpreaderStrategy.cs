@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -106,8 +107,11 @@ namespace Trading.Strategies
                         var step = md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread
                             ? Security.PriceStep.CheckIfValueNullThenZero() * sign
                             : 0;
-                        var price = md.CalculateWorstLimitSpreadPrice(_sideForEnterToPosition, _spread);
+                        var price = md.CalculateWorstLimitSpreadPrice(_sideForEnterToPosition, _spread, md.BestPair.SpreadPrice.CheckIfValueNullThenZero());
 
+                        Debug.WriteLine($"COND: sz {size}  stp {step}  prc {price}");
+
+                        //откуда цена ? и почему так криво работают LQS раз через раз
                         if (size <= 0)
                         {
                             _isEnterActivated = false;
@@ -220,9 +224,9 @@ namespace Trading.Strategies
             _enterStrategy.WhenStopping()
                 .Do(() =>
                 {
-                    _isEnterActivated = false;
-
                     ChildStrategies.Remove(_enterStrategy);
+
+                    _isEnterActivated = false;
                 })
                 .Until(() => !_isEnterActivated)
                 .Apply(this);

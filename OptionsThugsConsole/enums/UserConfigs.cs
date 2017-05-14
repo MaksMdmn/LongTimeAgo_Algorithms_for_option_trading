@@ -2,6 +2,6 @@
 {
     public enum UserConfigs
     {
-        Portfolio, UnderlyingAsset
+        Portfolio, UndAsset, XmlPath
     }
 }

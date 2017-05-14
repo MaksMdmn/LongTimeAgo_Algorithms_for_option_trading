@@ -20,8 +20,6 @@ namespace Trading.Strategies
         private Security[] _marketDepths;
         private Portfolio[] _portfolios;
 
-        //private readonly Timer _workingTimeControl;
-
         protected PrimaryStrategy()
         {
             Timeout = 2000;
@@ -35,7 +33,7 @@ namespace Trading.Strategies
             MaxErrorCount = 10;
             OrdersKeepTime = TimeSpan.Zero;
 
-            TimeHelper.SyncMarketTime();
+            //TimeHelper.SyncMarketTime();
 
             //_workingTimeControl = new Timer();
             //_workingTimeControl.Elapsed += (sender, args) =>

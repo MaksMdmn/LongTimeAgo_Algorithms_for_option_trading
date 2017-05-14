@@ -1,0 +1,151 @@
+﻿00:00:00.000|       |QuikTrader|Connect
+15:14:43.985|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001...
+15:14:43.986|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001 is OK.
+15:14:43.988|       |Quik LUA. Transactions|Sending logon to 127.0.0.1:5001...
+15:14:44.001|       |Quik LUA. Transactions|Logon sent to 127.0.0.1:5001 OK.
+15:14:44.002|       |Quik LUA. Market data|Connect to 127.0.0.1:5001...
+15:14:44.004|       |Quik LUA. Market data|Connect to 127.0.0.1:5001 is OK.
+15:14:44.004|       |Quik LUA. Market data|Sending logon to 127.0.0.1:5001...
+15:14:44.004|       |Quik LUA. Market data|Logon sent to 127.0.0.1:5001 OK.
+15:14:44.007|       |Quik LUA. Transactions|Start message processing.
+15:14:44.007|       |Quik LUA. Market data|Start message processing.
+15:14:44.059|       |QuikTrader|Создан новый портфель SPBFUT00d75.
+15:14:44.079|Warning|QuikTrader|Заявка 289182600 не найдена.
+15:14:44.081|Warning|QuikTrader|Заявка 289182818 не найдена.
+15:14:44.081|Warning|QuikTrader|Заявка 289182427 не найдена.
+15:14:44.081|Warning|QuikTrader|Заявка 289182726 не найдена.
+15:14:44.081|Warning|QuikTrader|Заявка 289298011 не найдена.
+15:14:44.082|Warning|QuikTrader|Заявка 289299924 не найдена.
+15:14:44.082|Warning|QuikTrader|Заявка 289321234 не найдена.
+15:14:44.082|Warning|QuikTrader|Заявка 289321984 не найдена.
+15:14:44.082|Warning|QuikTrader|Заявка 289329257 не найдена.
+15:14:44.083|Warning|QuikTrader|Заявка 289331910 не найдена.
+15:14:44.083|Warning|QuikTrader|Заявка 289332088 не найдена.
+15:14:44.083|Warning|QuikTrader|Заявка 289332598 не найдена.
+15:14:44.083|Warning|QuikTrader|Заявка 289332739 не найдена.
+15:14:44.084|Warning|QuikTrader|Заявка 289333101 не найдена.
+15:14:44.084|Warning|QuikTrader|Заявка 289358252 не найдена.
+15:14:44.084|Warning|QuikTrader|Заявка 289361102 не найдена.
+15:14:44.084|Warning|QuikTrader|Заявка 289367885 не найдена.
+15:14:44.085|Warning|QuikTrader|Заявка 289388290 не найдена.
+15:14:44.085|Warning|QuikTrader|Заявка 289388389 не найдена.
+15:14:44.085|Warning|QuikTrader|Заявка 289389305 не найдена.
+15:14:44.085|Warning|QuikTrader|Заявка 289390675 не найдена.
+15:14:44.086|Warning|QuikTrader|Заявка 289390735 не найдена.
+15:14:44.086|Warning|QuikTrader|Заявка 289393563 не найдена.
+15:14:44.086|Warning|QuikTrader|Заявка 289393673 не найдена.
+15:14:44.086|Warning|QuikTrader|Заявка 289393792 не найдена.
+15:14:44.087|Warning|QuikTrader|Заявка 289455070 не найдена.
+15:14:44.087|Warning|QuikTrader|Заявка 289540793 не найдена.
+15:14:44.087|       |QuikTrader|New order: 53588260/291649269 Покупка Цена=1.3 Объем=10 Сост=Done Бал=0 
+15:14:44.087|       |QuikTrader|New order: 53588279/291672556 Продажа Цена=0.56 Объем=5 Сост=Done Бал=5 
+15:14:44.088|Warning|QuikTrader|Заявка 289182600 не найдена.
+15:14:44.088|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.088,T(S)=2017.05.11 17:20:03.268,(Transaction),Sec=S#:BR45BQ7@FORTS, Native:,Type:,Ord=289182600/0/0,Fail=,Price=0,OrdVol=,TrVol=21,Bal=,TId=9136357,Pf=SPBFUT00d75,TPrice=0,11,UId=,State=
+15:14:44.088|Warning|QuikTrader|Заявка 289182818 не найдена.
+15:14:44.088|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.088,T(S)=2017.05.11 17:20:05.253,(Transaction),Sec=S#:Si57500BF7@FORTS, Native:,Type:,Ord=289182818/0/0,Fail=,Price=0,OrdVol=,TrVol=6,Bal=,TId=9136368,Pf=SPBFUT00d75,TPrice=933,UId=,State=
+15:14:44.088|Warning|QuikTrader|Заявка 289182427 не найдена.
+15:14:44.088|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.088,T(S)=2017.05.11 17:20:02.238,(Transaction),Sec=S#:BRM7@FORTS, Native:,Type:,Ord=289182427/0/0,Fail=,Price=0,OrdVol=,TrVol=5,Bal=,TId=9136345,Pf=SPBFUT00d75,TPrice=50,76,UId=,State=
+15:14:44.089|Warning|QuikTrader|Заявка 289182726 не найдена.
+15:14:44.089|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.089,T(S)=2017.05.11 17:20:04.174,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289182726/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9136361,Pf=SPBFUT00d75,TPrice=57558,UId=,State=
+15:14:44.089|Warning|QuikTrader|Заявка 289298011 не найдена.
+15:14:44.089|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.089,T(S)=2017.05.11 17:34:20.553,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289298011/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139251,Pf=SPBFUT00d75,TPrice=57522,UId=,State=
+15:14:44.089|Warning|QuikTrader|Заявка 289299924 не найдена.
+15:14:44.089|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.089,T(S)=2017.05.11 17:34:36.382,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289299924/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139309,Pf=SPBFUT00d75,TPrice=57518,UId=,State=
+15:14:44.089|Warning|QuikTrader|Заявка 289321234 не найдена.
+15:14:44.089|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.089,T(S)=2017.05.11 17:37:19.744,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321234/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139832,Pf=SPBFUT00d75,TPrice=57525,UId=,State=
+15:14:44.089|Warning|QuikTrader|Заявка 289321984 не найдена.
+15:14:44.089|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.089,T(S)=2017.05.11 17:37:28.041,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321984/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139849,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+15:14:44.089|Warning|QuikTrader|Заявка 289329257 не найдена.
+15:14:44.089|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.089,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9140003,Pf=SPBFUT00d75,TPrice=57519,UId=,State=
+15:14:44.090|Warning|QuikTrader|Заявка 289329257 не найдена.
+15:14:44.090|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.090,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140004,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+15:14:44.090|Warning|QuikTrader|Заявка 289333101 не найдена.
+15:14:44.090|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.090,T(S)=2017.05.11 17:39:11.793,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9140052,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+15:14:44.090|Warning|QuikTrader|Заявка 289333101 не найдена.
+15:14:44.090|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.090,T(S)=2017.05.11 17:39:14.955,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=2,Bal=,TId=9140058,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+15:14:44.090|Warning|QuikTrader|Заявка 289358252 не найдена.
+15:14:44.090|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.090,T(S)=2017.05.11 17:42:52.001,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289358252/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140591,Pf=SPBFUT00d75,TPrice=57532,UId=,State=
+15:14:44.090|Warning|QuikTrader|Заявка 289361102 не найдена.
+15:14:44.090|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.090,T(S)=2017.05.11 17:43:15.503,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289361102/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140624,Pf=SPBFUT00d75,TPrice=57538,UId=,State=
+15:14:44.090|Warning|QuikTrader|Заявка 289367885 не найдена.
+15:14:44.090|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.090,T(S)=2017.05.11 17:44:16.597,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289367885/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140726,Pf=SPBFUT00d75,TPrice=57547,UId=,State=
+15:14:44.091|Warning|QuikTrader|Заявка 289390735 не найдена.
+15:14:44.091|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.091,T(S)=2017.05.11 17:48:05.209,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289390735/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141130,Pf=SPBFUT00d75,TPrice=57537,UId=,State=
+15:14:44.091|Warning|QuikTrader|Заявка 289393792 не найдена.
+15:14:44.091|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.091,T(S)=2017.05.11 17:48:31.168,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289393792/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141184,Pf=SPBFUT00d75,TPrice=57528,UId=,State=
+15:14:44.091|Warning|QuikTrader|Заявка 289455070 не найдена.
+15:14:44.091|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.091,T(S)=2017.05.11 17:58:18.459,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289455070/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9142349,Pf=SPBFUT00d75,TPrice=57554,UId=,State=
+15:14:44.091|Warning|QuikTrader|Заявка 289540793 не найдена.
+15:14:44.091|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:14:44.091,T(S)=2017.05.11 18:09:51.006,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289540793/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9144137,Pf=SPBFUT00d75,TPrice=57561,UId=,State=
+15:14:48.992|       |QuikTrader|Инструмент BR45BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.992|       |QuikTrader|Инструмент BR51BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.993|       |QuikTrader|Инструмент BR53BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.994|       |QuikTrader|Инструмент BRM7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.994|       |QuikTrader|Инструмент BRN7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.995|       |QuikTrader|Инструмент BR43BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.995|       |QuikTrader|Инструмент BR43BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.995|       |QuikTrader|Инструмент BR44BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.996|       |QuikTrader|Инструмент BR44BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.996|       |QuikTrader|Инструмент BR45BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.997|       |QuikTrader|Инструмент BR46BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.997|       |QuikTrader|Инструмент BR46BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.997|       |QuikTrader|Инструмент BR47BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.998|       |QuikTrader|Инструмент BR47BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.998|       |QuikTrader|Инструмент BR48BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.998|       |QuikTrader|Инструмент BR48BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.999|       |QuikTrader|Инструмент BR49BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.999|       |QuikTrader|Инструмент BR49BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.999|       |QuikTrader|Инструмент BR50BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:48.999|       |QuikTrader|Инструмент BR50BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.000|       |QuikTrader|Инструмент BR51BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.000|       |QuikTrader|Инструмент BR52BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.000|       |QuikTrader|Инструмент BR52BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.001|       |QuikTrader|Инструмент BR53BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.001|       |QuikTrader|Инструмент BR54BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.001|       |QuikTrader|Инструмент BR54BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.001|       |QuikTrader|Инструмент BR55BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.002|       |QuikTrader|Инструмент BR55BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.002|       |QuikTrader|Инструмент BR56BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.002|       |QuikTrader|Инструмент BR56BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.003|       |QuikTrader|Инструмент BR57BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.003|       |QuikTrader|Инструмент BR57BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.003|       |QuikTrader|Инструмент BR58BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.004|       |QuikTrader|Инструмент BR58BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.004|       |QuikTrader|Инструмент BR59BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.004|       |QuikTrader|Инструмент BR59BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.004|       |QuikTrader|Инструмент BR60BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.005|       |QuikTrader|Инструмент BR60BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.005|       |QuikTrader|Инструмент BR43BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.005|       |QuikTrader|Инструмент BR43BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.006|       |QuikTrader|Инструмент BR44BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.006|       |QuikTrader|Инструмент BR44BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.006|       |QuikTrader|Инструмент BR45BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.007|       |QuikTrader|Инструмент BR45BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.007|       |QuikTrader|Инструмент BR46BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.007|       |QuikTrader|Инструмент BR46BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.008|       |QuikTrader|Инструмент BR47BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.008|       |QuikTrader|Инструмент BR47BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.008|       |QuikTrader|Инструмент BR48BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.008|       |QuikTrader|Инструмент BR48BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.009|       |QuikTrader|Инструмент BR49BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.009|       |QuikTrader|Инструмент BR49BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.009|       |QuikTrader|Инструмент BR50BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.010|       |QuikTrader|Инструмент BR50BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.010|       |QuikTrader|Инструмент BR51BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.010|       |QuikTrader|Инструмент BR51BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.011|       |QuikTrader|Инструмент BR52BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.011|       |QuikTrader|Инструмент BR52BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.012|       |QuikTrader|Инструмент BR53BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.012|       |QuikTrader|Инструмент BR53BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.012|       |QuikTrader|Инструмент BR54BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.013|       |QuikTrader|Инструмент BR54BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.013|       |QuikTrader|Инструмент BR55BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.013|       |QuikTrader|Инструмент BR55BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.014|       |QuikTrader|Инструмент BR56BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.014|       |QuikTrader|Инструмент BR56BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.014|       |QuikTrader|Инструмент BR57BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.015|       |QuikTrader|Инструмент BR57BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.015|       |QuikTrader|Инструмент BR58BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.015|       |QuikTrader|Инструмент BR58BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.016|       |QuikTrader|Инструмент BR59BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+15:14:49.016|       |QuikTrader|Инструмент BR59BR7@FORTS зарегистрирован на получение рыночных данных для Level1.

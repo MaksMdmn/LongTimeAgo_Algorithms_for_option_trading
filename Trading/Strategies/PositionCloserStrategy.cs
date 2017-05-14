@@ -101,7 +101,7 @@ namespace Trading.Strategies
             return $"{nameof(_priceToClose)}: {_priceToClose}, " +
                    $"{nameof(_securityDesirableDirection)}: {_securityDesirableDirection}, " +
                    $"{nameof(_strategyOrderSide)}: {_strategyOrderSide}, " +
-                   $"{nameof(SecurityWithSignalToClose)}: {SecurityWithSignalToClose.Code}";
+                   $"security with signal: {SecurityWithSignalToClose.Code}";
         }
     }
 }

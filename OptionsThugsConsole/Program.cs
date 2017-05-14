@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Security;
 using System.Threading;
@@ -15,6 +16,21 @@ namespace OptionsThugsConsole
     {
         static void Main(string[] args)
         {
+            //UserPosition tempPosition = new UserPosition("testcode");
+            //tempPosition.Money = 35M;
+
+
+            //UserPosition tempPosition1 = new UserPosition("testcod22e");
+            //tempPosition1.Money = 665M;
+
+
+            //UserPosition.SaveToXml(new List<UserPosition>()
+            //{
+            //   tempPosition1, tempPosition
+            //});
+
+
+
             IConnector connector = new QuikTrader()
             {
                 LuaFixServerAddress = "127.0.0.1:5001".To<EndPoint>(),

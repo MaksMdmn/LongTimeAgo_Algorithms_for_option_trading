@@ -180,8 +180,6 @@ namespace Trading.Strategies
                 delta += bs.Delta(DateTimeOffset.Now, null, futPrice).CheckIfValueNullThenZero() * pair.Value;
             });
 
-            Debug.WriteLine(delta);
-
             return delta;
         }
 
@@ -244,7 +242,7 @@ namespace Trading.Strategies
                    $"{nameof(MinFuturesPositionVal)}: {MinFuturesPositionVal}, " +
                    $"{nameof(DeltaStep)}: {DeltaStep}, " +
                    $"{nameof(DeltaBuffer)}: {DeltaBuffer}, " +
-                   $"{nameof(PriceLevelsForHedge)}: {PriceLevelsForHedge.Select(phl => phl.Direction + " " + phl.Price + " ")}";
+                   $"hedge levels: {PriceLevelsForHedge?.Select(phl => phl.Direction + " " + phl.Price + " ")}";
         }
     }
 }

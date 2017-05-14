@@ -137,22 +137,25 @@ namespace Trading.Common
         }
 
         public static decimal CalculateWorstLimitSpreadPrice(this MarketDepth md, Sides dealSide,
-            decimal desirableSpread)
+            decimal desirableSpread, decimal priceStep)
         {
             if (!md.CheckIfSpreadExist())
                 throw new ArgumentException("spread does not exist, calculation impossible: " + md.BestPair);
 
-            var diff = md.BestPair.SpreadPrice.Value - desirableSpread;
+            if (priceStep <= 0)
+                throw new ArgumentException("price step cannot have below zero value" + priceStep);
+
+            var diff = (md.BestPair.SpreadPrice.Value - desirableSpread) / priceStep;
             var halfDiff = diff / 2;
 
             if (diff % 2 == 0)
-                return md.Security.ShrinkPrice(dealSide == Sides.Buy ? md.BestBid.Price + halfDiff : md.BestAsk.Price - halfDiff);
-
-
+                return md.Security.ShrinkPrice(dealSide == Sides.Buy
+                    ? md.BestBid.Price + halfDiff * priceStep
+                    : md.BestAsk.Price - halfDiff * priceStep);
 
             return md.Security.ShrinkPrice(dealSide == Sides.Buy
-                ? md.BestBid.Price + Math.Floor(halfDiff)
-                : md.BestAsk.Price - Math.Ceiling(halfDiff));
+                ? md.BestBid.Price + Math.Floor(halfDiff) * priceStep
+                : md.BestAsk.Price - Math.Ceiling(halfDiff) * priceStep);
         }
 
         public static bool CheckIfSpreadExist(this MarketDepth md)

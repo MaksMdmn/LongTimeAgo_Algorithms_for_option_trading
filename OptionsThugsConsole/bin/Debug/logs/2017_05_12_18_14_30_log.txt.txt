@@ -1,0 +1,729 @@
+﻿00:00:00.000|       |QuikTrader|Connect
+18:14:36.539|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001...
+18:14:36.540|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001 is OK.
+18:14:36.542|       |Quik LUA. Transactions|Sending logon to 127.0.0.1:5001...
+18:14:36.555|       |Quik LUA. Transactions|Logon sent to 127.0.0.1:5001 OK.
+18:14:36.556|       |Quik LUA. Market data|Connect to 127.0.0.1:5001...
+18:14:36.556|       |Quik LUA. Market data|Connect to 127.0.0.1:5001 is OK.
+18:14:36.556|       |Quik LUA. Market data|Sending logon to 127.0.0.1:5001...
+18:14:36.559|       |Quik LUA. Market data|Logon sent to 127.0.0.1:5001 OK.
+18:14:36.562|       |Quik LUA. Transactions|Start message processing.
+18:14:36.562|       |Quik LUA. Market data|Start message processing.
+18:14:36.610|       |QuikTrader|Создан новый портфель SPBFUT00d75.
+18:14:36.632|Warning|QuikTrader|Заявка 289182600 не найдена.
+18:14:36.634|Warning|QuikTrader|Заявка 289182818 не найдена.
+18:14:36.634|Warning|QuikTrader|Заявка 289182427 не найдена.
+18:14:36.635|Warning|QuikTrader|Заявка 289182726 не найдена.
+18:14:36.635|Warning|QuikTrader|Заявка 289298011 не найдена.
+18:14:36.635|Warning|QuikTrader|Заявка 289299924 не найдена.
+18:14:36.635|Warning|QuikTrader|Заявка 289321234 не найдена.
+18:14:36.636|Warning|QuikTrader|Заявка 289321984 не найдена.
+18:14:36.636|Warning|QuikTrader|Заявка 289329257 не найдена.
+18:14:36.636|Warning|QuikTrader|Заявка 289331910 не найдена.
+18:14:36.636|Warning|QuikTrader|Заявка 289332088 не найдена.
+18:14:36.637|Warning|QuikTrader|Заявка 289332598 не найдена.
+18:14:36.637|Warning|QuikTrader|Заявка 289332739 не найдена.
+18:14:36.637|Warning|QuikTrader|Заявка 289333101 не найдена.
+18:14:36.637|Warning|QuikTrader|Заявка 289358252 не найдена.
+18:14:36.638|Warning|QuikTrader|Заявка 289361102 не найдена.
+18:14:36.638|Warning|QuikTrader|Заявка 289367885 не найдена.
+18:14:36.638|Warning|QuikTrader|Заявка 289388290 не найдена.
+18:14:36.638|Warning|QuikTrader|Заявка 289388389 не найдена.
+18:14:36.639|Warning|QuikTrader|Заявка 289389305 не найдена.
+18:14:36.639|Warning|QuikTrader|Заявка 289390675 не найдена.
+18:14:36.639|Warning|QuikTrader|Заявка 289390735 не найдена.
+18:14:36.640|Warning|QuikTrader|Заявка 289393563 не найдена.
+18:14:36.640|Warning|QuikTrader|Заявка 289393673 не найдена.
+18:14:36.640|Warning|QuikTrader|Заявка 289393792 не найдена.
+18:14:36.640|Warning|QuikTrader|Заявка 289455070 не найдена.
+18:14:36.640|Warning|QuikTrader|Заявка 289540793 не найдена.
+18:14:36.641|       |QuikTrader|New order: 53588260/291649269 Покупка Цена=1.3 Объем=10 Сост=Done Бал=0 
+18:14:36.641|       |QuikTrader|New order: 53588279/291672556 Продажа Цена=0.56 Объем=5 Сост=Done Бал=5 
+18:14:36.641|       |QuikTrader|New order: 55099236/291764878 Продажа Цена=47.63 Объем=2 Сост=Done Бал=0 
+18:14:36.642|       |QuikTrader|New order: 55099243/291771461 Продажа Цена=0.84 Объем=2 Сост=Done Бал=2 
+18:14:36.642|       |QuikTrader|New order: 55099247/291773595 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+18:14:36.642|       |QuikTrader|New order: 55099249/291774743 Продажа Цена=1.54 Объем=2 Сост=Done Бал=2 
+18:14:36.642|       |QuikTrader|New order: 55099251/291775019 Продажа Цена=1.54 Объем=2 Сост=Done Бал=2 
+18:14:36.643|       |QuikTrader|New order: 55099253/291776314 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+18:14:36.643|       |QuikTrader|New order: 55099255/291776386 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+18:14:36.643|       |QuikTrader|New order: 55099257/291776895 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+18:14:36.643|       |QuikTrader|New order: 55099261/291778612 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+18:14:36.644|       |QuikTrader|New order: 55099263/291782093 Продажа Цена=0.83 Объем=2 Сост=Done Бал=2 
+18:14:36.644|       |QuikTrader|New order: 55099265/291782396 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+18:14:36.644|       |QuikTrader|New order: 55099267/291783417 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+18:14:36.644|       |QuikTrader|New order: 55099271/291783767 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+18:14:36.645|       |QuikTrader|New order: 55099273/291784829 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+18:14:36.645|       |QuikTrader|New order: 55099275/291786357 Продажа Цена=0.86 Объем=2 Сост=Done Бал=2 
+18:14:36.645|       |QuikTrader|New order: 55099277/291786727 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.645|       |QuikTrader|New order: 55099279/291787686 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.646|       |QuikTrader|New order: 55099281/291789237 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.646|       |QuikTrader|New order: 55099285/291789748 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.646|Warning|QuikTrader|Заявка 291792275 не найдена.
+18:14:36.646|       |QuikTrader|New order: 55099287/291792287 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.647|       |QuikTrader|New order: 55099289/291792631 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.647|       |QuikTrader|New order: 55099291/291794212 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.647|       |QuikTrader|New order: 55099295/291796687 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.648|       |QuikTrader|New order: 55099297/291797074 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.648|       |QuikTrader|New order: 55099299/291799121 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.648|Warning|QuikTrader|Заявка 291799507 не найдена.
+18:14:36.648|       |QuikTrader|New order: 55099301/291799758 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.649|Warning|QuikTrader|Заявка 291800079 не найдена.
+18:14:36.649|       |QuikTrader|New order: 55099303/291800190 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.649|Warning|QuikTrader|Заявка 291800891 не найдена.
+18:14:36.649|       |QuikTrader|New order: 55099305/291800936 Продажа Цена=0.85 Объем=2 Сост=Done Бал=2 
+18:14:36.650|       |QuikTrader|New order: 56223127/291906386 Продажа Цена=47.63 Объем=1 Сост=Done Бал=0 
+18:14:36.650|       |QuikTrader|New order: 56223134/291908413 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+18:14:36.650|       |QuikTrader|New order: 56223136/291910400 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+18:14:36.650|       |QuikTrader|New order: 56223138/291911037 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+18:14:36.651|       |QuikTrader|New order: 56223140/291911217 Продажа Цена=1.54 Объем=2 Сост=Done Бал=2 
+18:14:36.651|       |QuikTrader|New order: 56223142/291911415 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+18:14:36.651|       |QuikTrader|New order: 56223144/291911805 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+18:14:36.666|       |QuikTrader|New order: 56223146/291911907 Продажа Цена=0.88 Объем=2 Сост=Done Бал=2 
+18:14:36.666|       |QuikTrader|New order: 56518261/291925979 Продажа Цена=0.87 Объем=2 Сост=Done Бал=2 
+18:14:36.667|       |QuikTrader|New order: 56518263/291926641 Продажа Цена=0.91 Объем=2 Сост=Done Бал=2 
+18:14:36.667|       |QuikTrader|New order: 56518265/291926852 Продажа Цена=0.89 Объем=2 Сост=Done Бал=2 
+18:14:36.667|       |QuikTrader|New order: 65182259/292702315 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.667|       |QuikTrader|New order: 65182261/292702365 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.668|       |QuikTrader|New order: 65182263/292702408 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.668|       |QuikTrader|New order: 65182265/292702524 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.668|       |QuikTrader|New order: 65182267/292702618 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.668|       |QuikTrader|New order: 65182269/292702692 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.669|       |QuikTrader|New order: 65182271/292702821 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.669|       |QuikTrader|New order: 65182273/292703054 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.669|       |QuikTrader|New order: 65182275/292703082 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.669|       |QuikTrader|New order: 65182277/292703130 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.670|       |QuikTrader|New order: 65182279/292703245 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.670|       |QuikTrader|New order: 65182281/292703305 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.670|       |QuikTrader|New order: 65182283/292703382 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.670|       |QuikTrader|New order: 65182285/292703412 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.671|       |QuikTrader|New order: 65182287/292703473 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.671|       |QuikTrader|New order: 65182289/292703571 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.671|       |QuikTrader|New order: 65182291/292703658 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.671|       |QuikTrader|New order: 65182293/292703769 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.672|       |QuikTrader|New order: 65182295/292703815 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.672|       |QuikTrader|New order: 65182297/292703900 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.672|       |QuikTrader|New order: 65182299/292703944 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.673|       |QuikTrader|New order: 65182301/292703970 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.673|       |QuikTrader|New order: 65182305/292706069 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.673|       |QuikTrader|New order: 65182307/292706094 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.673|       |QuikTrader|New order: 65182309/292706160 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.674|       |QuikTrader|New order: 65182313/292706199 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.674|       |QuikTrader|New order: 65182315/292706269 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:14:36.674|       |QuikTrader|New order: 65182317/292706361 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.674|       |QuikTrader|New order: 65182319/292706383 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.675|       |QuikTrader|New order: 65182321/292706457 Продажа Цена=50.7 Объем=1 Сост=Done Бал=1 
+18:14:36.675|       |QuikTrader|New order: 65182323/292706554 Продажа Цена=50.69 Объем=1 Сост=Done Бал=1 
+18:14:36.675|       |QuikTrader|New order: 65182327/292708303 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.675|       |QuikTrader|New order: 65182329/292708449 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.676|       |QuikTrader|New order: 65182331/292708522 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.676|       |QuikTrader|New order: 65182337/292710906 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.676|       |QuikTrader|New order: 65182339/292710983 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.676|       |QuikTrader|New order: 65182341/292711018 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.677|       |QuikTrader|New order: 65182343/292711070 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.677|       |QuikTrader|New order: 65182345/292711128 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.677|       |QuikTrader|New order: 65182347/292711219 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.678|       |QuikTrader|New order: 65182349/292711376 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.678|       |QuikTrader|New order: 65182351/292711424 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.678|       |QuikTrader|New order: 65182353/292711439 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.678|       |QuikTrader|New order: 65182355/292711477 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.679|       |QuikTrader|New order: 65182357/292711520 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.679|       |QuikTrader|New order: 65182359/292711609 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.679|       |QuikTrader|New order: 65182361/292711637 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.679|       |QuikTrader|New order: 65182363/292711686 Продажа Цена=50.72 Объем=1 Сост=Done Бал=1 
+18:14:36.680|       |QuikTrader|New order: 65182365/292711743 Продажа Цена=50.71 Объем=1 Сост=Done Бал=1 
+18:14:36.680|Warning|QuikTrader|Заявка 289182600 не найдена.
+18:14:36.680|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.680,T(S)=2017.05.11 17:20:03.268,(Transaction),Sec=S#:BR45BQ7@FORTS, Native:,Type:,Ord=289182600/0/0,Fail=,Price=0,OrdVol=,TrVol=21,Bal=,TId=9136357,Pf=SPBFUT00d75,TPrice=0,11,UId=,State=
+18:14:36.680|Warning|QuikTrader|Заявка 289182818 не найдена.
+18:14:36.680|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.680,T(S)=2017.05.11 17:20:05.253,(Transaction),Sec=S#:Si57500BF7@FORTS, Native:,Type:,Ord=289182818/0/0,Fail=,Price=0,OrdVol=,TrVol=6,Bal=,TId=9136368,Pf=SPBFUT00d75,TPrice=933,UId=,State=
+18:14:36.681|Warning|QuikTrader|Заявка 289182427 не найдена.
+18:14:36.681|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.681,T(S)=2017.05.11 17:20:02.238,(Transaction),Sec=S#:BRM7@FORTS, Native:,Type:,Ord=289182427/0/0,Fail=,Price=0,OrdVol=,TrVol=5,Bal=,TId=9136345,Pf=SPBFUT00d75,TPrice=50,76,UId=,State=
+18:14:36.681|Warning|QuikTrader|Заявка 289182726 не найдена.
+18:14:36.681|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.681,T(S)=2017.05.11 17:20:04.174,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289182726/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9136361,Pf=SPBFUT00d75,TPrice=57558,UId=,State=
+18:14:36.681|Warning|QuikTrader|Заявка 289298011 не найдена.
+18:14:36.681|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.681,T(S)=2017.05.11 17:34:20.553,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289298011/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139251,Pf=SPBFUT00d75,TPrice=57522,UId=,State=
+18:14:36.681|Warning|QuikTrader|Заявка 289299924 не найдена.
+18:14:36.681|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.681,T(S)=2017.05.11 17:34:36.382,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289299924/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139309,Pf=SPBFUT00d75,TPrice=57518,UId=,State=
+18:14:36.681|Warning|QuikTrader|Заявка 289321234 не найдена.
+18:14:36.681|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.681,T(S)=2017.05.11 17:37:19.744,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321234/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139832,Pf=SPBFUT00d75,TPrice=57525,UId=,State=
+18:14:36.682|Warning|QuikTrader|Заявка 289321984 не найдена.
+18:14:36.682|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.682,T(S)=2017.05.11 17:37:28.041,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321984/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139849,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+18:14:36.682|Warning|QuikTrader|Заявка 289329257 не найдена.
+18:14:36.682|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.682,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9140003,Pf=SPBFUT00d75,TPrice=57519,UId=,State=
+18:14:36.682|Warning|QuikTrader|Заявка 289329257 не найдена.
+18:14:36.682|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.682,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140004,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+18:14:36.682|Warning|QuikTrader|Заявка 289333101 не найдена.
+18:14:36.682|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.682,T(S)=2017.05.11 17:39:11.793,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9140052,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+18:14:36.682|Warning|QuikTrader|Заявка 289333101 не найдена.
+18:14:36.682|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.682,T(S)=2017.05.11 17:39:14.955,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=2,Bal=,TId=9140058,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+18:14:36.682|Warning|QuikTrader|Заявка 289358252 не найдена.
+18:14:36.682|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.682,T(S)=2017.05.11 17:42:52.001,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289358252/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140591,Pf=SPBFUT00d75,TPrice=57532,UId=,State=
+18:14:36.683|Warning|QuikTrader|Заявка 289361102 не найдена.
+18:14:36.683|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.683,T(S)=2017.05.11 17:43:15.503,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289361102/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140624,Pf=SPBFUT00d75,TPrice=57538,UId=,State=
+18:14:36.683|Warning|QuikTrader|Заявка 289367885 не найдена.
+18:14:36.683|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.683,T(S)=2017.05.11 17:44:16.597,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289367885/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140726,Pf=SPBFUT00d75,TPrice=57547,UId=,State=
+18:14:36.683|Warning|QuikTrader|Заявка 289390735 не найдена.
+18:14:36.683|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.683,T(S)=2017.05.11 17:48:05.209,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289390735/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141130,Pf=SPBFUT00d75,TPrice=57537,UId=,State=
+18:14:36.683|Warning|QuikTrader|Заявка 289393792 не найдена.
+18:14:36.683|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.683,T(S)=2017.05.11 17:48:31.168,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289393792/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141184,Pf=SPBFUT00d75,TPrice=57528,UId=,State=
+18:14:36.683|Warning|QuikTrader|Заявка 289455070 не найдена.
+18:14:36.683|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.683,T(S)=2017.05.11 17:58:18.459,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289455070/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9142349,Pf=SPBFUT00d75,TPrice=57554,UId=,State=
+18:14:36.683|Warning|QuikTrader|Заявка 289540793 не найдена.
+18:14:36.683|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 18:14:36.683,T(S)=2017.05.11 18:09:51.006,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289540793/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9144137,Pf=SPBFUT00d75,TPrice=57561,UId=,State=
+18:14:46.260|       |QuikTrader|Инструмент BR45BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.261|       |QuikTrader|Инструмент BR51BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.261|       |QuikTrader|Инструмент BR52BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.263|       |QuikTrader|Инструмент BR53BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.263|       |QuikTrader|Инструмент BRM7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.264|       |QuikTrader|Инструмент BRN7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.264|       |QuikTrader|Инструмент BR43BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.264|       |QuikTrader|Инструмент BR43BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.265|       |QuikTrader|Инструмент BR44BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.265|       |QuikTrader|Инструмент BR44BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.266|       |QuikTrader|Инструмент BR45BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.266|       |QuikTrader|Инструмент BR46BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.266|       |QuikTrader|Инструмент BR46BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.267|       |QuikTrader|Инструмент BR47BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.267|       |QuikTrader|Инструмент BR47BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.267|       |QuikTrader|Инструмент BR48BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.267|       |QuikTrader|Инструмент BR48BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.268|       |QuikTrader|Инструмент BR49BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.268|       |QuikTrader|Инструмент BR49BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.269|       |QuikTrader|Инструмент BR50BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.269|       |QuikTrader|Инструмент BR50BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.269|       |QuikTrader|Инструмент BR51BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.269|       |QuikTrader|Инструмент BR52BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.270|       |QuikTrader|Инструмент BR53BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.270|       |QuikTrader|Инструмент BR54BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.270|       |QuikTrader|Инструмент BR54BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.271|       |QuikTrader|Инструмент BR55BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.271|       |QuikTrader|Инструмент BR55BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.271|       |QuikTrader|Инструмент BR56BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.271|       |QuikTrader|Инструмент BR56BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.272|       |QuikTrader|Инструмент BR57BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.272|       |QuikTrader|Инструмент BR57BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.272|       |QuikTrader|Инструмент BR58BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.273|       |QuikTrader|Инструмент BR58BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.273|       |QuikTrader|Инструмент BR59BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.273|       |QuikTrader|Инструмент BR59BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.274|       |QuikTrader|Инструмент BR60BE7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.274|       |QuikTrader|Инструмент BR60BQ7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.274|       |QuikTrader|Инструмент BR43BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.275|       |QuikTrader|Инструмент BR43BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.275|       |QuikTrader|Инструмент BR44BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.275|       |QuikTrader|Инструмент BR44BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.276|       |QuikTrader|Инструмент BR45BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.276|       |QuikTrader|Инструмент BR45BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.277|       |QuikTrader|Инструмент BR46BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.277|       |QuikTrader|Инструмент BR46BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.277|       |QuikTrader|Инструмент BR47BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.277|       |QuikTrader|Инструмент BR47BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.278|       |QuikTrader|Инструмент BR48BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.278|       |QuikTrader|Инструмент BR48BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.278|       |QuikTrader|Инструмент BR49BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.278|       |QuikTrader|Инструмент BR49BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.279|       |QuikTrader|Инструмент BR50BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.279|       |QuikTrader|Инструмент BR50BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.279|       |QuikTrader|Инструмент BR51BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.280|       |QuikTrader|Инструмент BR51BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.280|       |QuikTrader|Инструмент BR52BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.280|       |QuikTrader|Инструмент BR52BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.280|       |QuikTrader|Инструмент BR53BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.281|       |QuikTrader|Инструмент BR53BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.281|       |QuikTrader|Инструмент BR54BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.282|       |QuikTrader|Инструмент BR54BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.282|       |QuikTrader|Инструмент BR55BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.282|       |QuikTrader|Инструмент BR55BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.283|       |QuikTrader|Инструмент BR56BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.283|       |QuikTrader|Инструмент BR56BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.283|       |QuikTrader|Инструмент BR57BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.284|       |QuikTrader|Инструмент BR57BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.284|       |QuikTrader|Инструмент BR58BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.284|       |QuikTrader|Инструмент BR58BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.285|       |QuikTrader|Инструмент BR59BF7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:14:46.285|       |QuikTrader|Инструмент BR59BR7@FORTS зарегистрирован на получение рыночных данных для Level1.
+18:15:10.417|       |LQS_BRM7@FORTS_SPBFUT00d75|Стратегия Запущена. [0,-1]. Позиция 0.
+18:15:10.421|       |QuikTrader|Инструмент BRM7@FORTS зарегистрирован на получение рыночных данных для MarketDepth.
+18:15:10.425|Error  |Quik LUA. Transactions|System.ArgumentOutOfRangeException: Неправильный тип сообщения.
+Имя параметра: message
+Фактическое значение было Portfolio.
+   в StockSharp.Fix.Dialects.DefaultDialect.OnWrite(IFixWriter writer, Message message)
+   в StockSharp.Quik.Lua.LuaDialect.OnWrite(IFixWriter writer, Message message)
+   в StockSharp.Fix.Dialects.BaseDialect.#=qQHXmrsRQTtNBJm7rqlkw$NGzOHRFFOYslRLsQ8z3vHTj_Te3ev2Xf_V3zs7QafAr(Message #=qJZXKrLIu36w3tX7kTXweHA==)
+   в StockSharp.Fix.FixMessageAdapter.OnSendInMessage(Message message)
+   в StockSharp.Messages.MessageAdapter.SendInMessage(Message message)
+18:15:10.425|Error  |QuikTrader|System.ArgumentOutOfRangeException: Неправильный тип сообщения.
+Имя параметра: message
+Фактическое значение было Portfolio.
+   в StockSharp.Fix.Dialects.DefaultDialect.OnWrite(IFixWriter writer, Message message)
+   в StockSharp.Quik.Lua.LuaDialect.OnWrite(IFixWriter writer, Message message)
+   в StockSharp.Fix.Dialects.BaseDialect.#=qQHXmrsRQTtNBJm7rqlkw$NGzOHRFFOYslRLsQ8z3vHTj_Te3ev2Xf_V3zs7QafAr(Message #=qJZXKrLIu36w3tX7kTXweHA==)
+   в StockSharp.Fix.FixMessageAdapter.OnSendInMessage(Message message)
+   в StockSharp.Messages.MessageAdapter.SendInMessage(Message message)
+18:15:10.431|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x2ED5287) заявки на Sell с ценой 50,68 и объемом 1. 
+18:15:10.431|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.68 Объем=1 Сост=None Бал=0 
+18:15:10.431|       |QuikTrader|New order: 65670931/ Продажа Цена=50.68 Объем=1 Сост=Pending Бал=1 
+18:15:10.652|Warning|QuikTrader|Заявка 292736141 не найдена.
+18:15:10.652|       |QuikTrader|Order changed: 65670931/292736141 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:10.652|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:11.299|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670931 (0x2ED5287).
+18:15:11.299|       |QuikTrader|CancelOrder: 65670931/292736141 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:11.519|       |QuikTrader|Order changed: 65670931/292736141 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:15:11.519|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:11.519|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670931 (0x2ED5287) больше не активна.
+18:15:11.720|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x19C62EC) заявки на Sell с ценой 50,68 и объемом 1. 
+18:15:11.720|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.68 Объем=1 Сост=None Бал=0 
+18:15:11.720|       |QuikTrader|New order: 65670933/ Продажа Цена=50.68 Объем=1 Сост=Pending Бал=1 
+18:15:11.869|Warning|QuikTrader|Заявка 292736256 не найдена.
+18:15:11.869|       |QuikTrader|Order changed: 65670933/292736256 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:11.869|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:11.971|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670933 (0x19C62EC).
+18:15:11.971|       |QuikTrader|CancelOrder: 65670933/292736256 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:12.132|       |QuikTrader|Order changed: 65670933/292736256 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:12.132|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:12.183|       |QuikTrader|Order changed: 65670933/292736256 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:15:12.183|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:12.183|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670933 (0x19C62EC) больше не активна.
+18:15:12.371|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x3735F75) заявки на Sell с ценой 50,68 и объемом 1. 
+18:15:12.371|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.68 Объем=1 Сост=None Бал=0 
+18:15:12.371|       |QuikTrader|New order: 65670935/ Продажа Цена=50.68 Объем=1 Сост=Pending Бал=1 
+18:15:12.554|Warning|QuikTrader|Заявка 292736324 не найдена.
+18:15:12.554|       |QuikTrader|Order changed: 65670935/292736324 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:12.554|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:12.699|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670935 (0x3735F75).
+18:15:12.699|       |QuikTrader|CancelOrder: 65670935/292736324 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:12.812|       |QuikTrader|Order changed: 65670935/292736324 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:12.812|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:12.875|       |QuikTrader|Order changed: 65670935/292736324 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:15:12.875|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:12.875|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670935 (0x3735F75) больше не активна.
+18:15:13.022|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x31225E4) заявки на Sell с ценой 50,68 и объемом 1. 
+18:15:13.022|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.68 Объем=1 Сост=None Бал=0 
+18:15:13.022|       |QuikTrader|New order: 65670937/ Продажа Цена=50.68 Объем=1 Сост=Pending Бал=1 
+18:15:13.141|Warning|QuikTrader|Заявка 292736376 не найдена.
+18:15:13.141|       |QuikTrader|Order changed: 65670937/292736376 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:13.141|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:14.426|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670937 (0x31225E4).
+18:15:14.426|       |QuikTrader|CancelOrder: 65670937/292736376 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:14.589|       |QuikTrader|Order changed: 65670937/292736376 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:14.589|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:14.591|       |QuikTrader|Order changed: 65670937/292736376 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:15:14.591|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:14.591|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670937 (0x31225E4) больше не активна.
+18:15:14.677|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x2701CEA) заявки на Sell с ценой 50,68 и объемом 1. 
+18:15:14.677|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.68 Объем=1 Сост=None Бал=0 
+18:15:14.677|       |QuikTrader|New order: 65670939/ Продажа Цена=50.68 Объем=1 Сост=Pending Бал=1 
+18:15:14.914|Warning|QuikTrader|Заявка 292736480 не найдена.
+18:15:14.950|       |QuikTrader|Order changed: 65670939/292736480 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:14.950|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:15.030|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670939 (0x2701CEA).
+18:15:15.030|       |QuikTrader|CancelOrder: 65670939/292736480 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:15.305|       |QuikTrader|Order changed: 65670939/292736480 Продажа Цена=50.68 Объем=1 Сост=Active Бал=1 
+18:15:15.305|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:15.307|       |QuikTrader|Order changed: 65670939/292736480 Продажа Цена=50.68 Объем=1 Сост=Done Бал=1 
+18:15:15.307|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:15:15.307|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670939 (0x2701CEA) больше не активна.
+18:15:18.048|       |LQS_BRM7@FORTS_SPBFUT00d75|Стратегия останавливается. [0,-1]. Позиция 0.
+18:15:18.051|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0xB1C92) заявки на Sell с ценой 50,68 и объемом 1. 
+18:15:18.051|Warning|LQS_BRM7@FORTS_SPBFUT00d75|Стратегия в состоянии Stopping. Регистрация заявки невозможна.
+18:15:18.051|       |LQS_BRM7@FORTS_SPBFUT00d75|Ожидание снятия всех активных заявок.
+18:15:59.535|       |LQS_BRM7@FORTS_SPBFUT00d75|Стратегия Запущена. [0,-1]. Позиция 0.
+18:15:59.547|Error  |QuikTrader|System.InvalidOperationException: Subscribed
+18:16:00.068|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x2A66580) заявки на Sell с ценой 50,67 и объемом 1. 
+18:16:00.068|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.67 Объем=1 Сост=None Бал=0 
+18:16:00.068|       |QuikTrader|New order: 65670945/ Продажа Цена=50.67 Объем=1 Сост=Pending Бал=1 
+18:16:00.304|       |QuikTrader|Order changed: 65670945/292739783 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:00.304|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:00.304|       |QuikTrader|Order changed: 65670945/292739783 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:00.304|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:00.604|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670945 (0x2A66580).
+18:16:00.604|       |QuikTrader|CancelOrder: 65670945/292739783 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:00.760|       |QuikTrader|Order changed: 65670945/292739783 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:00.760|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:00.763|       |QuikTrader|Order changed: 65670945/292739783 Продажа Цена=50.67 Объем=1 Сост=Done Бал=1 
+18:16:00.763|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:00.763|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670945 (0x2A66580) больше не активна.
+18:16:00.957|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x20CF046) заявки на Sell с ценой 50,67 и объемом 1. 
+18:16:00.957|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.67 Объем=1 Сост=None Бал=0 
+18:16:00.957|       |QuikTrader|New order: 65670947/ Продажа Цена=50.67 Объем=1 Сост=Pending Бал=1 
+18:16:01.106|Warning|QuikTrader|Заявка 292739829 не найдена.
+18:16:01.106|       |QuikTrader|Order changed: 65670947/292739829 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:01.106|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:01.180|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670947 (0x20CF046).
+18:16:01.180|       |QuikTrader|CancelOrder: 65670947/292739829 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:01.322|       |QuikTrader|Order changed: 65670947/292739829 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:01.322|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:01.324|       |QuikTrader|Order changed: 65670947/292739829 Продажа Цена=50.67 Объем=1 Сост=Done Бал=1 
+18:16:01.324|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:01.324|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670947 (0x20CF046) больше не активна.
+18:16:01.711|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x1073F53) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:01.711|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:01.711|       |QuikTrader|New order: 65670949/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:01.873|Warning|QuikTrader|Заявка 292739926 не найдена.
+18:16:01.874|       |QuikTrader|Order changed: 65670949/292739926 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:01.874|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:01.947|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670949 (0x1073F53).
+18:16:01.947|       |QuikTrader|CancelOrder: 65670949/292739926 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:02.025|       |QuikTrader|Order changed: 65670949/292739926 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:02.025|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:02.056|       |QuikTrader|Order changed: 65670949/292739926 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:02.056|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:02.056|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670949 (0x1073F53) больше не активна.
+18:16:02.203|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x2C8E6C2) заявки на Sell с ценой 50,67 и объемом 1. 
+18:16:02.203|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.67 Объем=1 Сост=None Бал=0 
+18:16:02.203|       |QuikTrader|New order: 65670951/ Продажа Цена=50.67 Объем=1 Сост=Pending Бал=1 
+18:16:02.449|Warning|QuikTrader|Заявка 292739999 не найдена.
+18:16:02.449|       |QuikTrader|Order changed: 65670951/292739999 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:02.449|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:02.548|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670951 (0x2C8E6C2).
+18:16:02.548|       |QuikTrader|CancelOrder: 65670951/292739999 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:02.778|       |QuikTrader|Order changed: 65670951/292739999 Продажа Цена=50.67 Объем=1 Сост=Active Бал=1 
+18:16:02.778|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:02.780|       |QuikTrader|Order changed: 65670951/292739999 Продажа Цена=50.67 Объем=1 Сост=Done Бал=1 
+18:16:02.780|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:02.780|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670951 (0x2C8E6C2) больше не активна.
+18:16:02.976|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x2139785) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:02.976|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:02.976|       |QuikTrader|New order: 65670953/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:03.152|Warning|QuikTrader|Заявка 292740064 не найдена.
+18:16:03.152|       |QuikTrader|Order changed: 65670953/292740064 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:03.152|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:03.338|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670953 (0x2139785).
+18:16:03.338|       |QuikTrader|CancelOrder: 65670953/292740064 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:03.536|       |QuikTrader|Order changed: 65670953/292740064 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:03.536|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:03.640|       |QuikTrader|Order changed: 65670953/292740064 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:03.640|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:03.640|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670953 (0x2139785) больше не активна.
+18:16:04.260|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x3B8743C) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:04.260|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:04.260|       |QuikTrader|New order: 65670955/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:04.404|Warning|QuikTrader|Заявка 292740145 не найдена.
+18:16:04.404|       |QuikTrader|Order changed: 65670955/292740145 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:04.404|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:04.898|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670955 (0x3B8743C).
+18:16:04.898|       |QuikTrader|CancelOrder: 65670955/292740145 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:05.011|       |QuikTrader|Order changed: 65670955/292740145 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:05.011|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:05.012|       |QuikTrader|Order changed: 65670955/292740145 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:05.012|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:05.012|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670955 (0x3B8743C) больше не активна.
+18:16:05.159|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x6E1283) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:05.159|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:05.159|       |QuikTrader|New order: 65670957/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:05.333|Warning|QuikTrader|Заявка 292740225 не найдена.
+18:16:05.333|       |QuikTrader|Order changed: 65670957/292740225 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:05.333|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:05.527|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670957 (0x6E1283).
+18:16:05.527|       |QuikTrader|CancelOrder: 65670957/292740225 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:05.665|       |QuikTrader|Order changed: 65670957/292740225 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:05.665|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:05.667|       |QuikTrader|Order changed: 65670957/292740225 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:05.667|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:05.667|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670957 (0x6E1283) больше не активна.
+18:16:05.964|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x1424C1D) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:05.964|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:05.964|       |QuikTrader|New order: 65670959/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:06.099|       |QuikTrader|Order changed: 65670959/292740278 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:06.099|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:06.099|       |QuikTrader|Order changed: 65670959/292740278 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:06.099|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:06.204|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670959 (0x1424C1D).
+18:16:06.204|       |QuikTrader|CancelOrder: 65670959/292740278 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:06.607|       |QuikTrader|Order changed: 65670959/292740278 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:06.607|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:06.609|       |QuikTrader|Order changed: 65670959/292740278 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:06.609|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:06.609|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670959 (0x1424C1D) больше не активна.
+18:16:07.001|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x18811E6) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:07.001|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:07.001|       |QuikTrader|New order: 65670961/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:07.248|Warning|QuikTrader|Заявка 292740339 не найдена.
+18:16:07.249|       |QuikTrader|Order changed: 65670961/292740339 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:07.249|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:07.311|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670961 (0x18811E6).
+18:16:07.311|       |QuikTrader|CancelOrder: 65670961/292740339 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:07.455|       |QuikTrader|Order changed: 65670961/292740339 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:07.455|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:07.456|       |QuikTrader|Order changed: 65670961/292740339 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:07.456|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:07.456|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670961 (0x18811E6) больше не активна.
+18:16:07.559|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x13D7BE9) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:07.559|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:07.559|       |QuikTrader|New order: 65670963/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:07.807|Warning|QuikTrader|Заявка 292740401 не найдена.
+18:16:07.807|       |QuikTrader|Order changed: 65670963/292740401 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:07.807|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:08.152|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670963 (0x13D7BE9).
+18:16:08.152|       |QuikTrader|CancelOrder: 65670963/292740401 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:08.290|       |QuikTrader|Order changed: 65670963/292740401 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:08.290|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:08.291|       |QuikTrader|Order changed: 65670963/292740401 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:08.291|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:08.291|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670963 (0x13D7BE9) больше не активна.
+18:16:08.809|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x19A5D70) заявки на Sell с ценой 50,65 и объемом 1. 
+18:16:08.809|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.65 Объем=1 Сост=None Бал=0 
+18:16:08.809|       |QuikTrader|New order: 65670965/ Продажа Цена=50.65 Объем=1 Сост=Pending Бал=1 
+18:16:08.963|Warning|QuikTrader|Заявка 292740493 не найдена.
+18:16:08.963|       |QuikTrader|Order changed: 65670965/292740493 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:08.963|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:09.160|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670965 (0x19A5D70).
+18:16:09.160|       |QuikTrader|CancelOrder: 65670965/292740493 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:09.305|       |QuikTrader|Order changed: 65670965/292740493 Продажа Цена=50.65 Объем=1 Сост=Active Бал=1 
+18:16:09.305|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:09.307|       |QuikTrader|Order changed: 65670965/292740493 Продажа Цена=50.65 Объем=1 Сост=Done Бал=1 
+18:16:09.307|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:09.307|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670965 (0x19A5D70) больше не активна.
+18:16:09.708|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x1090E5B) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:09.708|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:09.708|       |QuikTrader|New order: 65670967/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:09.851|Warning|QuikTrader|Заявка 292740548 не найдена.
+18:16:09.852|       |QuikTrader|Order changed: 65670967/292740548 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:09.852|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:09.954|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670967 (0x1090E5B).
+18:16:09.954|       |QuikTrader|CancelOrder: 65670967/292740548 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:10.096|       |QuikTrader|Order changed: 65670967/292740548 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:10.096|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:10.151|       |QuikTrader|Order changed: 65670967/292740548 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:10.151|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:10.151|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670967 (0x1090E5B) больше не активна.
+18:16:10.449|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x399A588) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:10.449|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:10.449|       |QuikTrader|New order: 65670969/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:10.753|Warning|QuikTrader|Заявка 292740628 не найдена.
+18:16:10.753|       |QuikTrader|Order changed: 65670969/292740628 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:10.753|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:11.147|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670969 (0x399A588).
+18:16:11.147|       |QuikTrader|CancelOrder: 65670969/292740628 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:11.289|       |QuikTrader|Order changed: 65670969/292740628 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:11.289|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:11.388|       |QuikTrader|Order changed: 65670969/292740628 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:11.388|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:11.388|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670969 (0x399A588) больше не активна.
+18:16:11.653|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x1AD465A) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:11.653|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:11.653|       |QuikTrader|New order: 65670971/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:11.806|Warning|QuikTrader|Заявка 292740665 не найдена.
+18:16:11.806|       |QuikTrader|Order changed: 65670971/292740665 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:11.806|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:12.418|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670971 (0x1AD465A).
+18:16:12.418|       |QuikTrader|CancelOrder: 65670971/292740665 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:12.571|       |QuikTrader|Order changed: 65670971/292740665 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:12.571|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:12.573|       |QuikTrader|Order changed: 65670971/292740665 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:12.573|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:12.573|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670971 (0x1AD465A) больше не активна.
+18:16:13.074|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x19C2179) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:13.074|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:13.074|       |QuikTrader|New order: 65670973/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:13.230|       |QuikTrader|Order changed: 65670973/292740715 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:13.230|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:13.231|       |QuikTrader|Order changed: 65670973/292740715 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:13.231|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:14.438|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670973 (0x19C2179).
+18:16:14.438|       |QuikTrader|CancelOrder: 65670973/292740715 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:14.661|       |QuikTrader|Order changed: 65670973/292740715 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:14.661|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:14.665|       |QuikTrader|Order changed: 65670973/292740715 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:14.665|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:14.665|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670973 (0x19C2179) больше не активна.
+18:16:14.847|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x37D7A10) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:14.847|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:14.847|       |QuikTrader|New order: 65670975/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:14.988|Warning|QuikTrader|Заявка 292740793 не найдена.
+18:16:14.989|       |QuikTrader|Order changed: 65670975/292740793 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:14.989|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:15.092|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670975 (0x37D7A10).
+18:16:15.092|       |QuikTrader|CancelOrder: 65670975/292740793 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:15.237|       |QuikTrader|Order changed: 65670975/292740793 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:15.237|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:15.298|       |QuikTrader|Order changed: 65670975/292740793 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:15.298|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:15.298|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670975 (0x37D7A10) больше не активна.
+18:16:15.988|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x3403E22) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:15.988|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:15.988|       |QuikTrader|New order: 65670977/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:16.168|Warning|QuikTrader|Заявка 292740916 не найдена.
+18:16:16.168|       |QuikTrader|Order changed: 65670977/292740916 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:16.168|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:17.009|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670977 (0x3403E22).
+18:16:17.009|       |QuikTrader|CancelOrder: 65670977/292740916 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:17.143|       |QuikTrader|Order changed: 65670977/292740916 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:17.143|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:17.145|       |QuikTrader|Order changed: 65670977/292740916 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:17.145|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:17.145|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670977 (0x3403E22) больше не активна.
+18:16:17.248|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x278742D) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:17.248|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:17.248|       |QuikTrader|New order: 65670979/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:17.402|Warning|QuikTrader|Заявка 292740987 не найдена.
+18:16:17.402|       |QuikTrader|Order changed: 65670979/292740987 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:17.402|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:17.500|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670979 (0x278742D).
+18:16:17.500|       |QuikTrader|CancelOrder: 65670979/292740987 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:17.643|       |QuikTrader|Order changed: 65670979/292740987 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:17.643|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:17.750|       |QuikTrader|Order changed: 65670979/292740987 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:17.750|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:17.750|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670979 (0x278742D) больше не активна.
+18:16:18.251|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x207E983) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:18.251|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:18.251|       |QuikTrader|New order: 65670981/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:18.500|Warning|QuikTrader|Заявка 292741021 не найдена.
+18:16:18.500|       |QuikTrader|Order changed: 65670981/292741021 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:18.500|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:18.798|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670981 (0x207E983).
+18:16:18.798|       |QuikTrader|CancelOrder: 65670981/292741021 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:18.946|       |QuikTrader|Order changed: 65670981/292741021 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:18.946|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:18.947|       |QuikTrader|Order changed: 65670981/292741021 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:18.947|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:18.947|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670981 (0x207E983) больше не активна.
+18:16:19.528|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x1A6E049) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:19.528|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:19.528|       |QuikTrader|New order: 65670983/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:19.638|Warning|QuikTrader|Заявка 292741071 не найдена.
+18:16:19.638|       |QuikTrader|Order changed: 65670983/292741071 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:19.638|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:19.857|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670983 (0x1A6E049).
+18:16:19.857|       |QuikTrader|CancelOrder: 65670983/292741071 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:20.009|       |QuikTrader|Order changed: 65670983/292741071 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:20.009|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:20.010|       |QuikTrader|Order changed: 65670983/292741071 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:20.010|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:20.010|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670983 (0x1A6E049) больше не активна.
+18:16:20.621|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x3366E0C) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:20.621|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:20.621|       |QuikTrader|New order: 65670985/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:20.922|Warning|QuikTrader|Заявка 292741138 не найдена.
+18:16:20.922|       |QuikTrader|Order changed: 65670985/292741138 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:20.922|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:21.119|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670985 (0x3366E0C).
+18:16:21.119|       |QuikTrader|CancelOrder: 65670985/292741138 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:21.253|       |QuikTrader|Order changed: 65670985/292741138 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:21.253|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:21.303|       |QuikTrader|Order changed: 65670985/292741138 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:21.303|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:21.303|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670985 (0x3366E0C) больше не активна.
+18:16:21.714|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x8FE137) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:21.714|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:21.714|       |QuikTrader|New order: 65670987/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:21.855|Warning|QuikTrader|Заявка 292741194 не найдена.
+18:16:21.855|       |QuikTrader|Order changed: 65670987/292741194 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:21.855|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:22.589|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670987 (0x8FE137).
+18:16:22.589|       |QuikTrader|CancelOrder: 65670987/292741194 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:22.783|       |QuikTrader|Order changed: 65670987/292741194 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:22.783|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:22.892|       |QuikTrader|Order changed: 65670987/292741194 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:22.892|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:22.892|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670987 (0x8FE137) больше не активна.
+18:16:23.087|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x2DA1846) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:23.087|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:23.087|       |QuikTrader|New order: 65670989/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:23.328|Warning|QuikTrader|Заявка 292741246 не найдена.
+18:16:23.328|       |QuikTrader|Order changed: 65670989/292741246 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:23.328|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:23.727|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670989 (0x2DA1846).
+18:16:23.727|       |QuikTrader|CancelOrder: 65670989/292741246 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:23.878|       |QuikTrader|Order changed: 65670989/292741246 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:23.878|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:23.985|       |QuikTrader|Order changed: 65670989/292741246 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:23.985|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:23.985|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670989 (0x2DA1846) больше не активна.
+18:16:24.183|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x2161599) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:24.183|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:24.183|       |QuikTrader|New order: 65670991/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:24.433|Warning|QuikTrader|Заявка 292741289 не найдена.
+18:16:24.433|       |QuikTrader|Order changed: 65670991/292741289 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:24.433|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:24.629|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670991 (0x2161599).
+18:16:24.629|       |QuikTrader|CancelOrder: 65670991/292741289 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:24.868|       |QuikTrader|Order changed: 65670991/292741289 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:24.868|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:24.870|       |QuikTrader|Order changed: 65670991/292741289 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:24.870|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:24.870|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670991 (0x2161599) больше не активна.
+18:16:26.804|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x1DBE78C) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:26.804|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:26.804|       |QuikTrader|New order: 65670993/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:26.968|Warning|QuikTrader|Заявка 292741418 не найдена.
+18:16:26.991|       |QuikTrader|Order changed: 65670993/292741418 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:26.991|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:27.513|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670993 (0x1DBE78C).
+18:16:27.513|       |QuikTrader|CancelOrder: 65670993/292741418 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:27.732|       |QuikTrader|Order changed: 65670993/292741418 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:27.732|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:27.759|       |QuikTrader|Order changed: 65670993/292741418 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:27.759|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:27.759|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670993 (0x1DBE78C) больше не активна.
+18:16:27.842|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0xF8B5A2) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:27.842|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:27.842|       |QuikTrader|New order: 65670995/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:27.996|Warning|QuikTrader|Заявка 292741510 не найдена.
+18:16:27.996|       |QuikTrader|Order changed: 65670995/292741510 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:27.996|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:28.386|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670995 (0xF8B5A2).
+18:16:28.386|       |QuikTrader|CancelOrder: 65670995/292741510 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:28.524|       |QuikTrader|Order changed: 65670995/292741510 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:28.524|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:28.526|       |QuikTrader|Order changed: 65670995/292741510 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:28.526|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:28.526|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670995 (0xF8B5A2) больше не активна.
+18:16:28.783|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x9E3886) заявки на Sell с ценой 50,64 и объемом 1. 
+18:16:28.783|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.64 Объем=1 Сост=None Бал=0 
+18:16:28.783|       |QuikTrader|New order: 65670997/ Продажа Цена=50.64 Объем=1 Сост=Pending Бал=1 
+18:16:28.936|Warning|QuikTrader|Заявка 292741642 не найдена.
+18:16:28.937|       |QuikTrader|Order changed: 65670997/292741642 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:28.937|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:29.049|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670997 (0x9E3886).
+18:16:29.049|       |QuikTrader|CancelOrder: 65670997/292741642 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:29.229|       |QuikTrader|Order changed: 65670997/292741642 Продажа Цена=50.64 Объем=1 Сост=Active Бал=1 
+18:16:29.229|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:29.231|       |QuikTrader|Order changed: 65670997/292741642 Продажа Цена=50.64 Объем=1 Сост=Done Бал=1 
+18:16:29.231|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:29.231|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670997 (0x9E3886) больше не активна.
+18:16:29.390|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x65A393) заявки на Sell с ценой 50,66 и объемом 1. 
+18:16:29.390|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.66 Объем=1 Сост=None Бал=0 
+18:16:29.390|       |QuikTrader|New order: 65670999/ Продажа Цена=50.66 Объем=1 Сост=Pending Бал=1 
+18:16:29.515|Warning|QuikTrader|Заявка 292741727 не найдена.
+18:16:29.515|       |QuikTrader|Order changed: 65670999/292741727 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:29.515|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:30.038|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65670999 (0x65A393).
+18:16:30.038|       |QuikTrader|CancelOrder: 65670999/292741727 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:30.209|       |QuikTrader|Order changed: 65670999/292741727 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:30.209|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:30.212|       |QuikTrader|Order changed: 65670999/292741727 Продажа Цена=50.66 Объем=1 Сост=Done Бал=1 
+18:16:30.212|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:30.212|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65670999 (0x65A393) больше не активна.
+18:16:30.356|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x17663B0) заявки на Sell с ценой 50,66 и объемом 1. 
+18:16:30.356|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.66 Объем=1 Сост=None Бал=0 
+18:16:30.356|       |QuikTrader|New order: 65671001/ Продажа Цена=50.66 Объем=1 Сост=Pending Бал=1 
+18:16:30.511|Warning|QuikTrader|Заявка 292741885 не найдена.
+18:16:30.511|       |QuikTrader|Order changed: 65671001/292741885 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:30.511|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:31.235|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65671001 (0x17663B0).
+18:16:31.235|       |QuikTrader|CancelOrder: 65671001/292741885 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:31.385|       |QuikTrader|Order changed: 65671001/292741885 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:31.385|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:31.387|       |QuikTrader|Order changed: 65671001/292741885 Продажа Цена=50.66 Объем=1 Сост=Done Бал=1 
+18:16:31.387|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:31.387|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65671001 (0x17663B0) больше не активна.
+18:16:31.887|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x1CF203E) заявки на Sell с ценой 50,66 и объемом 1. 
+18:16:31.887|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.66 Объем=1 Сост=None Бал=0 
+18:16:31.887|       |QuikTrader|New order: 65671003/ Продажа Цена=50.66 Объем=1 Сост=Pending Бал=1 
+18:16:32.041|Warning|QuikTrader|Заявка 292741948 не найдена.
+18:16:32.042|       |QuikTrader|Order changed: 65671003/292741948 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:32.042|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:32.871|       |LQS_BRM7@FORTS_SPBFUT00d75|Отмена заявки 65671003 (0x1CF203E).
+18:16:32.871|       |QuikTrader|CancelOrder: 65671003/292741948 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:33.007|       |QuikTrader|Order changed: 65671003/292741948 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:33.007|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:33.009|       |QuikTrader|Order changed: 65671003/292741948 Продажа Цена=50.66 Объем=1 Сост=Done Бал=1 
+18:16:33.009|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.
+18:16:33.009|       |LQS_BRM7@FORTS_SPBFUT00d75|Заявка 65671003 (0x1CF203E) больше не активна.
+18:16:33.747|       |LQS_BRM7@FORTS_SPBFUT00d75|Регистрация новой  (0x32DEFD3) заявки на Sell с ценой 50,66 и объемом 1. 
+18:16:33.747|       |QuikTrader|RegisterOrder: 0/ Продажа Цена=50.66 Объем=1 Сост=None Бал=0 
+18:16:33.747|       |QuikTrader|New order: 65671005/ Продажа Цена=50.66 Объем=1 Сост=Pending Бал=1 
+18:16:33.857|Warning|QuikTrader|Заявка 292742060 не найдена.
+18:16:33.858|       |QuikTrader|Order changed: 65671005/292742060 Продажа Цена=50.66 Объем=1 Сост=Active Бал=1 
+18:16:33.858|       |LQS_BRM7@FORTS_SPBFUT00d75|Новая позиция: (S#:BRM7@FORTS, Native:,Type:Future, SPBFUT00d75)=0.

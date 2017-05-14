@@ -1,0 +1,87 @@
+﻿00:00:00.000|       |QuikTrader|Connect
+15:10:31.846|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001...
+15:10:31.847|       |Quik LUA. Transactions|Connect to 127.0.0.1:5001 is OK.
+15:10:31.849|       |Quik LUA. Transactions|Sending logon to 127.0.0.1:5001...
+15:10:31.863|       |Quik LUA. Transactions|Logon sent to 127.0.0.1:5001 OK.
+15:10:31.863|       |Quik LUA. Market data|Connect to 127.0.0.1:5001...
+15:10:31.864|       |Quik LUA. Market data|Connect to 127.0.0.1:5001 is OK.
+15:10:31.864|       |Quik LUA. Market data|Sending logon to 127.0.0.1:5001...
+15:10:31.866|       |Quik LUA. Market data|Logon sent to 127.0.0.1:5001 OK.
+15:10:31.869|       |Quik LUA. Transactions|Start message processing.
+15:10:31.869|       |Quik LUA. Market data|Start message processing.
+15:10:31.926|       |QuikTrader|Создан новый портфель SPBFUT00d75.
+15:10:31.949|Warning|QuikTrader|Заявка 289182600 не найдена.
+15:10:31.951|Warning|QuikTrader|Заявка 289182818 не найдена.
+15:10:31.951|Warning|QuikTrader|Заявка 289182427 не найдена.
+15:10:31.951|Warning|QuikTrader|Заявка 289182726 не найдена.
+15:10:31.952|Warning|QuikTrader|Заявка 289298011 не найдена.
+15:10:31.952|Warning|QuikTrader|Заявка 289299924 не найдена.
+15:10:31.952|Warning|QuikTrader|Заявка 289321234 не найдена.
+15:10:31.952|Warning|QuikTrader|Заявка 289321984 не найдена.
+15:10:31.953|Warning|QuikTrader|Заявка 289329257 не найдена.
+15:10:31.953|Warning|QuikTrader|Заявка 289331910 не найдена.
+15:10:31.953|Warning|QuikTrader|Заявка 289332088 не найдена.
+15:10:31.954|Warning|QuikTrader|Заявка 289332598 не найдена.
+15:10:31.954|Warning|QuikTrader|Заявка 289332739 не найдена.
+15:10:31.954|Warning|QuikTrader|Заявка 289333101 не найдена.
+15:10:31.954|Warning|QuikTrader|Заявка 289358252 не найдена.
+15:10:31.955|Warning|QuikTrader|Заявка 289361102 не найдена.
+15:10:31.955|Warning|QuikTrader|Заявка 289367885 не найдена.
+15:10:31.955|Warning|QuikTrader|Заявка 289388290 не найдена.
+15:10:31.955|Warning|QuikTrader|Заявка 289388389 не найдена.
+15:10:31.955|Warning|QuikTrader|Заявка 289389305 не найдена.
+15:10:31.956|Warning|QuikTrader|Заявка 289390675 не найдена.
+15:10:31.956|Warning|QuikTrader|Заявка 289390735 не найдена.
+15:10:31.956|Warning|QuikTrader|Заявка 289393563 не найдена.
+15:10:31.957|Warning|QuikTrader|Заявка 289393673 не найдена.
+15:10:31.957|Warning|QuikTrader|Заявка 289393792 не найдена.
+15:10:31.957|Warning|QuikTrader|Заявка 289455070 не найдена.
+15:10:31.957|Warning|QuikTrader|Заявка 289540793 не найдена.
+15:10:31.958|       |QuikTrader|New order: 53588260/291649269 Покупка Цена=1.3 Объем=10 Сост=Done Бал=0 
+15:10:31.958|       |QuikTrader|New order: 53588279/291672556 Продажа Цена=0.56 Объем=5 Сост=Done Бал=5 
+15:10:31.958|Warning|QuikTrader|Заявка 289182600 не найдена.
+15:10:31.958|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.958,T(S)=2017.05.11 17:20:03.268,(Transaction),Sec=S#:BR45BQ7@FORTS, Native:,Type:,Ord=289182600/0/0,Fail=,Price=0,OrdVol=,TrVol=21,Bal=,TId=9136357,Pf=SPBFUT00d75,TPrice=0,11,UId=,State=
+15:10:31.959|Warning|QuikTrader|Заявка 289182818 не найдена.
+15:10:31.959|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.959,T(S)=2017.05.11 17:20:05.253,(Transaction),Sec=S#:Si57500BF7@FORTS, Native:,Type:,Ord=289182818/0/0,Fail=,Price=0,OrdVol=,TrVol=6,Bal=,TId=9136368,Pf=SPBFUT00d75,TPrice=933,UId=,State=
+15:10:31.959|Warning|QuikTrader|Заявка 289182427 не найдена.
+15:10:31.959|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.959,T(S)=2017.05.11 17:20:02.238,(Transaction),Sec=S#:BRM7@FORTS, Native:,Type:,Ord=289182427/0/0,Fail=,Price=0,OrdVol=,TrVol=5,Bal=,TId=9136345,Pf=SPBFUT00d75,TPrice=50,76,UId=,State=
+15:10:31.959|Warning|QuikTrader|Заявка 289182726 не найдена.
+15:10:31.959|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.959,T(S)=2017.05.11 17:20:04.174,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289182726/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9136361,Pf=SPBFUT00d75,TPrice=57558,UId=,State=
+15:10:31.959|Warning|QuikTrader|Заявка 289298011 не найдена.
+15:10:31.959|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.959,T(S)=2017.05.11 17:34:20.553,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289298011/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139251,Pf=SPBFUT00d75,TPrice=57522,UId=,State=
+15:10:31.959|Warning|QuikTrader|Заявка 289299924 не найдена.
+15:10:31.959|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.959,T(S)=2017.05.11 17:34:36.382,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289299924/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9139309,Pf=SPBFUT00d75,TPrice=57518,UId=,State=
+15:10:31.960|Warning|QuikTrader|Заявка 289321234 не найдена.
+15:10:31.960|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.960,T(S)=2017.05.11 17:37:19.744,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321234/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139832,Pf=SPBFUT00d75,TPrice=57525,UId=,State=
+15:10:31.960|Warning|QuikTrader|Заявка 289321984 не найдена.
+15:10:31.960|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.960,T(S)=2017.05.11 17:37:28.041,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289321984/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9139849,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+15:10:31.960|Warning|QuikTrader|Заявка 289329257 не найдена.
+15:10:31.960|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.960,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9140003,Pf=SPBFUT00d75,TPrice=57519,UId=,State=
+15:10:31.960|Warning|QuikTrader|Заявка 289329257 не найдена.
+15:10:31.960|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.960,T(S)=2017.05.11 17:38:30.308,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289329257/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140004,Pf=SPBFUT00d75,TPrice=57517,UId=,State=
+15:10:31.960|Warning|QuikTrader|Заявка 289333101 не найдена.
+15:10:31.960|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.960,T(S)=2017.05.11 17:39:11.793,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=3,Bal=,TId=9140052,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+15:10:31.960|Warning|QuikTrader|Заявка 289333101 не найдена.
+15:10:31.960|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.960,T(S)=2017.05.11 17:39:14.955,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289333101/0/0,Fail=,Price=0,OrdVol=,TrVol=2,Bal=,TId=9140058,Pf=SPBFUT00d75,TPrice=57521,UId=,State=
+15:10:31.961|Warning|QuikTrader|Заявка 289358252 не найдена.
+15:10:31.961|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.961,T(S)=2017.05.11 17:42:52.001,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289358252/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140591,Pf=SPBFUT00d75,TPrice=57532,UId=,State=
+15:10:31.961|Warning|QuikTrader|Заявка 289361102 не найдена.
+15:10:31.961|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.961,T(S)=2017.05.11 17:43:15.503,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289361102/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140624,Pf=SPBFUT00d75,TPrice=57538,UId=,State=
+15:10:31.961|Warning|QuikTrader|Заявка 289367885 не найдена.
+15:10:31.961|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.961,T(S)=2017.05.11 17:44:16.597,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289367885/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9140726,Pf=SPBFUT00d75,TPrice=57547,UId=,State=
+15:10:31.961|Warning|QuikTrader|Заявка 289390735 не найдена.
+15:10:31.961|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.961,T(S)=2017.05.11 17:48:05.209,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289390735/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141130,Pf=SPBFUT00d75,TPrice=57537,UId=,State=
+15:10:31.961|Warning|QuikTrader|Заявка 289393792 не найдена.
+15:10:31.961|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.961,T(S)=2017.05.11 17:48:31.168,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289393792/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9141184,Pf=SPBFUT00d75,TPrice=57528,UId=,State=
+15:10:31.961|Warning|QuikTrader|Заявка 289455070 не найдена.
+15:10:31.961|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.961,T(S)=2017.05.11 17:58:18.459,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289455070/0/0,Fail=,Price=0,OrdVol=,TrVol=1,Bal=,TId=9142349,Pf=SPBFUT00d75,TPrice=57554,UId=,State=
+15:10:31.962|Warning|QuikTrader|Заявка 289540793 не найдена.
+15:10:31.962|       |QuikTrader|My trade delayed: Execution,T(L)=2017.05.12 15:10:31.962,T(S)=2017.05.11 18:09:51.006,(Transaction),Sec=S#:SiM7@FORTS, Native:,Type:,Ord=289540793/0/0,Fail=,Price=0,OrdVol=,TrVol=4,Bal=,TId=9144137,Pf=SPBFUT00d75,TPrice=57561,UId=,State=
+15:10:46.464|       |QuikTrader|Connect
+15:10:46.464|Warning|QuikTrader|Невозможно подключиться, так как подключение находится в состоянии Connected.
+15:11:08.991|       |QuikTrader|Connect
+15:11:08.991|Warning|QuikTrader|Невозможно подключиться, так как подключение находится в состоянии Connected.
+15:11:31.251|       |QuikTrader|Connect
+15:11:31.251|Warning|QuikTrader|Невозможно подключиться, так как подключение находится в состоянии Connected.
+15:13:06.028|       |QuikTrader|Connect
+15:13:06.028|Warning|QuikTrader|Невозможно подключиться, так как подключение находится в состоянии Connected.
