@@ -44,6 +44,8 @@ namespace OptionsThugsConsole.entities
 
             _logManager = new LogManager();
 
+            _userPositions = new Dictionary<string, UserPosition>();
+
             UserPosition.LoadFromXml()?.ForEach(up => { _userPositions.Add(up.SecCode, up); });
 
             _logManager.Listeners.Add(logger);
@@ -336,13 +338,30 @@ namespace OptionsThugsConsole.entities
             OnNewAnswer($"loaded securities: {_connector.Securities.Count()}", ConsoleColor.Green, false);
             OnNewAnswer($"loaded portfolios: {_connector.Portfolios.Count()}", ConsoleColor.Green, false);
 
-            var posSb = new StringBuilder();
+            var terminalPositionsSb = new StringBuilder();
+            var xmlPosSb = new StringBuilder();
+
             _connector.Positions.ForEach(p =>
             {
-                posSb.AppendLine($"{p.Portfolio.Name}    {p.CurrentValue}    {p.Security.Name}");
+                terminalPositionsSb.AppendLine($"{p.Portfolio.Name}    {p.CurrentValue}    {p.Security.Name}");
             });
 
-            OnNewAnswer($"terminal positions: {Environment.NewLine}{posSb}", ConsoleColor.Green, false);
+            _userPositions.ForEach(kvp =>
+            {
+                xmlPosSb
+                    .Append(kvp.Key)
+                    .Append(" ")
+                    .Append(kvp.Value.Quantity)
+                    .Append(" ")
+                    .Append(kvp.Value.Price)
+                    .Append(" ")
+                    .Append($" was created:{kvp.Value.CreatedTime}")
+                    .AppendLine();
+            });
+
+            OnNewAnswer("", ConsoleColor.Green, false);
+            OnNewAnswer($"terminal positions: {Environment.NewLine}{terminalPositionsSb}", ConsoleColor.Green, false);
+            OnNewAnswer($"file positions: {Environment.NewLine}{xmlPosSb}", ConsoleColor.Yellow, false);
 
             if (_dataManager.MappedStrategies.Count == 0)
             {
@@ -376,7 +395,7 @@ namespace OptionsThugsConsole.entities
                     OnNewAnswer(sb.ToString(), ConsoleColor.Green, false);
                 });
             }
-            OnNewAnswer($"program underlying asset: {_dataManager.UnderlyingAsset.Code}", ConsoleColor.Green, false);
+            OnNewAnswer($"program underlying asset: {_dataManager.UnderlyingAsset.Code} ({_dataManager.GetSecurityStringRepresentation(_dataManager.UnderlyingAsset)})", ConsoleColor.Green, false);
         }
 
         private void DoStopCmd(string[] userParams)

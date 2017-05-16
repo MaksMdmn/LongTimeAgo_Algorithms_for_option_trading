@@ -14,4 +14,11 @@
     <Price>0</Price>
     <Money>35</Money>
   </UserPosition>
+  <UserPosition>
+    <SecCode>BR53BE7</SecCode>
+    <CreatedTime>05/16/2017 21:57:33</CreatedTime>
+    <Quantity>10</Quantity>
+    <Price>0</Price>
+    <Money>0</Money>
+  </UserPosition>
 </ArrayOfUserPosition>

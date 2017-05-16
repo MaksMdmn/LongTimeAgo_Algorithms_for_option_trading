@@ -15,6 +15,7 @@ namespace Trading.Strategies
         protected MarketDepth MarketDepth { get; private set; }
         protected OrderSynchronizer OrderSynchronizer { get; }
         protected PositionSynchronizer PositionSynchronizer { get; }
+        protected TimingController TimingController { get; private set; }
 
         protected QuoterStrategy(Sides quotingSide, decimal quotingVolume)
         {
@@ -49,8 +50,16 @@ namespace Trading.Strategies
 
             MarketDepth = GetMarketDepth(Security);
 
+            TimingController = new TimingController(QuotingProcess, 700, 1000);
+
+            QuotingProcess();
+
             Security.WhenMarketDepthChanged(Connector)
-                .Do(QuotingProcess)
+                .Do(() =>
+                {
+                    QuotingProcess();
+                    TimingController?.TimingMethodHappened();
+                })
                 .Apply(this);
 
             this.WhenPositionChanged()
@@ -58,6 +67,7 @@ namespace Trading.Strategies
                 {
                     if (Math.Abs(Position) >= Volume)
                     {
+                        TimingController?.EndTimingControl();
                         Stop();
                     }
                 })

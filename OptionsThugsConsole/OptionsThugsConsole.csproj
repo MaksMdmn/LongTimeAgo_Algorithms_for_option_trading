@@ -94,7 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="entities\DataManager.cs" />
     <Compile Include="entities\StrategyManager.cs" />
-    <Compile Include="entities\CommandParser.cs" />
+    <Compile Include="entities\CommandHandler.cs" />
     <Compile Include="enums\UserCommands.cs" />
     <Compile Include="enums\UserKeyWords.cs" />
   </ItemGroup>

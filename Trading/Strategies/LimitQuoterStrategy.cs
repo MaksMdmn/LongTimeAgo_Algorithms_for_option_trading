@@ -48,7 +48,7 @@ namespace Trading.Strategies
                         var order = this.CreateOrder(QuotingSide, price, volume);
 
                         order.WhenRegistered(Connector)
-                            .Do(() => ProcessFastOrder(order))
+                            .Do(() => ProcessNicePriceOrder(order))
                             .Once()
                             .Apply(this);
 
@@ -59,7 +59,7 @@ namespace Trading.Strategies
                         var order = this.CreateOrder(QuotingSide, StopQuotingPrice, volume);
 
                         order.WhenRegistered(Connector)
-                            .Do(() => ProcessSlowOrder(order))
+                            .Do(() => ProcessBadPriceOrder(order))
                             .Once()
                             .Apply(this);
 
@@ -73,63 +73,52 @@ namespace Trading.Strategies
             }
         }
 
-        private void ProcessFastOrder(Order order)
+        private void ProcessNicePriceOrder(Order order)
         {
-            //TODO попробовал 2 раза выполнить действие, поможет ли от лага?
-            DoSafeFastOrderCanceling(order);
-
             Security.WhenMarketDepthChanged(Connector)
-                .Do(md => { DoSafeFastOrderCanceling(order); })
+                .Do(md =>
+                {
+                    if (OrderSynchronizer.IsAnyOrdersInWork
+                        && IsQuotingNeeded(order.Price))
+                    {
+                        try
+                        {
+                            OrderSynchronizer.CancelCurrentOrder();
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            IncrMaxErrorCountIfNotScared();
+                            this.AddWarningLog("MaxErrorCount was incremented");
+                            this.AddErrorLog(ex);
+                        }
+                    }
+                })
                 .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
                 .Apply(this);
         }
 
-        private void ProcessSlowOrder(Order order)
+        private void ProcessBadPriceOrder(Order order)
         {
-            //TODO попробовал 2 раза выполнить действие, поможет ли от лага?
-            DoSafeSlowOrderCanceling(order);
-
             Security.WhenMarketDepthChanged(Connector)
-                .Do(md => { DoSafeSlowOrderCanceling(order); })
+                .Do(md =>
+                {
+                    if (OrderSynchronizer.IsAnyOrdersInWork
+                        && IsBestQuoteMyQuote(order, MarketDepth.GetSuitableBestLimitQuote(QuotingSide)))
+                    {
+                        try
+                        {
+                            OrderSynchronizer.CancelCurrentOrder();
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            IncrMaxErrorCountIfNotScared();
+                            this.AddWarningLog("MaxErrorCount was incremented");
+                            this.AddErrorLog(ex);
+                        }
+                    }
+                })
                 .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
                 .Apply(this);
-        }
-
-        private void DoSafeFastOrderCanceling(Order order)
-        {
-            if (OrderSynchronizer.IsAnyOrdersInWork
-                    && IsQuotingNeeded(order.Price))
-            {
-                try
-                {
-                    OrderSynchronizer.CancelCurrentOrder();
-                }
-                catch (InvalidOperationException ex)
-                {
-                    IncrMaxErrorCountIfNotScared();
-                    this.AddWarningLog("MaxErrorCount was incremented");
-                    this.AddErrorLog(ex);
-                }
-            }
-        }
-
-        private void DoSafeSlowOrderCanceling(Order order)
-        {
-            if (OrderSynchronizer.IsAnyOrdersInWork
-                    && !IsBestQuoteMyQuote(order, MarketDepth.GetSuitableBestLimitQuote(QuotingSide)))
-            //TODO добавил "!" тк логика была не верна, проверить
-            {
-                try
-                {
-                    OrderSynchronizer.CancelCurrentOrder();
-                }
-                catch (InvalidOperationException ex)
-                {
-                    IncrMaxErrorCountIfNotScared();
-                    this.AddWarningLog("MaxErrorCount was incremented");
-                    this.AddErrorLog(ex);
-                }
-            }
         }
 
         private bool IsQuotingNeeded(decimal currentQuotingPrice)

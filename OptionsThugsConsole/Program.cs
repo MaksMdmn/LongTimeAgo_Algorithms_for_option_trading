@@ -39,10 +39,10 @@ namespace OptionsThugsConsole
             };
 
             AppConfigManager configManager = AppConfigManager.GetInstance();
-            CommandParser parser = CommandParser.GetInstance(connector);
+            CommandHandler handler = CommandHandler.GetInstance(connector);
 
             configManager.NewAnswer += Console.WriteLine;
-            parser.NewAnswer += Console.WriteLine;
+            handler.NewAnswer += Console.WriteLine;
 
             configManager.PrintAllSettings();
 
@@ -50,7 +50,7 @@ namespace OptionsThugsConsole
             {
                 var userMessage = Console.ReadLine()?.ToLower();
 
-                parser.ParseUserMessage(userMessage);
+                handler.ParseUserMessage(userMessage);
 
                 if (userMessage.CompareIgnoreCase(UserCommands.Dconn.ToString()))
                     break;

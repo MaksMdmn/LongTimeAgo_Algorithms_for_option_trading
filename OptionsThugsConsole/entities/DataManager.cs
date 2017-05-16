@@ -59,7 +59,7 @@ namespace OptionsThugsConsole.entities
             if (tempSecurities.Count > 1)
                 throw new ArgumentException("more than one matches in collection. Please, enter more specific security code from follows: "
                     + Environment.NewLine
-                    + tempSecurities.Select(s => s.Code + " " + s.Type + " " + s.OptionType + " " +
+                    + tempSecurities.Select(s => s.Code + " (key is:" + GetSecurityStringRepresentation(s) + ")" + " " + s.Type + " " + s.OptionType + " " +
                                                  $"{s.ExpiryDate:dd.MM.yyyy}").ToArray().Join(Environment.NewLine));
 
             if (tempSec == null)
