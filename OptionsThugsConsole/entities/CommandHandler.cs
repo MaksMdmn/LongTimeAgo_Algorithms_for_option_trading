@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -68,7 +69,7 @@ namespace OptionsThugsConsole.entities
             else
                 OnNewAnswer("entered command is incorrect. Please try one of follows: "
                     + Environment.NewLine
-                    + string.Join(Environment.NewLine, Enum.GetNames(typeof(UserCommands))));
+                    + AlignString(Enum.GetNames(typeof(UserCommands))));
         }
 
         private void ParseCommand(UserCommands cmd, string[] userParams)
@@ -211,14 +212,13 @@ namespace OptionsThugsConsole.entities
                     sb.AppendLine();
                     _userPositions.ForEach(kvp =>
                     {
-                        sb
-                        .Append(kvp.Key)
-                        .Append(" ")
-                        .Append(kvp.Value.Quantity)
-                        .Append(" ")
-                        .Append(kvp.Value.Price)
-                        .Append(" ")
-                        .Append($" was created:{kvp.Value.CreatedTime}")
+                        sb.Append(AlignString(new string[]
+                        {
+                            kvp.Key,
+                            kvp.Value.Quantity.ToString(),
+                            kvp.Value.Price.ToString(),
+                            $"created:{kvp.Value.CreatedTime}"
+                        }))
                         .AppendLine();
                     });
                     sb.AppendLine();
@@ -348,14 +348,14 @@ namespace OptionsThugsConsole.entities
 
             _userPositions.ForEach(kvp =>
             {
-                xmlPosSb
-                    .Append(kvp.Key)
-                    .Append(" ")
-                    .Append(kvp.Value.Quantity)
-                    .Append(" ")
-                    .Append(kvp.Value.Price)
-                    .Append(" ")
-                    .Append($" was created:{kvp.Value.CreatedTime}")
+
+                xmlPosSb.Append(AlignString(new string[]
+                    {
+                        kvp.Key,
+                        kvp.Value.Quantity.ToString(),
+                        kvp.Value.Price.ToString(),
+                        $"created:{kvp.Value.CreatedTime}"
+                    }))
                     .AppendLine();
             });
 
@@ -376,24 +376,29 @@ namespace OptionsThugsConsole.entities
 
                 _dataManager.MappedStrategies.ForEach(kvp =>
                 {
-                    sb.Append("*name: ")
-                        .Append(kvp.Key)
-                        .AppendLine()
-                        .Append("*state: ")
-                        .Append(kvp.Value.ProcessState)
-                        .Append(" errors: ")
-                        .Append(kvp.Value.ErrorCount)
-                        .Append(" trades: ")
-                        .Append(kvp.Value.MyTrades.Count())
-                        .Append(" position: ")
-                        .Append(kvp.Value.Position)
-                        .Append(" other: ")
-                        .Append(kvp.Value.ToString())
-                        .AppendLine()
-                        .AppendLine();
+                    sb.Append(AlignString(new string[]
+                    {
+                        "*name: ",
+                        kvp.Key,
+                        "state: ",
+                        kvp.Value.ProcessState.ToString(),
+                        " errors: ",
+                        kvp.Value.ErrorCount.ToString(),
+                        " trades: ",
+                        kvp.Value.MyTrades.Count().ToString(),
+                        " position: ",
+                        kvp.Value.Position.ToString()
+                    }));
 
-                    OnNewAnswer(sb.ToString(), ConsoleColor.Green, false);
+                    sb.AppendLine();
+
+                    sb.Append("string representation: ")
+                    .Append(kvp.Value.ToString());
+
+                    sb.AppendLine()
+                    .AppendLine();
                 });
+                OnNewAnswer(sb.ToString(), ConsoleColor.Green, false);
             }
             OnNewAnswer($"program underlying asset: {_dataManager.UnderlyingAsset.Code} ({_dataManager.GetSecurityStringRepresentation(_dataManager.UnderlyingAsset)})", ConsoleColor.Green, false);
         }
@@ -410,34 +415,23 @@ namespace OptionsThugsConsole.entities
 
             UserKeyWords kw;
 
-            var pairsToRemove = new List<KeyValuePair<string, PrimaryStrategy>>();
-
             if (Enum.TryParse(strategyName, true, out kw))
             {
                 if (kw == UserKeyWords.All)
                     _dataManager.MappedStrategies.ForEach(kvp =>
                     {
                         kvp.Value.Stop();
-                        pairsToRemove.Add(kvp);
                     });
             }
             else
             {
                 if (_dataManager.MappedStrategies.ContainsKey(strategyName))
-                {
                     _dataManager.MappedStrategies[strategyName].Stop();
-                    pairsToRemove
-                        .Add(new KeyValuePair<string, PrimaryStrategy>(strategyName, _dataManager.MappedStrategies[strategyName]));
-                }
 
                 else
                     OnNewAnswer("please choose correct strategy name from following: "
-                        + _dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray().Join(Environment.NewLine), ConsoleColor.Yellow);
+                        + AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
             }
-
-
-            if (pairsToRemove.Count > 0)
-                _dataManager.MappedStrategies.RemoveRange(pairsToRemove);
         }
 
         private void DoStartCmd(string[] userParams)
@@ -457,16 +451,7 @@ namespace OptionsThugsConsole.entities
                 if (kw == UserKeyWords.All)
                     _dataManager.MappedStrategies.ForEach(kvp =>
                     {
-                        kvp.Value.WhenStarted()
-                            .Do(() => NewAnswer($"{kvp.Key} strategy started."))
-
-                            .Apply(kvp.Value);
-                        kvp.Value.WhenStopping()
-                            .Do(() =>
-                            {
-                                NewAnswer($"{kvp.Key} strategy stopping, pos: {kvp.Value.Position}");
-                            })
-                            .Apply(kvp.Value);
+                        AssignCommonStrategyRules(kvp.Key, kvp.Value);
 
                         kvp.Value.Start();
                     });
@@ -477,23 +462,14 @@ namespace OptionsThugsConsole.entities
                 {
                     var soughtStrategy = _dataManager.MappedStrategies[strategyName];
 
-                    soughtStrategy.WhenStarted()
-                        .Do(() => NewAnswer($"{soughtStrategy} strategy started."))
-                        .Apply(soughtStrategy);
-
-                    soughtStrategy.WhenStopping()
-                        .Do(() =>
-                        {
-                            NewAnswer($"{soughtStrategy} strategy stopping, pos: {soughtStrategy.Position}");
-                        })
-                        .Apply(soughtStrategy);
+                    AssignCommonStrategyRules(strategyName, soughtStrategy);
 
                     soughtStrategy.Start();
                 }
                 else
                 {
                     OnNewAnswer("please choose correct strategy name from following: "
-                        + _dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray().Join(Environment.NewLine), ConsoleColor.Yellow);
+                        + AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
                 }
             }
         }
@@ -623,11 +599,15 @@ namespace OptionsThugsConsole.entities
 
                         UserPosition.SaveToXml(_userPositions.Values.ToList());
 
-                        OnNewAnswer($"NEW TRADE [ " +
-                                    $"side: {mt.Order.Direction} " +
-                                    $"size: {mt.Trade.Volume}  " +
-                                    $"price: {mt.Trade.Price} " +
-                                    $"sec: {mt.Trade.Security.Code} ], deal saved", ConsoleColor.Green);
+                        OnNewAnswer(AlignString(new string[]
+                        {
+                            "NEW TRADE [",
+                            $"side: {mt.Order.Direction}",
+                            $"size: {mt.Trade.Volume}",
+                            $"price: {mt.Trade.Price}",
+                            $"sec: {mt.Trade.Security.Code}",
+                            " ], deal saved"
+                        }), ConsoleColor.Magenta);
                     };
                 }
                 catch (Exception e1)
@@ -650,6 +630,34 @@ namespace OptionsThugsConsole.entities
             _connector?.Disconnect();
         }
 
+        private void AssignCommonStrategyRules(string name, PrimaryStrategy strategy)
+        {
+            strategy.WhenStarted()
+                        .Do(() =>
+                {
+                    NewAnswer("");
+                    NewAnswer($"{strategy} strategy started (key {name}).");
+                })
+                        .Apply(strategy);
+
+            strategy.WhenStopping()
+                .Do(() =>
+                {
+                    NewAnswer("");
+                    NewAnswer($"{strategy} strategy stopping, pos: {strategy.Position} (key {name})");
+                })
+                .Apply(strategy);
+
+            strategy.StrategyStopped += () =>
+            {
+                {
+                    _dataManager.MappedStrategies.Remove(name);
+                    NewAnswer("");
+                    NewAnswer($"{strategy} strategy STOPPED and removed from collection (key {name})");
+                }
+            };
+        }
+
         private decimal GreeksRounding(decimal value, int extraRoundNumbers = 0)
         {
             return Math.Round(value, 4 + extraRoundNumbers);
@@ -665,6 +673,29 @@ namespace OptionsThugsConsole.entities
             return Math.Round(value, 2);
         }
 
+        public static string AlignString(string[] words)
+        {
+            var sb = new StringBuilder();
+            var innerToken = " ";
+            var externalToken = "   ";
+            var maxLength = words.OrderByDescending(s => s.Length).First()?.Length;
+
+            if (maxLength > 0)
+            {
+                words.ForEach(word =>
+                {
+                    sb.Append(word);
+                    for (int i = 0; i < maxLength - word.Length; i++)
+                    {
+                        sb.Append(innerToken);
+                    }
+                    sb.Append(externalToken);
+                });
+            }
+
+
+            return sb.ToString();
+        }
 
         private void OnNewAnswer(string msg, ConsoleColor color = ConsoleColor.White, bool showDateTime = true)
         {

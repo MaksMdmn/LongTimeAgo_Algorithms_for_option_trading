@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Security;
+using System.Text;
 using System.Threading;
 using Ecng.Common;
 using OptionsThugsConsole.entities;
@@ -16,7 +17,14 @@ namespace OptionsThugsConsole
     {
         static void Main(string[] args)
         {
-            //UserPosition tempPosition = new UserPosition("testcode");
+            List<UserPosition> _userPositions = UserPosition.LoadFromXml();
+
+            _userPositions[0].AddNewDeal(Sides.Buy, 1.32M, -13);
+
+            UserPosition.SaveToXml(_userPositions);
+
+            Console.ReadLine();
+            //UserPosition tempPosition = new UserPosition("testcode");   BR52BE7
             //tempPosition.Money = 35M;
 
 

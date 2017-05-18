@@ -31,6 +31,7 @@ namespace Trading.Strategies
 
             this.WhenPositionChanged()
                 .Do(p => PositionSynchronizer.NewPositionChange(p))
+                .Until(IsStrategyStopping)
                 .Apply(this);
 
             this.WhenNewMyTrade()
@@ -38,6 +39,7 @@ namespace Trading.Strategies
                 {
                     PositionSynchronizer.NewTradeChange(mt.Trade.Volume);
                 })
+                .Until(IsStrategyStopping)
                 .Apply(this);
 
         }
@@ -52,7 +54,7 @@ namespace Trading.Strategies
 
             TimingController = new TimingController(QuotingProcess, 700, 1000);
 
-            QuotingProcess();
+            QuotingProcess(); //TODO проверить может это поможет обойти лаг с синхронизацией, почему-то не подтягивается стакан полностью в 1ый раз
 
             Security.WhenMarketDepthChanged(Connector)
                 .Do(() =>
@@ -60,20 +62,25 @@ namespace Trading.Strategies
                     QuotingProcess();
                     TimingController?.TimingMethodHappened();
                 })
+                .Until(IsStrategyStopping)
                 .Apply(this);
 
             this.WhenPositionChanged()
                 .Do(() =>
                 {
                     if (Math.Abs(Position) >= Volume)
-                    {
-                        TimingController?.EndTimingControl();
                         Stop();
-                    }
                 })
+                .Until(IsStrategyStopping)
                 .Apply(this);
 
             base.OnStarted();
+        }
+
+        protected override void OnStopped()
+        {
+            TimingController?.EndTimingControl();
+            base.OnStopped();
         }
 
         protected void IncrMaxErrorCountIfNotScared() => MaxErrorCount += 1;

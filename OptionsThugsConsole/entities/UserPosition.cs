@@ -35,6 +35,9 @@ namespace OptionsThugsConsole.entities
             List<UserPosition> result;
             var serializer = new XmlSerializer(typeof(List<UserPosition>));
 
+            if (!File.Exists(PathToXmlFile))
+                return null;
+
             using (var reader = new StreamReader(PathToXmlFile))
             {
                 result = (List<UserPosition>)serializer.Deserialize(reader);
@@ -58,8 +61,9 @@ namespace OptionsThugsConsole.entities
             var tempSize = side == Sides.Sell ? size * -1 : size;
 
             Quantity += tempSize;
-            Money += Quantity * Price * -1;
-            Price = Math.Round(Money / Quantity * -1, 4);
+            Money += tempSize * price * -1;
+
+            Price = Quantity == 0 ? 0 : Math.Round(Money / Quantity * -1, 4);
 
             CreatedTime = $"{DateTime.Now}";
         }

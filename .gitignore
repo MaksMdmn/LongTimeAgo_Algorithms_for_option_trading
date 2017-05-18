@@ -1,1 +1,3 @@
 ﻿/.vs*
+/OptionsThugsConsole/bin/Debug/logs*
+/OptionsThugsConsole/bin/Release/logs*

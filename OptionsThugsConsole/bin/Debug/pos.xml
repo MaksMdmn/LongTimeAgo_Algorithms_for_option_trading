@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUserPosition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <UserPosition>
-    <SecCode>testcod22e</SecCode>
-    <CreatedTime>14.05.2017 14:44:06</CreatedTime>
+    <SecCode>BR52BE7</SecCode>
+    <CreatedTime>18.05.2017 22:10:00</CreatedTime>
     <Quantity>0</Quantity>
     <Price>0</Price>
-    <Money>665</Money>
-  </UserPosition>
-  <UserPosition>
-    <SecCode>testcode</SecCode>
-    <CreatedTime>14.05.2017 14:44:06</CreatedTime>
-    <Quantity>0</Quantity>
-    <Price>0</Price>
-    <Money>35</Money>
-  </UserPosition>
-  <UserPosition>
-    <SecCode>BR53BE7</SecCode>
-    <CreatedTime>05/16/2017 21:57:33</CreatedTime>
-    <Quantity>10</Quantity>
-    <Price>0</Price>
-    <Money>0</Money>
+    <Money>-47.69</Money>
   </UserPosition>
 </ArrayOfUserPosition>

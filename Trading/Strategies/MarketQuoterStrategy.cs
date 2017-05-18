@@ -59,6 +59,7 @@ namespace Trading.Strategies
             catch (Exception ex)
             {
                 this.AddErrorLog(ex);
+                Stop();
             }
         }
 

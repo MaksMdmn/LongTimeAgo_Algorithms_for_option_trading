@@ -70,6 +70,7 @@ namespace Trading.Strategies
             catch (Exception ex)
             {
                 this.AddErrorLog(ex);
+                Stop();
             }
         }
 
@@ -93,7 +94,7 @@ namespace Trading.Strategies
                         }
                     }
                 })
-                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
+                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork || IsStrategyStopping())
                 .Apply(this);
         }
 
@@ -117,7 +118,7 @@ namespace Trading.Strategies
                         }
                     }
                 })
-                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork /*|| ProcessState == ProcessStates.Stopping*/)
+                .Until(() => !OrderSynchronizer.IsAnyOrdersInWork || IsStrategyStopping())
                 .Apply(this);
         }
 

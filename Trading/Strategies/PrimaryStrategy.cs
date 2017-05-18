@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Timers;
 using Ecng.Collections;
 using Ecng.Common;
@@ -13,6 +15,8 @@ namespace Trading.Strategies
     public abstract class PrimaryStrategy : Strategy
     {
         public int Timeout { get; set; }
+
+        public event Action StrategyStopped;
 
         private bool _isSetDone;
         private volatile bool _isCorrectChild;
@@ -67,6 +71,12 @@ namespace Trading.Strategies
 
         protected override void OnStarted()
         {
+            ProcessStateChanged += str =>
+            {
+                if (str.ProcessState == ProcessStates.Stopped)
+                    OnStrategyStopped();
+            };
+
             this.WhenError()
                 .Do(e =>
                 {
@@ -127,11 +137,22 @@ namespace Trading.Strategies
                 portfolios.ForEach(p => Connector.RegisterPortfolio(p));
         }
 
+        protected bool IsStrategyStopping()
+        {
+            return ProcessState == ProcessStates.Stopping;
+        }
         //TODO это общий обработчик, подумать может нужно останавливать стратегию и писать разные обработчики.
         private void ShowAppropriateMsgBox(string text, string error, string caption)
         {
             //MessageBox.Show(string.Format(CultureInfo.CurrentCulture, text + "{0}", error),
             //        caption, MessageBoxButton.OK, MessageBoxImage.Error);
+
+            Debug.WriteLine($"{text} {error}. Strategy state:{ProcessState}");
+        }
+
+        private void OnStrategyStopped()
+        {
+            StrategyStopped?.Invoke();
         }
     }
 }

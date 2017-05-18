@@ -113,8 +113,11 @@ namespace Trading.Common
             Task.Run(() =>
             {
                 if (!_eventWaiter.WaitOne(Timeout))
+                {
+                    _strategy.Stop();
                     throw new TimeoutException(
                         "Still have no respond from terminal about order transaction, timeout: " + Timeout);
+                }
 
                 methodAfterSuccess();
             });
