@@ -17,6 +17,8 @@ namespace Trading.Strategies
         protected PositionSynchronizer PositionSynchronizer { get; }
         protected TimingController TimingController { get; private set; }
 
+        private bool _isQuoting;
+
         protected QuoterStrategy(Sides quotingSide, decimal quotingVolume)
         {
             QuotingSide = quotingSide;
@@ -26,6 +28,8 @@ namespace Trading.Strategies
 
             OrderSynchronizer.Timeout = Timeout;
             PositionSynchronizer.Timeout = Timeout;
+
+            _isQuoting = false;
 
             WaitAllTrades = true;
 
@@ -54,13 +58,20 @@ namespace Trading.Strategies
 
             TimingController = new TimingController(QuotingProcess, 700, 1000);
 
-            QuotingProcess(); //TODO проверить может это поможет обойти лаг с синхронизацией, почему-то не подтягивается стакан полностью в 1ый раз
+            QuotingProcess(); 
 
             Security.WhenMarketDepthChanged(Connector)
                 .Do(() =>
                 {
-                    QuotingProcess();
-                    TimingController?.TimingMethodHappened();
+                    if (_isQuoting)
+                    {
+                        _isQuoting = true;
+
+                        QuotingProcess();
+                        TimingController?.TimingMethodHappened();
+
+                        _isQuoting = false;
+                    }
                 })
                 .Until(IsStrategyStopping)
                 .Apply(this);

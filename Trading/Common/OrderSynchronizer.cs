@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
+using StockSharp.Logging;
 using StockSharp.Messages;
 
 namespace Trading.Common
@@ -115,8 +116,7 @@ namespace Trading.Common
                 if (!_eventWaiter.WaitOne(Timeout))
                 {
                     _strategy.Stop();
-                    throw new TimeoutException(
-                        "Still have no respond from terminal about order transaction, timeout: " + Timeout);
+                    _strategy.AddErrorLog("Still have no respond from terminal about order transaction, timeout: " + Timeout);
                 }
 
                 methodAfterSuccess();

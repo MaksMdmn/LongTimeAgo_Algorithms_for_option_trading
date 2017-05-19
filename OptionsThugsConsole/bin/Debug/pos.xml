@@ -2,9 +2,16 @@
 <ArrayOfUserPosition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <UserPosition>
     <SecCode>BR52BE7</SecCode>
-    <CreatedTime>18.05.2017 22:10:00</CreatedTime>
+    <CreatedTime>05/19/2017 11:25:04</CreatedTime>
     <Quantity>0</Quantity>
     <Price>0</Price>
-    <Money>-47.69</Money>
+    <Money>-48.63</Money>
+  </UserPosition>
+  <UserPosition>
+    <SecCode>BR57BE7</SecCode>
+    <CreatedTime>05/19/2017 11:57:59</CreatedTime>
+    <Quantity>-1</Quantity>
+    <Price>-0.11</Price>
+    <Money>-0.11</Money>
   </UserPosition>
 </ArrayOfUserPosition>

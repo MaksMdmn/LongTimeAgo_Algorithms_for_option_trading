@@ -3,6 +3,7 @@ using System.Diagnostics;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
+using StockSharp.Logging;
 using StockSharp.Messages;
 using Trading.Common;
 
@@ -98,54 +99,64 @@ namespace Trading.Strategies
             Security.WhenMarketDepthChanged(Connector)
                 .Do(md =>
                 {
-                    if (!_isEnterActivated && md.CheckIfSpreadExist())
+                    try
                     {
-                        _isEnterActivated = true;
-
-                        var sign = _sideForEnterToPosition == Sides.Buy ? 1 : -1;
-                        var size = _lot.ShrinkSizeToTrade(_sideForEnterToPosition, CurrentPoisition, LimitedFuturesValueAbs);
-                        var step = md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread
-                            ? Security.PriceStep.CheckIfValueNullThenZero() * sign
-                            : 0;
-                        var price = md.CalculateWorstLimitSpreadPrice(_sideForEnterToPosition, _spread, md.BestPair.SpreadPrice.CheckIfValueNullThenZero());
-
-                        Debug.WriteLine($"COND: sz {size}  stp {step}  prc {price}");
-
-                        //откуда цена ? и почему так криво работают LQS раз через раз
-                        if (size <= 0)
+                        if (!_isEnterActivated && md.CheckIfSpreadExist())
                         {
-                            _isEnterActivated = false;
+                            _isEnterActivated = true;
+
+                            var sign = _sideForEnterToPosition == Sides.Buy ? 1 : -1;
+                            var size = _lot.ShrinkSizeToTrade(_sideForEnterToPosition, CurrentPoisition,
+                                LimitedFuturesValueAbs);
+                            var step = md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread
+                                ? Security.PriceStep.CheckIfValueNullThenZero() * sign
+                                : 0;
+                            var price = md.CalculateWorstLimitSpreadPrice(_sideForEnterToPosition, _spread,
+                                md.BestPair.SpreadPrice.CheckIfValueNullThenZero());
+
+                            if (size <= 0 || price <= 0)
+                            {
+                                _isEnterActivated = false;
+                            }
+                            else
+                            {
+                                _enterStrategy = new LimitQuoterStrategy(_sideForEnterToPosition, size, step, price)
+                                {
+                                    IsLimitOrdersAlwaysRepresent = true
+                                };
+
+                                AssignEnterRulesAndStart();
+                            }
                         }
-                        else
+
+                        if (!_isLeaverActivated && CurrentPoisition != 0)
                         {
-                            _enterStrategy = new LimitQuoterStrategy(_sideForEnterToPosition, size, step, price)
+                            _isLeaverActivated = true;
+
+                            var side = CurrentPoisition > 0 ? Sides.Sell : Sides.Buy;
+                            var sign = side == Sides.Buy ? 1 : -1;
+                            var size = CurrentPoisition.PrepareSizeToTrade();
+                            var step = md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread
+                                ? Security.PriceStep.CheckIfValueNullThenZero() * sign
+                                : 0;
+                            var price = CalculateExitPositionPrice();
+
+                            if (price <= 0)
+                                throw new ArgumentException("Impossible to continue work, exit price <=0");
+
+                            _leaveStrategy = new LimitQuoterStrategy(side, size, step, price)
                             {
                                 IsLimitOrdersAlwaysRepresent = true
                             };
 
-                            AssignEnterRulesAndStart();
+
+                            AssignLeaveRulesAndStart();
                         }
                     }
-
-                    if (!_isLeaverActivated && CurrentPoisition != 0)
+                    catch (Exception e1)
                     {
-                        _isLeaverActivated = true;
-
-                        var side = CurrentPoisition > 0 ? Sides.Sell : Sides.Buy;
-                        var sign = side == Sides.Buy ? 1 : -1;
-                        var size = CurrentPoisition.PrepareSizeToTrade();
-                        var step = md.BestPair.SpreadPrice.CheckIfValueNullThenZero() > _spread
-                            ? Security.PriceStep.CheckIfValueNullThenZero() * sign
-                            : 0;
-                        var price = CalculateExitPositionPrice();
-
-                        _leaveStrategy = new LimitQuoterStrategy(side, size, step, price)
-                        {
-                            IsLimitOrdersAlwaysRepresent = true
-                        };
-
-
-                        AssignLeaveRulesAndStart();
+                        this.AddErrorLog($"exception: {e1.Message}");
+                        Stop();
                     }
                 })
                 //.Until(() => ProcessState == ProcessStates.Stopping)

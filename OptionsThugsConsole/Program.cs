@@ -17,28 +17,6 @@ namespace OptionsThugsConsole
     {
         static void Main(string[] args)
         {
-            List<UserPosition> _userPositions = UserPosition.LoadFromXml();
-
-            _userPositions[0].AddNewDeal(Sides.Buy, 1.32M, -13);
-
-            UserPosition.SaveToXml(_userPositions);
-
-            Console.ReadLine();
-            //UserPosition tempPosition = new UserPosition("testcode");   BR52BE7
-            //tempPosition.Money = 35M;
-
-
-            //UserPosition tempPosition1 = new UserPosition("testcod22e");
-            //tempPosition1.Money = 665M;
-
-
-            //UserPosition.SaveToXml(new List<UserPosition>()
-            //{
-            //   tempPosition1, tempPosition
-            //});
-
-
-
             IConnector connector = new QuikTrader()
             {
                 LuaFixServerAddress = "127.0.0.1:5001".To<EndPoint>(),
@@ -66,7 +44,7 @@ namespace OptionsThugsConsole
 
             var counter = 10;
             while (connector.ConnectionState == ConnectionStates.Connected
-                || counter <= 0)
+                && counter > 0)
             {
                 Console.WriteLine("Trying to close safety for {0} sec.", counter);
                 Thread.Sleep(1000);

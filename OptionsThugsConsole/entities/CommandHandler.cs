@@ -103,7 +103,7 @@ namespace OptionsThugsConsole.entities
                         DoSettingsCmd(userParams);
                         break;
                     case UserCommands.Dconn:
-                        DoExit();
+                        DoDconnCmd();
                         break;
                 }
             }
@@ -176,31 +176,31 @@ namespace OptionsThugsConsole.entities
                     decimal vega = 0M;
                     decimal theta = 0M;
 
-                    tempSecurityMap.ForEach(kvp =>
-                    {
-                        if (kvp.Value == 0)
-                        {
-                            return;
-                        }
+                    tempSecurityMap.OrderBy(kvp => kvp.Key.Code).ForEach(kvp =>
+                     {
+                         if (kvp.Value == 0)
+                         {
+                             return;
+                         }
 
-                        if (kvp.Key.Type == SecurityTypes.Future)
-                        {
-                            delta += kvp.Value;
-                        }
+                         if (kvp.Key.Type == SecurityTypes.Future)
+                         {
+                             delta += kvp.Value;
+                         }
 
-                        if (kvp.Key.Type == SecurityTypes.Option)
-                        {
-                            var bs = new BlackScholes(kvp.Key, _dataManager.UnderlyingAsset, _connector);
-                            var lastPrice = kvp.Value > 0
-                                ? _dataManager.UnderlyingAsset.BestBid.Price
-                                : _dataManager.UnderlyingAsset.BestAsk.Price;
+                         if (kvp.Key.Type == SecurityTypes.Option)
+                         {
+                             var bs = new BlackScholes(kvp.Key, _dataManager.UnderlyingAsset, _connector);
+                             var lastPrice = kvp.Value > 0
+                                 ? _dataManager.UnderlyingAsset.BestBid.Price
+                                 : _dataManager.UnderlyingAsset.BestAsk.Price;
 
-                            delta += (bs.Delta(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                            gamma += (bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                            vega += (bs.Vega(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                            theta += (bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                        }
-                    });
+                             delta += (bs.Delta(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
+                             gamma += (bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
+                             vega += (bs.Vega(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
+                             theta += (bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
+                         }
+                     });
 
                     sb.Append($"POSITION GREEKS " +
                               $"delta: {GreeksRounding(delta)} " +
@@ -228,7 +228,7 @@ namespace OptionsThugsConsole.entities
 
                     var unAssetCodePart = _dataManager.UnderlyingAsset.Code.Substring(0, 2);
 
-                    tempSecurityMap.ForEach(kvp =>
+                    tempSecurityMap.OrderBy(kvp => kvp.Key.Code).ForEach(kvp =>
                     {
                         var curAssetCodePart = kvp.Key.Code.Substring(0, 2);
 
@@ -261,7 +261,7 @@ namespace OptionsThugsConsole.entities
                     });
                     break;
                 case UserKeyWords.Spr:
-                    tempSecurityMap.ForEach(kvp =>
+                    tempSecurityMap.OrderBy(kvp => kvp.Key.Code).ForEach(kvp =>
                     {
                         sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
                         .Append($" spread: {PriceRounding(kvp.Key.BestPair?.SpreadPrice ?? 0)}" +
@@ -270,7 +270,7 @@ namespace OptionsThugsConsole.entities
                     });
                     break;
                 case UserKeyWords.Vol:
-                    tempSecurityMap.ForEach(kvp =>
+                    tempSecurityMap.OrderBy(kvp => kvp.Key.Code).ForEach(kvp =>
                     {
                         if (kvp.Key.Type == SecurityTypes.Option)
                         {
@@ -378,25 +378,25 @@ namespace OptionsThugsConsole.entities
                 {
                     sb.Append(AlignString(new string[]
                     {
-                        "*name: ",
+                        "name: ",
                         kvp.Key,
-                        "state: ",
+                        "type:",
+                        kvp.Value.GetType().Name,
+                        "state:",
                         kvp.Value.ProcessState.ToString(),
-                        " errors: ",
+                        "errors:",
                         kvp.Value.ErrorCount.ToString(),
-                        " trades: ",
+                        "trades:",
                         kvp.Value.MyTrades.Count().ToString(),
-                        " position: ",
+                        "position:",
                         kvp.Value.Position.ToString()
-                    }));
+                    }, true, 2));
 
-                    sb.AppendLine();
-
-                    sb.Append("string representation: ")
+                    sb.Append("strRepresent:  ")
                     .Append(kvp.Value.ToString());
 
                     sb.AppendLine()
-                    .AppendLine();
+                    .AppendLine("***");
                 });
                 OnNewAnswer(sb.ToString(), ConsoleColor.Green, false);
             }
@@ -408,6 +408,12 @@ namespace OptionsThugsConsole.entities
             if (userParams.Length != 1)
             {
                 OnNewAnswer("please enter name one of existing strategies  to start (or keyword 'all')", ConsoleColor.Yellow);
+                return;
+            }
+
+            if (_dataManager.MappedStrategies.Count == 0)
+            {
+                OnNewAnswer("have no strategies to stop", ConsoleColor.Yellow);
                 return;
             }
 
@@ -439,6 +445,12 @@ namespace OptionsThugsConsole.entities
             if (userParams.Length != 1)
             {
                 OnNewAnswer("please enter one name of strategy to start (or keyword 'all')", ConsoleColor.Yellow);
+                return;
+            }
+
+            if (_dataManager.MappedStrategies.Count == 0)
+            {
+                OnNewAnswer("have no strategies to start", ConsoleColor.Yellow);
                 return;
             }
 
@@ -531,6 +543,12 @@ namespace OptionsThugsConsole.entities
 
         private void DoConnectCmd()
         {
+            if (_connector.ConnectionState == ConnectionStates.Connected)
+            {
+                OnNewAnswer("already connected.");
+                return;
+            }
+
             _connector.Connected += () =>
             {
                 OnNewAnswer("connected (success), loading securities, pls wait...");
@@ -609,6 +627,9 @@ namespace OptionsThugsConsole.entities
                             " ], deal saved"
                         }), ConsoleColor.Magenta);
                     };
+
+                    OnNewAnswer("");
+                    DoStatusCmd();
                 }
                 catch (Exception e1)
                 {
@@ -617,8 +638,14 @@ namespace OptionsThugsConsole.entities
             });
         }
 
-        private void DoExit()
+        private void DoDconnCmd()
         {
+            if (_connector.ConnectionState != ConnectionStates.Connected)
+            {
+                OnNewAnswer("have no connection to break.");
+                return;
+            }
+
             _connector.Disconnected += () =>
             {
                 OnNewAnswer("disconnected (success)");
@@ -644,7 +671,7 @@ namespace OptionsThugsConsole.entities
                 .Do(() =>
                 {
                     NewAnswer("");
-                    NewAnswer($"{strategy} strategy stopping, pos: {strategy.Position} (key {name})");
+                    NewAnswer($"{name} strategy STOPPING, pos: {strategy.Position}");
                 })
                 .Apply(strategy);
 
@@ -653,7 +680,7 @@ namespace OptionsThugsConsole.entities
                 {
                     _dataManager.MappedStrategies.Remove(name);
                     NewAnswer("");
-                    NewAnswer($"{strategy} strategy STOPPED and removed from collection (key {name})");
+                    NewAnswer($"{name} strategy STOPPED and removed from collection");
                 }
             };
         }
@@ -673,23 +700,34 @@ namespace OptionsThugsConsole.entities
             return Math.Round(value, 2);
         }
 
-        public static string AlignString(string[] words)
+        public static string AlignString(string[] words, bool withNewLines = false, int newLineAfterWords = 1)
         {
             var sb = new StringBuilder();
             var innerToken = " ";
             var externalToken = "   ";
             var maxLength = words.OrderByDescending(s => s.Length).First()?.Length;
+            var wordsCounter = 0;
 
             if (maxLength > 0)
             {
                 words.ForEach(word =>
                 {
                     sb.Append(word);
+
                     for (int i = 0; i < maxLength - word.Length; i++)
                     {
                         sb.Append(innerToken);
                     }
                     sb.Append(externalToken);
+
+                    if (withNewLines)
+                    {
+                        wordsCounter++;
+
+                        if (wordsCounter % newLineAfterWords == 0)
+                            sb.AppendLine();
+
+                    }
                 });
             }
 

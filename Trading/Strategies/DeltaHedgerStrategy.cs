@@ -7,6 +7,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Derivatives;
 using StockSharp.BusinessEntities;
+using StockSharp.Logging;
 using StockSharp.Messages;
 using Trading.Common;
 
@@ -115,6 +116,7 @@ namespace Trading.Strategies
             Security.WhenMarketDepthChanged(Connector)
                 .Do(md =>
                 {
+                    try { 
                     if (!_isDeltaHedging)
                     {
                         _isDeltaHedging = true;
@@ -148,6 +150,12 @@ namespace Trading.Strategies
                         }
 
                         _isDeltaHedging = false;
+                    }
+                    }
+                    catch (Exception e1)
+                    {
+                        this.AddErrorLog($"exception: {e1.Message}");
+                        Stop();
                     }
 
                 })

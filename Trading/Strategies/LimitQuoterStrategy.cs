@@ -41,7 +41,7 @@ namespace Trading.Strategies
                     decimal price = Security.ShrinkPrice(bestQuote.Price + QuotePriceShift);
                     decimal volume = Math.Abs(Volume) - Math.Abs(Position);
 
-                    if (volume <= 0) return;
+                    if (volume <= 0 || price <= 0) return;
 
                     if (IsLimitPriceAcceptableForQuoting(price))
                     {
