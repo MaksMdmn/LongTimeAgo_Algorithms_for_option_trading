@@ -73,8 +73,8 @@ namespace Trading.Strategies
 
         public override string ToString()
         {
-            return $"{base.ToString()}, " +
-                   $"{nameof(TargetPrice)}: {TargetPrice}";
+            return $"{nameof(TargetPrice)}: {TargetPrice} "
+                   + base.ToString();
         }
     }
 }

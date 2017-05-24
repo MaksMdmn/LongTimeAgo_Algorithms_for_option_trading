@@ -111,46 +111,52 @@ namespace Trading.Strategies
 
             DoStrategyPreparation(securitiesToReg.ToArray(), new Security[] { Security }, new Portfolio[] { Portfolio });
 
-            if (DeltaStep < 0) throw new ArgumentException("DeltaStep cannot be below zero: " + DeltaStep); ;
+            if (DeltaStep < 0) throw new ArgumentException("DeltaStep cannot be below zero: " + DeltaStep);
+
+            var md = GetMarketDepth(Security);
 
             Security.WhenMarketDepthChanged(Connector)
-                .Do(md =>
+                .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
+                .Do(() =>
                 {
-                    try { 
-                    if (!_isDeltaHedging)
+                    try
                     {
-                        _isDeltaHedging = true;
 
-                        var futuresQuote = _totalDelta >= 0 ? md.BestBid : md.BestAsk;
-
-                        if (futuresQuote == null)
+                        if (!_isDeltaHedging
+                            && IsTradingTime())
                         {
-                            _isDeltaHedging = false;
-                            return;
-                        }
+                            _isDeltaHedging = true;
 
-                        if (_isPriceLevelsForHedgeInitialized)
-                        {
-                            _priceLevelsForHedge.ForEach(level =>
+                            var futuresQuote = _totalDelta >= 0 ? md.BestBid : md.BestAsk;
+
+                            if (futuresQuote == null)
                             {
-                                if (MyTradingHelper.CheckIfWasCrossedByPrice(level, futuresQuote.Price))
+                                _isDeltaHedging = false;
+                                return;
+                            }
+
+                            if (_isPriceLevelsForHedgeInitialized)
+                            {
+                                _priceLevelsForHedge.ForEach(level =>
                                 {
-                                    DoHedge(CalcPosDelta(), 1);
-                                }
-                            });
+                                    if (MyTradingHelper.CheckIfWasCrossedByPrice(level, futuresQuote.Price))
+                                    {
+                                        DoHedge(CalcPosDelta(), 1);
+                                    }
+                                });
+                            }
+
+                            _totalDelta = CalcPosDelta();
+
+                            if (DeltaStep != 0
+                                && Math.Abs(_totalDelta / DeltaStep) >= 1
+                                && _totalDelta != 0)
+                            {
+                                DoHedge(_totalDelta, DeltaStep);
+                            }
+
+                            _isDeltaHedging = false;
                         }
-
-                        _totalDelta = CalcPosDelta();
-
-                        if (DeltaStep != 0
-                            && Math.Abs(_totalDelta / DeltaStep) >= 1
-                            && _totalDelta != 0)
-                        {
-                            DoHedge(_totalDelta, DeltaStep);
-                        }
-
-                        _isDeltaHedging = false;
-                    }
                     }
                     catch (Exception e1)
                     {
@@ -159,7 +165,6 @@ namespace Trading.Strategies
                     }
 
                 })
-                //.Until(() => ProcessState == ProcessStates.Stopping) // может лишнее
                 .Apply(this);
 
 
@@ -250,7 +255,8 @@ namespace Trading.Strategies
                    $"{nameof(MinFuturesPositionVal)}: {MinFuturesPositionVal}, " +
                    $"{nameof(DeltaStep)}: {DeltaStep}, " +
                    $"{nameof(DeltaBuffer)}: {DeltaBuffer}, " +
-                   $"hedge levels: {PriceLevelsForHedge?.Select(phl => phl.Direction + " " + phl.Price + " ")}";
+                   $"hedge levels: {PriceLevelsForHedge?.Select(phl => phl.Direction + " " + phl.Price + " ")} "
+                   + base.ToString();
         }
     }
 }

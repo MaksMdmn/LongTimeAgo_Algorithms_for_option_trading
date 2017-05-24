@@ -15,7 +15,6 @@ namespace Trading.Strategies
         protected MarketDepth MarketDepth { get; private set; }
         protected OrderSynchronizer OrderSynchronizer { get; }
         protected PositionSynchronizer PositionSynchronizer { get; }
-        protected TimingController TimingController { get; private set; }
 
         private bool _isQuoting;
 
@@ -56,22 +55,27 @@ namespace Trading.Strategies
 
             MarketDepth = GetMarketDepth(Security);
 
-            TimingController = new TimingController(QuotingProcess, 700, 1000);
-
-            QuotingProcess(); 
+            if (IsTradingTime())
+                QuotingProcess();
+            else
+                OrderSynchronizer.CancelCurrentOrder();
 
             Security.WhenMarketDepthChanged(Connector)
+                .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
                 .Do(() =>
                 {
-                    if (_isQuoting)
+                    if (!_isQuoting)
                     {
                         _isQuoting = true;
 
-                        QuotingProcess();
-                        TimingController?.TimingMethodHappened();
+                        if (IsTradingTime())
+                            QuotingProcess();
+                        else
+                            OrderSynchronizer.CancelCurrentOrder();
 
                         _isQuoting = false;
                     }
+
                 })
                 .Until(IsStrategyStopping)
                 .Apply(this);
@@ -86,12 +90,6 @@ namespace Trading.Strategies
                 .Apply(this);
 
             base.OnStarted();
-        }
-
-        protected override void OnStopped()
-        {
-            TimingController?.EndTimingControl();
-            base.OnStopped();
         }
 
         protected void IncrMaxErrorCountIfNotScared() => MaxErrorCount += 1;
@@ -116,7 +114,7 @@ namespace Trading.Strategies
 
         public override string ToString()
         {
-            return $"{nameof(QuotingSide)}: {QuotingSide}";
+            return $"{nameof(QuotingSide)}: {QuotingSide} " + base.ToString();
         }
     }
 }

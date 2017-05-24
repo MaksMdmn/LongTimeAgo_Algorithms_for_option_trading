@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>gunsicon.ICO</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ecng.Collections">
       <HintPath>..\..\..\xLibs\S#\StockSharp_4.3.21_ru\References\Ecng.Collections.dll</HintPath>
@@ -88,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="entities\AppConfigManager.cs" />
+    <Compile Include="entities\MessageManager.cs" />
     <Compile Include="entities\UserPosition.cs" />
     <Compile Include="enums\UserConfigs.cs" />
     <Compile Include="Program.cs" />
@@ -100,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gunsicon.ICO" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

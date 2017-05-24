@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using Ecng.Collections;
 using Ecng.Common;
@@ -9,6 +11,8 @@ using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
+using StockSharp.Logging;
+using StockSharp.Messages;
 
 namespace Trading.Strategies
 {
@@ -16,13 +20,28 @@ namespace Trading.Strategies
     {
         public int Timeout { get; set; }
 
-        public event Action StrategyStopped;
+        public event Action PrimaryStrategyStopped;
+
+        private static int GlobalCounter;
+        private static readonly TimeSpan DangerPeriodStart;
+        private static readonly TimeSpan DangerPeriodEnd;
+        protected static readonly TimeSpan AutoUpdatePeriod;
 
         private bool _isSetDone;
         private volatile bool _isCorrectChild;
+        private volatile bool _readyToStop;
         private Security[] _securities;
         private Security[] _marketDepths;
         private Portfolio[] _portfolios;
+
+        static PrimaryStrategy()
+        {
+            TimeHelper.SyncMarketTime();
+            DangerPeriodStart = new TimeSpan(18, 59, 55);
+            DangerPeriodEnd = new TimeSpan(19, 5, 5);
+            AutoUpdatePeriod = TimeSpan.FromSeconds(2);
+            GlobalCounter = 0;
+        }
 
         protected PrimaryStrategy()
         {
@@ -30,26 +49,14 @@ namespace Trading.Strategies
 
             _isSetDone = false;
             _isCorrectChild = false;
+            _readyToStop = true;
 
             CancelOrdersWhenStopping = true;
             CommentOrders = true;
             DisposeOnStop = false;
             MaxErrorCount = 10;
             OrdersKeepTime = TimeSpan.Zero;
-
-            //TimeHelper.SyncMarketTime();
-
-            //_workingTimeControl = new Timer();
-            //_workingTimeControl.Elapsed += (sender, args) =>
-            //{
-            //    //TODO делать саспенд на клиринг и восстанавливать после (беда в том что на фортс клиринг иногда больше, чем зашито в либе)
-
-            //    ExchangeBoard.Forts.WorkingTime.Periods[0].Times
-
-            //    TimeHelper.Now
-            //};
-            //_workingTimeControl.Interval = 1000;
-            //_workingTimeControl.Enabled = true;
+            Name += GlobalCounter++;
         }
 
         public void SetStrategyEntitiesForWork(IConnector connector, Security security, Portfolio portfolio)
@@ -67,6 +74,7 @@ namespace Trading.Strategies
         protected void MarkStrategyLikeChild(PrimaryStrategy child)
         {
             child._isCorrectChild = true;
+            child.Log += message => this.AddWarningLog($"CHILD MESSAGE (parent: {this.Name} child: {child.Name}): {message.Message}");
         }
 
         protected override void OnStarted()
@@ -76,6 +84,17 @@ namespace Trading.Strategies
                 if (str.ProcessState == ProcessStates.Stopped)
                     OnStrategyStopped();
             };
+
+            this.WhenOrderChanged().Do(mt =>
+                {
+                    if (!Orders.Any(o => o.State == OrderStates.Active || o.State == OrderStates.Pending))
+                        _readyToStop = true;
+                    else
+                        _readyToStop = false;
+
+                    Debug.WriteLine("IS STRATEGY READY TO STOP: " + _readyToStop);
+                })
+            .Apply(this);
 
             this.WhenError()
                 .Do(e =>
@@ -88,12 +107,28 @@ namespace Trading.Strategies
             Connector.ConnectionError += e => { ShowAppropriateMsgBox("Connector.ConnectionError event: ", e.ToString(), "Connection error2"); };
             Connector.OrderRegisterFailed += of => { ShowAppropriateMsgBox("Connector.OrderRegisterFaild event: ", of.Error.ToString(), "Order registration failed"); };
 
-            //this.WhenStopping()
-            //    .Do(() => _workingTimeControl.Enabled = false)
-            //    .Once()
-            //    .Apply(this);
-
             base.OnStarted();
+        }
+
+
+        protected override void OnStopping()
+        {
+            try
+            {
+                while (!_readyToStop)
+                {
+                    /*NOP*/
+                }
+
+                Debug.WriteLine("NO MORE ORDERS, CONTINUE STOPPING");
+
+                Rules.Clear();
+                base.OnStopping();
+            }
+            catch (Exception e1)
+            {
+                this.AddErrorLog(e1);
+            }
         }
 
         protected override void OnStopped()
@@ -150,9 +185,29 @@ namespace Trading.Strategies
             Debug.WriteLine($"{text} {error}. Strategy state:{ProcessState}");
         }
 
+        protected bool IsTradingTime()
+        {
+            if (Security == null)
+                return false;
+
+            var currentTime = TimeHelper.Now;
+            var checkingTime = currentTime.Add(TimeSpan.FromSeconds(10));
+
+            if (checkingTime.TimeOfDay > DangerPeriodStart && currentTime.TimeOfDay < DangerPeriodEnd)
+                return false;
+
+            return Security.Board.IsTradeTime(checkingTime)
+                && Security.Board.IsTradeTime(currentTime);
+        }
+
         private void OnStrategyStopped()
         {
-            StrategyStopped?.Invoke();
+            PrimaryStrategyStopped?.Invoke();
+        }
+
+        public override string ToString()
+        {
+            return "MaxVolume: " + Volume + " ";
         }
     }
 }

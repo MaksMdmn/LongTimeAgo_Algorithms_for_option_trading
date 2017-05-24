@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Ecng.Collections;
-using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
 using OptionsThugsConsole.enums;
 using StockSharp.BusinessEntities;
@@ -59,11 +57,11 @@ namespace OptionsThugsConsole.entities
                            $"volume{SeparatorBeforVal}{SeparatorAfterVal}" +
                            $"targetprice{SeparatorBeforVal}";
                 case StrategyTypes.Pcs:
-                    return $"security{SeparatorBeforVal}{SeparatorAfterVal}" +
-                           $"closeprice{SeparatorBeforVal}{SeparatorAfterVal}" +
-                           $"securityWithSignal{SeparatorBeforVal}{DefaultMark}{SeparatorAfterVal}" +
-                           $"securityDirection{SeparatorBeforVal}Up/Down/None{SeparatorAfterVal}" +
-                           $"positionToclose{SeparatorBeforVal}+-";
+                    return $"securityToClose:{SeparatorBeforVal}{SeparatorAfterVal}" +
+                           $"signalPrice{SeparatorBeforVal}{SeparatorAfterVal}" +
+                           $"signalSecurity{SeparatorBeforVal}{DefaultMark}{SeparatorAfterVal}" +
+                           $"signalDirection{SeparatorBeforVal}Up/Down/None{SeparatorAfterVal}" +
+                           $"positionToClose{SeparatorBeforVal}+-";
                 case StrategyTypes.Sss:
                     return $"security{SeparatorBeforVal}{SeparatorAfterVal}" +
                            $"cur.pos{SeparatorBeforVal}{SeparatorAfterVal}" +

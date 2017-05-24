@@ -61,7 +61,7 @@ namespace Trading.Common
             {
                 if (!_eventWaiter.WaitOne(Timeout))
                     throw new TimeoutException(
-                        "Still have no respond from terminal about order transaction, timeout: " + Timeout);
+                        "(PosSync) Still have no respond from terminal about order transaction, timeout: " + Timeout);
             });
         }
     }

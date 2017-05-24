@@ -96,11 +96,17 @@ namespace Trading.Strategies
                 LimitedFuturesValueAbs = LimitedFuturesValueAbs != 0 ? LimitedFuturesValueAbs : decimal.MaxValue;
 
 
+            var md = GetMarketDepth(Security);
+
             Security.WhenMarketDepthChanged(Connector)
-                .Do(md =>
+                .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
+                .Do(() =>
                 {
                     try
                     {
+                        if (!IsTradingTime())
+                            return;
+
                         if (!_isEnterActivated && md.CheckIfSpreadExist())
                         {
                             _isEnterActivated = true;
@@ -232,19 +238,20 @@ namespace Trading.Strategies
                 .Until(() => !_isEnterActivated)
                 .Apply(this);
 
-            _enterStrategy.WhenStopping()
-                .Do(() =>
-                {
-                    ChildStrategies.Remove(_enterStrategy);
+            _enterStrategy.PrimaryStrategyStopped += () =>
+            {
+                Debug.WriteLine("entering stopped.");
 
-                    _isEnterActivated = false;
-                })
-                .Until(() => !_isEnterActivated)
-                .Apply(this);
+                ChildStrategies.Remove(_enterStrategy);
+
+                _isEnterActivated = false;
+            };
 
 
             MarkStrategyLikeChild(_enterStrategy);
             ChildStrategies.Add(_enterStrategy);
+
+            Debug.WriteLine("entering started.");
         }
 
         private void AssignLeaveRulesAndStart()
@@ -267,18 +274,20 @@ namespace Trading.Strategies
                 .Until(() => !_isLeaverActivated)
                 .Apply(this);
 
-            _leaveStrategy.WhenStopping()
-                .Do(() =>
-                {
-                    _isLeaverActivated = false;
+            _leaveStrategy.PrimaryStrategyStopped += () =>
+            {
 
-                    ChildStrategies.Remove(_leaveStrategy);
-                })
-                .Until(() => !_isLeaverActivated)
-                .Apply(this);
+                Debug.WriteLine("leaver stopped.");
+
+                _isLeaverActivated = false;
+
+                ChildStrategies.Remove(_leaveStrategy);
+            };
 
             MarkStrategyLikeChild(_leaveStrategy);
             ChildStrategies.Add(_leaveStrategy);
+
+            Debug.WriteLine("leaver started.");
         }
 
         private void PositionAndMoneySyncIncrementation(decimal addedPosValue, decimal addedMoneyValue)
@@ -321,7 +330,8 @@ namespace Trading.Strategies
                    $"{nameof(_lot)}: {_lot}, " +
                    $"{nameof(_sideForEnterToPosition)}: {_sideForEnterToPosition}, " +
                    $"{nameof(LimitedFuturesValueAbs)}: {LimitedFuturesValueAbs}, " +
-                   $"{nameof(TenRepresentationOfDecimalNumbers)}: {TenRepresentationOfDecimalNumbers}";
+                   $"{nameof(TenRepresentationOfDecimalNumbers)}: {TenRepresentationOfDecimalNumbers} "
+                   + base.ToString();
         }
     }
 }

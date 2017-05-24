@@ -104,7 +104,8 @@ namespace Trading.Strategies
                 .Do(md =>
                 {
                     if (OrderSynchronizer.IsAnyOrdersInWork
-                        && IsBestQuoteMyQuote(order, MarketDepth.GetSuitableBestLimitQuote(QuotingSide)))
+                        && IsBestQuoteMyQuote(order, MarketDepth.GetSuitableBestLimitQuote(QuotingSide))
+                        && IsTradingTime())
                     {
                         try
                         {
@@ -170,10 +171,10 @@ namespace Trading.Strategies
 
         public override string ToString()
         {
-            return $"{base.ToString()}, " +
-                   $"{nameof(QuotePriceShift)}: {QuotePriceShift}, " +
+            return $"{nameof(QuotePriceShift)}: {QuotePriceShift}, " +
                    $"{nameof(StopQuotingPrice)}: {StopQuotingPrice}, " +
-                   $"{nameof(IsLimitOrdersAlwaysRepresent)}: {IsLimitOrdersAlwaysRepresent}";
+                   $"{nameof(IsLimitOrdersAlwaysRepresent)}: {IsLimitOrdersAlwaysRepresent} "
+                   + base.ToString();
         }
     }
 }

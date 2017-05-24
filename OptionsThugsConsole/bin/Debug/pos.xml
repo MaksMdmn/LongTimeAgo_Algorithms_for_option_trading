@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUserPosition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <UserPosition>
-    <SecCode>BR52BE7</SecCode>
-    <CreatedTime>05/19/2017 11:25:04</CreatedTime>
-    <Quantity>0</Quantity>
-    <Price>0</Price>
-    <Money>-48.63</Money>
+    <SecCode>BR55BE7</SecCode>
+    <CreatedTime>05/24/2017 11:43:23</CreatedTime>
+    <Quantity>-2</Quantity>
+    <Price>0.04</Price>
+    <Money>0.08</Money>
   </UserPosition>
   <UserPosition>
-    <SecCode>BR57BE7</SecCode>
-    <CreatedTime>05/19/2017 11:57:59</CreatedTime>
-    <Quantity>-1</Quantity>
-    <Price>-0.11</Price>
-    <Money>-0.11</Money>
+    <SecCode>BRM7</SecCode>
+    <CreatedTime>05/24/2017 18:43:47</CreatedTime>
+    <Quantity>2</Quantity>
+    <Price>54.265</Price>
+    <Money>-108.53</Money>
   </UserPosition>
 </ArrayOfUserPosition>

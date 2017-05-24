@@ -28,6 +28,7 @@ namespace OptionsThugsConsole.entities
 
         private Dictionary<string, UserPosition> _userPositions;
         private DataManager _dataManager;
+        private readonly MessageManager _messageManager;
         private readonly IConnector _connector;
         private readonly LogManager _logManager;
 
@@ -47,6 +48,9 @@ namespace OptionsThugsConsole.entities
 
             _userPositions = new Dictionary<string, UserPosition>();
 
+            _messageManager = MessageManager.GetInstance();
+            _messageManager.AutoMessage += DoAutoGeneralInfo;
+
             UserPosition.LoadFromXml()?.ForEach(up => { _userPositions.Add(up.SecCode, up); });
 
             _logManager.Listeners.Add(logger);
@@ -60,19 +64,24 @@ namespace OptionsThugsConsole.entities
 
         public void ParseUserMessage(string msg)
         {
-            UserCommands cmd;
-
             var tempMsgArr = msg.Split(' ');
 
-            if (Enum.TryParse(tempMsgArr[0], true, out cmd))
-                ParseCommand(cmd, tempMsgArr.Where(val => val != tempMsgArr[0]).ToArray());
-            else
-                OnNewAnswer("entered command is incorrect. Please try one of follows: "
+            try
+            {
+                var cmd = _messageManager.ParseUserCommand(tempMsgArr[0]);
+                var userArgs = _messageManager.ParseUserArgs(tempMsgArr);
+
+                ExecuteCommand(cmd, userArgs);
+            }
+            catch (Exception e1)
+            {
+                OnNewAnswer(e1.Message + " Please try one of follows: "
                     + Environment.NewLine
-                    + AlignString(Enum.GetNames(typeof(UserCommands))));
+                    + MessageManager.AlignString(Enum.GetNames(typeof(UserCommands))));
+            }
         }
 
-        private void ParseCommand(UserCommands cmd, string[] userParams)
+        private void ExecuteCommand(UserCommands cmd, string[] userParams)
         {
             try
             {
@@ -93,9 +102,6 @@ namespace OptionsThugsConsole.entities
                     case UserCommands.Status:
                         DoStatusCmd();
                         break;
-                    //case UserCommands.Deals:
-                    //    DoDealsCmd(userParams);
-                    //    break;
                     case UserCommands.Calc:
                         DoCalcCmd(userParams);
                         break;
@@ -105,12 +111,66 @@ namespace OptionsThugsConsole.entities
                     case UserCommands.Dconn:
                         DoDconnCmd();
                         break;
+                    case UserCommands.Timer:
+                        DoTimerCmd();
+                        break;
+                    case UserCommands.Kill:
+                        DoKillCmd(userParams);
+                        break;
                 }
             }
             catch (Exception e1)
             {
                 OnNewAnswer($"unknown exception: {e1.Message}", ConsoleColor.Red);
             }
+        }
+
+        private void DoKillCmd(string[] userParams)
+        {
+            if (userParams.Length != 1)
+            {
+                OnNewAnswer("please enter correct strategy name for forcible delete", ConsoleColor.Yellow);
+                return;
+            }
+
+            var strategyName = userParams[0];
+
+
+            if (_dataManager?.MappedStrategies == null)
+            {
+                OnNewAnswer("some entities still null, delete impossible", ConsoleColor.Yellow);
+                return;
+            }
+
+            PrimaryStrategy strategy;
+
+            if (!_dataManager.MappedStrategies.TryGetValue(strategyName, out strategy))
+            {
+                OnNewAnswer("have no strategies with such a name.", ConsoleColor.Yellow);
+                return;
+            }
+
+            if (strategy.ProcessState != ProcessStates.Stopped)
+            {
+                OnNewAnswer($"strategy must be stopped for forcible delete, current state {strategy.ProcessState}", ConsoleColor.Yellow);
+                return;
+            }
+
+            _dataManager.MappedStrategies.Remove(strategyName);
+            OnNewAnswer($"{strategyName} strategy removed forcibly from collection", ConsoleColor.Red);
+        }
+
+        private void DoTimerCmd()
+        {
+            if (_messageManager == null)
+                return;
+
+            if (_messageManager.IsTimerEnabled())
+                _messageManager.DisableTimer();
+            else
+                _messageManager.EnableTimer();
+
+            OnNewAnswer($"timer: {_messageManager.IsTimerEnabled()}", ConsoleColor.Yellow);
         }
 
         private void DoCalcCmd(string[] userParams)
@@ -171,52 +231,24 @@ namespace OptionsThugsConsole.entities
             switch (kw1)
             {
                 case UserKeyWords.Pos:
-                    decimal delta = 0M;
-                    decimal gamma = 0M;
-                    decimal vega = 0M;
-                    decimal theta = 0M;
+                    var greeks = GetSummaryGreeks(tempSecurityMap);
 
-                    tempSecurityMap.OrderBy(kvp => kvp.Key.Code).ForEach(kvp =>
-                     {
-                         if (kvp.Value == 0)
-                         {
-                             return;
-                         }
-
-                         if (kvp.Key.Type == SecurityTypes.Future)
-                         {
-                             delta += kvp.Value;
-                         }
-
-                         if (kvp.Key.Type == SecurityTypes.Option)
-                         {
-                             var bs = new BlackScholes(kvp.Key, _dataManager.UnderlyingAsset, _connector);
-                             var lastPrice = kvp.Value > 0
-                                 ? _dataManager.UnderlyingAsset.BestBid.Price
-                                 : _dataManager.UnderlyingAsset.BestAsk.Price;
-
-                             delta += (bs.Delta(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                             gamma += (bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                             vega += (bs.Vega(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                             theta += (bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0) * kvp.Value;
-                         }
-                     });
-
-                    sb.Append($"POSITION GREEKS " +
-                              $"delta: {GreeksRounding(delta)} " +
-                              $"gamma: {GreeksRounding(gamma, 1)} " +
-                              $"vega: {GreeksRounding(vega)} " +
-                              $"theta: {GreeksRounding(theta, -2)}");
+                    sb.Append($"positions greeks (terminal)" +
+                              $"delta: {greeks[0]} " +
+                              $"gamma: {greeks[1]} " +
+                              $"vega: {greeks[2]} " +
+                              $"theta: {greeks[3]}");
                     sb.AppendLine();
-                    sb.Append($"POSITIONS FROM XML-FILE:");
+                    sb.Append($"position saved data (xml-file)");
                     sb.AppendLine();
                     _userPositions.ForEach(kvp =>
                     {
-                        sb.Append(AlignString(new string[]
+                        sb.Append(MessageManager.AlignString(new string[]
                         {
                             kvp.Key,
                             kvp.Value.Quantity.ToString(),
                             kvp.Value.Price.ToString(),
+                            kvp.Value.Money.ToString(),
                             $"created:{kvp.Value.CreatedTime}"
                         }))
                         .AppendLine();
@@ -235,37 +267,22 @@ namespace OptionsThugsConsole.entities
                         if (!curAssetCodePart.CompareIgnoreCase(unAssetCodePart))
                             return;
 
+                        var secGreeks = GetSecurityGreeks(kvp.Key, kvp.Value);
 
-                        if (kvp.Key.Type == SecurityTypes.Future)
-                        {
-                            sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
-                            .Append($" delta: {kvp.Value}")
-                            .AppendLine();
-                        }
-
-                        if (kvp.Key.Type == SecurityTypes.Option)
-                        {
-                            var bs = new BlackScholes(kvp.Key, _dataManager.UnderlyingAsset, _connector);
-                            var lastPrice = kvp.Value > 0
-                                ? _dataManager.UnderlyingAsset.BestBid.Price
-                                : _dataManager.UnderlyingAsset.BestAsk.Price;
-
-
-                            sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
-                            .Append($" delta: {GreeksRounding(bs.Delta(DateTimeOffset.Now, null, lastPrice) ?? 0)}")
-                            .Append($" gamma: {GreeksRounding(bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0, 1)}")
-                            .Append($" vega: {GreeksRounding(bs.Vega(DateTimeOffset.Now, null, lastPrice) ?? 0)}")
-                            .Append($" theta: {GreeksRounding(bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0, -2)}")
-                            .AppendLine();
-                        }
+                        sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
+                        .Append($" delta: {secGreeks[0]}")
+                        .Append($" gamma: {secGreeks[1]}")
+                        .Append($" vega: {secGreeks[2]}")
+                        .Append($" theta: {secGreeks[3]}")
+                        .AppendLine();
                     });
                     break;
                 case UserKeyWords.Spr:
                     tempSecurityMap.OrderBy(kvp => kvp.Key.Code).ForEach(kvp =>
                     {
                         sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
-                        .Append($" spread: {PriceRounding(kvp.Key.BestPair?.SpreadPrice ?? 0)}" +
-                                $"   [{PriceRounding(kvp.Key.BestBid?.Price ?? 0)} / {PriceRounding(kvp.Key.BestAsk?.Price ?? 0)}]")
+                        .Append($" spread: {MessageManager.MsgPriceRounding(kvp.Key.BestPair?.SpreadPrice ?? 0)}" +
+                                $"   [{MessageManager.MsgPriceRounding(kvp.Key.BestBid?.Price ?? 0)} / {MessageManager.MsgPriceRounding(kvp.Key.BestAsk?.Price ?? 0)}]")
                         .AppendLine();
                     });
                     break;
@@ -277,9 +294,9 @@ namespace OptionsThugsConsole.entities
                             var bs = new BlackScholes(kvp.Key, _dataManager.UnderlyingAsset, _connector);
 
                             var bidVol = kvp.Key.BestBid == null ? 0 :
-                                VolaRounding(bs.ImpliedVolatility(DateTimeOffset.Now, kvp.Key.BestBid.Price) ?? 0);
+                                MessageManager.MsgVolaRounding(bs.ImpliedVolatility(DateTimeOffset.Now, kvp.Key.BestBid.Price) ?? 0);
                             var askVol = kvp.Key.BestAsk == null ? 0 :
-                                VolaRounding(bs.ImpliedVolatility(DateTimeOffset.Now, kvp.Key.BestAsk.Price) ?? 0);
+                                MessageManager.MsgVolaRounding(bs.ImpliedVolatility(DateTimeOffset.Now, kvp.Key.BestAsk.Price) ?? 0);
 
                             sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
                             .Append($" bid vol: {bidVol}%")
@@ -349,7 +366,7 @@ namespace OptionsThugsConsole.entities
             _userPositions.ForEach(kvp =>
             {
 
-                xmlPosSb.Append(AlignString(new string[]
+                xmlPosSb.Append(MessageManager.AlignString(new string[]
                     {
                         kvp.Key,
                         kvp.Value.Quantity.ToString(),
@@ -376,7 +393,7 @@ namespace OptionsThugsConsole.entities
 
                 _dataManager.MappedStrategies.ForEach(kvp =>
                 {
-                    sb.Append(AlignString(new string[]
+                    sb.Append(MessageManager.AlignString(new string[]
                     {
                         "name: ",
                         kvp.Key,
@@ -386,8 +403,6 @@ namespace OptionsThugsConsole.entities
                         kvp.Value.ProcessState.ToString(),
                         "errors:",
                         kvp.Value.ErrorCount.ToString(),
-                        "trades:",
-                        kvp.Value.MyTrades.Count().ToString(),
                         "position:",
                         kvp.Value.Position.ToString()
                     }, true, 2));
@@ -426,17 +441,17 @@ namespace OptionsThugsConsole.entities
                 if (kw == UserKeyWords.All)
                     _dataManager.MappedStrategies.ForEach(kvp =>
                     {
-                        kvp.Value.Stop();
+                        Task.Run(() => TryToStopStrategy(kvp.Key, kvp.Value)); // TODO проверить, может стоп метод вылетает и остальные не исполняются. попробую в отд потоке.
                     });
             }
             else
             {
                 if (_dataManager.MappedStrategies.ContainsKey(strategyName))
-                    _dataManager.MappedStrategies[strategyName].Stop();
+                    TryToStopStrategy(strategyName, _dataManager.MappedStrategies[strategyName]);
 
                 else
                     OnNewAnswer("please choose correct strategy name from following: "
-                        + AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
+                        + MessageManager.AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
             }
         }
 
@@ -481,7 +496,7 @@ namespace OptionsThugsConsole.entities
                 else
                 {
                     OnNewAnswer("please choose correct strategy name from following: "
-                        + AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
+                        + MessageManager.AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
                 }
             }
         }
@@ -506,7 +521,8 @@ namespace OptionsThugsConsole.entities
 
             if (!Enum.TryParse(userParams[0], true, out param1))
             {
-                OnNewAnswer($"cannot create such a strategy. Possible types: {Enum.GetNames(typeof(StrategyTypes))}", ConsoleColor.Yellow);
+                OnNewAnswer($"cannot create such a strategy. Possible types: " +
+                            $"{MessageManager.AlignString(Enum.GetNames(typeof(StrategyTypes)))}", ConsoleColor.Yellow);
                 return;
             }
 
@@ -617,7 +633,7 @@ namespace OptionsThugsConsole.entities
 
                         UserPosition.SaveToXml(_userPositions.Values.ToList());
 
-                        OnNewAnswer(AlignString(new string[]
+                        OnNewAnswer(MessageManager.AlignString(new string[]
                         {
                             "NEW TRADE [",
                             $"side: {mt.Order.Direction}",
@@ -628,8 +644,10 @@ namespace OptionsThugsConsole.entities
                         }), ConsoleColor.Magenta);
                     };
 
-                    OnNewAnswer("");
+                    OnNewAnswer("Print 'timer' to enable/disable auto-print-information about positions.", ConsoleColor.Yellow);
                     DoStatusCmd();
+
+
                 }
                 catch (Exception e1)
                 {
@@ -649,10 +667,11 @@ namespace OptionsThugsConsole.entities
             _connector.Disconnected += () =>
             {
                 OnNewAnswer("disconnected (success)");
-                _dataManager = null;
             };
 
             DoStopCmd(new[] { UserKeyWords.All.ToString() });
+
+            _messageManager.DisableTimer();
 
             _connector?.Disconnect();
         }
@@ -662,77 +681,158 @@ namespace OptionsThugsConsole.entities
             strategy.WhenStarted()
                         .Do(() =>
                 {
-                    NewAnswer("");
-                    NewAnswer($"{strategy} strategy started (key {name}).");
+                    OnNewAnswer("");
+                    OnNewAnswer($"{strategy} strategy started (key {name}).");
                 })
                         .Apply(strategy);
 
             strategy.WhenStopping()
                 .Do(() =>
                 {
-                    NewAnswer("");
-                    NewAnswer($"{name} strategy STOPPING, pos: {strategy.Position}");
+                    OnNewAnswer("");
+                    OnNewAnswer($"{name} strategy STOPPING, pos: {strategy.Position}");
                 })
                 .Apply(strategy);
 
-            strategy.StrategyStopped += () =>
+            strategy.PrimaryStrategyStopped += () =>
             {
                 {
                     _dataManager.MappedStrategies.Remove(name);
-                    NewAnswer("");
-                    NewAnswer($"{name} strategy STOPPED and removed from collection");
+                    OnNewAnswer("");
+                    OnNewAnswer($"{name} strategy STOPPED and removed from collection");
                 }
             };
         }
 
-        private decimal GreeksRounding(decimal value, int extraRoundNumbers = 0)
+        private void TryToStopStrategy(string name, PrimaryStrategy strategy)
         {
-            return Math.Round(value, 4 + extraRoundNumbers);
+            if (strategy.ProcessState == ProcessStates.Started)
+                strategy.Stop();
+            else
+                OnNewAnswer($"such a strategy cannot be stopped: {name} {strategy.ProcessState}", ConsoleColor.Red, false);
         }
 
-        private decimal VolaRounding(decimal value)
+        private decimal[] GetSummaryGreeks(Dictionary<Security, decimal> securityPositionMapping)
         {
-            return Math.Round(value, 2);
-        }
+            decimal delta = 0M;
+            decimal gamma = 0M;
+            decimal vega = 0M;
+            decimal theta = 0M;
 
-        private decimal PriceRounding(decimal value)
-        {
-            return Math.Round(value, 2);
-        }
-
-        public static string AlignString(string[] words, bool withNewLines = false, int newLineAfterWords = 1)
-        {
-            var sb = new StringBuilder();
-            var innerToken = " ";
-            var externalToken = "   ";
-            var maxLength = words.OrderByDescending(s => s.Length).First()?.Length;
-            var wordsCounter = 0;
-
-            if (maxLength > 0)
+            securityPositionMapping.OrderBy(kvp => kvp.Key.Code).ForEach(kvp =>
             {
-                words.ForEach(word =>
+                if (kvp.Value == 0)
                 {
-                    sb.Append(word);
+                    return;
+                }
 
-                    for (int i = 0; i < maxLength - word.Length; i++)
-                    {
-                        sb.Append(innerToken);
-                    }
-                    sb.Append(externalToken);
+                if (kvp.Key.Type == SecurityTypes.Future)
+                {
+                    delta += kvp.Value;
+                }
 
-                    if (withNewLines)
-                    {
-                        wordsCounter++;
+                if (kvp.Key.Type == SecurityTypes.Option)
+                {
+                    var bs = new BlackScholes(kvp.Key, _dataManager.UnderlyingAsset, _connector);
+                    var lastPrice = kvp.Value > 0
+                        ? _dataManager.UnderlyingAsset.BestBid.Price
+                        : _dataManager.UnderlyingAsset.BestAsk.Price;
 
-                        if (wordsCounter % newLineAfterWords == 0)
-                            sb.AppendLine();
+                    delta += MessageManager.MsgGreeksRounding((bs.Delta(DateTimeOffset.Now, null, lastPrice) ?? 0)) * kvp.Value;
+                    gamma += MessageManager.MsgGreeksRounding((bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0), 1) * kvp.Value;
+                    vega += MessageManager.MsgGreeksRounding((bs.Vega(DateTimeOffset.Now, null, lastPrice) ?? 0)) * kvp.Value;
+                    theta += MessageManager.MsgGreeksRounding((bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0), -2) * kvp.Value;
+                }
+            });
 
-                    }
-                });
+            return new decimal[] { delta, gamma, vega, theta };
+        }
+
+        private decimal[] GetSecurityGreeks(Security sec, decimal pos)
+        {
+            decimal delta = 0M;
+            decimal gamma = 0M;
+            decimal vega = 0M;
+            decimal theta = 0M;
+
+            if (sec.Type == SecurityTypes.Future)
+            {
+                delta += pos;
             }
 
+            if (sec.Type == SecurityTypes.Option)
+            {
+                var bs = new BlackScholes(sec, _dataManager.UnderlyingAsset, _connector);
+                var lastPrice = pos > 0
+                    ? _dataManager.UnderlyingAsset.BestBid.Price
+                    : _dataManager.UnderlyingAsset.BestAsk.Price;
 
-            return sb.ToString();
+                delta = MessageManager.MsgGreeksRounding(bs.Delta(DateTimeOffset.Now, null, lastPrice) ?? 0);
+                gamma = MessageManager.MsgGreeksRounding(bs.Gamma(DateTimeOffset.Now, null, lastPrice) ?? 0, 1);
+                vega = MessageManager.MsgGreeksRounding(bs.Vega(DateTimeOffset.Now, null, lastPrice) ?? 0);
+                theta = MessageManager.MsgGreeksRounding(bs.Theta(DateTimeOffset.Now, null, lastPrice) ?? 0, -2);
+            }
+
+            return new decimal[] { delta, gamma, vega, theta };
+
+        }
+
+        private void DoAutoGeneralInfo()
+        {
+            OnNewAnswer("-----------------------------------", ConsoleColor.Magenta);
+
+            OnNewAnswer(MessageManager.AlignString(new string[]
+            {
+                "Connection state:",
+                _connector?.ConnectionState.ToString()
+            }), ConsoleColor.Green, false);
+
+            var sb = new StringBuilder();
+
+            sb.Append("terminal positions:").Append(" ");
+
+            _connector?.Positions?.ForEach(p =>
+            {
+                sb.Append(p.Security.Code).Append(" ").Append(p.CurrentValue).Append(" ");
+            });
+
+            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" ")), ConsoleColor.Green, false);
+
+            sb.Clear();
+
+            sb.Append("xml-file positions:").Append(" ");
+
+            _userPositions.ForEach(kvp =>
+            {
+                sb.Append(kvp.Key).Append(" ").Append(kvp.Value.Quantity).Append(" ");
+
+            });
+
+            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" ")), ConsoleColor.Green, false);
+
+            sb.Clear();
+
+            sb.Append("strategies positions:").Append(" ");
+
+            _dataManager?.MappedStrategies?.ForEach(kvp =>
+            {
+                sb.Append(kvp.Key).Append(" ").Append(kvp.Value.Position).Append(" ").Append(kvp.Value.ProcessState).Append(" ");
+
+            });
+
+            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" ")), ConsoleColor.Green, false);
+
+            var tempSecurityMap = new Dictionary<Security, decimal>();
+
+            _dataManager
+                .LookupAllConnectorsPositions()
+                .ForEach(p => { tempSecurityMap.Add(p.Security, p.CurrentValue ?? 0); });
+
+            var greeks = GetSummaryGreeks(tempSecurityMap);
+
+            OnNewAnswer($"delta: {greeks[0]} gamma: {greeks[1]} vega: {greeks[2]} theta: {greeks[3]}", ConsoleColor.Green, false);
+
+            OnNewAnswer("-----------------------------------", ConsoleColor.Magenta);
         }
 
         private void OnNewAnswer(string msg, ConsoleColor color = ConsoleColor.White, bool showDateTime = true)

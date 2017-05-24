@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using Ecng.Common;
 using OptionsThugsConsole.enums;
 using StockSharp.Messages;
 
@@ -9,7 +10,11 @@ namespace OptionsThugsConsole.entities
 {
     public class UserPosition
     {
-        private static readonly string PathToXmlFile = AppConfigManager.GetInstance().GetSettingValue(UserConfigs.XmlPath.ToString());
+        private static readonly string PathToXmlFile =
+            AppConfigManager.GetInstance().GetSettingValue(UserConfigs.XmlPath.ToString())
+                .CompareIgnoreCase("root")
+                    ? Directory.GetCurrentDirectory() + "\\pos.xml"
+                    : AppConfigManager.GetInstance().GetSettingValue(UserConfigs.XmlPath.ToString());
 
         public string SecCode { get; set; }
         public string CreatedTime { get; set; }
@@ -36,7 +41,10 @@ namespace OptionsThugsConsole.entities
             var serializer = new XmlSerializer(typeof(List<UserPosition>));
 
             if (!File.Exists(PathToXmlFile))
+            {
+                SaveToXml(new List<UserPosition>());
                 return null;
+            }
 
             using (var reader = new StreamReader(PathToXmlFile))
             {

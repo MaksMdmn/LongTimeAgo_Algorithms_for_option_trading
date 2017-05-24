@@ -2,6 +2,6 @@
 {
     public enum UserCommands
     {
-        Conn, Create, Start, Stop, Status,  Calc, Settings, Dconn
+        Conn, Create, Start, Stop, Status,  Calc, Settings, Dconn, Timer, Kill
     }
 }

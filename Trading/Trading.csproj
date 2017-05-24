@@ -74,7 +74,6 @@
     <Compile Include="Common\PriceDirection.cs" />
     <Compile Include="Common\PriceHedgeLevel.cs" />
     <Compile Include="Common\StrategyTypes.cs" />
-    <Compile Include="Common\TimingController.cs" />
     <Compile Include="Strategies\DeltaHedgerStrategy.cs" />
     <Compile Include="Strategies\LimitQuoterStrategy.cs" />
     <Compile Include="Strategies\MarketQuoterStrategy.cs" />

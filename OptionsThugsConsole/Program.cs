@@ -7,9 +7,11 @@ using System.Threading;
 using Ecng.Common;
 using OptionsThugsConsole.entities;
 using OptionsThugsConsole.enums;
+using StockSharp.Algo;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
 using StockSharp.Quik;
+using Trading.Strategies;
 
 namespace OptionsThugsConsole
 {

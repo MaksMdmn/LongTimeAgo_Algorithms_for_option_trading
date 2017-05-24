@@ -46,9 +46,14 @@ namespace Trading.Strategies
 
             if (SecurityWithSignalToClose == null)
             {
+                var md = GetMarketDepth(Security);
+
                 Security.WhenMarketDepthChanged(Connector)
-                    .Do(md =>
+                    .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
+                    .Do(() =>
                     {
+                        //не проверяем время, т.к. правило выполняется Once()
+
                         var mqs = new MarketQuoterStrategy(_strategyOrderSide, Volume, _priceToClose);
 
                         mqs.WhenStopped()
@@ -56,6 +61,7 @@ namespace Trading.Strategies
                             .Once()
                             .Apply(this);
 
+                        MarkStrategyLikeChild(mqs);
                         ChildStrategies.Add(mqs);
                     })
                     .Once()
@@ -63,22 +69,31 @@ namespace Trading.Strategies
             }
             else
             {
-                Strategy mqs = null;
+                PrimaryStrategy mqs = null;
 
-                var mqsStartRule = SecurityWithSignalToClose.WhenMarketDepthChanged(Connector)
-                    .Do(md =>
+                var md = GetMarketDepth(SecurityWithSignalToClose);
+
+                var mqsStartRule = SecurityWithSignalToClose
+                    .WhenMarketDepthChanged(Connector)
+                    .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
+                    .Do(() =>
                     {
-                        if (_securityDesirableDirection == PriceDirection.Up && md.BestBid.Price >= _priceToClose
-                        || _securityDesirableDirection == PriceDirection.Down && md.BestAsk.Price <= _priceToClose)
+                        if (!IsTradingTime())
+                            return;
+
+                            //котировки специально развернуты неверно - как только была сделка на графике (ударили в аск или налили в бид) - закрываемся
+                            if (_securityDesirableDirection == PriceDirection.Up && md.BestAsk.Price >= _priceToClose
+                        || _securityDesirableDirection == PriceDirection.Down && md.BestBid.Price <= _priceToClose)
                         {
-                            // пока делаем по любой цене, как только сработает условие
-                            mqs = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide));
+                                // пока делаем по любой цене, как только сработает условие
+                                mqs = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide));
 
                             mqs.WhenStopped()
                                 .Do(this.Stop)
                                 .Once()
                                 .Apply(this);
 
+                            MarkStrategyLikeChild(mqs);
                             ChildStrategies.Add(mqs);
                         }
                     })
@@ -86,7 +101,7 @@ namespace Trading.Strategies
                     .Apply(this);
 
                 this.WhenStopping()
-                    .Do(() => { })
+                    .Do(() => { /*NOP*/})
                     .Apply(this)
                     .Exclusive(mqsStartRule);
             }
@@ -101,7 +116,8 @@ namespace Trading.Strategies
             return $"{nameof(_priceToClose)}: {_priceToClose}, " +
                    $"{nameof(_securityDesirableDirection)}: {_securityDesirableDirection}, " +
                    $"{nameof(_strategyOrderSide)}: {_strategyOrderSide}, " +
-                   $"security with signal: {SecurityWithSignalToClose.Code}";
+                   $"security with signal: {SecurityWithSignalToClose?.Code} "
+                   + base.ToString();
         }
     }
 }

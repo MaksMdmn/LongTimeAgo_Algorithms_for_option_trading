@@ -15,9 +15,14 @@ namespace Trading.Common
         private readonly Strategy _strategy;
         private volatile bool _isOrderRegistering;
         private volatile bool _isOrderCanceling;
+        private volatile bool _isAnyOrdersInWork;
         private Order _currentOrder;
 
-        public bool IsAnyOrdersInWork { get; private set; }
+        public bool IsAnyOrdersInWork
+        {
+            get { return _isAnyOrdersInWork; }
+            private set { _isAnyOrdersInWork = value; }
+        }
 
         public int Timeout { get; set; }
 
@@ -35,6 +40,7 @@ namespace Trading.Common
                 .Or(_strategy.WhenStopped())
                 .Do(s =>
                 {
+                    _strategy.AddWarningLog($"trying to stop {_strategy.Name}: {_strategy.ProcessState}");
                     _eventWaiter.Set();
                 })
                 .Apply(_strategy);
@@ -46,6 +52,8 @@ namespace Trading.Common
                 return;
 
             _isOrderRegistering = true;
+
+            _strategy.AddWarningLog($"TRY TO PLACE ORDER {order}, {_strategy.Name}: {_strategy.ProcessState}");
 
             _currentOrder = order;
 
@@ -59,6 +67,7 @@ namespace Trading.Common
             _currentOrder.WhenRegistered(_strategy.Connector)
                 .Do(() =>
                 {
+                    _strategy.AddWarningLog($"NOTE THAT ORDER REGISTERED {order}, {_strategy.Name}: {_strategy.ProcessState}");
                     _eventWaiter.Set();
                 })
                 .Once()
@@ -76,15 +85,18 @@ namespace Trading.Common
 
         public void CancelCurrentOrder()
         {
-            if (_isOrderCanceling)
+            if (_isOrderCanceling || !_isAnyOrdersInWork) // TODO добавил. проверить, не проебать
                 return;
 
             _isOrderCanceling = true;
 
+            _strategy.AddWarningLog($"TRY TO CANCEL ORDER {_currentOrder}, {_strategy.Name}: {_strategy.ProcessState}");
+
             if (_currentOrder == null)
             {
                 _isOrderCanceling = false;
-                throw new ArgumentNullException("Such an order does not exist: " + _currentOrder);
+                _strategy.AddErrorLog("have no order to cancel: " + _currentOrder);
+                return;
             }
 
             _currentOrder.WhenChanged(_strategy.Connector)
@@ -92,6 +104,7 @@ namespace Trading.Common
                 {
                     if (o.State == OrderStates.Done || o.State == OrderStates.Failed)
                     {
+                        _strategy.AddWarningLog($"NOTE THAT ORDER CANCELED {_currentOrder}, {_strategy.Name}: {_strategy.ProcessState}");
                         _eventWaiter.Set();
                     }
 
@@ -116,7 +129,7 @@ namespace Trading.Common
                 if (!_eventWaiter.WaitOne(Timeout))
                 {
                     _strategy.Stop();
-                    _strategy.AddErrorLog("Still have no respond from terminal about order transaction, timeout: " + Timeout);
+                    _strategy.AddErrorLog("(OrderSync) Still have no respond from terminal about order transaction, timeout: " + Timeout);
                 }
 
                 methodAfterSuccess();
