@@ -39,7 +39,7 @@ namespace Trading.Strategies
                 {
                     if (Math.Abs(Position) >= Volume)
                     {
-                        Stop();
+                        PrimaryStopping();
                     }
                 })
                 .Apply(this);
@@ -49,7 +49,6 @@ namespace Trading.Strategies
                 var md = GetMarketDepth(Security);
 
                 Security.WhenMarketDepthChanged(Connector)
-                    .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
                     .Do(() =>
                     {
                         //не проверяем время, т.к. правило выполняется Once()
@@ -75,7 +74,6 @@ namespace Trading.Strategies
 
                 var mqsStartRule = SecurityWithSignalToClose
                     .WhenMarketDepthChanged(Connector)
-                    .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
                     .Do(() =>
                     {
                         if (!IsTradingTime())
@@ -107,8 +105,6 @@ namespace Trading.Strategies
             }
 
             base.OnStarted();
-
-
         }
 
         public override string ToString()

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
@@ -161,7 +160,7 @@ namespace Trading.Strategies
                     catch (Exception e1)
                     {
                         this.AddErrorLog($"exception: {e1.Message}");
-                        Stop();
+                        PrimaryStopping();
                     }
 
                 })

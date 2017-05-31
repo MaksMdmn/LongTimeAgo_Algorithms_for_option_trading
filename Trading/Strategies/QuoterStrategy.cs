@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
@@ -61,9 +62,14 @@ namespace Trading.Strategies
                 OrderSynchronizer.CancelCurrentOrder();
 
             Security.WhenMarketDepthChanged(Connector)
-                .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
                 .Do(() =>
                 {
+                    if (IsPrimaryStoppingStarted())
+                    {
+                        OrderSynchronizer.CancelCurrentOrder();
+                        return;
+                    }
+
                     if (!_isQuoting)
                     {
                         _isQuoting = true;
@@ -75,7 +81,6 @@ namespace Trading.Strategies
 
                         _isQuoting = false;
                     }
-
                 })
                 .Until(IsStrategyStopping)
                 .Apply(this);
@@ -84,7 +89,7 @@ namespace Trading.Strategies
                 .Do(() =>
                 {
                     if (Math.Abs(Position) >= Volume)
-                        Stop();
+                        PrimaryStopping();
                 })
                 .Until(IsStrategyStopping)
                 .Apply(this);
@@ -109,6 +114,31 @@ namespace Trading.Strategies
 
             return false;
         }
+
+        public override void PrimaryStopping()
+        {
+            FromHerePrimaryStoppingStarted();
+
+            Task.Run(() =>
+            {
+                if (OrderSynchronizer.IsOrderRegistering) { }
+
+                while (OrderSynchronizer.IsOrderRegistering)
+                {
+                    /*NOP*/
+                }
+
+                OrderSynchronizer.CancelCurrentOrder();
+
+                while (OrderSynchronizer.IsAnyOrdersInWork)
+                {
+                    /*NOP*/
+                }
+
+                base.PrimaryStopping();
+            });
+        }
+
 
         protected abstract void QuotingProcess();
 

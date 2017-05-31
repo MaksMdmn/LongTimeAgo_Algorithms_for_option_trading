@@ -99,7 +99,6 @@ namespace Trading.Strategies
             var md = GetMarketDepth(Security);
 
             Security.WhenMarketDepthChanged(Connector)
-                .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
                 .Do(() =>
                 {
                     try
@@ -126,6 +125,8 @@ namespace Trading.Strategies
                             }
                             else
                             {
+                                Debug.WriteLine($"spread:{md.BestPair.SpreadPrice}, lqs price:{price}");
+
                                 _enterStrategy = new LimitQuoterStrategy(_sideForEnterToPosition, size, step, price)
                                 {
                                     IsLimitOrdersAlwaysRepresent = true
@@ -162,10 +163,9 @@ namespace Trading.Strategies
                     catch (Exception e1)
                     {
                         this.AddErrorLog($"exception: {e1.Message}");
-                        Stop();
+                        PrimaryStopping();
                     }
                 })
-                //.Until(() => ProcessState == ProcessStates.Stopping)
                 .Apply(this);
 
             this.WhenStopping()
@@ -240,8 +240,6 @@ namespace Trading.Strategies
 
             _enterStrategy.PrimaryStrategyStopped += () =>
             {
-                Debug.WriteLine("entering stopped.");
-
                 ChildStrategies.Remove(_enterStrategy);
 
                 _isEnterActivated = false;
@@ -250,8 +248,6 @@ namespace Trading.Strategies
 
             MarkStrategyLikeChild(_enterStrategy);
             ChildStrategies.Add(_enterStrategy);
-
-            Debug.WriteLine("entering started.");
         }
 
         private void AssignLeaveRulesAndStart()
@@ -276,18 +272,13 @@ namespace Trading.Strategies
 
             _leaveStrategy.PrimaryStrategyStopped += () =>
             {
-
-                Debug.WriteLine("leaver stopped.");
+                ChildStrategies.Remove(_leaveStrategy);
 
                 _isLeaverActivated = false;
-
-                ChildStrategies.Remove(_leaveStrategy);
             };
 
             MarkStrategyLikeChild(_leaveStrategy);
             ChildStrategies.Add(_leaveStrategy);
-
-            Debug.WriteLine("leaver started.");
         }
 
         private void PositionAndMoneySyncIncrementation(decimal addedPosValue, decimal addedMoneyValue)

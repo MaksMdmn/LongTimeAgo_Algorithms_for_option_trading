@@ -9,9 +9,16 @@
   </UserPosition>
   <UserPosition>
     <SecCode>BRM7</SecCode>
-    <CreatedTime>05/24/2017 18:43:47</CreatedTime>
-    <Quantity>2</Quantity>
-    <Price>54.265</Price>
-    <Money>-108.53</Money>
+    <CreatedTime>05/26/2017 14:49:28</CreatedTime>
+    <Quantity>-12</Quantity>
+    <Price>52.55</Price>
+    <Money>630.60</Money>
+  </UserPosition>
+  <UserPosition>
+    <SecCode>BRN7</SecCode>
+    <CreatedTime>05/31/2017 17:20:48</CreatedTime>
+    <Quantity>-12</Quantity>
+    <Price>50.9158</Price>
+    <Money>610.99</Money>
   </UserPosition>
 </ArrayOfUserPosition>

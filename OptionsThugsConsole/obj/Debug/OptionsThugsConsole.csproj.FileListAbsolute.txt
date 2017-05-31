@@ -14,7 +14,6 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\StockS
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\StockSharp.Logging.dll
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\StockSharp.Messages.dll
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\StockSharp.Quik.dll
-D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Trading.dll
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\MoreLinq.dll
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Ecng.Reflection.dll
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Ecng.Interop.dll
@@ -68,6 +67,7 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Newton
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\DevExpress.Data.v15.2.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\DevExpress.Printing.v15.2.Core.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\DevExpress.Xpf.Grid.v15.2.Core.xml
-D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Debug\OptionsThugsConsole.csprojResolveAssemblyReference.cache
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Debug\OptionsThugsConsole.exe
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Debug\OptionsThugsConsole.pdb
+D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Debug\Trading.dll
+D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Debug\OptionsThugsConsole.csprojResolveAssemblyReference.cache

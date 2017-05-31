@@ -6,13 +6,14 @@ using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
 using StockSharp.Messages;
+using Trading.Strategies;
 
 namespace Trading.Common
 {
     public class OrderSynchronizer
     {
         private readonly EventWaitHandle _eventWaiter = new EventWaitHandle(false, EventResetMode.AutoReset);
-        private readonly Strategy _strategy;
+        private readonly PrimaryStrategy _strategy;
         private volatile bool _isOrderRegistering;
         private volatile bool _isOrderCanceling;
         private volatile bool _isAnyOrdersInWork;
@@ -24,9 +25,13 @@ namespace Trading.Common
             private set { _isAnyOrdersInWork = value; }
         }
 
+        public bool IsOrderRegistering => _isOrderRegistering;
+
+        public bool IsOrderCanceling => _isOrderRegistering;
+
         public int Timeout { get; set; }
 
-        public OrderSynchronizer(Strategy strategy)
+        public OrderSynchronizer(PrimaryStrategy strategy)
         {
             Timeout = 1000;
 
@@ -48,6 +53,9 @@ namespace Trading.Common
 
         public void PlaceOrder(Order order)
         {
+            if (_strategy.IsPrimaryStoppingStarted())
+                return;
+
             if (_isOrderRegistering)
                 return;
 
@@ -128,7 +136,7 @@ namespace Trading.Common
             {
                 if (!_eventWaiter.WaitOne(Timeout))
                 {
-                    _strategy.Stop();
+                    _strategy.PrimaryStopping();
                     _strategy.AddErrorLog("(OrderSync) Still have no respond from terminal about order transaction, timeout: " + Timeout);
                 }
 

@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
-using Ecng.Collections;
 using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
 using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
-using StockSharp.Messages;
 
 namespace Trading.Strategies
 {
@@ -29,7 +23,8 @@ namespace Trading.Strategies
 
         private bool _isSetDone;
         private volatile bool _isCorrectChild;
-        private volatile bool _readyToStop;
+        private volatile bool _isPrimaryStoppingStarted;
+        private volatile int _closedChildCounter;
         private Security[] _securities;
         private Security[] _marketDepths;
         private Portfolio[] _portfolios;
@@ -41,19 +36,21 @@ namespace Trading.Strategies
             DangerPeriodEnd = new TimeSpan(19, 5, 5);
             AutoUpdatePeriod = TimeSpan.FromSeconds(2);
             GlobalCounter = 0;
+
         }
 
         protected PrimaryStrategy()
         {
-            Timeout = 2000;
+            Timeout = 5000;
 
             _isSetDone = false;
             _isCorrectChild = false;
-            _readyToStop = true;
+            _isPrimaryStoppingStarted = false;
+            _closedChildCounter = 0;
 
-            CancelOrdersWhenStopping = true;
+            CancelOrdersWhenStopping = false;
             CommentOrders = true;
-            DisposeOnStop = false;
+            DisposeOnStop = true;
             MaxErrorCount = 10;
             OrdersKeepTime = TimeSpan.Zero;
             Name += GlobalCounter++;
@@ -85,17 +82,6 @@ namespace Trading.Strategies
                     OnStrategyStopped();
             };
 
-            this.WhenOrderChanged().Do(mt =>
-                {
-                    if (!Orders.Any(o => o.State == OrderStates.Active || o.State == OrderStates.Pending))
-                        _readyToStop = true;
-                    else
-                        _readyToStop = false;
-
-                    Debug.WriteLine("IS STRATEGY READY TO STOP: " + _readyToStop);
-                })
-            .Apply(this);
-
             this.WhenError()
                 .Do(e =>
                 {
@@ -110,25 +96,46 @@ namespace Trading.Strategies
             base.OnStarted();
         }
 
-
-        protected override void OnStopping()
+        public virtual void PrimaryStopping()
         {
+            var totalChildCount = ChildStrategies.Count;
+
             try
             {
-                while (!_readyToStop)
+                if (ChildStrategies?.Count > 0)
+                {
+                    ChildStrategies.ForEach(ps =>
+                    {
+                        Task.Run(() =>
+                        {
+                            var primaryStrategy = ps as PrimaryStrategy;
+
+                            if (primaryStrategy == null)
+                                return;
+
+                            primaryStrategy.PrimaryStrategyStopped += () => _closedChildCounter++;
+                            primaryStrategy.PrimaryStopping();
+                        });
+                    });
+                }
+
+                while (totalChildCount != _closedChildCounter)
                 {
                     /*NOP*/
                 }
 
-                Debug.WriteLine("NO MORE ORDERS, CONTINUE STOPPING");
-
-                Rules.Clear();
-                base.OnStopping();
+                Stop();
+                _closedChildCounter = 0;
             }
             catch (Exception e1)
             {
                 this.AddErrorLog(e1);
             }
+        }
+
+        public bool IsPrimaryStoppingStarted()
+        {
+            return _isPrimaryStoppingStarted;
         }
 
         protected override void OnStopped()
@@ -149,6 +156,11 @@ namespace Trading.Strategies
             }
 
             base.OnStopped();
+        }
+
+        protected void FromHerePrimaryStoppingStarted()
+        {
+            _isPrimaryStoppingStarted = true;
         }
 
         protected void DoStrategyPreparation(Security[] securities, Security[] marketDepths, Portfolio[] portfolios)

@@ -7,6 +7,7 @@ using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Messages;
+using Trading.Strategies;
 
 namespace Trading.Common
 {
@@ -130,10 +131,10 @@ namespace Trading.Common
             }
         }
 
-        public static void SafeStop(this Strategy strategy)
+        public static void SafeStop(this PrimaryStrategy strategy)
         {
             if (strategy?.ProcessState == ProcessStates.Started)
-                strategy.Stop();
+                strategy.PrimaryStopping();
         }
 
         public static decimal CalculateWorstLimitSpreadPrice(this MarketDepth md, Sides dealSide,
@@ -145,17 +146,26 @@ namespace Trading.Common
             if (priceStep <= 0)
                 throw new ArgumentException("price step cannot have below zero value" + priceStep);
 
-            var diff = (md.BestPair.SpreadPrice.Value - desirableSpread) / priceStep;
-            var halfDiff = diff / 2;
+            //old implementation TODO сверить какая лучше
+            //var diff = (md.BestPair.SpreadPrice.Value - desirableSpread) / priceStep;
+            //var partOfDiff = diff / 2;
 
-            if (diff % 2 == 0)
-                return md.Security.ShrinkPrice(dealSide == Sides.Buy
-                    ? md.BestBid.Price + halfDiff * priceStep
-                    : md.BestAsk.Price - halfDiff * priceStep);
+            //if (diff % 2 == 0)
+            //    return md.Security.ShrinkPrice(dealSide == Sides.Buy
+            //        ? md.BestBid.Price + partOfDiff * priceStep
+            //        : md.BestAsk.Price - partOfDiff * priceStep);
+
+            //return md.Security.ShrinkPrice(dealSide == Sides.Buy
+            //    ? md.BestBid.Price + Math.Floor(partOfDiff) * priceStep
+            //    : md.BestAsk.Price - Math.Ceiling(partOfDiff) * priceStep);
+
+
+            //new implementation TODO не забыть что метод НЕ используется для удовлетворительного спреда!!! (а только для market<my)
+            var diff = (md.BestPair.SpreadPrice.Value - desirableSpread) / priceStep;
 
             return md.Security.ShrinkPrice(dealSide == Sides.Buy
-                ? md.BestBid.Price + Math.Floor(halfDiff) * priceStep
-                : md.BestAsk.Price - Math.Ceiling(halfDiff) * priceStep);
+                ? md.BestBid.Price + (diff - 1) * priceStep
+                : md.BestAsk.Price - (diff + 1) * priceStep);
         }
 
         public static bool CheckIfSpreadExist(this MarketDepth md)

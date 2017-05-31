@@ -707,7 +707,7 @@ namespace OptionsThugsConsole.entities
         private void TryToStopStrategy(string name, PrimaryStrategy strategy)
         {
             if (strategy.ProcessState == ProcessStates.Started)
-                strategy.Stop();
+                strategy.PrimaryStopping();
             else
                 OnNewAnswer($"such a strategy cannot be stopped: {name} {strategy.ProcessState}", ConsoleColor.Red, false);
         }
