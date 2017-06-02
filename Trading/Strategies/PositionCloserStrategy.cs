@@ -44,6 +44,9 @@ namespace Trading.Strategies
                 })
                 .Apply(this);
 
+            //не проверяем время, т.к. правило выполняется Once()
+            TimingController.SetTimingUnnecessary();
+
             if (SecurityWithSignalToClose == null)
             {
                 var md = GetMarketDepth(Security);
@@ -51,8 +54,6 @@ namespace Trading.Strategies
                 Security.WhenMarketDepthChanged(Connector)
                     .Do(() =>
                     {
-                        //не проверяем время, т.к. правило выполняется Once()
-
                         var mqs = new MarketQuoterStrategy(_strategyOrderSide, Volume, _priceToClose);
 
                         mqs.WhenStopped()
@@ -81,19 +82,19 @@ namespace Trading.Strategies
 
                             //котировки специально развернуты неверно - как только была сделка на графике (ударили в аск или налили в бид) - закрываемся
                             if (_securityDesirableDirection == PriceDirection.Up && md.BestAsk.Price >= _priceToClose
-                        || _securityDesirableDirection == PriceDirection.Down && md.BestBid.Price <= _priceToClose)
-                        {
+                            || _securityDesirableDirection == PriceDirection.Down && md.BestBid.Price <= _priceToClose)
+                            {
                                 // пока делаем по любой цене, как только сработает условие
                                 mqs = new MarketQuoterStrategy(_strategyOrderSide, Volume, Security.GetMarketPrice(_strategyOrderSide));
 
-                            mqs.WhenStopped()
-                                .Do(this.Stop)
-                                .Once()
-                                .Apply(this);
+                                mqs.WhenStopped()
+                                    .Do(this.Stop)
+                                    .Once()
+                                    .Apply(this);
 
-                            MarkStrategyLikeChild(mqs);
-                            ChildStrategies.Add(mqs);
-                        }
+                                MarkStrategyLikeChild(mqs);
+                                ChildStrategies.Add(mqs);
+                            }
                     })
                     .Until(() => mqs != null)
                     .Apply(this);

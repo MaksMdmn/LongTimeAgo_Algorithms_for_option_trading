@@ -787,6 +787,8 @@ namespace OptionsThugsConsole.entities
                 _connector?.ConnectionState.ToString()
             }), ConsoleColor.Green, false);
 
+            OnNewAnswer("", ConsoleColor.Green, false);
+
             var sb = new StringBuilder();
 
             sb.Append("terminal positions:").Append(" ");
@@ -796,9 +798,13 @@ namespace OptionsThugsConsole.entities
                 sb.Append(p.Security.Code).Append(" ").Append(p.CurrentValue).Append(" ");
             });
 
-            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" ")), ConsoleColor.Green, false);
+            OnNewAnswer("", ConsoleColor.Green, false);
+
+            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 2, " "), ConsoleColor.Green, false);
 
             sb.Clear();
+
+            OnNewAnswer("", ConsoleColor.Green, false);
 
             sb.Append("xml-file positions:").Append(" ");
 
@@ -808,19 +814,22 @@ namespace OptionsThugsConsole.entities
 
             });
 
-            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" ")), ConsoleColor.Green, false);
+            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 2, " "), ConsoleColor.Green, false);
 
             sb.Clear();
 
-            sb.Append("strategies positions:").Append(" ");
+            OnNewAnswer("", ConsoleColor.Green, false);
 
+            sb.Append("str-gies positions :").Append(" ");
             _dataManager?.MappedStrategies?.ForEach(kvp =>
             {
                 sb.Append(kvp.Key).Append(" ").Append(kvp.Value.Position).Append(" ").Append(kvp.Value.ProcessState).Append(" ");
 
             });
 
-            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" ")), ConsoleColor.Green, false);
+            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 3, " "), ConsoleColor.Green, false);
+
+            OnNewAnswer("", ConsoleColor.Green, false);
 
             var tempSecurityMap = new Dictionary<Security, decimal>();
 

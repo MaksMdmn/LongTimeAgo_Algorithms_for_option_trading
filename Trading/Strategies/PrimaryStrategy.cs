@@ -7,12 +7,15 @@ using StockSharp.Algo;
 using StockSharp.Algo.Strategies;
 using StockSharp.BusinessEntities;
 using StockSharp.Logging;
+using Trading.Common;
 
 namespace Trading.Strategies
 {
     public abstract class PrimaryStrategy : Strategy
     {
         public int Timeout { get; set; }
+
+        protected TimingController TimingController { get; private set; }
 
         public event Action PrimaryStrategyStopped;
 
@@ -36,11 +39,12 @@ namespace Trading.Strategies
             DangerPeriodEnd = new TimeSpan(19, 5, 5);
             AutoUpdatePeriod = TimeSpan.FromSeconds(2);
             GlobalCounter = 0;
-
         }
 
         protected PrimaryStrategy()
         {
+            TimingController = new TimingController(700, 2000);
+
             Timeout = 5000;
 
             _isSetDone = false;
@@ -93,11 +97,15 @@ namespace Trading.Strategies
             Connector.ConnectionError += e => { ShowAppropriateMsgBox("Connector.ConnectionError event: ", e.ToString(), "Connection error2"); };
             Connector.OrderRegisterFailed += of => { ShowAppropriateMsgBox("Connector.OrderRegisterFaild event: ", of.Error.ToString(), "Order registration failed"); };
 
+            TimingController.StartTimingControl();
+
             base.OnStarted();
         }
 
         public virtual void PrimaryStopping()
         {
+            TimingController.StopTimingControl();
+
             var totalChildCount = ChildStrategies.Count;
 
             try
@@ -114,6 +122,7 @@ namespace Trading.Strategies
                                 return;
 
                             primaryStrategy.PrimaryStrategyStopped += () => _closedChildCounter++;
+                            primaryStrategy.CancelActiveOrders(); //TODO ещё одна попытка решить проблему залипающих ордеров в терминале после остановки стратегии
                             primaryStrategy.PrimaryStopping();
                         });
                     });
@@ -138,6 +147,11 @@ namespace Trading.Strategies
             return _isPrimaryStoppingStarted;
         }
 
+        public void FromHerePrimaryStoppingStarted()
+        {
+            _isPrimaryStoppingStarted = true;
+        }
+
         protected override void OnStopped()
         {
             if (!_isCorrectChild)
@@ -156,11 +170,6 @@ namespace Trading.Strategies
             }
 
             base.OnStopped();
-        }
-
-        protected void FromHerePrimaryStoppingStarted()
-        {
-            _isPrimaryStoppingStarted = true;
         }
 
         protected void DoStrategyPreparation(Security[] securities, Security[] marketDepths, Portfolio[] portfolios)

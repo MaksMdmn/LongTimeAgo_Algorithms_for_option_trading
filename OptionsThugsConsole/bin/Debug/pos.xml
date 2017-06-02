@@ -21,4 +21,11 @@
     <Price>50.9158</Price>
     <Money>610.99</Money>
   </UserPosition>
+  <UserPosition>
+    <SecCode>BR50BR7</SecCode>
+    <CreatedTime>06/02/2017 12:33:41</CreatedTime>
+    <Quantity>-3</Quantity>
+    <Price>1.89</Price>
+    <Money>5.67</Money>
+  </UserPosition>
 </ArrayOfUserPosition>

@@ -150,6 +150,9 @@ namespace Trading.Strategies
 
         private bool IsBestQuoteMyQuote(Order order, Quote bestQuote)
         {
+            if (order == null || bestQuote == null)
+                return false;
+
             var bestSize = bestQuote.Volume;
             var bestPrice = bestQuote.Price;
             var ordSize = order.Volume - order.GetTrades(Connector).Sum(mt => mt.Order.Volume);

@@ -18,7 +18,7 @@ namespace Trading.Strategies
         protected PositionSynchronizer PositionSynchronizer { get; }
 
         private bool _isQuoting;
-
+        
         protected QuoterStrategy(Sides quotingSide, decimal quotingVolume)
         {
             QuotingSide = quotingSide;
@@ -56,6 +56,8 @@ namespace Trading.Strategies
 
             MarketDepth = GetMarketDepth(Security);
 
+            TimingController.SetTimingMethod(QuotingProcess);
+
             if (IsTradingTime())
                 QuotingProcess();
             else
@@ -64,6 +66,8 @@ namespace Trading.Strategies
             Security.WhenMarketDepthChanged(Connector)
                 .Do(() =>
                 {
+                    TimingController.TimingMethodHappened();
+
                     if (IsPrimaryStoppingStarted())
                     {
                         OrderSynchronizer.CancelCurrentOrder();

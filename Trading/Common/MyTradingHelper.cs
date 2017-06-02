@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Ecng.Collections;
 using Microsoft.Practices.ObjectBuilder2;
@@ -146,26 +147,22 @@ namespace Trading.Common
             if (priceStep <= 0)
                 throw new ArgumentException("price step cannot have below zero value" + priceStep);
 
-            //old implementation TODO сверить какая лучше
-            //var diff = (md.BestPair.SpreadPrice.Value - desirableSpread) / priceStep;
-            //var partOfDiff = diff / 2;
+            var marketSpread = md.BestAsk.Price - md.BestBid.Price;
+            var diff = Math.Abs(marketSpread - desirableSpread);
 
-            //if (diff % 2 == 0)
-            //    return md.Security.ShrinkPrice(dealSide == Sides.Buy
-            //        ? md.BestBid.Price + partOfDiff * priceStep
-            //        : md.BestAsk.Price - partOfDiff * priceStep);
+            if (marketSpread < desirableSpread)
+                return md.Security.ShrinkPrice(dealSide == Sides.Buy
+                    ? md.BestBid.Price - diff
+                    : md.BestAsk.Price + diff);
 
-            //return md.Security.ShrinkPrice(dealSide == Sides.Buy
-            //    ? md.BestBid.Price + Math.Floor(partOfDiff) * priceStep
-            //    : md.BestAsk.Price - Math.Ceiling(partOfDiff) * priceStep);
+            if (marketSpread > desirableSpread)
+                return md.Security.ShrinkPrice(dealSide == Sides.Buy
+                ? md.BestBid.Price - priceStep
+                : md.BestAsk.Price + priceStep);
 
-
-            //new implementation TODO не забыть что метод НЕ используется для удовлетворительного спреда!!! (а только для market<my)
-            var diff = (md.BestPair.SpreadPrice.Value - desirableSpread) / priceStep;
-
-            return md.Security.ShrinkPrice(dealSide == Sides.Buy
-                ? md.BestBid.Price + (diff - 1) * priceStep
-                : md.BestAsk.Price - (diff + 1) * priceStep);
+            return dealSide == Sides.Buy
+                   ? md.BestBid.Price
+                   : md.BestAsk.Price;
         }
 
         public static bool CheckIfSpreadExist(this MarketDepth md)

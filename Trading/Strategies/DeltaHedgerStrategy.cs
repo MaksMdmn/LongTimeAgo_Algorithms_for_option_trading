@@ -20,6 +20,7 @@ namespace Trading.Strategies
 
         private decimal _totalDelta;
         private bool _isPriceLevelsForHedgeInitialized;
+        private MarketDepth md;
         private volatile bool _isDeltaHedging;
         //Security = Underlying assets (future for hedge)
 
@@ -112,62 +113,67 @@ namespace Trading.Strategies
 
             if (DeltaStep < 0) throw new ArgumentException("DeltaStep cannot be below zero: " + DeltaStep);
 
-            var md = GetMarketDepth(Security);
+            md = GetMarketDepth(Security);
+
+            TimingController.SetTimingMethod(HedgingProcess);
 
             Security.WhenMarketDepthChanged(Connector)
-                .Or(Connector.WhenIntervalElapsed(PrimaryStrategy.AutoUpdatePeriod))
                 .Do(() =>
                 {
-                    try
-                    {
-
-                        if (!_isDeltaHedging
-                            && IsTradingTime())
-                        {
-                            _isDeltaHedging = true;
-
-                            var futuresQuote = _totalDelta >= 0 ? md.BestBid : md.BestAsk;
-
-                            if (futuresQuote == null)
-                            {
-                                _isDeltaHedging = false;
-                                return;
-                            }
-
-                            if (_isPriceLevelsForHedgeInitialized)
-                            {
-                                _priceLevelsForHedge.ForEach(level =>
-                                {
-                                    if (MyTradingHelper.CheckIfWasCrossedByPrice(level, futuresQuote.Price))
-                                    {
-                                        DoHedge(CalcPosDelta(), 1);
-                                    }
-                                });
-                            }
-
-                            _totalDelta = CalcPosDelta();
-
-                            if (DeltaStep != 0
-                                && Math.Abs(_totalDelta / DeltaStep) >= 1
-                                && _totalDelta != 0)
-                            {
-                                DoHedge(_totalDelta, DeltaStep);
-                            }
-
-                            _isDeltaHedging = false;
-                        }
-                    }
-                    catch (Exception e1)
-                    {
-                        this.AddErrorLog($"exception: {e1.Message}");
-                        PrimaryStopping();
-                    }
-
+                    TimingController.TimingMethodHappened();
+                    HedgingProcess();
                 })
                 .Apply(this);
 
 
             base.OnStarted();
+        }
+
+        private void HedgingProcess()
+        {
+            try
+            {
+                if (!_isDeltaHedging
+                    && IsTradingTime())
+                {
+                    _isDeltaHedging = true;
+
+                    var futuresQuote = _totalDelta >= 0 ? md.BestBid : md.BestAsk;
+
+                    if (futuresQuote == null)
+                    {
+                        _isDeltaHedging = false;
+                        return;
+                    }
+
+                    if (_isPriceLevelsForHedgeInitialized)
+                    {
+                        _priceLevelsForHedge.ForEach(level =>
+                        {
+                            if (level.CheckIfWasCrossedByPrice(futuresQuote.Price))
+                            {
+                                DoHedge(CalcPosDelta(), 1);
+                            }
+                        });
+                    }
+
+                    _totalDelta = CalcPosDelta();
+
+                    if (DeltaStep != 0
+                        && Math.Abs(_totalDelta / DeltaStep) >= 1
+                        && _totalDelta != 0)
+                    {
+                        DoHedge(_totalDelta, DeltaStep);
+                    }
+
+                    _isDeltaHedging = false;
+                }
+            }
+            catch (Exception e1)
+            {
+                this.AddErrorLog($"exception: {e1.Message}");
+                PrimaryStopping();
+            }
         }
 
         private decimal CalcPosDelta()
