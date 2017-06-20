@@ -120,8 +120,8 @@ namespace Trading.Strategies
 
         public override void PrimaryStopping()
         {
-            _enterStrategy?.FromHerePrimaryStoppingStarted();
-            _leaveStrategy?.FromHerePrimaryStoppingStarted();
+            _enterStrategy?.MarkPlaceAsPrimaryStoppingStarted();
+            _leaveStrategy?.MarkPlaceAsPrimaryStoppingStarted();
             //TODO дичь, но проверить - бывает залипает заявка: проскакивает между остановкой стратегии и приходом ИД ордера с биржи - стратегия удаляется, ордер остаётся.
             base.PrimaryStopping();
         }

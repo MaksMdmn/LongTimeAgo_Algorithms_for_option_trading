@@ -37,8 +37,6 @@ namespace Trading.Common
                     timingMethod();
                     TimingMethodHappened();
                 }
-
-                Debug.WriteLine("AUTO ... !!!");
             };
 
             _timer.Interval = _timingMethodPeriodicityMs;
@@ -50,7 +48,6 @@ namespace Trading.Common
             if (_noNeedTiming)
                 throw new InvalidOperationException("method was marked like unnecessary");
 
-            Debug.WriteLine("METHOD HAPPENED");
             _lastUpdate = DateTime.Now;
             _isTimingExecutionNeeded = false;
         }
@@ -64,7 +61,6 @@ namespace Trading.Common
                 throw new NullReferenceException("_timer");
 
             _timer.Enabled = true;
-            Debug.WriteLine("TIMER CREATED");
         }
 
         public void StopTimingControl()
@@ -78,8 +74,6 @@ namespace Trading.Common
             _timer.Enabled = false;
             _timer.Dispose();
             _timer = null;
-
-            Debug.WriteLine("TIMER DESTROYED");
         }
 
         public void SetTimingUnnecessary()
@@ -92,10 +86,7 @@ namespace Trading.Common
             var diff = DateTime.Now.Subtract(_lastUpdate);
 
             if (diff.Seconds >= _maxDownTime)
-            {
-                Debug.WriteLine("NEED EXECUTION");
                 _isTimingExecutionNeeded = true;
-            }
         }
     }
 }

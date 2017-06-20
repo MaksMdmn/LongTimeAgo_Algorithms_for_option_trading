@@ -157,8 +157,8 @@ namespace Trading.Common
 
             if (marketSpread > desirableSpread)
                 return md.Security.ShrinkPrice(dealSide == Sides.Buy
-                ? md.BestBid.Price - priceStep
-                : md.BestAsk.Price + priceStep);
+                ? md.BestBid.Price + priceStep
+                : md.BestAsk.Price - priceStep);
 
             return dealSide == Sides.Buy
                    ? md.BestBid.Price

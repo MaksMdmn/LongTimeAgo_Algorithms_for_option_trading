@@ -68,6 +68,5 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Release\Newt
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Release\DevExpress.Data.v15.2.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Release\DevExpress.Printing.v15.2.Core.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Release\DevExpress.Xpf.Grid.v15.2.Core.xml
-D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Release\OptionsThugsConsole.csprojResolveAssemblyReference.cache
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Release\OptionsThugsConsole.exe
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Release\OptionsThugsConsole.pdb

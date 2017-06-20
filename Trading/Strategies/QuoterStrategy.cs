@@ -121,7 +121,7 @@ namespace Trading.Strategies
 
         public override void PrimaryStopping()
         {
-            FromHerePrimaryStoppingStarted();
+            MarkPlaceAsPrimaryStoppingStarted();
 
             Task.Run(() =>
             {

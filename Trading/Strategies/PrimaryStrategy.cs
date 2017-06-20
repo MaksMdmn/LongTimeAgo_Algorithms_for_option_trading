@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Ecng.Common;
 using Microsoft.Practices.ObjectBuilder2;
@@ -116,14 +117,16 @@ namespace Trading.Strategies
                     {
                         Task.Run(() =>
                         {
-                            var primaryStrategy = ps as PrimaryStrategy;
+                            var curStrategy = ps as PrimaryStrategy;
 
-                            if (primaryStrategy == null)
+                            if (curStrategy == null)
                                 return;
 
-                            primaryStrategy.PrimaryStrategyStopped += () => _closedChildCounter++;
-                            primaryStrategy.CancelActiveOrders(); //TODO ещё одна попытка решить проблему залипающих ордеров в терминале после остановки стратегии
-                            primaryStrategy.PrimaryStopping();
+                            curStrategy.PrimaryStrategyStopped += () => _closedChildCounter++;
+
+                            curStrategy.CancelActiveOrders();//TODO ещё одна попытка решить проблему залипающих ордеров в терминале после остановки стратегии
+
+                            curStrategy.PrimaryStopping();
                         });
                     });
                 }
@@ -147,7 +150,7 @@ namespace Trading.Strategies
             return _isPrimaryStoppingStarted;
         }
 
-        public void FromHerePrimaryStoppingStarted()
+        public void MarkPlaceAsPrimaryStoppingStarted()
         {
             _isPrimaryStoppingStarted = true;
         }
