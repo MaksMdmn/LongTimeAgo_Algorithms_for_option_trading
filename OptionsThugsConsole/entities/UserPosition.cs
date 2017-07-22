@@ -11,10 +11,10 @@ namespace OptionsThugsConsole.entities
     public class UserPosition
     {
         private static readonly string PathToXmlFile =
-            AppConfigManager.GetInstance().GetSettingValue(UserConfigs.XmlPath.ToString())
+            ConfigManager.GetInstance().GetSettingValue(UserConfigs.XmlPath.ToString())
                 .CompareIgnoreCase("root")
                     ? Directory.GetCurrentDirectory() + "\\pos.xml"
-                    : AppConfigManager.GetInstance().GetSettingValue(UserConfigs.XmlPath.ToString());
+                    : ConfigManager.GetInstance().GetSettingValue(UserConfigs.XmlPath.ToString());
 
         public string SecCode { get; set; }
         public string CreatedTime { get; set; }

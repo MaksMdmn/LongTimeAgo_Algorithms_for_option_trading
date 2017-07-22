@@ -48,7 +48,7 @@ namespace OptionsThugsConsole.entities
 
             _userPositions = new Dictionary<string, UserPosition>();
 
-            _messageManager = MessageManager.GetInstance();
+            _messageManager = new MessageManager();
             _messageManager.AutoMessage += DoAutoGeneralInfo;
 
             UserPosition.LoadFromXml()?.ForEach(up => { _userPositions.Add(up.SecCode, up); });
@@ -60,6 +60,11 @@ namespace OptionsThugsConsole.entities
         public static CommandHandler GetInstance(IConnector connector)
         {
             return Instance ?? (Instance = new CommandHandler(connector));
+        }
+
+        public void SetOutput(Action<string> outputMethod)
+        {
+            _messageManager.NewAnswer += outputMethod;
         }
 
         public void ParseUserMessage(string msg)
@@ -75,9 +80,10 @@ namespace OptionsThugsConsole.entities
             }
             catch (Exception e1)
             {
-                OnNewAnswer(e1.Message + " Please try one of follows: "
+                _messageManager.ProceedAnswer(e1.Message + " Please try one of follows: "
                     + Environment.NewLine
                     + MessageManager.AlignString(Enum.GetNames(typeof(UserCommands))));
+
             }
         }
 
@@ -121,7 +127,7 @@ namespace OptionsThugsConsole.entities
             }
             catch (Exception e1)
             {
-                OnNewAnswer($"unknown exception: {e1.Message}", ConsoleColor.Red);
+                _messageManager.ProceedAnswer($"unknown exception: {e1.Message}", ConsoleColor.Red);
             }
         }
 
@@ -129,7 +135,7 @@ namespace OptionsThugsConsole.entities
         {
             if (userParams.Length != 1)
             {
-                OnNewAnswer("please enter correct strategy name for forcible delete", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("please enter correct strategy name for forcible delete", ConsoleColor.Yellow);
                 return;
             }
 
@@ -138,7 +144,7 @@ namespace OptionsThugsConsole.entities
 
             if (_dataManager?.MappedStrategies == null)
             {
-                OnNewAnswer("some entities still null, delete impossible", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("some entities still null, delete impossible", ConsoleColor.Yellow);
                 return;
             }
 
@@ -146,18 +152,18 @@ namespace OptionsThugsConsole.entities
 
             if (!_dataManager.MappedStrategies.TryGetValue(strategyName, out strategy))
             {
-                OnNewAnswer("have no strategies with such a name.", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("have no strategies with such a name.", ConsoleColor.Yellow);
                 return;
             }
 
             if (strategy.ProcessState != ProcessStates.Stopped)
             {
-                OnNewAnswer($"strategy must be stopped for forcible delete, current state {strategy.ProcessState}", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer($"strategy must be stopped for forcible delete, current state {strategy.ProcessState}", ConsoleColor.Yellow);
                 return;
             }
 
             _dataManager.MappedStrategies.Remove(strategyName);
-            OnNewAnswer($"{strategyName} strategy removed forcibly from collection", ConsoleColor.Red);
+            _messageManager.ProceedAnswer($"{strategyName} strategy removed forcibly from collection", ConsoleColor.Red);
         }
 
         private void DoTimerCmd()
@@ -170,14 +176,14 @@ namespace OptionsThugsConsole.entities
             else
                 _messageManager.EnableTimer();
 
-            OnNewAnswer($"timer: {_messageManager.IsTimerEnabled()}", ConsoleColor.Yellow);
+            _messageManager.ProceedAnswer($"timer: {(_messageManager.IsTimerEnabled() ? "ON" : "OFF")}", ConsoleColor.Yellow);
         }
 
         private void DoCalcCmd(string[] userParams)
         {
             if (userParams.Length < 1 || userParams.Length > 2)
             {
-                OnNewAnswer($"please enter type of calculation that should be done: {UserKeyWords.Grk} {UserKeyWords.Vol} {UserKeyWords.Spr} " +
+                _messageManager.ProceedAnswer($"please enter type of calculation that should be done: {UserKeyWords.Grk} {UserKeyWords.Vol} {UserKeyWords.Spr} " +
                             $"by option series (set middle option strike) or {UserKeyWords.Pos} for cur. position", ConsoleColor.Yellow);
                 return;
             }
@@ -186,19 +192,19 @@ namespace OptionsThugsConsole.entities
             var calcType = userParams[0];
             if (!Enum.TryParse(calcType, true, out kw1))
             {
-                OnNewAnswer($"please enter correct command: {UserKeyWords.Grk} {UserKeyWords.Vol} {UserKeyWords.Spr}", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer($"please enter correct command: {UserKeyWords.Grk} {UserKeyWords.Vol} {UserKeyWords.Spr}", ConsoleColor.Yellow);
                 return;
             }
 
             if (kw1 == UserKeyWords.Pos && userParams.Length != 1)
             {
-                OnNewAnswer($"{UserKeyWords.Pos} command should be used without additional args", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer($"{UserKeyWords.Pos} command should be used without additional args", ConsoleColor.Yellow);
                 return;
             }
 
             if (kw1 != UserKeyWords.Pos && userParams.Length != 2)
             {
-                OnNewAnswer($"{UserKeyWords.Grk} {UserKeyWords.Vol} {UserKeyWords.Spr} commands should be used with sec. code", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer($"{UserKeyWords.Grk} {UserKeyWords.Vol} {UserKeyWords.Spr} commands should be used with sec. code", ConsoleColor.Yellow);
                 return;
             }
 
@@ -224,7 +230,7 @@ namespace OptionsThugsConsole.entities
 
             if (tempSecurityMap.Count == 0)
             {
-                OnNewAnswer($"any securities with such code part, please try more specific letters", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer($"any securities with such code part, please try more specific letters", ConsoleColor.Yellow);
                 return;
             }
 
@@ -233,13 +239,16 @@ namespace OptionsThugsConsole.entities
                 case UserKeyWords.Pos:
                     var greeks = GetSummaryGreeks(tempSecurityMap);
 
-                    sb.Append($"positions greeks (terminal)" +
-                              $"delta: {greeks[0]} " +
-                              $"gamma: {greeks[1]} " +
-                              $"vega: {greeks[2]} " +
-                              $"theta: {greeks[3]}");
-                    sb.AppendLine();
-                    sb.Append($"position saved data (xml-file)");
+                    sb.Append(MessageManager.AlignString(new string[]
+                        {
+                            $"dt={greeks[0]}",
+                            $"gm={greeks[1]}",
+                            $"vg={greeks[2]}",
+                            $"th={greeks[3]}",
+                        }))
+                        .AppendLine();
+
+                    sb.Append($"saved positions: ");
                     sb.AppendLine();
                     _userPositions.ForEach(kvp =>
                     {
@@ -269,11 +278,14 @@ namespace OptionsThugsConsole.entities
 
                         var secGreeks = GetSecurityGreeks(kvp.Key, kvp.Value);
 
-                        sb.Append(_dataManager.GetSecurityStringRepresentation(kvp.Key))
-                        .Append($" delta: {secGreeks[0]}")
-                        .Append($" gamma: {secGreeks[1]}")
-                        .Append($" vega: {secGreeks[2]}")
-                        .Append($" theta: {secGreeks[3]}")
+                        sb.Append(MessageManager.AlignString(new string[]
+                        {
+                            _dataManager.GetSecurityStringRepresentation(kvp.Key),
+                            $"dt={secGreeks[0]}",
+                            $"gm={secGreeks[1]}",
+                            $"vg={secGreeks[2]}",
+                            $"th={secGreeks[3]}",
+                        }))
                         .AppendLine();
                     });
                     break;
@@ -308,18 +320,18 @@ namespace OptionsThugsConsole.entities
                 default:
                     sb.Append($"please enter correct command: {UserKeyWords.Grk} {UserKeyWords.Vol} {UserKeyWords.Spr} " +
                         "by option series (set middle option strike) or emptpy string for cur. positions");
-                    OnNewAnswer(sb.ToString(), ConsoleColor.Yellow);
+                    _messageManager.ProceedAnswer(sb.ToString(), ConsoleColor.Yellow);
                     return;
             }
 
-            OnNewAnswer(sb.ToString());
+            _messageManager.ProceedAnswer(sb.ToString());
         }
 
         private void DoSettingsCmd(string[] userParams)
         {
             if (userParams.Length < 1 || userParams.Length > 2)
             {
-                OnNewAnswer("please enter setting name and/or new setting value to change it (or keyword 'all' to show up settings)", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("please enter setting name and/or new setting value to change it (or keyword 'all' to show up settings)", ConsoleColor.Yellow);
                 return;
             }
 
@@ -331,29 +343,29 @@ namespace OptionsThugsConsole.entities
                 UserKeyWords kw;
 
                 if (Enum.TryParse(settingName, true, out kw))
-                    AppConfigManager.GetInstance().PrintAllSettings();
+                    ConfigManager.GetInstance().PrintAllSettings();
                 else
-                    OnNewAnswer(AppConfigManager.GetInstance().GetSettingValue(settingName), ConsoleColor.Yellow);
+                    _messageManager.ProceedAnswer(ConfigManager.GetInstance().GetSettingValue(settingName), ConsoleColor.Yellow);
 
             }
 
             if (userParams.Length == 2)
             {
                 var settingValue = userParams[1];
-                var oldValue = AppConfigManager.GetInstance().GetSettingValue(settingName);
+                var oldValue = ConfigManager.GetInstance().GetSettingValue(settingName);
 
-                AppConfigManager.GetInstance().UpdateConfigFile(settingName, settingValue);
+                ConfigManager.GetInstance().UpdateConfigFile(settingName, settingValue);
 
-                OnNewAnswer($"Changed, old value: {oldValue} new value: {settingValue}");
+                _messageManager.ProceedAnswer($"Changed, old value: {oldValue} new value: {settingValue}");
             }
         }
 
         private void DoStatusCmd()
         {
-            OnNewAnswer("", ConsoleColor.Green);
-            OnNewAnswer($"connection: {_connector.Name}, status: {_connector.ConnectionState}", ConsoleColor.Green, false);
-            OnNewAnswer($"loaded securities: {_connector.Securities.Count()}", ConsoleColor.Green, false);
-            OnNewAnswer($"loaded portfolios: {_connector.Portfolios.Count()}", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer("", ConsoleColor.Green);
+            _messageManager.ProceedAnswer($"connection: {_connector.Name}, status: {_connector.ConnectionState}", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer($"loaded securities: {_connector.Securities.Count()}", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer($"loaded portfolios: {_connector.Portfolios.Count()}", ConsoleColor.Green, false);
 
             var terminalPositionsSb = new StringBuilder();
             var xmlPosSb = new StringBuilder();
@@ -376,13 +388,13 @@ namespace OptionsThugsConsole.entities
                     .AppendLine();
             });
 
-            OnNewAnswer("", ConsoleColor.Green, false);
-            OnNewAnswer($"terminal positions: {Environment.NewLine}{terminalPositionsSb}", ConsoleColor.Green, false);
-            OnNewAnswer($"file positions: {Environment.NewLine}{xmlPosSb}", ConsoleColor.Yellow, false);
+            _messageManager.ProceedAnswer("", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer($"terminal positions: {Environment.NewLine}{terminalPositionsSb}", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer($"file positions: {Environment.NewLine}{xmlPosSb}", ConsoleColor.Yellow, false);
 
             if (_dataManager.MappedStrategies.Count == 0)
             {
-                OnNewAnswer("still no strategies created.", ConsoleColor.Green, false);
+                _messageManager.ProceedAnswer("still no strategies created.", ConsoleColor.Green, false);
             }
             else
             {
@@ -407,28 +419,29 @@ namespace OptionsThugsConsole.entities
                         kvp.Value.Position.ToString()
                     }, true, 2));
 
-                    sb.Append("strRepresent:  ")
+                    sb.Append("STRRPS:  ")
                     .Append(kvp.Value.ToString());
 
                     sb.AppendLine()
-                    .AppendLine("***");
+                    .AppendLine("***")
+                    .AppendLine();
                 });
-                OnNewAnswer(sb.ToString(), ConsoleColor.Green, false);
+                _messageManager.ProceedAnswer(sb.ToString(), ConsoleColor.Green, false);
             }
-            OnNewAnswer($"program underlying asset: {_dataManager.UnderlyingAsset.Code} ({_dataManager.GetSecurityStringRepresentation(_dataManager.UnderlyingAsset)})", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer($"program underlying asset: {_dataManager.UnderlyingAsset.Code} ({_dataManager.GetSecurityStringRepresentation(_dataManager.UnderlyingAsset)})", ConsoleColor.Green, false);
         }
 
         private void DoStopCmd(string[] userParams)
         {
             if (userParams.Length != 1)
             {
-                OnNewAnswer("please enter name one of existing strategies  to start (or keyword 'all')", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("please enter name one of existing strategies  to start (or keyword 'all')", ConsoleColor.Yellow);
                 return;
             }
 
             if (_dataManager.MappedStrategies.Count == 0)
             {
-                OnNewAnswer("have no strategies to stop", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("have no strategies to stop", ConsoleColor.Yellow);
                 return;
             }
 
@@ -450,7 +463,7 @@ namespace OptionsThugsConsole.entities
                     TryToStopStrategy(strategyName, _dataManager.MappedStrategies[strategyName]);
 
                 else
-                    OnNewAnswer("please choose correct strategy name from following: "
+                    _messageManager.ProceedAnswer("please choose correct strategy name from following: "
                         + MessageManager.AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
             }
         }
@@ -459,13 +472,13 @@ namespace OptionsThugsConsole.entities
         {
             if (userParams.Length != 1)
             {
-                OnNewAnswer("please enter one name of strategy to start (or keyword 'all')", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("please enter one name of strategy to start (or keyword 'all')", ConsoleColor.Yellow);
                 return;
             }
 
             if (_dataManager.MappedStrategies.Count == 0)
             {
-                OnNewAnswer("have no strategies to start", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("have no strategies to start", ConsoleColor.Yellow);
                 return;
             }
 
@@ -495,7 +508,7 @@ namespace OptionsThugsConsole.entities
                 }
                 else
                 {
-                    OnNewAnswer("please choose correct strategy name from following: "
+                    _messageManager.ProceedAnswer("please choose correct strategy name from following: "
                         + MessageManager.AlignString(_dataManager.MappedStrategies.Select(kvp => kvp.Key).ToArray()), ConsoleColor.Yellow);
                 }
             }
@@ -505,7 +518,7 @@ namespace OptionsThugsConsole.entities
         {
             if (userParams.Length < 2)
             {
-                OnNewAnswer("please enter type and name of created strategy.", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("please enter type and name of created strategy.", ConsoleColor.Yellow);
                 return;
             }
 
@@ -515,30 +528,30 @@ namespace OptionsThugsConsole.entities
             if (param2.Length < 5
                 || Char.IsNumber(param2.ToCharArray()[0]))
             {
-                OnNewAnswer("strategy name should have length more that 5 symbols and started from letter (NOT number)", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("strategy name should have length more that 5 symbols and started from letter (NOT number)", ConsoleColor.Yellow);
                 return;
             }
 
             if (!Enum.TryParse(userParams[0], true, out param1))
             {
-                OnNewAnswer($"cannot create such a strategy. Possible types: " +
+                _messageManager.ProceedAnswer($"cannot create such a strategy. Possible types: " +
                             $"{MessageManager.AlignString(Enum.GetNames(typeof(StrategyTypes)))}", ConsoleColor.Yellow);
                 return;
             }
 
             if (_dataManager.MappedStrategies.ContainsKey(param2))
             {
-                OnNewAnswer("strategy with such name has already exist.", ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer("strategy with such name has already exist.", ConsoleColor.Yellow);
                 return;
             }
 
             StrategyManager strategyMaker = new StrategyManager(_connector, _dataManager);
 
-            OnNewAnswer(strategyMaker.GetStrategyStringLayout(param1));
+            _messageManager.ProceedAnswer(strategyMaker.GetStrategyStringLayout(param1));
 
             try
             {
-                OnNewAnswer(Environment.NewLine +
+                _messageManager.ProceedAnswer(Environment.NewLine +
                             "Please enter straregy params at the next line like in format above AND:" +
                             Environment.NewLine +
                             "-main separator is semicolon WITHOUT space" + Environment.NewLine +
@@ -549,11 +562,11 @@ namespace OptionsThugsConsole.entities
 
                 _logManager.Sources.Add(strategy);
 
-                OnNewAnswer("strategy created.");
+                _messageManager.ProceedAnswer("strategy created.");
             }
             catch (ArgumentException e1)
             {
-                OnNewAnswer(e1.Message, ConsoleColor.Yellow);
+                _messageManager.ProceedAnswer(e1.Message, ConsoleColor.Yellow);
             }
         }
 
@@ -561,13 +574,13 @@ namespace OptionsThugsConsole.entities
         {
             if (_connector.ConnectionState == ConnectionStates.Connected)
             {
-                OnNewAnswer("already connected.");
+                _messageManager.ProceedAnswer("already connected.");
                 return;
             }
 
             _connector.Connected += () =>
             {
-                OnNewAnswer("connected (success), loading securities, pls wait...");
+                _messageManager.ProceedAnswer("connected (success), loading securities, pls wait...");
                 _dataManager = new DataManager(_connector);
             };
 
@@ -605,15 +618,15 @@ namespace OptionsThugsConsole.entities
 
                     _dataManager.MappedSecurities = tempSecurityMap;
 
-                    OnNewAnswer($"couldn't read instruments: {cannotReadCounter}", ConsoleColor.Red, false);
-                    OnNewAnswer($"attempts to load more than twice: {alreadyLoadedCounter}", ConsoleColor.Red, false);
+                    _messageManager.ProceedAnswer($"couldn't read instruments: {cannotReadCounter}", ConsoleColor.Red, false);
+                    _messageManager.ProceedAnswer($"attempts to load more than twice: {alreadyLoadedCounter}", ConsoleColor.Red, false);
 
                     _dataManager.UnderlyingAsset = _dataManager.LookupThroughExistingSecurities(
-                        AppConfigManager.GetInstance().GetSettingValue(UserConfigs.UndAsset.ToString()));
+                        ConfigManager.GetInstance().GetSettingValue(UserConfigs.Asset.ToString()));
 
                     _dataManager.RegisterMappedUndAssetsSecuruties();
 
-                    OnNewAnswer($"{_dataManager.MappedSecurities.Count} securities loaded.");
+                    _messageManager.ProceedAnswer($"{_dataManager.MappedSecurities.Count} securities loaded.");
 
                     _connector.NewMyTrade += mt =>
                     {
@@ -633,7 +646,7 @@ namespace OptionsThugsConsole.entities
 
                         UserPosition.SaveToXml(_userPositions.Values.ToList());
 
-                        OnNewAnswer(MessageManager.AlignString(new string[]
+                        _messageManager.ProceedAnswer(MessageManager.AlignString(new string[]
                         {
                             "NEW TRADE [",
                             $"side: {mt.Order.Direction}",
@@ -644,14 +657,14 @@ namespace OptionsThugsConsole.entities
                         }), ConsoleColor.Magenta);
                     };
 
-                    OnNewAnswer("Print 'timer' to enable/disable auto-print-information about positions.", ConsoleColor.Yellow);
+                    _messageManager.ProceedAnswer("Print 'timer' to enable/disable auto-print-information about positions.", ConsoleColor.Yellow);
                     DoStatusCmd();
 
 
                 }
                 catch (Exception e1)
                 {
-                    OnNewAnswer($"unknown exception: {e1.Message}", ConsoleColor.Red);
+                    _messageManager.ProceedAnswer($"unknown exception: {e1.Message}", ConsoleColor.Red);
                 }
             });
         }
@@ -660,13 +673,13 @@ namespace OptionsThugsConsole.entities
         {
             if (_connector.ConnectionState != ConnectionStates.Connected)
             {
-                OnNewAnswer("have no connection to break.");
+                _messageManager.ProceedAnswer("have no connection to break.");
                 return;
             }
 
             _connector.Disconnected += () =>
             {
-                OnNewAnswer("disconnected (success)");
+                _messageManager.ProceedAnswer("disconnected (success)");
             };
 
             DoStopCmd(new[] { UserKeyWords.All.ToString() });
@@ -681,16 +694,16 @@ namespace OptionsThugsConsole.entities
             strategy.WhenStarted()
                         .Do(() =>
                 {
-                    OnNewAnswer("");
-                    OnNewAnswer($"{strategy} strategy started (key {name}).");
+                    _messageManager.ProceedAnswer("");
+                    _messageManager.ProceedAnswer($"{strategy} strategy started (key {name}).");
                 })
                         .Apply(strategy);
 
             strategy.WhenStopping()
                 .Do(() =>
                 {
-                    OnNewAnswer("");
-                    OnNewAnswer($"{name} strategy STOPPING, pos: {strategy.Position}");
+                    _messageManager.ProceedAnswer("");
+                    _messageManager.ProceedAnswer($"{name} strategy STOPPING, pos: {strategy.Position}");
                 })
                 .Apply(strategy);
 
@@ -698,8 +711,8 @@ namespace OptionsThugsConsole.entities
             {
                 {
                     _dataManager.MappedStrategies.Remove(name);
-                    OnNewAnswer("");
-                    OnNewAnswer($"{name} strategy STOPPED and removed from collection");
+                    _messageManager.ProceedAnswer("");
+                    _messageManager.ProceedAnswer($"{name} strategy STOPPED and removed from collection");
                 }
             };
         }
@@ -709,7 +722,7 @@ namespace OptionsThugsConsole.entities
             if (strategy.ProcessState == ProcessStates.Started)
                 strategy.PrimaryStopping();
             else
-                OnNewAnswer($"such a strategy cannot be stopped: {name} {strategy.ProcessState}", ConsoleColor.Red, false);
+                _messageManager.ProceedAnswer($"such a strategy cannot be stopped: {name} {strategy.ProcessState}", ConsoleColor.Red, false);
         }
 
         private decimal[] GetSummaryGreeks(Dictionary<Security, decimal> securityPositionMapping)
@@ -779,15 +792,15 @@ namespace OptionsThugsConsole.entities
 
         private void DoAutoGeneralInfo()
         {
-            OnNewAnswer("-----------------------------------", ConsoleColor.Magenta);
+            _messageManager.ProceedAnswer("-----------------------------------", ConsoleColor.Magenta);
 
-            OnNewAnswer(MessageManager.AlignString(new string[]
+            _messageManager.ProceedAnswer(MessageManager.AlignString(new string[]
             {
                 "Connection state:",
                 _connector?.ConnectionState.ToString()
             }), ConsoleColor.Green, false);
 
-            OnNewAnswer("", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer("", ConsoleColor.Green, false);
 
             var sb = new StringBuilder();
 
@@ -798,13 +811,13 @@ namespace OptionsThugsConsole.entities
                 sb.Append(p.Security.Code).Append(" ").Append(p.CurrentValue).Append(" ");
             });
 
-            OnNewAnswer("", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer("", ConsoleColor.Green, false);
 
-            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 2, " "), ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 2, " "), ConsoleColor.Green, false);
 
             sb.Clear();
 
-            OnNewAnswer("", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer("", ConsoleColor.Green, false);
 
             sb.Append("xml-file positions:").Append(" ");
 
@@ -814,11 +827,11 @@ namespace OptionsThugsConsole.entities
 
             });
 
-            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 2, " "), ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 2, " "), ConsoleColor.Green, false);
 
             sb.Clear();
 
-            OnNewAnswer("", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer("", ConsoleColor.Green, false);
 
             sb.Append("str-gies positions :").Append(" ");
             _dataManager?.MappedStrategies?.ForEach(kvp =>
@@ -827,9 +840,9 @@ namespace OptionsThugsConsole.entities
 
             });
 
-            OnNewAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 3, " "), ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer(MessageManager.AlignString(sb.ToString().Split(" "), true, 3, " "), ConsoleColor.Green, false);
 
-            OnNewAnswer("", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer("", ConsoleColor.Green, false);
 
             var tempSecurityMap = new Dictionary<Security, decimal>();
 
@@ -839,21 +852,9 @@ namespace OptionsThugsConsole.entities
 
             var greeks = GetSummaryGreeks(tempSecurityMap);
 
-            OnNewAnswer($"delta: {greeks[0]} gamma: {greeks[1]} vega: {greeks[2]} theta: {greeks[3]}", ConsoleColor.Green, false);
+            _messageManager.ProceedAnswer($"delta: {greeks[0]} gamma: {greeks[1]} vega: {greeks[2]} theta: {greeks[3]}", ConsoleColor.Green, false);
 
-            OnNewAnswer("-----------------------------------", ConsoleColor.Magenta);
-        }
-
-        private void OnNewAnswer(string msg, ConsoleColor color = ConsoleColor.White, bool showDateTime = true)
-        {
-            if (showDateTime)
-                msg = DateTime.Now + ": " + msg;
-
-            if (color != ConsoleColor.White)
-                Console.ForegroundColor = color;
-
-            NewAnswer?.Invoke(msg);
-            Console.ResetColor();
+            _messageManager.ProceedAnswer("-----------------------------------", ConsoleColor.Magenta);
         }
     }
 }

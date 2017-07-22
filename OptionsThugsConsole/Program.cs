@@ -26,11 +26,11 @@ namespace OptionsThugsConsole
                 LuaPassword = "quik".To<SecureString>()
             };
 
-            AppConfigManager configManager = AppConfigManager.GetInstance();
+            ConfigManager configManager = ConfigManager.GetInstance();
             CommandHandler handler = CommandHandler.GetInstance(connector);
 
-            configManager.NewAnswer += Console.WriteLine;
-            handler.NewAnswer += Console.WriteLine;
+            configManager.SetOutput(Console.WriteLine);
+            handler.SetOutput(Console.WriteLine);
 
             configManager.PrintAllSettings();
 

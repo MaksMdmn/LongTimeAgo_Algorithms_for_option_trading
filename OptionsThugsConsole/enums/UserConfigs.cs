@@ -2,6 +2,6 @@
 {
     public enum UserConfigs
     {
-        Portfolio, UndAsset, XmlPath, StatusTiming
+        Portfolio, Asset, XmlPath, Timer
     }
 }

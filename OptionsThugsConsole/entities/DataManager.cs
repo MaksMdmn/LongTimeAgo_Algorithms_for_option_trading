@@ -25,14 +25,14 @@ namespace OptionsThugsConsole.entities
             MappedStrategies = new SynchronizedDictionary<string, PrimaryStrategy>();
             MappedSecurities = new SynchronizedDictionary<string, Security>();
 
-            AppConfigManager.GetInstance().SettingChanged += settingName =>
+            ConfigManager.GetInstance().SettingChanged += settingName =>
             {
-                if (settingName.CompareIgnoreCase(UserConfigs.UndAsset.ToString()))
+                if (settingName.CompareIgnoreCase(UserConfigs.Asset.ToString()))
                 {
                     UnRegisterMappedUndAssetsSecuruties();
 
                     UnderlyingAsset =
-                        LookupThroughExistingSecurities(AppConfigManager.GetInstance().GetSettingValue(settingName));
+                        LookupThroughExistingSecurities(ConfigManager.GetInstance().GetSettingValue(settingName));
 
                     RegisterMappedUndAssetsSecuruties();
                 }

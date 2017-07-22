@@ -28,7 +28,7 @@ namespace OptionsThugsConsole.entities
             _dataManager = dataManager;
 
             _defaultPortfolio = dataManager.LookupThroughConnectorsPortfolios(
-                AppConfigManager.GetInstance().GetSettingValue(
+                ConfigManager.GetInstance().GetSettingValue(
                     UserConfigs.Portfolio.ToString()));
         }
 

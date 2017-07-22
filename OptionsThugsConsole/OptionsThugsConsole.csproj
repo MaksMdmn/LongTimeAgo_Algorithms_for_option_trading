@@ -90,7 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="entities\AppConfigManager.cs" />
+    <Compile Include="entities\ConfigManager.cs" />
     <Compile Include="entities\MessageManager.cs" />
     <Compile Include="entities\UserPosition.cs" />
     <Compile Include="enums\UserConfigs.cs" />

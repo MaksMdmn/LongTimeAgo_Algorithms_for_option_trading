@@ -70,3 +70,4 @@ D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Release\DevE
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\bin\Release\DevExpress.Xpf.Grid.v15.2.Core.xml
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Release\OptionsThugsConsole.exe
 D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Release\OptionsThugsConsole.pdb
+D:\programming\c# here\Project\OptionsThugs\OptionsThugsConsole\obj\Release\OptionsThugsConsole.csprojResolveAssemblyReference.cache

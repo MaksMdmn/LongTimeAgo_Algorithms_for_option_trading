@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfUserPosition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfUserPosition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UserPosition>
+    <SecCode>Si59000BU7</SecCode>
+    <CreatedTime>07/20/2017 10:32:39</CreatedTime>
+    <Quantity>50</Quantity>
+    <Price>874</Price>
+    <Money>-43700</Money>
+  </UserPosition>
+  <UserPosition>
+    <SecCode>Si58500BU7</SecCode>
+    <CreatedTime>07/20/2017 12:39:20</CreatedTime>
+    <Quantity>0</Quantity>
+    <Price>0</Price>
+    <Money>1950</Money>
+  </UserPosition>
+  <UserPosition>
+    <SecCode>SiU7</SecCode>
+    <CreatedTime>07/20/2017 12:42:22</CreatedTime>
+    <Quantity>12</Quantity>
+    <Price>59842.75</Price>
+    <Money>-718113</Money>
+  </UserPosition>
+</ArrayOfUserPosition>
